@@ -1,3 +1,1 @@
 # toprak_rehberi
-
-
