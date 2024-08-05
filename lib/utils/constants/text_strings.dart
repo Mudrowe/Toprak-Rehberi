@@ -22,9 +22,9 @@ class TTexts {
   static const String createAccount = "Kayıt Ol";
   static const String orSignInWith = "or sign in with";
   static const String orSignUpWith = "or sign up with";
-  static const String iAgreeTo = "I agree to";
-  static const String privacyPolicy = "Privacy Policy";
-  static const String termsOfUse = "Terms of use";
+  static const String iAgreeTo = "'nı kabul ediyorum.";
+  static const String privacyPolicy = "Gizlilik Politikası";
+  static const String termsOfUse = "Hizmet Şartları";
   static const String verificationCode = "verificationCode";
   static const String resendEmail = "Resend Email";
   static const String resendEmailIn = "Resend email in";

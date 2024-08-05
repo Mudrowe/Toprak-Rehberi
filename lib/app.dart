@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:toprak_rehberi/features/authentication/screens/login/login.dart';
-import 'package:toprak_rehberi/features/authentication/screens/signup/signup.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 import 'package:toprak_rehberi/utils/theme/theme.dart';
 
