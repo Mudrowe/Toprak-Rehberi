@@ -67,7 +67,7 @@ class TSignupForm extends StatelessWidget {
           decoration: const InputDecoration(
             prefixIcon: Icon(Icons.lock),
             labelText: TTexts.password,
-            suffixIcon: Icon(Icons.remove_red_eye),
+            suffixIcon: Icon(Icons.visibility),
           ),
         ),
         const SizedBox(
@@ -79,7 +79,7 @@ class TSignupForm extends StatelessWidget {
           decoration: const InputDecoration(
             prefixIcon: Icon(Icons.lock),
             labelText: TTexts.password,
-            suffixIcon: Icon(Icons.remove_red_eye),
+            suffixIcon: Icon(Icons.visibility),
           ),
         ),
         const SizedBox(
