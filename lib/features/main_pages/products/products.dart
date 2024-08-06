@@ -23,14 +23,7 @@ class ProductsScreen extends StatelessWidget {
             SizedBox(
               height: TSizes.spaceBtwSections,
             ),
-            Padding(
-              padding: EdgeInsets.only(left: TSizes.defaulSpace),
-              child: Column(
-                children: [
-                  TProductCard(),
-                ],
-              ),
-            ),
+            TProductCard(),
           ],
         ),
       ),
