@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:toprak_rehberi/features/authentication/screens/signup/signup.dart';
 import 'package:toprak_rehberi/navigation_menu.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';

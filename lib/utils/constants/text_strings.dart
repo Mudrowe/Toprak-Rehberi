@@ -5,7 +5,7 @@ class TTexts {
   static const String skip = "Geç";
   static const String done = "Biti";
   static const String submit = "Onayla";
-  static const String appName = "Toprak Rehberi";
+  static const String appName = "TOPRAK REHBERİ";
   static const String tContinue = "İlerle";
 
 

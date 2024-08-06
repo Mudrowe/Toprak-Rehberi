@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:toprak_rehberi/features/authentication/screens/signup/signup.dart';
-import 'package:toprak_rehberi/utils/constants/colors.dart';
-import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
 class NavigationMenu extends StatelessWidget {
   const NavigationMenu({super.key});
@@ -10,7 +8,6 @@ class NavigationMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(NavigationController());
-    final darkMode = THelperFunctions.isDarkMode(context);
 
     return Scaffold(
       bottomNavigationBar: Obx(
@@ -20,9 +17,6 @@ class NavigationMenu extends StatelessWidget {
           selectedIndex: controller.selectedIndex.value,
           onDestinationSelected: (index) =>
               controller.selectedIndex.value = index,
-          backgroundColor: TColors.primaryColor,
-          indicatorColor: TColors.white,          
-
           destinations: const [
             NavigationDestination(icon: Icon(Icons.home), label: 'Anasayfa'),
             NavigationDestination(icon: Icon(Icons.grass), label: 'Arazilerim'),

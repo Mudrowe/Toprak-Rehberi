@@ -37,7 +37,7 @@ class TColors {
 
   // Gradient Colors
   static const Gradient linearGradient =
-      LinearGradient(colors: [Color(0x5f73B28E), Color(0xff20854d)]);
+      LinearGradient(colors: [Color(0x5F73B28E), Color(0xFF20854D)]);
       
   static const recommendationGradient = LinearGradient(
     colors: [
