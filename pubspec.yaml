@@ -18,6 +18,8 @@ dependencies:
   intl: ^0.18.1
   logger: ^2.0.1
   url_launcher: ^6.1.12
+  arc_progress_bar_new: ^1.0.4
+  percent_indicator: ^4.2.2
 
   # Icons
   cupertino_icons: ^1.0.6
@@ -45,3 +47,4 @@ flutter:
     - assets/logos/
     - assets/icons/
     - assets/images/
+    - assets/products/

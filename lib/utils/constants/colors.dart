@@ -56,6 +56,8 @@ class TColors {
   static const Color meh = Color(0xFFFFBF0B);
   static const Color bad = Color(0xFFDC2863);
 
+  static const Color progressBackground = Color(0xFF36434E);
+
   // Neutral Shades
   static const Color black = Color(0XFF232323);
   static const Color darkerGrey = Color(0XFF4F4F4F);
