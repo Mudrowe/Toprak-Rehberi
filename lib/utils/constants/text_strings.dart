@@ -5,7 +5,7 @@ class TTexts {
   static const String skip = "Geç";
   static const String done = "Biti";
   static const String submit = "Onayla";
-  static const String appName = "Toprak Rehberi";
+  static const String appName = "TOPRAK REHBERİ";
   static const String tContinue = "İlerle";
 
 
@@ -22,9 +22,9 @@ class TTexts {
   static const String createAccount = "Kayıt Ol";
   static const String orSignInWith = "or sign in with";
   static const String orSignUpWith = "or sign up with";
-  static const String iAgreeTo = "I agree to";
-  static const String privacyPolicy = "Privacy Policy";
-  static const String termsOfUse = "Terms of use";
+  static const String iAgreeTo = "'nı kabul ediyorum.";
+  static const String privacyPolicy = "Gizlilik Politikası";
+  static const String termsOfUse = "Hizmet Şartları";
   static const String verificationCode = "verificationCode";
   static const String resendEmail = "Resend Email";
   static const String resendEmailIn = "Resend email in";
@@ -32,7 +32,7 @@ class TTexts {
 
   // -- Authentication Headings
   static const String loginTitle = "Welcome back,";
-  static const String signupTitle = "Let’s create your account";
+  static const String signupTitle = "KAYIT OL";
   static const String forgetPasswordTitle = "Forget password";
   static const String forgetPasswordSubTitle = "Don’t worry sometimes people can forget too, enter your email and we will send you a password reset link.";
   static const String changeYourPasswordTitle = "Password Reset Email Sent";
