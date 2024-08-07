@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:toprak_rehberi/features/authentication/screens/signup/signup.dart';
+import 'package:toprak_rehberi/features/home/home.dart';
 
 class NavigationMenu extends StatelessWidget {
   const NavigationMenu({super.key});
@@ -35,9 +35,9 @@ class NavigationController extends GetxController {
   final Rx<int> selectedIndex = 0.obs;
 
   final screens = [
-    const SignupScreen(),
+    const HomeScreen(),
     Container(color: Colors.deepPurple),
-    Container(color: Colors.amber),
+    Container(color: Colors.green),
     Container(color: Colors.red),
   ];
 }
