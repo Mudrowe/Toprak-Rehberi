@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:toprak_rehberi/common/styles/shadows.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
@@ -23,15 +24,10 @@ class TProductImage extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 12),
           decoration: BoxDecoration(
-              color: TColors.white,
-              borderRadius: BorderRadius.circular(TSizes.borderRadiusLg),
-              boxShadow: [
-                BoxShadow(
-                  color: TColors.black.withOpacity(0.1),
-                  blurRadius: 6,
-                  offset: const Offset(0, 2),
-                )
-              ]),
+            color: TColors.white,
+            borderRadius: BorderRadius.circular(TSizes.borderRadiusLg),
+            boxShadow: [TShadowStyle.productShadow]
+          ),
           child: Text(
             productName,
             style: const TextStyle(

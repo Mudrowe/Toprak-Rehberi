@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:toprak_rehberi/common/styles/shadows.dart';
 import 'package:toprak_rehberi/common/widgets/products/widgets/product_image.dart';
 import 'package:toprak_rehberi/common/widgets/products/widgets/product_progress.dart';
 import 'package:toprak_rehberi/features/main_pages/home/home.dart';
@@ -28,10 +29,10 @@ class TProductCard extends StatelessWidget {
     return GestureDetector(
       onTap: () => Get.to(() => const HomeScreen()),
       child: Container(
-        padding: const EdgeInsets.all(1),
         width: TSizes.cardWidth,
         height: TSizes.cardHeight,
         decoration: BoxDecoration(
+          boxShadow: [TShadowStyle.productShadow],
           color: TColors.softGreen,
           borderRadius: BorderRadius.circular(TSizes.cardRadiusLg),
         ),
