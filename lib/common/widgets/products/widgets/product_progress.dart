@@ -11,7 +11,6 @@ class TProductProgress extends StatelessWidget {
 
   final String harvestDate;
   final double progressPercentage;
-
   @override
   Widget build(BuildContext context) {
     return Column(
