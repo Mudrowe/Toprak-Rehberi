@@ -24,10 +24,9 @@ class TProductImage extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 12),
           decoration: BoxDecoration(
-            color: TColors.white,
-            borderRadius: BorderRadius.circular(TSizes.borderRadiusLg),
-            boxShadow: [TShadowStyle.productShadow]
-          ),
+              color: TColors.white,
+              borderRadius: BorderRadius.circular(TSizes.borderRadiusLg),
+              boxShadow: [TShadowStyle.productShadow]),
           child: Text(
             productName,
             style: const TextStyle(
