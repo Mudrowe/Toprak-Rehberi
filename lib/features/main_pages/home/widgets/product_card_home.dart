@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:toprak_rehberi/common/styles/shadows.dart';
 import 'package:toprak_rehberi/common/widgets/custom_shapes/arc_progress_bar.dart';
 import 'package:toprak_rehberi/features/main_pages/home/home.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';
@@ -30,14 +29,15 @@ class TProductCardHome extends StatelessWidget {
         width: TSizes.cardWidth,
         height: TSizes.cardHeight,
         decoration: BoxDecoration(
-          boxShadow: [TShadowStyle.productShadow],
+          // ! FIX: bottom part of the card's boxShadow is not visible
+          //boxShadow: [TShadowStyle.productShadow],
           color: TColors.softGreen,
           borderRadius: BorderRadius.circular(TSizes.cardRadiusLg),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            IconButton(onPressed: (){}, icon: Image.asset(TImages.arrowBack)),
+            IconButton(onPressed: () {}, icon: Image.asset(TImages.arrowBack)),
             Column(
               children: [
                 const Text(
@@ -74,9 +74,9 @@ class TProductCardHome extends StatelessWidget {
                 ),
               ],
             ),
-
-            IconButton(onPressed: (){}, icon: Image.asset(TImages.arrowForward)),
-            ],
+            IconButton(
+                onPressed: () {}, icon: Image.asset(TImages.arrowForward)),
+          ],
         ),
       ),
     );

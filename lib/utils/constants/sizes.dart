@@ -52,7 +52,7 @@ class TSizes {
   static const double spaceBtwInputFields = 16.0;
 
   // Card sizes
-  static const double cardHeight = 150;
+  static const double cardHeight = 200;
   static const double cardWidth = 350;
   static const double cardElevation = 2.0;
   static const double cardRadiusXs = 6.0;
