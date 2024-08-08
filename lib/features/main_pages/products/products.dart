@@ -11,6 +11,8 @@ class ProductsScreen extends StatelessWidget {
       length: 2,
       child: Scaffold(
         //appBar: TAppBar(),
+
+        // TODO: NESTED SCROLL VIEW
         body: SingleChildScrollView(
           child: Column(
             children: [

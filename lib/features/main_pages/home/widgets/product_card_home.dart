@@ -28,7 +28,7 @@ class TProductCardHome extends StatelessWidget {
       onTap: () => Get.to(() => const HomeScreen()),
       child: Container(
         width: TSizes.cardWidth,
-        height: TSizes.cardHeight / 1.4,
+        height: TSizes.cardHeight,
         decoration: BoxDecoration(
           boxShadow: [TShadowStyle.productShadow],
           color: TColors.softGreen,
