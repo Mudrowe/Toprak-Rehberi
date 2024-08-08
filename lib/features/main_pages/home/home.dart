@@ -1,5 +1,5 @@
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:toprak_rehberi/features/main_pages/home/widgets/pie_chart.dart';
 import 'package:toprak_rehberi/features/main_pages/home/widgets/product_card_home.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
@@ -8,14 +8,14 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(
+            SizedBox(
               height: TSizes.spaceBtwSections,
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: 28),
               child: TProductCardHome(
                   productName: 'Üzüm',
@@ -23,27 +23,11 @@ class HomeScreen extends StatelessWidget {
                   fieldName: 'Bahçe 3',
                   progressPercentage: 0.123),
             ),
-            const SizedBox(
-              height: TSizes.spaceBtwSections,
-            ),
-            Center(
-              child: AspectRatio(
-                aspectRatio: 1.0,
-                child: Container(
-                  margin: const EdgeInsets.only(right: 105, left: 15),
-                  child: PieChart(
-                    PieChartData(
-                      sections: [
-                        PieChartSectionData(value: 25, color: const Color(0xFF0D2535)),
-                        PieChartSectionData(value: 29, color: const Color(0xFF5388D8)),
-                        PieChartSectionData(value: 8, color: const Color(0xFFBE3700)),
-                        PieChartSectionData(value: 38, color: const Color(0xFFF4BE37)),
-                      ]
-                    )
-                  ),
-                ),
-              ),
-            ),
+            SizedBox(height: TSizes.spaceBtwItems),
+            Text('Ekili Olan Toplam Ürün Sayınız 13'),
+            TPieChart(chartName: 'ÜRÜN DAĞILIMINIZ',),
+            TPieChart(chartName: 'ARAZİ TİPİ DAĞILIMINIZ',),
+            
           ],
         ),
       ),
