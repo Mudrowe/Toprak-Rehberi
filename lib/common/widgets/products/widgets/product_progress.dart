@@ -16,7 +16,7 @@ class TProductProgress extends StatelessWidget {
   final double progressPercentage;
   final bool isHarvested;
   final int score;
-
+  
   @override
   Widget build(BuildContext context) {
     return Column(

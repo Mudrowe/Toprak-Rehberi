@@ -21,6 +21,9 @@ dependencies:
   carousel_slider: ^4.2.1
   arc_progress_bar_new: ^1.0.4
   percent_indicator: ^4.2.2
+  syncfusion_flutter_charts: ^26.2.8
+  syncfusion_flutter_gauges: ^26.2.8
+  fl_chart: ^0.68.0
 
   # Icons
   cupertino_icons: ^1.0.6

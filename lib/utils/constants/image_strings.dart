@@ -4,6 +4,8 @@ class TImages {
 
   // Icons
   static const String backArrow = "assets/icons/back.png";
+  static const String arrowBack = "assets/icons/arrow_back.png";
+  static const String arrowForward = "assets/icons/arrow_forward.png";
 
   // Products
   static const String apple = "assets/products/apple.png";
