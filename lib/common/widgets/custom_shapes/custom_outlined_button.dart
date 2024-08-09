@@ -8,7 +8,7 @@ class CustomOutlinedButton extends StatelessWidget {
     final double width;
     final double height;
   
-  const CustomOutlinedButton({
+  const CustomOutlinedButton({super.key, 
     required this.onPressed,
     required this.text,
     required this.borderColor,
