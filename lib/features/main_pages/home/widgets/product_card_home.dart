@@ -6,6 +6,12 @@ import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/image_strings.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
+// ? Card background is little bit weird in dark mode
+// ? Should be more darker color but primary color is weird too
+// ! Maybe it will be like the searchbox style
+
+// ? pieChartColor1 is too dark for dark mod. Consider to change it
+
 class TProductCardHome extends StatelessWidget {
   const TProductCardHome({
     super.key,
@@ -55,7 +61,8 @@ class TProductCardHome extends StatelessWidget {
                 Text(
                   productName,
                   style: const TextStyle(
-                      color: TColors.black, fontWeight: FontWeight.bold),
+                      color: TColors.black, 
+                      fontWeight: FontWeight.bold),
                 ),
                 Text(
                   fieldName,

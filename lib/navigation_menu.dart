@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:toprak_rehberi/features/main_pages/home/home.dart';
 import 'package:toprak_rehberi/features/main_pages/products/products.dart';
+import 'package:toprak_rehberi/features/main_pages/profile/profile.dart';
 
 class NavigationMenu extends StatelessWidget {
   const NavigationMenu({super.key});
@@ -39,6 +40,6 @@ class NavigationController extends GetxController {
     const HomeScreen(),
     Container(color: Colors.deepPurple),
     const ProductsScreen(),
-    Container(color: Colors.red),
+    const ProfileScreen(),
   ];
 }

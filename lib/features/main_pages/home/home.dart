@@ -1,25 +1,28 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/features/main_pages/home/widgets/card_slider.dart';
+import 'package:toprak_rehberi/features/main_pages/home/widgets/legend_item.dart';
 import 'package:toprak_rehberi/features/main_pages/home/widgets/pie_chart.dart';
 import 'package:toprak_rehberi/features/main_pages/home/widgets/product_card_home.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
+import 'package:toprak_rehberi/utils/constants/text_strings.dart';
+import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
 // TODO: ProductCards aren't recieved dynamically.
 // TODO: So, Stats are not compatible with products in the productsScreen
 
-
 // ! FIX: There isn't any length check for legendItems.
 // ! FIX: If there would be too many items, the screen will break
-
-
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final dark = THelperFunctions.isDarkMode(context);
+    final Color textColor = dark ? TColors.white : TColors.black;
+
     return Scaffold(
       body: Column(
         children: [
@@ -51,28 +54,28 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
           const SizedBox(height: TSizes.spaceBtwItems),
-          const Row(
+          Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                'Ekili Olan Toplam Ürün Sayınız',
+                TTexts.totalProducts,
                 style: TextStyle(
-                    color: TColors.black,
+                    color: textColor,
                     fontWeight: FontWeight.bold,
                     fontSize: 16),
               ),
               Text(
                 '200',
                 style: TextStyle(
-                    color: TColors.black,
+                    color: textColor,
                     fontWeight: FontWeight.bold,
                     fontSize: 16),
               ),
             ],
           ),
           TPieChart(
-            chartName: 'ÜRÜN DAĞILIMINIZ',
+            chartName: TTexts.productDistribution,
             sections: [
               PieChartSectionData(
                   value: 25,
@@ -121,28 +124,28 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(
             height: TSizes.spaceBtwItems,
           ),
-          const Row(
+          Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                'Toplam Arazi Sayınız',
+                TTexts.totalFields,
                 style: TextStyle(
-                    color: TColors.black,
+                    color: textColor,
                     fontWeight: FontWeight.bold,
                     fontSize: 16),
               ),
               Text(
                 '100',
                 style: TextStyle(
-                    color: TColors.black,
+                    color: textColor,
                     fontWeight: FontWeight.bold,
                     fontSize: 16),
               ),
             ],
           ),
           TPieChart(
-            chartName: 'ARAZİ TİPİ DAĞILIMINIZ',
+            chartName: TTexts.fieldDistribution,
             sections: [
               PieChartSectionData(
                   value: 60,
