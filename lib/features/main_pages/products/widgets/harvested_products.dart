@@ -4,8 +4,8 @@ import 'package:toprak_rehberi/common/widgets/products/product_card.dart';
 import 'package:toprak_rehberi/utils/constants/image_strings.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
-class TPlantedProducts extends StatelessWidget {
-  const TPlantedProducts({
+class THarvestedProducts extends StatelessWidget {
+  const THarvestedProducts({
     super.key,
   });
 
@@ -23,61 +23,67 @@ class TPlantedProducts extends StatelessWidget {
           height: TSizes.spaceBtwSections,
         ),
         TProductCard(
-          productName: 'Üzüm',
-          progressPercentage: 0.124,
-          fieldName: 'Arazi 1',
-          imagePath: TImages.grape,
-          harvestDate: '14 Nisan 2024',
+          productName: 'Ayçiçeği',
+          progressPercentage: 1,
+          fieldName: 'Bahçe 3',
+          imagePath: TImages.sunflower,
+          harvestDate: '12 Ocak 2021',
+          score: 3,
+        ),
+        SizedBox(
+          height: TSizes.spaceBtwItems,
+        ),
+        TProductCard(
+          productName: 'Domates',
+          progressPercentage: 1,
+          fieldName: 'Bağ 2',
+          imagePath: TImages.tomato,
+          harvestDate: '21 Haziran 2023',
+          score: 4,
+        ),
+        SizedBox(
+          height: TSizes.spaceBtwItems,
+        ),
+        TProductCard(
+          productName: 'Patlıcan',
+          progressPercentage: 1,
+          fieldName: 'Tarla 2',
+          imagePath: TImages.eggplant,
+          harvestDate: '5 Mart 2024',
+          score: 1,
         ),
         SizedBox(
           height: TSizes.spaceBtwItems,
         ),
         TProductCard(
           productName: 'Patates',
-          progressPercentage: 0.714,
-          fieldName: 'Arazi 3',
-          imagePath: TImages.potato,
-          harvestDate: '21 Aralık 2024',
-        ),
-        SizedBox(
-          height: TSizes.spaceBtwItems,
-        ),
-        TProductCard(
-          productName: 'Soğan',
-          progressPercentage: 0.574,
-          fieldName: 'Tarla 2',
-          imagePath: TImages.onion,
-          harvestDate: '5 Mart 2024',
-        ),
-        SizedBox(
-          height: TSizes.spaceBtwItems,
-        ),
-        TProductCard(
-          productName: 'Buğday',
-          progressPercentage: 0.34,
+          progressPercentage: 1,
           fieldName: 'Bahçe 1',
-          imagePath: TImages.wheat,
-          harvestDate: '5 Haziran 2022',
+          imagePath: TImages.potato,
+          harvestDate: '5 Haziran 2021',
+          score: 5,
         ),
         SizedBox(
           height: TSizes.spaceBtwItems,
         ),
         TProductCard(
           productName: 'Elma',
-          progressPercentage: 0.0445,
+          progressPercentage: 1,
           fieldName: 'Tarla 1',
           imagePath: TImages.apple,
           harvestDate: '2 Şubat 2024',
+          score: 2,
         ),
         SizedBox(
           height: TSizes.spaceBtwItems,
         ),
         TProductCard(
-          productName: 'Havuç',
-          progressPercentage: 0.444,
+          productName: 'Üzüm',
+          progressPercentage: 1,
           fieldName: 'Arazi 1',
-          imagePath: TImages.carrot,
-          harvestDate: '1 Mayıs 2024',
+          imagePath: TImages.grape,
+          harvestDate: '16 Ekim 2023',
+          score: 4,
         ),
         SizedBox(
           height: TSizes.spaceBtwItems,

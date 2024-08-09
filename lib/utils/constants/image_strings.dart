@@ -1,5 +1,4 @@
 class TImages {
-
   // App Logo
   static const String appLogo = "assets/logos/logo.png";
 
@@ -18,4 +17,11 @@ class TImages {
   static const String sunflower = "assets/products/sunflower.png";
   static const String tomato = "assets/products/tomato.png";
   static const String wheat = "assets/products/wheat.png";
-} 
+
+  // Scores
+  static const String bad = "assets/scores/1.png";
+  static const String meh = "assets/scores/2.png";
+  static const String mid = "assets/scores/3.png";
+  static const String good = "assets/scores/4.png";
+  static const String veryGood = "assets/scores/5.png";
+}

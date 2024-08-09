@@ -16,6 +16,8 @@ class TProductCard extends StatelessWidget {
     required this.fieldName,
     required this.imagePath,
     required this.progressPercentage,
+    this.isHarvested = false,
+    this.score = 3,
   });
 
   final String productName;
@@ -23,6 +25,8 @@ class TProductCard extends StatelessWidget {
   final String fieldName;
   final String imagePath;
   final double progressPercentage;
+  final bool isHarvested;
+  final int score;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +48,10 @@ class TProductCard extends StatelessWidget {
                 imagePath: imagePath,
                 fieldName: fieldName),
             TProductProgress(
-                harvestDate: harvestDate, progressPercentage: progressPercentage),
+                harvestDate: harvestDate,
+                progressPercentage: progressPercentage,
+                isHarvested: progressPercentage >= 1,
+                score: score),
           ],
         ),
       ),
