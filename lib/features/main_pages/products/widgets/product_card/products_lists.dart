@@ -6,7 +6,7 @@ final List<Product> harvestedProductsList = [
   Product(
     productName: 'Ayçiçeği',
     progressPercentage: 1,
-    fieldName: 'Bahçe 3',
+    landName: 'Bahçe 3',
     imagePath: TImages.sunflower,
     plantingDate: '3 Mart 2024',
     harvestDate: '12 Ocak 2025',
@@ -17,7 +17,7 @@ final List<Product> harvestedProductsList = [
   Product(
     productName: 'Domates',
     progressPercentage: 1,
-    fieldName: 'Bağ 2',
+    landName: 'Bağ 2',
     imagePath: TImages.tomato,
     plantingDate: '15 Mayıs 2023',
     harvestDate: '21 Haziran 2024',
@@ -28,7 +28,7 @@ final List<Product> harvestedProductsList = [
   Product(
     productName: 'Patlıcan',
     progressPercentage: 1,
-    fieldName: 'Tarla 2',
+    landName: 'Tarla 2',
     imagePath: TImages.eggplant,
     plantingDate: '1 Nisan 2023',
     harvestDate: '5 Mart 2024',
@@ -39,7 +39,7 @@ final List<Product> harvestedProductsList = [
   Product(
     productName: 'Patates',
     progressPercentage: 1,
-    fieldName: 'Bahçe 1',
+    landName: 'Bahçe 1',
     imagePath: TImages.potato,
     plantingDate: '20 Nisan 2023',
     harvestDate: '5 Haziran 2024',
@@ -50,7 +50,7 @@ final List<Product> harvestedProductsList = [
   Product(
     productName: 'Elma',
     progressPercentage: 1,
-    fieldName: 'Tarla 1',
+    landName: 'Tarla 1',
     imagePath: TImages.apple,
     plantingDate: '10 Mayıs 2023',
     harvestDate: '2 Şubat 2024',
@@ -61,7 +61,7 @@ final List<Product> harvestedProductsList = [
   Product(
     productName: 'Üzüm',
     progressPercentage: 1,
-    fieldName: 'Arazi 1',
+    landName: 'Arazi 1',
     imagePath: TImages.grape,
     plantingDate: '25 Nisan 2023',
     harvestDate: '16 Ekim 2023',
@@ -76,7 +76,7 @@ final List<Product> plantedProductsList = [
   Product(
     productName: 'Üzüm',
     progressPercentage: 0.124,
-    fieldName: 'Arazi 1',
+    landName: 'Arazi 1',
     imagePath: TImages.grape,
     plantingDate: '2 Mayıs 2024',
     harvestDate: '14 Nisan 2025',
@@ -85,7 +85,7 @@ final List<Product> plantedProductsList = [
   Product(
     productName: 'Patates',
     progressPercentage: 0.714,
-    fieldName: 'Arazi 3',
+    landName: 'Arazi 3',
     imagePath: TImages.potato,
     plantingDate: '15 Nisan 2024',
     harvestDate: '21 Aralık 2025',
@@ -94,7 +94,7 @@ final List<Product> plantedProductsList = [
   Product(
     productName: 'Soğan',
     progressPercentage: 0.574,
-    fieldName: 'Tarla 2',
+    landName: 'Tarla 2',
     imagePath: TImages.onion,
     plantingDate: '20 Mart 2024',
     harvestDate: '5 Mart 2025',
@@ -103,7 +103,7 @@ final List<Product> plantedProductsList = [
   Product(
     productName: 'Buğday',
     progressPercentage: 0.34,
-    fieldName: 'Bahçe 1',
+    landName: 'Bahçe 1',
     imagePath: TImages.wheat,
     plantingDate: '10 Mayıs 2024',
     harvestDate: '5 Haziran 2025',
@@ -112,7 +112,7 @@ final List<Product> plantedProductsList = [
   Product(
     productName: 'Elma',
     progressPercentage: 0.0445,
-    fieldName: 'Tarla 1',
+    landName: 'Tarla 1',
     imagePath: TImages.apple,
     plantingDate: '5 Mayıs 2023',
     harvestDate: '2 Şubat 2024',
@@ -121,7 +121,7 @@ final List<Product> plantedProductsList = [
   Product(
     productName: 'Havuç',
     progressPercentage: 0.444,
-    fieldName: 'Arazi 1',
+    landName: 'Arazi 1',
     imagePath: TImages.carrot,
     plantingDate: '15 Nisan 2024',
     harvestDate: '1 Mayıs 2025',

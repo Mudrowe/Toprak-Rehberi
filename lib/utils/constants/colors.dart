@@ -77,4 +77,9 @@ class TColors {
   static const Color softGrey = Color(0XFFF4F4F4);
   static const Color lightGrey = Color(0XFFF9F9F9);
   static const Color white = Color(0XFFFFFFFF);
+
+  // Land Colors
+  static const Color tarla = Colors.amber;
+  static const Color bag = Colors.greenAccent;
+  static const Color bahce = Colors.indigo;
 }

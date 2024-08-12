@@ -60,7 +60,7 @@ class TProductCardHome extends StatelessWidget {
                       color: TColors.black, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  product.fieldName,
+                  product.landName,
                   style: const TextStyle(
                       color: TColors.black, fontWeight: FontWeight.bold),
                 ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/styles/shadows.dart';
 import 'package:toprak_rehberi/common/widgets/appbar/appbar.dart';
 import 'package:toprak_rehberi/common/widgets/custom_shapes/custom_elevated_button.dart';
-import 'package:toprak_rehberi/common/widgets/products/widgets/product_progress.dart';
+import 'package:toprak_rehberi/features/main_pages/products/widgets/product_card/product_progress.dart';
 import 'package:toprak_rehberi/models/product/product.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
@@ -80,7 +80,7 @@ class TProductDetails extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  Text(product.fieldName),
+                  Text(product.landName),
                   Text(product.area.toString())
                 ],
               ),

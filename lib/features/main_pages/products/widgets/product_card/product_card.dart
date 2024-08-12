@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:toprak_rehberi/common/styles/shadows.dart';
 import 'package:toprak_rehberi/common/widgets/product_details/product_details.dart';
-import 'package:toprak_rehberi/common/widgets/products/widgets/product_image.dart';
-import 'package:toprak_rehberi/common/widgets/products/widgets/product_progress.dart';
+import 'package:toprak_rehberi/features/main_pages/products/widgets/product_card/product_image.dart';
+import 'package:toprak_rehberi/features/main_pages/products/widgets/product_card/product_progress.dart';
 import 'package:toprak_rehberi/models/product/product.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
@@ -35,7 +35,7 @@ class TProductCard extends StatelessWidget {
             TProductImage(
                 productName: product.productName,
                 imagePath: product.imagePath,
-                fieldName: product.fieldName),
+                fieldName: product.landName),
             TProductProgress(
                 harvestDate: product.harvestDate,
                 progressPercentage: product.progressPercentage,
