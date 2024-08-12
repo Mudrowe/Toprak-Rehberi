@@ -10,7 +10,6 @@ import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
-// TODO: ProductCards aren't recieved dynamically.
 // TODO: So, Stats are not compatible with products in the productsScreen
 
 // ! FIX: There isn't any length check for legendItems.
@@ -31,12 +30,14 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          const SizedBox(
-            height: TSizes.spaceBtwSections,
-          ),
-          
-          TCardSlider(cards: cards,),
+          const SizedBox(height: TSizes.spaceBtwSections),
+
+          // Carousel Slider
+          TCardSlider(cards: cards),
+
           const SizedBox(height: TSizes.spaceBtwItems),
+
+          // Products stats
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -57,6 +58,8 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
+
+          // Products Pie Chart
           TPieChart(
             chartName: TTexts.productDistribution,
             sections: [
@@ -104,15 +107,16 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(
-            height: TSizes.spaceBtwItems,
-          ),
+
+          const SizedBox(height: TSizes.spaceBtwItems),
+
+          // Lands Stats
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                TTexts.totalFields,
+                TTexts.totalLands,
                 style: TextStyle(
                     color: textColor,
                     fontWeight: FontWeight.bold,
@@ -127,8 +131,10 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
+
+          // Lands Pie Chart
           TPieChart(
-            chartName: TTexts.fieldDistribution,
+            chartName: TTexts.landDistribution,
             sections: [
               PieChartSectionData(
                   value: 60,

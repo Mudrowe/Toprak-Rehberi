@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:toprak_rehberi/common/widgets/custom_shapes/containers/search_container.dart';
+import 'package:toprak_rehberi/common/widgets/custom_shapes/search_container.dart';
 import 'package:toprak_rehberi/common/widgets/products/product_card.dart';
 import 'package:toprak_rehberi/common/widgets/products/widgets/products_lists.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';

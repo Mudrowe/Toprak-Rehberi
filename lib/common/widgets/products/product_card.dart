@@ -13,18 +13,14 @@ import 'package:toprak_rehberi/utils/constants/sizes.dart';
 // ! Maybe it will be like the searchbox style
 
 class TProductCard extends StatelessWidget {
-  const TProductCard(
-      {super.key,
-      required this.product});
+  const TProductCard({super.key, required this.product});
 
   final Product product;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.to(() => TProductDetails(
-            product: product,
-          )),
+      onTap: () => Get.to(() => TProductDetails(product: product)),
       child: Container(
         width: TSizes.cardWidth,
         height: TSizes.cardHeight,

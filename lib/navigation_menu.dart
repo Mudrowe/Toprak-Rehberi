@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:toprak_rehberi/features/main_pages/home/home.dart';
+import 'package:toprak_rehberi/features/main_pages/lands/lands.dart';
 import 'package:toprak_rehberi/features/main_pages/products/products.dart';
 import 'package:toprak_rehberi/features/main_pages/profile/profile.dart';
 
@@ -38,7 +39,7 @@ class NavigationController extends GetxController {
 
   final screens = [
     const HomeScreen(),
-    Container(color: Colors.deepPurple),
+    const LandsScreen(),
     const ProductsScreen(),
     const ProfileScreen(),
   ];

@@ -5,6 +5,7 @@ import 'package:toprak_rehberi/utils/theme/custom_themes/buttom_sheet_theme.dart
 import 'package:toprak_rehberi/utils/theme/custom_themes/checkbox_theme.dart';
 import 'package:toprak_rehberi/utils/theme/custom_themes/chip_theme.dart';
 import 'package:toprak_rehberi/utils/theme/custom_themes/elevated_button_theme.dart';
+import 'package:toprak_rehberi/utils/theme/custom_themes/icon_button_theme.dart';
 import 'package:toprak_rehberi/utils/theme/custom_themes/navigation_bar_theme.dart';
 import 'package:toprak_rehberi/utils/theme/custom_themes/outlined_button_theme.dart';
 import 'package:toprak_rehberi/utils/theme/custom_themes/text_button_theme.dart';
@@ -31,6 +32,7 @@ class TAppTheme {
     inputDecorationTheme: TTextFormFieldTheme.lightInputDecorationTheme,
     textButtonTheme: TTextButtonTheme.lightTextButtonTheme,
     navigationBarTheme: TNavigationBarTheme.navigationBarTheme,
+    iconButtonTheme: TIconButtonTheme.iconButtonTheme,
   );
 
 
@@ -51,5 +53,6 @@ class TAppTheme {
     inputDecorationTheme: TTextFormFieldTheme.darkInputDecorationTheme,
     textButtonTheme: TTextButtonTheme.darkTextButtonTheme,
     navigationBarTheme: TNavigationBarTheme.navigationBarTheme,
+    iconButtonTheme: TIconButtonTheme.iconButtonTheme,
   );
 }

@@ -46,12 +46,14 @@ class TTexts {
   static const String yourAccountCreatedTitle =
       "Your account successfully created!";
 
-  //  Home
-  static const String homeAppbarSubTitle = "";
-
   // Home Screen
   static const String totalProducts = 'Ekili Olan Toplam Ürün Sayınız';
   static const String productDistribution = 'ÜRÜN DAĞILIMINIZ';
-  static const String totalFields = 'Toplam Arazi Sayınız';
-  static const String fieldDistribution = 'ARAZİ TİPİ DAĞILIMINIZ';
+  static const String totalLands = 'Toplam Arazi Sayınız';
+  static const String landDistribution = 'ARAZİ TİPİ DAĞILIMINIZ';
+
+  // Operations
+  static const String addLand = 'Arazi Ekle';
+  static const String addProduct = 'Ürün Ekle';
+  static const String showSuggestions = 'Önerileri Gör';
 }

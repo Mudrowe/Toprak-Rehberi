@@ -12,6 +12,8 @@ import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
 // ? pieChartColor1 is too dark for dark mod. Consider to change it
 
+// ! IconButton theme breaks the left-right arrows in the TProductCardHome.
+
 class TProductCardHome extends StatelessWidget {
   const TProductCardHome({
     super.key,
@@ -36,8 +38,8 @@ class TProductCardHome extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            IconButton(
-                onPressed: () {}, icon: const Icon(Icons.arrow_left_sharp)),
+            // ! IconButton theme breaks the left-right arrows in the TProductCardHome.
+            //IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_left_sharp)),
             Column(
               children: [
                 const Text(
@@ -74,8 +76,8 @@ class TProductCardHome extends StatelessWidget {
                 ),
               ],
             ),
-            IconButton(
-                onPressed: () {}, icon: const Icon(Icons.arrow_right_sharp)),
+            // ! IconButton theme breaks the left-right arrows in the TProductCardHome.
+            //IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_right_sharp)),
           ],
         ),
       ),
