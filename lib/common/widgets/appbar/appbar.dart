@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:toprak_rehberi/common/widgets/appbar/widgets/circular_icon_button.dart';
 import 'package:toprak_rehberi/utils/constants/image_strings.dart';
 import 'package:toprak_rehberi/utils/device/device_utility.dart';
 
 class TAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const TAppBar({super.key});
+  final bool showBackButton;
+  final String? title;
+  const TAppBar({super.key, this.showBackButton = true, this.title});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: CircularIconButton(
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
-        assetImagePath: TImages.backArrow,
-      ),
+      automaticallyImplyLeading: false,
+      leading: showBackButton
+          ? CircularIconButton(
+              onPressed: () => Get.back(),
+              assetImagePath: TImages.backArrow,
+            )
+          : null,
+      title: title != null ? Text(title!) : null,
     );
   }
 

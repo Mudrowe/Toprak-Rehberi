@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:toprak_rehberi/common/widgets/custom_shapes/arc_progress_bar.dart';
 import 'package:toprak_rehberi/features/main_pages/home/home.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';
-import 'package:toprak_rehberi/utils/constants/image_strings.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
 // ? Card background is little bit weird in dark mode
@@ -43,7 +42,7 @@ class TProductCardHome extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            IconButton(onPressed: () {}, icon: Image.asset(TImages.arrowBack)),
+            IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_left_sharp)),
             Column(
               children: [
                 const Text(
@@ -82,7 +81,7 @@ class TProductCardHome extends StatelessWidget {
               ],
             ),
             IconButton(
-                onPressed: () {}, icon: Image.asset(TImages.arrowForward)),
+                onPressed: () {}, icon: const Icon(Icons.arrow_right_sharp)),
           ],
         ),
       ),
