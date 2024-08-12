@@ -38,7 +38,7 @@ class ProductsScreen extends StatelessWidget {
               ),
               SingleChildScrollView(
                 child: THarvestedProducts(),
-              ), // Placeholder for the second tab's content
+              ),
             ],
           ),
         ),

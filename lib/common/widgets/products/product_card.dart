@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:toprak_rehberi/common/styles/shadows.dart';
+import 'package:toprak_rehberi/common/widgets/product_details/product_details.dart';
 import 'package:toprak_rehberi/common/widgets/products/widgets/product_image.dart';
 import 'package:toprak_rehberi/common/widgets/products/widgets/product_progress.dart';
-import 'package:toprak_rehberi/features/main_pages/home/home.dart';
+import 'package:toprak_rehberi/models/product/product.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
@@ -12,30 +13,18 @@ import 'package:toprak_rehberi/utils/constants/sizes.dart';
 // ! Maybe it will be like the searchbox style
 
 class TProductCard extends StatelessWidget {
-  const TProductCard({
-    super.key,
-    // TODO: Name can be too long and it breaks the card
-    required this.productName,
-    required this.harvestDate,
-    required this.fieldName,
-    required this.imagePath,
-    required this.progressPercentage,
-    this.isHarvested = false,
-    this.score = 3,
-  });
+  const TProductCard(
+      {super.key,
+      required this.product});
 
-  final String productName;
-  final String harvestDate;
-  final String fieldName;
-  final String imagePath;
-  final double progressPercentage;
-  final bool isHarvested;
-  final int score;
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.to(() => const HomeScreen()),
+      onTap: () => Get.to(() => TProductDetails(
+            product: product,
+          )),
       child: Container(
         width: TSizes.cardWidth,
         height: TSizes.cardHeight,
@@ -48,14 +37,14 @@ class TProductCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             TProductImage(
-                productName: productName,
-                imagePath: imagePath,
-                fieldName: fieldName),
+                productName: product.productName,
+                imagePath: product.imagePath,
+                fieldName: product.fieldName),
             TProductProgress(
-                harvestDate: harvestDate,
-                progressPercentage: progressPercentage,
-                isHarvested: progressPercentage >= 1,
-                score: score),
+                harvestDate: product.harvestDate,
+                progressPercentage: product.progressPercentage,
+                isHarvested: product.progressPercentage >= 1,
+                score: product.score),
           ],
         ),
       ),

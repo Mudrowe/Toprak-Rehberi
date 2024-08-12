@@ -16,16 +16,18 @@ class TProductProgress extends StatelessWidget {
   final double progressPercentage;
   final bool isHarvested;
   final int score;
-  
+
   @override
   Widget build(BuildContext context) {
     return Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
+
+        // Harvest Date
         children: [
-          const Text( 
-            'Tahmini Hasat Tarihi',
-            style: TextStyle(
+          Text(
+            isHarvested ? 'Hasat Tarihi' : 'Tahmini Hasat Tarihi',
+            style: const TextStyle(
               color: TColors.black,
               fontWeight: FontWeight.bold,
             ),
@@ -37,6 +39,8 @@ class TProductProgress extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
+
+          // Progress Bar
           if (isHarvested) ...[
             const SizedBox(height: 8), // Spacing
             TScoreDisplay(score: score)

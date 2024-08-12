@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:toprak_rehberi/common/widgets/custom_shapes/arc_progress_bar.dart';
-import 'package:toprak_rehberi/features/main_pages/home/home.dart';
+import 'package:toprak_rehberi/common/widgets/product_details/product_details.dart';
+import 'package:toprak_rehberi/models/product/product.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
@@ -14,22 +15,15 @@ import 'package:toprak_rehberi/utils/constants/sizes.dart';
 class TProductCardHome extends StatelessWidget {
   const TProductCardHome({
     super.key,
-    // TODO: Name can be too long and it breaks the card
-    required this.productName,
-    required this.harvestDate,
-    required this.fieldName,
-    required this.progressPercentage,
+    required this.product,
   });
 
-  final String productName;
-  final String harvestDate;
-  final String fieldName;
-  final double progressPercentage;
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.to(() => const HomeScreen()),
+      onTap: () => Get.to(() => TProductDetails(product: product)),
       child: Container(
         width: TSizes.cardWidth,
         height: TSizes.cardHeight,
@@ -42,7 +36,8 @@ class TProductCardHome extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_left_sharp)),
+            IconButton(
+                onPressed: () {}, icon: const Icon(Icons.arrow_left_sharp)),
             Column(
               children: [
                 const Text(
@@ -50,7 +45,7 @@ class TProductCardHome extends StatelessWidget {
                   style: TextStyle(
                       color: TColors.black, fontWeight: FontWeight.bold),
                 ),
-                TArcProgressBar(progress: progressPercentage)
+                TArcProgressBar(progress: product.progressPercentage)
               ],
             ),
             const SizedBox(width: TSizes.spaceBtwItems),
@@ -58,13 +53,12 @@ class TProductCardHome extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
-                  productName,
+                  product.productName,
                   style: const TextStyle(
-                      color: TColors.black, 
-                      fontWeight: FontWeight.bold),
+                      color: TColors.black, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  fieldName,
+                  product.fieldName,
                   style: const TextStyle(
                       color: TColors.black, fontWeight: FontWeight.bold),
                 ),
@@ -74,7 +68,7 @@ class TProductCardHome extends StatelessWidget {
                       color: TColors.black, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  harvestDate,
+                  product.harvestDate,
                   style: const TextStyle(
                       color: TColors.black, fontWeight: FontWeight.bold),
                 ),
