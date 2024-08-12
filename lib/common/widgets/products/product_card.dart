@@ -15,7 +15,6 @@ import 'package:toprak_rehberi/utils/constants/sizes.dart';
 class TProductCard extends StatelessWidget {
   const TProductCard(
       {super.key,
-      // TODO: Name can be too long and it breaks the card
       required this.product});
 
   final Product product;
