@@ -69,16 +69,6 @@ class TProductDetails extends StatelessWidget {
 
             const SizedBox(height: TSizes.spaceBtwItems),
 
-            // Progress Bar
-            TProductProgress(
-              harvestDate: product.harvestDate,
-              progressPercentage: product.progressPercentage,
-              isHarvested: product.progressPercentage >= 1,
-              score: product.score,
-            ),
-
-            const SizedBox(height: TSizes.spaceBtwItems),
-
             // Field Info
             Container(
               height: 150,
@@ -94,6 +84,16 @@ class TProductDetails extends StatelessWidget {
                   Text(product.area.toString())
                 ],
               ),
+            ),
+
+            const SizedBox(height: TSizes.spaceBtwItems),
+
+            // Progress Bar
+            TProductProgress(
+              harvestDate: product.harvestDate,
+              progressPercentage: product.progressPercentage,
+              isHarvested: product.progressPercentage >= 1,
+              score: product.score,
             ),
 
             const SizedBox(height: TSizes.spaceBtwItems),

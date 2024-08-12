@@ -30,7 +30,7 @@ class TPlantedProducts extends StatelessWidget {
                 height: TSizes.spaceBtwItems,
               )
             ],
-          )
+          ),
       ],
     );
   }

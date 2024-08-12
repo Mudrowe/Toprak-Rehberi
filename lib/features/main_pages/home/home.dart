@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:toprak_rehberi/common/widgets/products/widgets/products_lists.dart';
 import 'package:toprak_rehberi/features/main_pages/home/widgets/card_slider.dart';
 import 'package:toprak_rehberi/features/main_pages/home/widgets/legend_item.dart';
 import 'package:toprak_rehberi/features/main_pages/home/widgets/pie_chart.dart';
@@ -22,6 +23,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
     final Color textColor = dark ? TColors.white : TColors.black;
+    final List<TProductCardHome> cards = [
+      for (var product in plantedProductsList)
+        TProductCardHome(product: product),
+    ];
 
     return Scaffold(
       body: Column(
@@ -29,30 +34,8 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(
             height: TSizes.spaceBtwSections,
           ),
-          const TCardSlider(
-            cards: [
-              TProductCardHome(
-                  productName: 'Üzüm',
-                  harvestDate: '21 Nisan 2024',
-                  fieldName: 'Bahçe 3',
-                  progressPercentage: 0.123),
-              TProductCardHome(
-                  productName: 'Çilek',
-                  harvestDate: '21 Nisan 2024',
-                  fieldName: 'Bahçe 3',
-                  progressPercentage: 0.83),
-              TProductCardHome(
-                  productName: 'Havuç',
-                  harvestDate: '21 Nisan 2024',
-                  fieldName: 'Bahçe 3',
-                  progressPercentage: 0.57),
-              TProductCardHome(
-                  productName: 'Buğday',
-                  harvestDate: '21 Nisan 2024',
-                  fieldName: 'Bahçe 3',
-                  progressPercentage: 0.953),
-            ],
-          ),
+          
+          TCardSlider(cards: cards,),
           const SizedBox(height: TSizes.spaceBtwItems),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
