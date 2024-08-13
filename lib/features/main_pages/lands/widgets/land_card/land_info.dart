@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/models/land/land.dart';
-import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
 class TLandInfo extends StatelessWidget {
@@ -13,6 +12,8 @@ class TLandInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -21,15 +22,15 @@ class TLandInfo extends StatelessWidget {
           children: [
             Text(
               land.landName,
-              style: const TextStyle(color: TColors.dark),
+              style: textTheme.bodyMedium,
             ),
             Text(
               '${land.address.city}  ${land.address.district}',
-              style: const TextStyle(color: TColors.dark),
+              style: textTheme.bodyMedium,
             ),
             Text(
               '${land.area.toInt()} ${TTexts.squareSymbol}',
-              style: const TextStyle(color: TColors.dark),
+              style: textTheme.bodyMedium,
             ),
           ],
         ),
@@ -37,9 +38,9 @@ class TLandInfo extends StatelessWidget {
         // Is Planted Checkbox
         Row(
           children: [
-            const Text(
+            Text(
               TTexts.isPlanted,
-              style: TextStyle(color: TColors.dark),
+              style: textTheme.bodyMedium,
             ),
             Checkbox(value: land.isPlanted, onChanged: (value) {}),
           ],

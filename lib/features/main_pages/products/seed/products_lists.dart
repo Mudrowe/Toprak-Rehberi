@@ -95,7 +95,7 @@ final List<Product> plantedProductsList = [
   Product(
     productName: 'Üzüm',
     progressPercentage: 0.124,
-    landName: 'Bağ 1',
+    landName: 'Tarla 1',
     imagePath: TImages.grape,
     plantingDate: '2 Mayıs 2024',
     harvestDate: '14 Nisan 2025',
@@ -107,7 +107,7 @@ final List<Product> plantedProductsList = [
   Product(
     productName: 'Patates',
     progressPercentage: 0.714,
-    landName: 'Bahçe 1',
+    landName: 'Tarla 1',
     imagePath: TImages.potato,
     plantingDate: '15 Nisan 2024',
     harvestDate: '21 Aralık 2025',
@@ -143,7 +143,7 @@ final List<Product> plantedProductsList = [
   Product(
     productName: 'Elma',
     progressPercentage: 0.0445,
-    landName: 'Tarla 1',
+    landName: 'Bahçe 1',
     imagePath: TImages.apple,
     plantingDate: '5 Mayıs 2023',
     harvestDate: '2 Şubat 2024',
@@ -155,7 +155,7 @@ final List<Product> plantedProductsList = [
   Product(
     productName: 'Havuç',
     progressPercentage: 0.444,
-    landName: 'Bağ 1',
+    landName: 'Bahçe 1',
     imagePath: TImages.carrot,
     plantingDate: '15 Nisan 2024',
     harvestDate: '1 Mayıs 2025',

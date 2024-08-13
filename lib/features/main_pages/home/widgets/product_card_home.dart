@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:toprak_rehberi/common/styles/card_style.dart';
 import 'package:toprak_rehberi/common/widgets/custom_shapes/arc_progress_bar.dart';
 import 'package:toprak_rehberi/common/widgets/product_details/product_details.dart';
 import 'package:toprak_rehberi/models/product/product.dart';
-import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
@@ -25,17 +25,13 @@ class TProductCardHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return GestureDetector(
       onTap: () => Get.to(() => TProductDetails(product: product)),
       child: Container(
         width: TSizes.cardWidth,
         height: TSizes.cardHeight,
-        decoration: BoxDecoration(
-          // ! FIX: bottom part of the card's boxShadow is not visible
-          //boxShadow: [TShadowStyle.productShadow],
-          color: TColors.softGreen,
-          borderRadius: BorderRadius.circular(TSizes.cardRadiusLg),
-        ),
+        decoration: getCardDecoration(context),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -43,11 +39,7 @@ class TProductCardHome extends StatelessWidget {
             //IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_left_sharp)),
             Column(
               children: [
-                const Text(
-                  TTexts.progress,
-                  style: TextStyle(
-                      color: TColors.black, fontWeight: FontWeight.bold),
-                ),
+                Text(TTexts.progress, style: textTheme.bodyLarge),
                 TArcProgressBar(progress: product.progressPercentage)
               ],
             ),
@@ -58,29 +50,25 @@ class TProductCardHome extends StatelessWidget {
                 // Product Name
                 Text(
                   product.productName,
-                  style: const TextStyle(
-                      color: TColors.black, fontWeight: FontWeight.bold),
+                  style: textTheme.bodyMedium,
                 ),
 
                 // Land Name
                 Text(
                   product.landName,
-                  style: const TextStyle(
-                      color: TColors.black, fontWeight: FontWeight.bold),
+                  style: textTheme.bodyMedium,
                 ),
 
                 // Harvest Date Title
-                const Text(
+                Text(
                   TTexts.harvestDate,
-                  style: TextStyle(
-                      color: TColors.black, fontWeight: FontWeight.bold),
+                  style: textTheme.bodyMedium,
                 ),
 
                 // Harvest Date
                 Text(
                   product.harvestDate,
-                  style: const TextStyle(
-                      color: TColors.black, fontWeight: FontWeight.bold),
+                  style: textTheme.bodyMedium,
                 ),
               ],
             ),

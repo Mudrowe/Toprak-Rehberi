@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:toprak_rehberi/common/styles/shadows.dart';
+import 'package:toprak_rehberi/common/styles/card_style.dart';
 import 'package:toprak_rehberi/common/widgets/appbar/appbar.dart';
 import 'package:toprak_rehberi/common/widgets/custom_shapes/custom_elevated_button.dart';
 import 'package:toprak_rehberi/features/main_pages/products/widgets/product_card/product_progress.dart';
@@ -31,11 +31,7 @@ class TProductDetails extends StatelessWidget {
               height: TSizes.cardHeight / 1.2,
               width: TSizes.cardWidth / 1.2,
               padding: const EdgeInsets.all(TSizes.sm),
-              decoration: BoxDecoration(
-                color: TColors.softGreen,
-                borderRadius: BorderRadius.circular(TSizes.borderRadiusLg),
-                boxShadow: [TShadowStyle.productShadow],
-              ),
+              decoration: getCardDecoration(context),
               child: FittedBox(
                 fit: BoxFit.contain,
                 child: Image.asset(product.imagePath),
@@ -48,11 +44,7 @@ class TProductDetails extends StatelessWidget {
             Container(
               height: TSizes.cardHeight / 2.5,
               width: TSizes.cardWidth / 1.2,
-              decoration: BoxDecoration(
-                color: TColors.softGreen,
-                borderRadius: BorderRadius.circular(TSizes.borderRadiusLg),
-                boxShadow: [TShadowStyle.productShadow],
-              ),
+              decoration: getCardDecoration(context),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -74,11 +66,7 @@ class TProductDetails extends StatelessWidget {
             Container(
               height: 150,
               width: TSizes.cardWidth / 1.2,
-              decoration: BoxDecoration(
-                color: TColors.softGreen,
-                borderRadius: BorderRadius.circular(TSizes.borderRadiusLg),
-                boxShadow: [TShadowStyle.productShadow],
-              ),
+              decoration: getCardDecoration(context),
               child: Column(
                 children: [
                   Text(product.landName),
@@ -91,10 +79,7 @@ class TProductDetails extends StatelessWidget {
 
             // Progress Bar
             TProductProgress(
-              harvestDate: product.harvestDate,
-              progressPercentage: product.progressPercentage,
-              isHarvested: product.progressPercentage >= 1,
-              score: product.score,
+              product: product,
             ),
 
             const SizedBox(height: TSizes.spaceBtwItems),

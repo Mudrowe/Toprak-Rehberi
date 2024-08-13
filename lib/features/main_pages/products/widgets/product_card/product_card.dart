@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:toprak_rehberi/common/styles/shadows.dart';
+import 'package:toprak_rehberi/common/styles/card_style.dart';
 import 'package:toprak_rehberi/common/widgets/product_details/product_details.dart';
 import 'package:toprak_rehberi/features/main_pages/products/widgets/product_card/product_image.dart';
 import 'package:toprak_rehberi/features/main_pages/products/widgets/product_card/product_progress.dart';
 import 'package:toprak_rehberi/models/product/product.dart';
-import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
 // ? Card background is little bit weird in dark mode
@@ -13,9 +12,15 @@ import 'package:toprak_rehberi/utils/constants/sizes.dart';
 // ! Maybe it will be like the searchbox style
 
 class TProductCard extends StatelessWidget {
-  const TProductCard({super.key, required this.product});
+  const TProductCard({
+    super.key,
+    required this.product,
+    this.showBackground = true,
+    this.showBorder = true,
+  });
 
   final Product product;
+  final bool showBackground, showBorder;
 
   @override
   Widget build(BuildContext context) {
@@ -24,23 +29,17 @@ class TProductCard extends StatelessWidget {
       child: Container(
         width: TSizes.cardWidth,
         height: TSizes.cardHeight,
-        decoration: BoxDecoration(
-          boxShadow: [TShadowStyle.productShadow],
-          color: TColors.softGreen,
-          borderRadius: BorderRadius.circular(TSizes.cardRadiusLg),
-        ),
+        decoration: getCardDecoration(context),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             TProductImage(
-                productName: product.productName,
-                imagePath: product.imagePath,
-                fieldName: product.landName),
+              product: product,
+              imagePath: product.imagePath,
+            ),
             TProductProgress(
-                harvestDate: product.harvestDate,
-                progressPercentage: product.progressPercentage,
-                isHarvested: product.progressPercentage >= 1,
-                score: product.score),
+              product: product,
+            ),
           ],
         ),
       ),

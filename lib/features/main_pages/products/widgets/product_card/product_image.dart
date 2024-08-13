@@ -1,51 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:toprak_rehberi/common/styles/shadows.dart';
-import 'package:toprak_rehberi/utils/constants/colors.dart';
+import 'package:toprak_rehberi/common/styles/card_style.dart';
+import 'package:toprak_rehberi/models/product/product.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
 class TProductImage extends StatelessWidget {
   const TProductImage({
     super.key,
-    required this.productName,
     required this.imagePath,
-    required this.fieldName,
+    required this.product,
   });
 
-  final String productName;
+  final Product product;
   final String imagePath;
-  final String fieldName;
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        // Product name
         Container(
-          padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 12),
-          decoration: BoxDecoration(
-              color: TColors.white,
-              borderRadius: BorderRadius.circular(TSizes.borderRadiusLg),
-              boxShadow: [TShadowStyle.productShadow]),
-          child: Text(
-            productName,
-            style: const TextStyle(
-              color: TColors.black,
-              fontWeight: FontWeight.bold,
-            ),
+          padding: const EdgeInsets.symmetric(
+            vertical: TSizes.xxs,
+            horizontal: TSizes.md,
           ),
+          decoration: getCardDecoration(context),
+          child: Text(product.productName, style: textTheme.bodyLarge),
         ),
+
+        // Product image
         Image.asset(
           imagePath,
-          height: 112,
-          width: 100,
+          height: TSizes.productImageHeight,
+          width: TSizes.productImageWidth,
         ),
+
+        // Land name
         Text(
-          fieldName,
-          style: const TextStyle(
-            color: TColors.black,
-            fontWeight: FontWeight.bold,
-          ),
+          product.landName,
+          style: textTheme.bodyLarge
         )
       ],
     );

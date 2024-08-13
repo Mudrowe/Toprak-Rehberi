@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/image_strings.dart';
+import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
-
 
 // ? Resolution of images is not very good.
 // ? Mid color is not very visible for reading
@@ -13,16 +12,17 @@ class TScoreDisplay extends StatelessWidget {
     required this.score,
   });
 
-  final int score; 
+  final int score;
 
   @override
   Widget build(BuildContext context) {
     String imagePath;
     String scoreText;
+    final textTheme = Theme.of(context).textTheme;
 
     switch (score) {
       case 1:
-        imagePath = TImages.bad; 
+        imagePath = TImages.bad;
         scoreText = TTexts.bad;
         break;
       case 2:
@@ -42,26 +42,15 @@ class TScoreDisplay extends StatelessWidget {
         scoreText = TTexts.veryGood;
         break;
       default:
-        imagePath = TImages.mid; 
+        imagePath = TImages.mid;
         scoreText = TTexts.mid;
     }
 
     return Column(
       children: [
-        Image.asset(
-          imagePath,
-          width: 55, 
-          height: 55,
-          fit: BoxFit.contain
-        ),
-        Text(
-          scoreText,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 22,
-            color: TColors.black
-          ),
-        ),
+        Image.asset(imagePath, width: 55, height: 55, fit: BoxFit.contain),
+        const SizedBox(height: TSizes.spaceBtwItems),
+        Text(scoreText, style: textTheme.bodyLarge),
       ],
     );
   }

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:toprak_rehberi/common/styles/card_style.dart';
 import 'package:toprak_rehberi/models/land/land.dart';
-import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/enums.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
-import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
 class TLandBanner extends StatelessWidget {
   const TLandBanner({
@@ -15,7 +14,6 @@ class TLandBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
     return Stack(
       children: [
         // Background
@@ -39,10 +37,7 @@ class TLandBanner extends StatelessWidget {
               vertical: TSizes.xxs,
               horizontal: TSizes.md,
             ),
-            decoration: BoxDecoration(
-              color: dark ? TColors.dark : TColors.light,
-              borderRadius: BorderRadius.circular(TSizes.cardRadiusLg),
-            ),
+            decoration: getCardDecoration(context),
             child: Text(land.landType.displayName),
           ),
         ),
