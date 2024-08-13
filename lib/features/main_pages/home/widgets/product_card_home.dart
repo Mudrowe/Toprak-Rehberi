@@ -5,6 +5,7 @@ import 'package:toprak_rehberi/common/widgets/product_details/product_details.da
 import 'package:toprak_rehberi/models/product/product.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
+import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
 // ? Card background is little bit weird in dark mode
 // ? Should be more darker color but primary color is weird too
@@ -43,7 +44,7 @@ class TProductCardHome extends StatelessWidget {
             Column(
               children: [
                 const Text(
-                  'İlerleme',
+                  TTexts.progress,
                   style: TextStyle(
                       color: TColors.black, fontWeight: FontWeight.bold),
                 ),
@@ -54,21 +55,28 @@ class TProductCardHome extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+                // Product Name
                 Text(
                   product.productName,
                   style: const TextStyle(
                       color: TColors.black, fontWeight: FontWeight.bold),
                 ),
+
+                // Land Name
                 Text(
                   product.landName,
                   style: const TextStyle(
                       color: TColors.black, fontWeight: FontWeight.bold),
                 ),
+
+                // Harvest Date Title
                 const Text(
-                  'Hasat Tarihi',
+                  TTexts.harvestDate,
                   style: TextStyle(
                       color: TColors.black, fontWeight: FontWeight.bold),
                 ),
+
+                // Harvest Date
                 Text(
                   product.harvestDate,
                   style: const TextStyle(

@@ -4,7 +4,7 @@ import 'package:toprak_rehberi/features/main_pages/lands/widgets/land_banner.dar
 import 'package:toprak_rehberi/models/land/land.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
-import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
+import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
 // TODO Write a generic text color
 
@@ -15,7 +15,6 @@ class TLandCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
     return GestureDetector(
       onTap: () {},
       child: Container(
@@ -48,7 +47,7 @@ class TLandCard extends StatelessWidget {
                         style: const TextStyle(color: TColors.dark),
                       ),
                       Text(
-                        '${land.area.toInt()} m\u00B2',
+                        '${land.area.toInt()} ${TTexts.squareSymbol}',
                         style: const TextStyle(color: TColors.dark),
                       ),
                     ],
@@ -61,7 +60,7 @@ class TLandCard extends StatelessWidget {
                   child: Row(
                     children: [
                       const Text(
-                        'Ürün Ekili Mi?',
+                        TTexts.isPlanted,
                         style: TextStyle(color: TColors.dark),
                       ),
                       Checkbox(value: land.isPlanted, onChanged: (value) {}),

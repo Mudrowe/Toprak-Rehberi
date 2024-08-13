@@ -3,6 +3,7 @@ import 'package:toprak_rehberi/models/land/land.dart';
 import 'package:toprak_rehberi/utils/constants/enums.dart';
 
 final List<Land> landsList = [
+  // 0
   Land(
     landName: 'Tarla 1',
     area: 1000,
@@ -16,8 +17,11 @@ final List<Land> landsList = [
       parcelNo: '898',
       adaNo: '0',
     ),
-    plantedProducts: plantedProductsList.sublist(0, 2),
+    plantedProducts: plantedProductsList.sublist(0, 2), // 0 1
+    harvestedProducts: harvestedProductsList.sublist(0, 1), // 0
   ),
+
+  // 1
   Land(
     landName: 'Tarla 2',
     area: 1000,
@@ -31,8 +35,11 @@ final List<Land> landsList = [
       parcelNo: '189',
       adaNo: '8',
     ),
-    plantedProducts: plantedProductsList.sublist(2, 3),
+    plantedProducts: plantedProductsList.sublist(2, 3), // 2
+    harvestedProducts: harvestedProductsList.sublist(1, 3), // 1 2
   ),
+
+  // 2
   Land(
     landName: 'Bağ 1',
     area: 1000,
@@ -46,8 +53,11 @@ final List<Land> landsList = [
       parcelNo: '898',
       adaNo: '0',
     ),
-    plantedProducts: plantedProductsList.sublist(3, 4),
+    plantedProducts: plantedProductsList.sublist(3, 4), // 3
+    harvestedProducts: harvestedProductsList.sublist(3, 4), // 3
   ),
+
+  // 3
   Land(
     landName: 'Bahçe 1',
     area: 850,
@@ -61,6 +71,7 @@ final List<Land> landsList = [
       parcelNo: '121',
       adaNo: '130',
     ),
-    plantedProducts: plantedProductsList.sublist(4, 5),
+    plantedProducts: plantedProductsList.sublist(4), // 4 5
+    harvestedProducts: harvestedProductsList.sublist(4), // 4 5
   ),
 ];

@@ -34,10 +34,13 @@ class LandsScreen extends StatelessWidget {
               const SizedBox(height: TSizes.spaceBtwSections),
 
               // Total Land Info
-              const Row(
+              Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [Text(TTexts.totalLands), Text('4')],
+                children: [
+                  const Text(TTexts.totalLands),
+                  Text(landsList.length.toString()),
+                ],
               ),
 
               const Divider(indent: 40, endIndent: 40),
@@ -48,7 +51,6 @@ class LandsScreen extends StatelessWidget {
                     const SizedBox(height: TSizes.spaceBtwItems),
                   ],
                 )
-
             ],
           ),
         ),

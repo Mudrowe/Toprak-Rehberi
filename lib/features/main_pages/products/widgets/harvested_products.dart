@@ -3,6 +3,7 @@ import 'package:toprak_rehberi/common/widgets/custom_shapes/search_container.dar
 import 'package:toprak_rehberi/features/main_pages/products/widgets/product_card/product_card.dart';
 import 'package:toprak_rehberi/features/main_pages/products/widgets/product_card/products_lists.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
+import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
 class THarvestedProducts extends StatelessWidget {
   const THarvestedProducts({
@@ -17,7 +18,7 @@ class THarvestedProducts extends StatelessWidget {
           height: TSizes.spaceBtwItems,
         ),
         const TSearchContainer(
-          text: 'Ürün ara',
+          text: TTexts.searchProduct,
         ),
         const SizedBox(
           height: TSizes.spaceBtwSections,

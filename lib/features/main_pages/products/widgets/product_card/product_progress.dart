@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/widgets/custom_shapes/arc_progress_bar.dart';
 import 'package:toprak_rehberi/features/main_pages/products/widgets/score_display.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';
+import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
 class TProductProgress extends StatelessWidget {
   const TProductProgress({
@@ -26,7 +27,7 @@ class TProductProgress extends StatelessWidget {
         // Harvest Date
         children: [
           Text(
-            isHarvested ? 'Hasat Tarihi' : 'Tahmini Hasat Tarihi',
+            isHarvested ? TTexts.harvestDate : TTexts.estimatedHarvestDate,
             style: const TextStyle(
               color: TColors.black,
               fontWeight: FontWeight.bold,
@@ -46,7 +47,7 @@ class TProductProgress extends StatelessWidget {
             TScoreDisplay(score: score)
           ] else ...[
             const Text(
-              'İlerleme',
+              TTexts.progress,
               style: TextStyle(
                 color: TColors.black,
                 fontWeight: FontWeight.bold,

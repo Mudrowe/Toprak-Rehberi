@@ -6,6 +6,7 @@ import 'package:toprak_rehberi/features/main_pages/products/widgets/product_card
 import 'package:toprak_rehberi/models/product/product.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
+import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
 class TProductDetails extends StatelessWidget {
   final Product product;
@@ -56,7 +57,7 @@ class TProductDetails extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Ekim Tarihi',
+                    TTexts.plantingDate,
                     style: textTheme.headlineSmall,
                   ),
                   Text(
@@ -103,7 +104,7 @@ class TProductDetails extends StatelessWidget {
                 ? const SizedBox()
                 : CustomElevatedButton(
                     onPressed: () {},
-                    text: 'HASAT ET',
+                    text: TTexts.harvest,
                     backgroundColor: TColors.primaryColor,
                     textColor: TColors.white,
                     width: TSizes.buttonWidth,

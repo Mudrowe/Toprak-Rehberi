@@ -6,6 +6,7 @@ class TTexts {
   static const String submit = "Onayla";
   static const String appName = "TOPRAK REHBERİ";
   static const String tContinue = "İlerle";
+  static const String squareSymbol = 'm\u00B2';
 
   // Personal Informations
   static const String firstNameSpecial = "Deniz";
@@ -34,17 +35,7 @@ class TTexts {
   static const String signupTitle = "KAYIT OL";
   static const String logOut = "Çıkış Yap";
   static const String closeAccount = "Hesabı Sil";
-  static const String forgetPasswordTitle = "Forget password";
-  static const String forgetPasswordSubTitle =
-      "Don’t worry sometimes people can forget too, enter your email and we will send you a password reset link.";
-  static const String changeYourPasswordTitle = "Password Reset Email Sent";
-  static const String changeYourPasswordSubTitle =
-      "Your Account Security is Our Priority! We've Sent You a Secure Link to Safely Change Your Password and Keep Your Account Protected.";
-  static const String confirmEmail = "Verify your email address!";
-  static const String emailNotReceivedMessage =
-      "Didn’t get the email? Check your junk/spam or resend it.";
-  static const String yourAccountCreatedTitle =
-      "Your account successfully created!";
+  static const String forgetPasswordTitle = "Şifremi Unuttum";
 
   // Home Screen
   static const String totalProducts = 'Ekili Olan Toplam Ürün Sayınız';
@@ -56,4 +47,23 @@ class TTexts {
   static const String addLand = 'Arazi Ekle';
   static const String addProduct = 'Ürün Ekle';
   static const String showSuggestions = 'Önerileri Gör';
+  static const String searchProduct = 'Ürün ara';
+  static const String harvest = 'HASAT ET';
+
+  // Scores
+  static const String bad = "Kötü";
+  static const String meh = "Eh İşte";
+  static const String mid = "Ortalama";
+  static const String good = "İyi";
+  static const String veryGood = "Çok İyi";
+
+  // Card Informations
+  static const String plantingDate = 'Ekim Tarihi';
+  static const String harvestDate = 'Hasat Tarihi';
+  static const String estimatedHarvestDate = 'Tahmini Hasat Tarihi';
+  static const String plantedProducts = 'Ekili Ürünler';
+  static const String harvestedProducts = 'Hasat Edilmiş Ürünler';
+  static const String isPlanted = 'Ürün Ekili Mi?';
+  static const String progress = 'İlerleme';
+
 }

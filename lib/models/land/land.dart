@@ -9,15 +9,18 @@ class Land {
   bool isPlanted = false;
   final Address adres;
   final List<Product>? plantedProducts;
+  final List<Product>? harvestedProducts;
 
-  Land(
-      {required this.area,
-      required this.plantedArea,
-      required this.isPlanted,
-      required this.adres,
-      required this.landName,
-      required this.landType,
-      this.plantedProducts});
+  Land({
+    required this.area,
+    required this.plantedArea,
+    required this.isPlanted,
+    required this.adres,
+    required this.landName,
+    required this.landType,
+    this.plantedProducts,
+    this.harvestedProducts,
+  });
 }
 
 class Address {
