@@ -1,4 +1,4 @@
-import 'package:toprak_rehberi/models/land/land.dart';
+//import 'package:toprak_rehberi/models/land/land.dart';
 
 class Product {
   // TODO: Name can be too long and it breaks the card

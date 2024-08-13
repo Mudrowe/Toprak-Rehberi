@@ -25,4 +25,9 @@ class TImages {
   static const String mid = "assets/scores/3.png";
   static const String good = "assets/scores/4.png";
   static const String veryGood = "assets/scores/5.png";
+
+  // Land Types
+  static const String tarla = "assets/land_types/tarla.png";
+  static const String bag = "assets/land_types/bağ.png";
+  static const String bahce = "assets/land_types/bahçe.png";
 }

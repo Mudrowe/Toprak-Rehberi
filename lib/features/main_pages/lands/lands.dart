@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/widgets/appbar/appbar.dart';
-import 'package:toprak_rehberi/features/main_pages/lands/widgets/land_card.dart';
+import 'package:toprak_rehberi/features/main_pages/lands/widgets/land_card/land_card.dart';
 import 'package:toprak_rehberi/features/main_pages/lands/widgets/lands_list.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';

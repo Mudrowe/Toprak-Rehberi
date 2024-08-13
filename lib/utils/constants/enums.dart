@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:toprak_rehberi/utils/constants/colors.dart';
+import 'package:toprak_rehberi/utils/constants/image_strings.dart';
 
 enum TextSizes { small, medium, large }
 
@@ -34,6 +35,21 @@ extension LandTypeColorExtension on LandType {
         return TColors.bag;
       default:
         return TColors.grey;
+    }
+  }
+}
+
+extension LandTypeImageExtension on LandType {
+  String get imagePath {
+    switch (this) {
+      case LandType.tarla:
+        return TImages.tarla;
+      case LandType.bahce:
+        return TImages.bahce;
+      case LandType.bag:
+        return TImages.bag;
+      default:
+        return TImages.tarla;
     }
   }
 }
