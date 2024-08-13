@@ -7,7 +7,7 @@ class Land {
   final double area;
   final double plantedArea;
   bool isPlanted = false;
-  final Address adres;
+  final Address address;
   final List<Product>? plantedProducts;
   final List<Product>? harvestedProducts;
 
@@ -15,7 +15,7 @@ class Land {
     required this.area,
     required this.plantedArea,
     required this.isPlanted,
-    required this.adres,
+    required this.address,
     required this.landName,
     required this.landType,
     this.plantedProducts,

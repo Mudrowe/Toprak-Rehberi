@@ -30,7 +30,7 @@ class TProductDetails extends StatelessWidget {
             Container(
               height: TSizes.cardHeight / 1.2,
               width: TSizes.cardWidth / 1.2,
-              padding: const EdgeInsets.all(12),
+              padding: const EdgeInsets.all(TSizes.sm),
               decoration: BoxDecoration(
                 color: TColors.softGreen,
                 borderRadius: BorderRadius.circular(TSizes.borderRadiusLg),

@@ -6,6 +6,7 @@ class TColors {
   static const Color primaryColor = Color(0xFF20854D);
   static const Color softGreen = Color(0xFFDEEDE4);
   static const Color middleGreen = Color(0xFFC5DFD0);
+  static const Color backgroundGreen = Color(0xFF72B691);
 
   // Text colors
   static const Color textPrimary = Color(0xFF333333);

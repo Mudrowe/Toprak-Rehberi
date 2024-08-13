@@ -1,37 +1,39 @@
+
 import 'package:flutter/material.dart';
+import 'package:toprak_rehberi/common/styles/shadows.dart';
 import 'package:toprak_rehberi/models/land/land.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/enums.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
-import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
-class TLandBanner extends StatelessWidget {
-  const TLandBanner({
+class TLandTypeImage extends StatelessWidget {
+  const TLandTypeImage({
     super.key,
     required this.land,
+    required this.dark,
   });
 
   final Land land;
+  final bool dark;
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
     return Stack(
       children: [
-        // Background
+        // Type Image
         Container(
-          height: 45,
-          width: TSizes.cardWidth,
+          height: TSizes.landCardHeight,
+          width: TSizes.landCardWidth,
           decoration: BoxDecoration(
-            color: land.landType.color,
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(TSizes.cardRadiusLg),
-              topRight: Radius.circular(TSizes.borderRadiusLg),
-            ),
+            color: TColors.backgroundGreen,
+            borderRadius:
+                BorderRadius.circular(TSizes.borderRadiusLg),
+            boxShadow: [TShadowStyle.productShadow],
           ),
+          child: Image.asset(land.landType.imagePath),
         ),
-
-        // Text
+    
+        // Type Text
         Padding(
           padding: const EdgeInsets.all(TSizes.smd),
           child: Container(
@@ -41,7 +43,8 @@ class TLandBanner extends StatelessWidget {
             ),
             decoration: BoxDecoration(
               color: dark ? TColors.dark : TColors.light,
-              borderRadius: BorderRadius.circular(TSizes.cardRadiusLg),
+              borderRadius:
+                  BorderRadius.circular(TSizes.cardRadiusLg),
             ),
             child: Text(land.landType.displayName),
           ),

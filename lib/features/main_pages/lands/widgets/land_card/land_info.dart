@@ -24,7 +24,7 @@ class TLandInfo extends StatelessWidget {
               style: const TextStyle(color: TColors.dark),
             ),
             Text(
-              '${land.adres.city}  ${land.adres.district}',
+              '${land.address.city}  ${land.address.district}',
               style: const TextStyle(color: TColors.dark),
             ),
             Text(

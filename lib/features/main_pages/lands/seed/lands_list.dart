@@ -10,7 +10,7 @@ final List<Land> landsList = [
     plantedArea: 500,
     isPlanted: true,
     landType: LandType.tarla,
-    adres: Address(
+    address: Address(
       city: 'Ankara',
       district: 'Polatlı',
       neighborhood: 'Özyurt',
@@ -28,7 +28,7 @@ final List<Land> landsList = [
     plantedArea: 700,
     isPlanted: true,
     landType: LandType.tarla,
-    adres: Address(
+    address: Address(
       city: 'Ankara',
       district: 'Polatlı',
       neighborhood: 'Sarıoba',
@@ -46,7 +46,7 @@ final List<Land> landsList = [
     plantedArea: 0,
     isPlanted: false,
     landType: LandType.bag,
-    adres: Address(
+    address: Address(
       city: 'Ankara',
       district: 'Polatlı',
       neighborhood: 'Özyurt',
@@ -64,7 +64,7 @@ final List<Land> landsList = [
     plantedArea: 300,
     isPlanted: true,
     landType: LandType.bahce,
-    adres: Address(
+    address: Address(
       city: 'Ankara',
       district: 'Ayaş',
       neighborhood: 'Ilıca',

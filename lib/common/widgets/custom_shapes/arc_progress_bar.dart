@@ -15,7 +15,7 @@ class TArcProgressBar extends StatelessWidget {
     Color progressColor = getProgressColor(progress);
 
     return CircularPercentIndicator(
-      radius: 55.0,
+      radius: TSizes.pieChartRadius,
       lineWidth: TSizes.md,
       percent: progress,
       center: Text(

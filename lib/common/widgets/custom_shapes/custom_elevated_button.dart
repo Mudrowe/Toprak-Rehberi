@@ -27,7 +27,7 @@ class CustomElevatedButton extends StatelessWidget {
       decoration: BoxDecoration(
         color: backgroundGradient == null ? backgroundColor : null,
         gradient: backgroundGradient,
-        borderRadius: BorderRadius.circular(12),  
+        borderRadius: BorderRadius.circular(TSizes.borderRadiusLg),  
       ),
       child: ElevatedButton(
         onPressed: onPressed,
@@ -35,7 +35,7 @@ class CustomElevatedButton extends StatelessWidget {
           minimumSize: Size(width, height),
           backgroundColor: Colors.transparent,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(TSizes.borderRadiusLg),
           ),
         ),
         child: Text(

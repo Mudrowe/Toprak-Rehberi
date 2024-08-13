@@ -66,4 +66,16 @@ class TTexts {
   static const String isPlanted = 'Ürün Ekili Mi?';
   static const String progress = 'İlerleme';
 
+  // Adress Sections
+  static const String landName = 'İsim';
+  static const String city = 'Şehir';
+  static const String district = 'İlçe';
+  static const String neighborhood = 'Mahalle/Köy';
+  static const String adaNo = 'Ada No';
+  static const String parcelNo = 'Parsel No';
+  static const String area = 'Alan';
+  static const String plantedArea = 'Ürün Ekili Alan';
+
+  // Land Details
+  static const String noPorducts = 'Bu Arazide Ekili Ürün Yok';
 }

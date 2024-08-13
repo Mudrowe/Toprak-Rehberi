@@ -21,8 +21,8 @@ class TLandCard extends StatelessWidget {
     return GestureDetector(
       onTap: () => Get.to(() => TLandDetails(land: land)),
       child: Container(
-        width: TSizes.cardWidth,
         height: TSizes.cardHeight,
+        width: TSizes.cardWidth,
         decoration: BoxDecoration(
           boxShadow: [TShadowStyle.productShadow],
           color: TColors.softGreen,
@@ -42,8 +42,8 @@ class TLandCard extends StatelessWidget {
                 // Land Type Image
                 Image.asset(
                   land.landType.imagePath,
-                  width: 150,
-                  height: 139,
+                  height: TSizes.typeImageHeight,
+                  width: TSizes.typeImageWidth,
                 ),
 
                 // Land Info
