@@ -28,14 +28,14 @@ class TCheckboxTheme {
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
     checkColor: WidgetStateProperty.resolveWith((states) {
       if (states.contains(WidgetState.selected)) {
-        return TColors.white;
+        return TColors.dark;
       } else {
-        return TColors.black;
+        return TColors.light;
       }
     }),
     fillColor: WidgetStateProperty.resolveWith((states) {
       if (states.contains(WidgetState.selected)) {
-        return TColors.primaryColor;
+        return TColors.light;
       } else {
         return Colors.transparent;
       }

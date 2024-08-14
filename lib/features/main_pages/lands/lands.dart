@@ -45,7 +45,9 @@ class LandsScreen extends StatelessWidget {
                   ],
                 ),
 
-                const Divider(indent: TSizes.dividerIndent, endIndent: TSizes.dividerIndent),
+                const Divider(
+                    indent: TSizes.dividerIndent,
+                    endIndent: TSizes.dividerIndent),
 
                 // Lands
                 for (var land in landsList)

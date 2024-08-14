@@ -34,8 +34,8 @@ class TFirstScreenBackground extends StatelessWidget {
               Container(
                 height: TSizes.logoHeight,
                 width: TSizes.logoWidth,
-                decoration: const BoxDecoration(
-                  color: TColors.black,
+                decoration: BoxDecoration(
+                  color: dark ? TColors.black : TColors.white,
                   shape: BoxShape.circle,
                 ),
                 child: Padding(

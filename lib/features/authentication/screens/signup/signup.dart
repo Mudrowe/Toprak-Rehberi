@@ -15,29 +15,22 @@ class SignupScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(TSizes.defaulSpace),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Titles
-              Text(
-                TTexts.signupTitle,
-                style: Theme.of(context).textTheme.headlineLarge,
-              ),
-              const SizedBox(
-                height: TSizes.spaceBtwSections,
-              ),
+              const SizedBox(height: TSizes.spaceBtwSections),
 
               // Form
               const TSignupForm(),
 
-              const SizedBox(
-                height: TSizes.spaceBtwSections,
-              ),
+              const SizedBox(height: TSizes.spaceBtwSections),
 
               // Signup Button
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                    onPressed: () {}, child: const Text(TTexts.createAccount)),
+                  onPressed: () {},
+                  child: const Text(TTexts.createAccount),
+                ),
               ),
             ],
           ),

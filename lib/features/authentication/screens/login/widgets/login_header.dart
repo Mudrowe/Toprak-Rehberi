@@ -18,17 +18,19 @@ class TLoginHeader extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-                height: TSizes.logoHeight,
-                width: TSizes.logoWidth,
-                decoration: const BoxDecoration(
-                  color: TColors.black,
-                  shape: BoxShape.circle,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(TSizes.sm),
-                  child: Image(image: AssetImage(dark ? TImages.darkAppLogo : TImages.lightAppLogo)),
-                ),
-              ),
+          height: TSizes.logoHeight,
+          width: TSizes.logoWidth,
+          decoration: BoxDecoration(
+            color: dark ? TColors.black : TColors.white,
+            shape: BoxShape.circle,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(TSizes.sm),
+            child: Image(
+                image: AssetImage(
+                    dark ? TImages.darkAppLogo : TImages.lightAppLogo)),
+          ),
+        ),
       ],
     );
   }

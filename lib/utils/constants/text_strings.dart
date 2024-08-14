@@ -75,6 +75,7 @@ class TTexts {
   static const String parcelNo = 'Parsel No';
   static const String area = 'Alan';
   static const String plantedArea = 'Ürün Ekili Alan';
+  static const String landType = 'Arazi Tipi';
 
   // Land Details
   static const String noPorducts = 'Bu Arazide Ekili Ürün Yok';

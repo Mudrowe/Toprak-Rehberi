@@ -7,10 +7,6 @@ import 'package:toprak_rehberi/models/product/product.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
-// ? Card background is little bit weird in dark mode
-// ? Should be more darker color but primary color is weird too
-// ! Maybe it will be like the searchbox style
-
 // ? pieChartColor1 is too dark for dark mod. Consider to change it
 
 // ! IconButton theme breaks the left-right arrows in the TProductCardHome.
