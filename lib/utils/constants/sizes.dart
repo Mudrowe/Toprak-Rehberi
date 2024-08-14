@@ -80,4 +80,8 @@ class TSizes {
 
   // Navigation bar
   static const double navigationBarHeight = 80.0;
+
+  // Scoring
+  static const double scoreRectangleHeight = 15.0;
+  static const double scoreRectangleWidth = 65.0;
 }
