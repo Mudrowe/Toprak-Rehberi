@@ -7,10 +7,6 @@ import 'package:toprak_rehberi/features/main_pages/products/widgets/product_card
 import 'package:toprak_rehberi/models/product/product.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
-// ? Card background is little bit weird in dark mode
-// ? Should be more darker color but primary color is weird too
-// ! Maybe it will be like the searchbox style
-
 class TProductCard extends StatelessWidget {
   const TProductCard({
     super.key,

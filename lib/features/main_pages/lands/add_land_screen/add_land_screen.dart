@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/widgets/appbar/appbar.dart';
-import 'package:toprak_rehberi/features/authentication/screens/signup/widgets/signup_form.dart';
+import 'package:toprak_rehberi/features/main_pages/lands/add_land_screen/widgets/add_land_form.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
-class SignupScreen extends StatelessWidget {
-  const SignupScreen({super.key});
+class TAddLandScreen extends StatelessWidget {
+  const TAddLandScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,20 +16,17 @@ class SignupScreen extends StatelessWidget {
           padding: const EdgeInsets.all(TSizes.defaulSpace),
           child: Column(
             children: [
-              // Titles
-              const SizedBox(height: TSizes.spaceBtwSections),
-
               // Form
-              const TSignupForm(),
+              const TAddLandForm(),
 
               const SizedBox(height: TSizes.spaceBtwSections),
 
-              // Signup Button
+              // Confirm Button
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {},
-                  child: const Text(TTexts.createAccount),
+                  child: const Text(TTexts.submit),
                 ),
               ),
             ],

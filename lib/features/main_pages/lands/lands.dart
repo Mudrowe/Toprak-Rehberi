@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:toprak_rehberi/features/main_pages/lands/add_land_screen/add_land_screen.dart';
 import 'package:toprak_rehberi/features/main_pages/lands/widgets/land_card/land_card.dart';
 import 'package:toprak_rehberi/features/main_pages/lands/seed/lands_list.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
@@ -27,7 +29,7 @@ class LandsScreen extends StatelessWidget {
 
                 IconButton(
                   iconSize: TSizes.iconLg,
-                  onPressed: () {},
+                  onPressed: () => Get.to(() => const TAddLandScreen()),
                   icon: const Icon(Icons.add),
                 ),
 
@@ -43,7 +45,9 @@ class LandsScreen extends StatelessWidget {
                   ],
                 ),
 
-                const Divider(indent: TSizes.dividerIndent, endIndent: TSizes.dividerIndent),
+                const Divider(
+                    indent: TSizes.dividerIndent,
+                    endIndent: TSizes.dividerIndent),
 
                 // Lands
                 for (var land in landsList)

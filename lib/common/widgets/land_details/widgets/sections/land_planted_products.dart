@@ -4,6 +4,7 @@ import 'package:toprak_rehberi/models/land/land.dart';
 import 'package:toprak_rehberi/utils/constants/image_strings.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
+import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
 class TLandPlantedProducts extends StatelessWidget {
   final Land land;
@@ -12,6 +13,7 @@ class TLandPlantedProducts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = THelperFunctions.isDarkMode(context);
     return land.isPlanted
         ? Column(
             children: [
@@ -30,7 +32,7 @@ class TLandPlantedProducts extends StatelessWidget {
           )
         : Column(
             children: [
-              Image.asset(TImages.appLogo),
+              Image.asset(dark ? TImages.darkAppLogo : TImages.lightAppLogo),
               const SizedBox(
                 height: TSizes.spaceBtwItems,
               ),

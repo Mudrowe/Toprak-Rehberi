@@ -27,7 +27,11 @@ class TProductCardImage extends StatelessWidget {
             horizontal: TSizes.md,
           ),
           decoration: getCardDecoration(context),
-          child: Text(product.productName, style: textTheme.bodyLarge),
+          child: Text(
+            product.productName,
+            style: textTheme.bodyLarge,
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
 
         // Product image
@@ -38,10 +42,7 @@ class TProductCardImage extends StatelessWidget {
         ),
 
         // Land name
-        Text(
-          product.landName,
-          style: textTheme.bodyLarge
-        )
+        Text(product.landName, style: textTheme.bodyLarge)
       ],
     );
   }

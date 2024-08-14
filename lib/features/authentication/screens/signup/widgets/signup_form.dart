@@ -11,81 +11,82 @@ class TSignupForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Form(
-        child: Column(
-      children: [
-        Row(
-          children: [
-            // First Name
-            Expanded(
-              child: TextFormField(
-                expands: false,
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.person),
-                  labelText: TTexts.firstName,
+      child: Column(
+        children: [
+          Row(
+            children: [
+              // First Name
+              Expanded(
+                child: TextFormField(
+                  expands: false,
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.person),
+                    labelText: TTexts.firstName,
+                  ),
                 ),
               ),
-            ),
 
-            const SizedBox(width: TSizes.spaceBtwInputFields),
+              const SizedBox(width: TSizes.spaceBtwInputFields),
 
-            // Last Name
-            Expanded(
-              child: TextFormField(
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.person),
-                  labelText: TTexts.lastName,
+              // Last Name
+              Expanded(
+                child: TextFormField(
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.person),
+                    labelText: TTexts.lastName,
+                  ),
                 ),
               ),
+            ],
+          ),
+
+          const SizedBox(height: TSizes.spaceBtwInputFields),
+
+          // Email
+          TextFormField(
+            decoration: const InputDecoration(
+              prefixIcon: Icon(Icons.email),
+              labelText: TTexts.email,
             ),
-          ],
-        ),
-
-        const SizedBox(height: TSizes.spaceBtwInputFields),
-
-        // Email
-        TextFormField(
-          decoration: const InputDecoration(
-            prefixIcon: Icon(Icons.email),
-            labelText: TTexts.email,
           ),
-        ),
 
-        const SizedBox(height: TSizes.spaceBtwInputFields),
+          const SizedBox(height: TSizes.spaceBtwInputFields),
 
-        // Phone Number
-        TextFormField(
-          decoration: const InputDecoration(
-            prefixIcon: Icon(Icons.phone),
-            labelText: TTexts.phoneNo,
+          // Phone Number
+          TextFormField(
+            decoration: const InputDecoration(
+              prefixIcon: Icon(Icons.phone),
+              labelText: TTexts.phoneNo,
+            ),
           ),
-        ),
 
-        const SizedBox(height: TSizes.spaceBtwInputFields),
+          const SizedBox(height: TSizes.spaceBtwInputFields),
 
-        // Password
-        TextFormField(
-          decoration: const InputDecoration(
-            prefixIcon: Icon(Icons.lock),
-            labelText: TTexts.password,
-            suffixIcon: Icon(Icons.visibility),
+          // Password
+          TextFormField(
+            decoration: const InputDecoration(
+              prefixIcon: Icon(Icons.lock),
+              labelText: TTexts.password,
+              suffixIcon: Icon(Icons.visibility),
+            ),
           ),
-        ),
 
-        const SizedBox(height: TSizes.spaceBtwInputFields),
+          const SizedBox(height: TSizes.spaceBtwInputFields),
 
-        // Password Again
-        TextFormField(
-          decoration: const InputDecoration(
-            prefixIcon: Icon(Icons.lock),
-            labelText: TTexts.password,
-            suffixIcon: Icon(Icons.visibility),
+          // Password Again
+          TextFormField(
+            decoration: const InputDecoration(
+              prefixIcon: Icon(Icons.lock),
+              labelText: TTexts.password,
+              suffixIcon: Icon(Icons.visibility),
+            ),
           ),
-        ),
 
-        const SizedBox(height: TSizes.spaceBtwSections),
+          const SizedBox(height: TSizes.spaceBtwSections),
 
-        const TTermsAndConditionsCheckBox(),
-      ],
-    ));
+          const TTermsAndConditionsCheckBox(),
+        ],
+      ),
+    );
   }
 }
