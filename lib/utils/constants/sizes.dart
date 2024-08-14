@@ -38,12 +38,14 @@ class TSizes {
   static const double borderRadiusMd = 8.0;
   static const double borderRadiusLg = 12.0;
 
-  // Divier height
+  // Divider height
   static const double dividerHeight = 1.0;
+  static const double dividerIndent = 40.0;
 
   // Land card dimensions
   static const double landCardHeight = 250.0;
   static const double landCardWidth = 350.0;
+  static const double landBannerHeight = 45.0;
 
   // Land type image dimensions
   static const double typeImageHeight = 139.0;
@@ -75,4 +77,7 @@ class TSizes {
   // Logo sizes
   static const double logoHeight = 120.0;
   static const double logoWidth = 120.0;
+
+  // Navigation bar
+  static const double navigationBarHeight = 80.0;
 }

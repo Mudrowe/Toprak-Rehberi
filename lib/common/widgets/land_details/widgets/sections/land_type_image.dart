@@ -8,11 +8,9 @@ class TLandTypeImage extends StatelessWidget {
   const TLandTypeImage({
     super.key,
     required this.land,
-    required this.dark,
   });
 
   final Land land;
-  final bool dark;
 
   @override
   Widget build(BuildContext context) {

@@ -4,6 +4,7 @@ import 'package:toprak_rehberi/features/main_pages/home/home.dart';
 import 'package:toprak_rehberi/features/main_pages/lands/lands.dart';
 import 'package:toprak_rehberi/features/main_pages/products/products.dart';
 import 'package:toprak_rehberi/features/main_pages/profile/profile.dart';
+import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
 class NavigationMenu extends StatelessWidget {
   const NavigationMenu({super.key});
@@ -15,7 +16,7 @@ class NavigationMenu extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: Obx(
         () => NavigationBar(
-          height: 80,
+          height: TSizes.navigationBarHeight,
           elevation: 0,
           selectedIndex: controller.selectedIndex.value,
           onDestinationSelected: (index) =>

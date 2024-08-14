@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/models/land/land.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
-class TLandInfo extends StatelessWidget {
-  const TLandInfo({
+class TLandCardInfo extends StatelessWidget {
+  const TLandCardInfo({
     super.key,
     required this.land,
   });

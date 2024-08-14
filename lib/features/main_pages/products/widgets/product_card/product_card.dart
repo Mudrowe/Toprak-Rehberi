@@ -33,7 +33,7 @@ class TProductCard extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            TProductImage(
+            TProductCardImage(
               product: product,
               imagePath: product.imagePath,
             ),

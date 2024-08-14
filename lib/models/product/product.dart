@@ -1,5 +1,3 @@
-//import 'package:toprak_rehberi/models/land/land.dart';
-
 class Product {
   // TODO: Name can be too long and it breaks the card
   final String productName;
@@ -11,10 +9,8 @@ class Product {
   final bool isHarvested;
   final int score;
   final double area;
-  //final Land land;
 
   Product({
-    //required this.land,
     required this.productName,
     required this.plantingDate,
     required this.harvestDate,

@@ -31,7 +31,7 @@ class TAppTheme {
     outlinedButtonTheme: TOutlinedButtonTheme.lightOutlinedButtonTheme,
     inputDecorationTheme: TTextFormFieldTheme.lightInputDecorationTheme,
     textButtonTheme: TTextButtonTheme.lightTextButtonTheme,
-    navigationBarTheme: TNavigationBarTheme.navigationBarTheme,
+    navigationBarTheme: TNavigationBarTheme.lightNavigationBarTheme,
     iconButtonTheme: TIconButtonTheme.iconButtonTheme,
   );
 
@@ -52,7 +52,7 @@ class TAppTheme {
     outlinedButtonTheme: TOutlinedButtonTheme.darkOutlinedButtonTheme,
     inputDecorationTheme: TTextFormFieldTheme.darkInputDecorationTheme,
     textButtonTheme: TTextButtonTheme.darkTextButtonTheme,
-    navigationBarTheme: TNavigationBarTheme.navigationBarTheme,
+    navigationBarTheme: TNavigationBarTheme.darkNavigationBarTheme,
     iconButtonTheme: TIconButtonTheme.iconButtonTheme,
   );
 }

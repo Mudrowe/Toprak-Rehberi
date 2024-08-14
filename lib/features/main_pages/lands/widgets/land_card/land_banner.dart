@@ -18,7 +18,7 @@ class TLandBanner extends StatelessWidget {
       children: [
         // Background
         Container(
-          height: 45,
+          height: TSizes.landBannerHeight,
           width: TSizes.cardWidth,
           decoration: BoxDecoration(
             color: land.landType.color,

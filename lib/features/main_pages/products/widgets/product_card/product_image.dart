@@ -3,8 +3,8 @@ import 'package:toprak_rehberi/common/styles/card_style.dart';
 import 'package:toprak_rehberi/models/product/product.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
-class TProductImage extends StatelessWidget {
-  const TProductImage({
+class TProductCardImage extends StatelessWidget {
+  const TProductCardImage({
     super.key,
     required this.imagePath,
     required this.product,

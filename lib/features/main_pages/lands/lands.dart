@@ -24,15 +24,15 @@ class LandsScreen extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-            
+
                 IconButton(
                   iconSize: TSizes.iconLg,
                   onPressed: () {},
                   icon: const Icon(Icons.add),
                 ),
-            
+
                 const SizedBox(height: TSizes.spaceBtwSections),
-            
+
                 // Total Land Info
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -42,8 +42,10 @@ class LandsScreen extends StatelessWidget {
                     Text(landsList.length.toString()),
                   ],
                 ),
-            
-                const Divider(indent: 40, endIndent: 40),
+
+                const Divider(indent: TSizes.dividerIndent, endIndent: TSizes.dividerIndent),
+
+                // Lands
                 for (var land in landsList)
                   Column(
                     children: [
