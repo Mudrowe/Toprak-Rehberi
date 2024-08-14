@@ -30,14 +30,14 @@ class TFirstScreenBackground extends StatelessWidget {
                     fontWeight: FontWeight.w600),
               ),
               Container(
-                height: 120,
-                width: 120,
+                height: TSizes.logoHeight,
+                width: TSizes.logoWidth,
                 decoration: const BoxDecoration(
                   color: TColors.white,
                   shape: BoxShape.circle,
                 ),
                 child: const Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(TSizes.sm),
                   child: Image(image: AssetImage(TImages.appLogo)),
                 ),
               ),

@@ -6,6 +6,7 @@ class TImages {
   static const String backArrow = "assets/icons/back.png";
   static const String arrowBack = "assets/icons/arrow_back.png";
   static const String arrowForward = "assets/icons/arrow_forward.png";
+  static const String plus = "assets/icons/plus.png";
 
   // Products
   static const String apple = "assets/products/apple.png";
@@ -24,4 +25,9 @@ class TImages {
   static const String mid = "assets/scores/3.png";
   static const String good = "assets/scores/4.png";
   static const String veryGood = "assets/scores/5.png";
+
+  // Land Types
+  static const String tarla = "assets/land_types/tarla.png";
+  static const String bag = "assets/land_types/bağ.png";
+  static const String bahce = "assets/land_types/bahçe.png";
 }

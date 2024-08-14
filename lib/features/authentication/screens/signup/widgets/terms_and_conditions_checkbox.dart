@@ -15,8 +15,8 @@ class TTermsAndConditionsCheckBox extends StatelessWidget {
     return Row(
       children: [
         SizedBox(
-            width: 24,
-            height: 24,
+            height: TSizes.lg,
+            width: TSizes.lg,
             child: Checkbox(value: true, onChanged: (value) {})),
         const SizedBox(
           width: TSizes.spaceBtwItems,

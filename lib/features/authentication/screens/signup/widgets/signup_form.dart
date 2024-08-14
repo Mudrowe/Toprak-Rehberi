@@ -20,26 +20,28 @@ class TSignupForm extends StatelessWidget {
               child: TextFormField(
                 expands: false,
                 decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.person),
-                    labelText: TTexts.firstName),
+                  prefixIcon: Icon(Icons.person),
+                  labelText: TTexts.firstName,
+                ),
               ),
             ),
-            const SizedBox(
-              width: TSizes.spaceBtwInputFields,
-            ),
+
+            const SizedBox(width: TSizes.spaceBtwInputFields),
+
             // Last Name
             Expanded(
               child: TextFormField(
                 decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.person), labelText: TTexts.lastName),
+                  prefixIcon: Icon(Icons.person),
+                  labelText: TTexts.lastName,
+                ),
               ),
             ),
           ],
         ),
 
-        const SizedBox(
-          height: TSizes.spaceBtwInputFields,
-        ),
+        const SizedBox(height: TSizes.spaceBtwInputFields),
+
         // Email
         TextFormField(
           decoration: const InputDecoration(
@@ -47,9 +49,8 @@ class TSignupForm extends StatelessWidget {
             labelText: TTexts.email,
           ),
         ),
-        const SizedBox(
-          height: TSizes.spaceBtwInputFields,
-        ),
+
+        const SizedBox(height: TSizes.spaceBtwInputFields),
 
         // Phone Number
         TextFormField(
@@ -58,9 +59,8 @@ class TSignupForm extends StatelessWidget {
             labelText: TTexts.phoneNo,
           ),
         ),
-        const SizedBox(
-          height: TSizes.spaceBtwInputFields,
-        ),
+
+        const SizedBox(height: TSizes.spaceBtwInputFields),
 
         // Password
         TextFormField(
@@ -70,9 +70,8 @@ class TSignupForm extends StatelessWidget {
             suffixIcon: Icon(Icons.visibility),
           ),
         ),
-        const SizedBox(
-          height: TSizes.spaceBtwInputFields,
-        ),
+
+        const SizedBox(height: TSizes.spaceBtwInputFields),
 
         // Password Again
         TextFormField(
@@ -82,9 +81,8 @@ class TSignupForm extends StatelessWidget {
             suffixIcon: Icon(Icons.visibility),
           ),
         ),
-        const SizedBox(
-          height: TSizes.spaceBtwSections,
-        ),
+
+        const SizedBox(height: TSizes.spaceBtwSections),
 
         const TTermsAndConditionsCheckBox(),
       ],

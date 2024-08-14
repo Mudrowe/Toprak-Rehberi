@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';
+import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
 class LegendItem extends StatelessWidget {
@@ -19,7 +20,7 @@ class LegendItem extends StatelessWidget {
     final Color textColor = dark ? TColors.white : TColors.black;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      padding: const EdgeInsets.symmetric(vertical: TSizes.sm),
       child: Row(
         children: [
           Container(

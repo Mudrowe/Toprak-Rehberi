@@ -6,6 +6,7 @@ class TColors {
   static const Color primaryColor = Color(0xFF20854D);
   static const Color softGreen = Color(0xFFDEEDE4);
   static const Color middleGreen = Color(0xFFC5DFD0);
+  static const Color backgroundGreen = Color(0xFF72B691);
 
   // Text colors
   static const Color textPrimary = Color(0xFF333333);
@@ -77,4 +78,9 @@ class TColors {
   static const Color softGrey = Color(0XFFF4F4F4);
   static const Color lightGrey = Color(0XFFF9F9F9);
   static const Color white = Color(0XFFFFFFFF);
+
+  // Land Colors
+  static const Color tarla = Colors.amber;
+  static const Color bag = Colors.greenAccent;
+  static const Color bahce = Colors.indigo;
 }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:toprak_rehberi/common/widgets/custom_shapes/containers/search_container.dart';
-import 'package:toprak_rehberi/common/widgets/products/product_card.dart';
-import 'package:toprak_rehberi/common/widgets/products/widgets/products_lists.dart';
+import 'package:toprak_rehberi/common/widgets/custom_shapes/search_container.dart';
+import 'package:toprak_rehberi/features/main_pages/products/widgets/product_card/product_card.dart';
+import 'package:toprak_rehberi/features/main_pages/products/seed/products_lists.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
+import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
 class TPlantedProducts extends StatelessWidget {
   const TPlantedProducts({
@@ -17,7 +18,7 @@ class TPlantedProducts extends StatelessWidget {
           height: TSizes.spaceBtwItems,
         ),
         const TSearchContainer(
-          text: 'Ürün ara',
+          text: TTexts.searchProduct,
         ),
         const SizedBox(
           height: TSizes.spaceBtwSections,

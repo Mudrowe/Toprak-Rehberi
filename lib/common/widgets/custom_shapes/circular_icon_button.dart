@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';
+import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
 class CircularIconButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -14,7 +15,7 @@ class CircularIconButton extends StatelessWidget {
     required this.assetImagePath,
     this.backgroundColor = TColors.primaryColor,
     this.iconColor = TColors.white,
-    this.padding = 8.0,
+    this.padding = TSizes.sm,
   });
 
   @override

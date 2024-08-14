@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
 class CustomOutlinedButton extends StatelessWidget {
     final VoidCallback onPressed;
@@ -26,7 +27,7 @@ class CustomOutlinedButton extends StatelessWidget {
         backgroundColor: Colors.white,
         side: BorderSide(color: borderColor),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(TSizes.borderRadiusLg),
         )
       ),
       child: Text(

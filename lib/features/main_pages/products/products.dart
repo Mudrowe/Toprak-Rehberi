@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/widgets/appbar/tabbar.dart';
-import 'package:toprak_rehberi/features/main_pages/products/widgets/harvested_products.dart';
-import 'package:toprak_rehberi/features/main_pages/products/widgets/planted_products.dart';
+import 'package:toprak_rehberi/features/main_pages/products/widgets/tabs/harvested_products.dart';
+import 'package:toprak_rehberi/features/main_pages/products/widgets/tabs/planted_products.dart';
+import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
 class ProductsScreen extends StatelessWidget {
   const ProductsScreen({super.key});
@@ -20,10 +21,10 @@ class ProductsScreen extends StatelessWidget {
                   title: TTabBar(
                     tabs: [
                       Tab(
-                        child: Text('Ekili Ürünler'),
+                        child: Text(TTexts.plantedProducts),
                       ),
                       Tab(
-                        child: Text('Hasat Edilmiş Ürünler'),
+                        child: Text(TTexts.harvestedProducts),
                       ),
                     ],
                   ),
