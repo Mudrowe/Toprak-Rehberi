@@ -67,7 +67,7 @@ class TTexts {
   static const String progress = 'İlerleme';
 
   // Adress Sections
-  static const String landName = 'İsim';
+  static const String landName = 'Arazi İsmi';
   static const String city = 'Şehir';
   static const String district = 'İlçe';
   static const String neighborhood = 'Mahalle/Köy';
