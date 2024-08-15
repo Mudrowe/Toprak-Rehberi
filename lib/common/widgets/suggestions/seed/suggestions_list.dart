@@ -8,7 +8,7 @@ final List<SuggestionProduct> suggesionsList = [
   SuggestionProduct(name: 'Ayçiçeği', score: 31),
   SuggestionProduct(name: 'Elma', score: 25),
   SuggestionProduct(name: 'Çilek', score: 21),
-  SuggestionProduct(name: 'Buğday', score: 13),
+  SuggestionProduct(name: 'Buğday', score: 5),
 ];
 
 class SuggestionProduct {

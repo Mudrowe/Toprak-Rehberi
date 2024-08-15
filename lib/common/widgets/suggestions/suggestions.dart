@@ -31,15 +31,32 @@ class SuggestionsScreen extends StatelessWidget {
                 gradient: TColors.recommendationGradient,
                 boxShadow: [TShadowStyle.productShadow],
               ),
-              child: Center(
+              child: const Center(
                 child: Text(
                   TTexts.ourSuggestions,
-                  style: textTheme.headlineSmall,
+                  style: TextStyle(
+                      color: TColors.black,
+                      fontSize: TSizes.fontSizeLg,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ),
 
             const SizedBox(height: TSizes.spaceBtwSections),
+            Padding(
+              // ! Paddings will probably broke with different screen size
+              padding: const EdgeInsets.only(left: TSizes.xxl*1.7, right: TSizes.xxl*1.2), 
+              child: Row(
+                //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text('Ürün', style: textTheme.headlineSmall),
+                  const Spacer(),
+                  Text('Başarı Puanı', style: textTheme.headlineSmall),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: TSizes.spaceBtwItems),
 
             // Suggestions
             Padding(
