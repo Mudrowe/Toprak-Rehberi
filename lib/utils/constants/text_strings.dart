@@ -81,4 +81,7 @@ class TTexts {
 
   // Product Details
   static const String scoreProduct = 'Hasat Veriminizi Değerlendirin';
+
+  // Suggestion
+  static const String ourSuggestions = 'Araziniz İçin Önerdiklerimiz';
 }

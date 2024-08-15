@@ -7,6 +7,7 @@ class TSizes {
   static const double md = 12.0;
   static const double lg = 24.0;
   static const double xl = 32.0;
+  static const double xxl = 40.0;
 
   // Icon sizes
   static const double iconXs = 12.0;
@@ -27,6 +28,7 @@ class TSizes {
 
   // AppBar height
   static const double appBarHeight = 56.0;
+  static const double suggestionHeadlineHeight = 60.0;
 
   // Default spacing between sections
   static const double defaulSpace = 24.0;
@@ -84,4 +86,7 @@ class TSizes {
   // Scoring
   static const double scoreRectangleHeight = 15.0;
   static const double scoreRectangleWidth = 65.0;
+
+  // Suggestions
+  static const double suggestionCardHeight = 55.0;
 }

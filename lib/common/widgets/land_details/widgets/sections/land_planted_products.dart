@@ -23,9 +23,7 @@ class TLandPlantedProducts extends StatelessWidget {
                 Column(
                   children: [
                     TProductCard(product: product),
-                    const SizedBox(
-                      height: TSizes.spaceBtwItems,
-                    )
+                    const SizedBox(height: TSizes.spaceBtwItems)
                   ],
                 ),
             ],
