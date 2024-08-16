@@ -9,13 +9,13 @@ class TProfileSection extends StatelessWidget {
     super.key,
     required this.title,
     required this.value,
-    required this.onPressed,
+    required this.onTap,
     this.showBackground = true,
     this.showBorder = true,
   });
 
   final String title, value;
-  final VoidCallback onPressed;
+  final VoidCallback onTap;
   final bool showBackground, showBorder;
 
   @override
@@ -23,7 +23,7 @@ class TProfileSection extends StatelessWidget {
     final dark = THelperFunctions.isDarkMode(context);
     final Color textColor = dark ? TColors.light : TColors.dark;
     return GestureDetector(
-      onTap: onPressed,
+      onTap: onTap,
       child: Padding(
         padding:
             const EdgeInsets.symmetric(vertical: TSizes.spaceBtwItems / 1.5),

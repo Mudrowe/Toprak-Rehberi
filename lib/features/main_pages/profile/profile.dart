@@ -22,35 +22,35 @@ class ProfileScreen extends StatelessWidget {
               TProfileSection(
                 title: TTexts.firstName,
                 value: TTexts.firstNameSpecial,
-                onPressed: () {},
+                onTap: () {},
               ),
 
               // Last Name
               TProfileSection(
                 title: TTexts.lastName,
                 value: TTexts.lastNameSpecial,
-                onPressed: () {},
+                onTap: () {},
               ),
 
               // Email
               TProfileSection(
                 title: TTexts.email,
                 value: TTexts.emailSpecial,
-                onPressed: () {},
+                onTap: () {},
               ),
 
               // Phone Number
               TProfileSection(
                 title: TTexts.phoneNoShort,
                 value: TTexts.phoneNoSpecial,
-                onPressed: () {},
+                onTap: () {},
               ),
 
               // Password
               TProfileSection(
                 title: TTexts.password,
                 value: '**********',
-                onPressed: () {},
+                onTap: () {},
               ),
 
               const SizedBox(height: TSizes.spaceBtwSections),
