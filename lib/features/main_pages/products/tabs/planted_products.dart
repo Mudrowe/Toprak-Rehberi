@@ -14,22 +14,34 @@ class TPlantedProducts extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(
-          height: TSizes.spaceBtwItems,
+        const SizedBox(height: TSizes.spaceBtwItems),
+
+        // Search bar
+        const TSearchContainer(text: TTexts.searchProduct),
+
+        const SizedBox(height: TSizes.spaceBtwSections),
+
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            const Text(TTexts.totalPlantedProducts),
+            Text('${plantedProductsList.length}')
+          ],
         ),
-        const TSearchContainer(
-          text: TTexts.searchProduct,
+
+        const Divider(
+          indent: TSizes.dividerIndent,
+          endIndent: TSizes.dividerIndent,
         ),
-        const SizedBox(
-          height: TSizes.spaceBtwSections,
-        ),
+
+        const SizedBox(height: TSizes.spaceBtwItems),
+
+        // Products
         for (var product in plantedProductsList)
           Column(
             children: [
               TProductCard(product: product),
-              const SizedBox(
-                height: TSizes.spaceBtwItems,
-              )
+              const SizedBox(height: TSizes.spaceBtwItems)
             ],
           ),
       ],

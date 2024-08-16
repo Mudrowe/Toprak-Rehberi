@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/widgets/appbar/tabbar.dart';
-import 'package:toprak_rehberi/features/main_pages/products/widgets/tabs/harvested_products.dart';
-import 'package:toprak_rehberi/features/main_pages/products/widgets/tabs/planted_products.dart';
+import 'package:toprak_rehberi/features/main_pages/products/tabs/harvested_products.dart';
+import 'package:toprak_rehberi/features/main_pages/products/tabs/planted_products.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
 class ProductsScreen extends StatelessWidget {
@@ -20,12 +20,8 @@ class ProductsScreen extends StatelessWidget {
                 flexibleSpace: FlexibleSpaceBar(
                   title: TTabBar(
                     tabs: [
-                      Tab(
-                        child: Text(TTexts.plantedProducts),
-                      ),
-                      Tab(
-                        child: Text(TTexts.harvestedProducts),
-                      ),
+                      Tab(child: Text(TTexts.plantedProducts)),
+                      Tab(child: Text(TTexts.harvestedProducts)),
                     ],
                   ),
                 ),
@@ -34,12 +30,8 @@ class ProductsScreen extends StatelessWidget {
           },
           body: const TabBarView(
             children: [
-              SingleChildScrollView(
-                child: TPlantedProducts(),
-              ),
-              SingleChildScrollView(
-                child: THarvestedProducts(),
-              ),
+              SingleChildScrollView(child: TPlantedProducts()),
+              SingleChildScrollView(child: THarvestedProducts()),
             ],
           ),
         ),
