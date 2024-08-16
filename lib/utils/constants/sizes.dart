@@ -5,6 +5,7 @@ class TSizes {
   static const double sm = 8.0;
   static const double smd = 10.0;
   static const double md = 12.0;
+  static const double slg = 14.0;
   static const double lg = 24.0;
   static const double xl = 32.0;
   static const double xxl = 40.0;

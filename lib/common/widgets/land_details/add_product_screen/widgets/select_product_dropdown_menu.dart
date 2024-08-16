@@ -11,8 +11,9 @@ class TSelectProductDropdownMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return DropdownButtonFormField(
-      hint: const Text(TTexts.choseProduct),
+      hint: Text(TTexts.choseProduct, style: textTheme.bodyLarge),
       items: [
         for (var product in suggesionsList)
           DropdownMenuItem(

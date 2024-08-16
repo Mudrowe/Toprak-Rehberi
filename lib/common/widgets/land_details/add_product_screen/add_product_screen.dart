@@ -21,6 +21,7 @@ class AddProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: const TAppBar(showBackButton: true),
       body: SingleChildScrollView(
@@ -36,16 +37,15 @@ class AddProductScreen extends StatelessWidget {
 
               const SizedBox(height: TSizes.spaceBtwSections * 2),
 
-
               // ! Sizes aren't flexible for long names
               Container(
-                width: TSizes.buttonWidth/2,
-                height: TSizes.buttonHeight*2,
+                width: TSizes.buttonWidth / 2,
+                height: TSizes.buttonHeight * 2,
                 decoration: getCardDecoration(context),
                 child: Center(
                   child: Text(
                     land.landName,
-                    style: const TextStyle(fontSize: TSizes.fontSizeLg),
+                    style: textTheme.titleLarge
                   ),
                 ),
               ),
@@ -57,8 +57,9 @@ class AddProductScreen extends StatelessWidget {
               const SizedBox(height: TSizes.spaceBtwSections * 2),
 
               TextFormField(
-                decoration: const InputDecoration(
-                    hintText: '${TTexts.productArea} (${TTexts.squareSymbol})'),
+                decoration: InputDecoration(
+                    hintText: '${TTexts.productArea} (${TTexts.squareSymbol})',
+                    hintStyle: textTheme.bodyLarge),
               ),
 
               const SizedBox(height: TSizes.spaceBtwSections * 2),
