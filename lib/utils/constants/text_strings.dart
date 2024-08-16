@@ -84,4 +84,6 @@ class TTexts {
 
   // Suggestion
   static const String ourSuggestions = 'Araziniz İçin Önerdiklerimiz';
+  static const String product = 'Ürün';
+  static const String score = 'Başarı Puanı';
 }
