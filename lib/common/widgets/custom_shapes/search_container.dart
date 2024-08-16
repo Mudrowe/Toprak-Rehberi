@@ -39,16 +39,23 @@ class TSearchContainer extends StatelessWidget {
             border: showBorder ? Border.all(color: TColors.grey) : null),
         child: Row(
           children: [
+            // Search icon
             Icon(
               icon1,
               color: TColors.primaryColor,
             ),
-            const SizedBox(
-              width: TSizes.spaceBtwItems,
-            ),
+
+            const SizedBox(width: TSizes.spaceBtwItems),
+
+            // Search Text
             Text(text, style: Theme.of(context).textTheme.bodySmall),
             const Spacer(),
-            Icon(icon2, color: TColors.primaryColor)
+
+            // Filter icon
+            GestureDetector(
+              child: Icon(icon2, color: TColors.primaryColor),
+              onTap: () {},
+            )
           ],
         ),
       ),

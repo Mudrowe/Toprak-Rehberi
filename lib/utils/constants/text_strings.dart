@@ -90,4 +90,8 @@ class TTexts {
   static const String ourSuggestions = 'Araziniz İçin Önerdiklerimiz';
   static const String product = 'Ürün';
   static const String score = 'Başarı Puanı';
+
+  // Products
+  static const String totalPlantedProducts = 'Ekili olan toplam ürün sayısı';
+  static const String totalHarvestedProducts = 'Hasat ettiğiniz toplam ürün sayısı';
 }
