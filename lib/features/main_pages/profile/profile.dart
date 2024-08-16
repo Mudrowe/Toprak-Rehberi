@@ -16,9 +16,7 @@ class ProfileScreen extends StatelessWidget {
           padding: const EdgeInsets.all(TSizes.defaulSpace),
           child: Column(
             children: [
-              const SizedBox(
-                height: TSizes.appBarHeight,
-              ),
+              const SizedBox(height: TSizes.appBarHeight),
 
               // First Name
               TProfileSection(
@@ -54,26 +52,24 @@ class ProfileScreen extends StatelessWidget {
                 value: '**********',
                 onPressed: () {},
               ),
-              const SizedBox(
-                height: TSizes.spaceBtwSections,
-              ),
+
+              const SizedBox(height: TSizes.spaceBtwSections),
 
               // Logout Button
               const TProfileSectionButton(
-                  text: TTexts.logOut,
-                  textColor: TColors.primaryColor,
-                  backgroundColor: TColors.white),
+                text: TTexts.logOut,
+                textColor: TColors.primaryColor,
+              ),
+
               const SizedBox(height: TSizes.spaceBtwSections * 3),
 
               // Close Account Button
               const TProfileSectionButton(
                 text: TTexts.closeAccount,
-                backgroundColor: TColors.error,
-                textColor: TColors.white,
+                textColor: TColors.error,
               ),
-              const SizedBox(
-                height: TSizes.spaceBtwSections,
-              )
+
+              const SizedBox(height: TSizes.spaceBtwSections)
             ],
           ),
         ),

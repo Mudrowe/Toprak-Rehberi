@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:toprak_rehberi/common/styles/card_style.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
 class TProfileSectionButton extends StatelessWidget {
@@ -6,13 +7,11 @@ class TProfileSectionButton extends StatelessWidget {
     super.key,
     required this.text,
     required this.textColor,
-    required this.backgroundColor,
     this.toWhere,
   });
 
   final String text;
   final Color textColor;
-  final Color backgroundColor;
   final VoidCallback? toWhere;
 
   @override
@@ -22,11 +21,7 @@ class TProfileSectionButton extends StatelessWidget {
       child: Container(
         width: TSizes.buttonWidth / 1.5,
         padding: const EdgeInsets.all(TSizes.md),
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          borderRadius: BorderRadius.circular(TSizes.cardRadiusLg),
-          border: Border.all(color: textColor),
-        ),
+        decoration: getCardDecoration(context),
         child: Center(
           child: Text(
             text,
