@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';
+import 'package:toprak_rehberi/utils/theme/custom_themes/alert_dialog_theme.dart';
 import 'package:toprak_rehberi/utils/theme/custom_themes/appbar_theme.dart';
 import 'package:toprak_rehberi/utils/theme/custom_themes/buttom_sheet_theme.dart';
 import 'package:toprak_rehberi/utils/theme/custom_themes/checkbox_theme.dart';
@@ -33,6 +34,7 @@ class TAppTheme {
     textButtonTheme: TTextButtonTheme.lightTextButtonTheme,
     navigationBarTheme: TNavigationBarTheme.lightNavigationBarTheme,
     iconButtonTheme: TIconButtonTheme.iconButtonTheme,
+    dialogTheme: TAlertDialogTheme.lightAlertDialogTheme,
   );
 
 
@@ -54,5 +56,6 @@ class TAppTheme {
     textButtonTheme: TTextButtonTheme.darkTextButtonTheme,
     navigationBarTheme: TNavigationBarTheme.darkNavigationBarTheme,
     iconButtonTheme: TIconButtonTheme.iconButtonTheme,
+    dialogTheme: TAlertDialogTheme.darkAlertDialogTheme,
   );
 }

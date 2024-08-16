@@ -60,6 +60,8 @@ class TSizes {
   // Input field
   static const double inputFieldRadius = 12.0;
   static const double spaceBtwInputFields = 16.0;
+  static const double changeInfoHeightDefault = 60.0;
+  static const double changeInfoHeightPassword = 140.0;
 
   // Card sizes
   static const double cardHeight = 203.0;

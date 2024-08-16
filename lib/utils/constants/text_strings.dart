@@ -3,7 +3,8 @@ class TTexts {
   static const String and = "ve";
   static const String skip = "Geç";
   static const String done = "Biti";
-  static const String submit = "ONAYLA";
+  static const String submit = "Onayla";
+  static const String cancel = "İptal Et";
   static const String appName = "TOPRAK REHBERİ";
   static const String tContinue = "İlerle";
   static const String squareSymbol = 'm\u00B2';
