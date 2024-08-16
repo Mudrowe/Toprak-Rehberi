@@ -11,13 +11,14 @@ Future<void> changeInfo({
   final bool dark = THelperFunctions.isDarkMode(context);
   final String title = _getTitle(info);
   final bool isPassword = info == TTexts.password;
+  final Color textColor = dark ? TColors.light : TColors.primaryColor;
 
   return showDialog<void>(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: _buildTitle(title, dark),
-        content: _buildContent(info, isPassword),
+        title: _buildTitle(title, dark, textColor),
+        content: _buildContent(info, isPassword, textColor),
         actions: _buildActions(context),
       );
     },
@@ -41,33 +42,34 @@ String _getTitle(String info) {
   }
 }
 
-Widget _buildTitle(String title, bool dark) {
+Widget _buildTitle(String title, bool dark, Color textColor) {
   return Text(
     title,
-    style: TextStyle(color: dark ? TColors.light : TColors.primaryColor),
+    style: TextStyle(color: textColor),
   );
 }
 
-Widget _buildContent(String info, bool isPassword) {
+Widget _buildContent(String info, bool isPassword, Color textColor) {
   return SizedBox(
     height: isPassword
         ? TSizes.changeInfoHeightPassword
         : TSizes.changeInfoHeightDefault,
     child: Column(
       children: [
-        _buildTextField('Yeni $info'),
-        if (isPassword) _buildTextField('Yeni $info Tekrar'),
+        _buildTextField('Yeni $info', textColor),
+        if (isPassword) _buildTextField('Yeni $info Tekrar', textColor),
       ],
     ),
   );
 }
 
-Widget _buildTextField(String label) {
+Widget _buildTextField(String label, Color textColor) {
   return Expanded(
     child: TextFormField(
       expands: false,
       decoration: InputDecoration(
         labelText: label,
+        labelStyle: TextStyle(fontSize: TSizes.fontSizeSm, color: textColor),
       ),
     ),
   );
