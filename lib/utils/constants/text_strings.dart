@@ -3,7 +3,7 @@ class TTexts {
   static const String and = "ve";
   static const String skip = "Geç";
   static const String done = "Biti";
-  static const String submit = "Onayla";
+  static const String submit = "ONAYLA";
   static const String appName = "TOPRAK REHBERİ";
   static const String tContinue = "İlerle";
   static const String squareSymbol = 'm\u00B2';
@@ -31,7 +31,6 @@ class TTexts {
   static const String termsOfUse = "Hizmet Şartları";
 
   // Authentication Headings
-  static const String loginTitle = "Welcome back,";
   static const String signupTitle = "KAYIT OL";
   static const String logOut = "Çıkış Yap";
   static const String closeAccount = "Hesabı Sil";
@@ -79,4 +78,12 @@ class TTexts {
 
   // Land Details
   static const String noPorducts = 'Bu Arazide Ekili Ürün Yok';
+
+  // Product Details
+  static const String scoreProduct = 'Hasat Veriminizi Değerlendirin';
+
+  // Suggestion
+  static const String ourSuggestions = 'Araziniz İçin Önerdiklerimiz';
+  static const String product = 'Ürün';
+  static const String score = 'Başarı Puanı';
 }

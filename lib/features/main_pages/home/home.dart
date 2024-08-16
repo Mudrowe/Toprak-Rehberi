@@ -28,149 +28,151 @@ class HomeScreen extends StatelessWidget {
     ];
 
     return Scaffold(
-      body: Column(
-        children: [
-          const SizedBox(height: TSizes.spaceBtwSections),
-
-          // Carousel Slider
-          TCardSlider(cards: cards),
-
-          const SizedBox(height: TSizes.spaceBtwItems),
-
-          // Products stats
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text(
-                TTexts.totalProducts,
-                style: TextStyle(
-                    color: textColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16),
-              ),
-              Text(
-                '200',
-                style: TextStyle(
-                    color: textColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16),
-              ),
-            ],
-          ),
-
-          // Products Pie Chart
-          TPieChart(
-            chartName: TTexts.productDistribution,
-            sections: [
-              PieChartSectionData(
-                  value: 25,
-                  showTitle: false,
-                  color: TColors.pieChartColor1,
-                  title: '25%'),
-              PieChartSectionData(
-                  value: 29,
-                  showTitle: false,
-                  color: TColors.pieChartColor2,
-                  title: '%29'),
-              PieChartSectionData(
-                value: 28,
-                showTitle: false,
-                color: TColors.pieChartColor3,
-              ),
-              PieChartSectionData(
-                  value: 18,
-                  showTitle: false,
-                  color: TColors.pieChartColor4,
-                  title: '%18'),
-            ],
-            legendItems: const [
-              LegendItem(
-                color: TColors.pieChartColor1,
-                productName: 'Patates',
-                percentage: '25%',
-              ),
-              LegendItem(
-                color: TColors.pieChartColor2,
-                productName: 'Buğday',
-                percentage: '29%',
-              ),
-              LegendItem(
-                color: TColors.pieChartColor3,
-                productName: 'Havuç',
-                percentage: '28%',
-              ),
-              LegendItem(
-                color: TColors.pieChartColor4,
-                productName: 'Çilek',
-                percentage: '18%',
-              ),
-            ],
-          ),
-
-          const SizedBox(height: TSizes.spaceBtwItems),
-
-          // Lands Stats
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text(
-                TTexts.totalLands,
-                style: TextStyle(
-                    color: textColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16),
-              ),
-              Text(
-                '100',
-                style: TextStyle(
-                    color: textColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16),
-              ),
-            ],
-          ),
-
-          // Lands Pie Chart
-          TPieChart(
-            chartName: TTexts.landDistribution,
-            sections: [
-              PieChartSectionData(
-                  value: 60,
-                  showTitle: false,
-                  color: TColors.pieChartColor4,
-                  title: '60%'),
-              PieChartSectionData(
-                  value: 15,
-                  showTitle: false,
-                  color: TColors.pieChartColor2,
-                  title: '%15'),
-              PieChartSectionData(
-                  value: 25,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(height: TSizes.spaceBtwSections),
+        
+            // Carousel Slider
+            TCardSlider(cards: cards),
+        
+            const SizedBox(height: TSizes.spaceBtwItems),
+        
+            // Products stats
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(
+                  TTexts.totalProducts,
+                  style: TextStyle(
+                      color: textColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16),
+                ),
+                Text(
+                  '200',
+                  style: TextStyle(
+                      color: textColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16),
+                ),
+              ],
+            ),
+        
+            // Products Pie Chart
+            TPieChart(
+              chartName: TTexts.productDistribution,
+              sections: [
+                PieChartSectionData(
+                    value: 25,
+                    showTitle: false,
+                    color: TColors.pieChartColor1,
+                    title: '25%'),
+                PieChartSectionData(
+                    value: 29,
+                    showTitle: false,
+                    color: TColors.pieChartColor2,
+                    title: '%29'),
+                PieChartSectionData(
+                  value: 28,
                   showTitle: false,
                   color: TColors.pieChartColor3,
-                  title: '%25'),
-            ],
-            legendItems: const [
-              LegendItem(
-                color: TColors.pieChartColor4,
-                productName: 'Tarla',
-                percentage: '60%',
-              ),
-              LegendItem(
-                color: TColors.pieChartColor2,
-                productName: 'Bahçe',
-                percentage: '15%',
-              ),
-              LegendItem(
-                color: TColors.pieChartColor3,
-                productName: 'Bağ',
-                percentage: '25%',
-              ),
-            ],
-          ),
-        ],
+                ),
+                PieChartSectionData(
+                    value: 18,
+                    showTitle: false,
+                    color: TColors.pieChartColor4,
+                    title: '%18'),
+              ],
+              legendItems: const [
+                LegendItem(
+                  color: TColors.pieChartColor1,
+                  productName: 'Patates',
+                  percentage: '25%',
+                ),
+                LegendItem(
+                  color: TColors.pieChartColor2,
+                  productName: 'Buğday',
+                  percentage: '29%',
+                ),
+                LegendItem(
+                  color: TColors.pieChartColor3,
+                  productName: 'Havuç',
+                  percentage: '28%',
+                ),
+                LegendItem(
+                  color: TColors.pieChartColor4,
+                  productName: 'Çilek',
+                  percentage: '18%',
+                ),
+              ],
+            ),
+        
+            const SizedBox(height: TSizes.spaceBtwItems),
+        
+            // Lands Stats
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(
+                  TTexts.totalLands,
+                  style: TextStyle(
+                      color: textColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16),
+                ),
+                Text(
+                  '100',
+                  style: TextStyle(
+                      color: textColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16),
+                ),
+              ],
+            ),
+        
+            // Lands Pie Chart
+            TPieChart(
+              chartName: TTexts.landDistribution,
+              sections: [
+                PieChartSectionData(
+                    value: 60,
+                    showTitle: false,
+                    color: TColors.pieChartColor4,
+                    title: '60%'),
+                PieChartSectionData(
+                    value: 15,
+                    showTitle: false,
+                    color: TColors.pieChartColor2,
+                    title: '%15'),
+                PieChartSectionData(
+                    value: 25,
+                    showTitle: false,
+                    color: TColors.pieChartColor3,
+                    title: '%25'),
+              ],
+              legendItems: const [
+                LegendItem(
+                  color: TColors.pieChartColor4,
+                  productName: 'Tarla',
+                  percentage: '60%',
+                ),
+                LegendItem(
+                  color: TColors.pieChartColor2,
+                  productName: 'Bahçe',
+                  percentage: '15%',
+                ),
+                LegendItem(
+                  color: TColors.pieChartColor3,
+                  productName: 'Bağ',
+                  percentage: '25%',
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

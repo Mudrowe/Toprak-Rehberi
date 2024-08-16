@@ -18,49 +18,51 @@ class TProductDetails extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: const TAppBar(),
-      body: Center(
-        child: Column(
-          children: [
-            Text(product.productName, style: textTheme.headlineMedium),
-            const SizedBox(
-              height: TSizes.spaceBtwItems,
-            ),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: [
+              // Product Name
+              Text(product.productName, style: textTheme.headlineMedium),
 
-            // Product image
-            TProductDetailsImage(product: product),
+              const SizedBox(height: TSizes.spaceBtwItems),
 
-            const SizedBox(height: TSizes.spaceBtwItems),
+              // Product image
+              TProductDetailsImage(product: product),
 
-            // Planting Date
-            TProductDetailsPlantingDate(textTheme: textTheme, product: product),
+              const SizedBox(height: TSizes.spaceBtwItems),
 
-            const SizedBox(height: TSizes.spaceBtwItems),
+              // Planting Date
+              TProductDetailsPlantingDate(
+                  textTheme: textTheme, product: product),
 
-            // ! There should be TLandDetailsInfo in here
-            // ! So, products must have land variable
-            // Field Info
-            Container(
-              height: 150,
-              width: TSizes.cardWidth / 1.2,
-              decoration: getCardDecoration(context),
-              child: Column(
-                children: [
-                  Text(product.landName),
-                  Text(product.area.toString())
-                ],
+              const SizedBox(height: TSizes.spaceBtwItems),
+
+              // ! There should be TLandDetailsInfo in here
+              // ! So, products must have land variable
+              // Field Info
+              Container(
+                height: 150,
+                width: TSizes.cardWidth / 1.2,
+                decoration: getCardDecoration(context),
+                child: Column(
+                  children: [
+                    Text(product.landName),
+                    Text(product.area.toString())
+                  ],
+                ),
               ),
-            ),
 
-            const SizedBox(height: TSizes.spaceBtwItems),
+              const SizedBox(height: TSizes.spaceBtwItems),
 
-            // Progress Bar
-            TProductProgress(product: product),
+              // Progress Bar
+              TProductProgress(product: product),
 
-            const SizedBox(height: TSizes.spaceBtwItems),
+              const SizedBox(height: TSizes.spaceBtwItems),
 
-            THarvestButton(product: product),
-            
-          ],
+              THarvestButton(product: product),
+            ],
+          ),
         ),
       ),
     );
