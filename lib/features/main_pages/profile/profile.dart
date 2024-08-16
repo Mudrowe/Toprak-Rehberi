@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:toprak_rehberi/features/main_pages/profile/widgets/change_info.dart';
 import 'package:toprak_rehberi/features/main_pages/profile/widgets/profile_section.dart';
 import 'package:toprak_rehberi/features/main_pages/profile/widgets/profile_section_button.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';
@@ -22,35 +23,38 @@ class ProfileScreen extends StatelessWidget {
               TProfileSection(
                 title: TTexts.firstName,
                 value: TTexts.firstNameSpecial,
-                onTap: () {},
+                onTap: () =>
+                    changeInfo(context: context, info: TTexts.firstName),
               ),
 
               // Last Name
               TProfileSection(
                 title: TTexts.lastName,
                 value: TTexts.lastNameSpecial,
-                onTap: () {},
+                onTap: () =>
+                    changeInfo(context: context, info: TTexts.lastName),
               ),
 
               // Email
               TProfileSection(
                 title: TTexts.email,
                 value: TTexts.emailSpecial,
-                onTap: () {},
+                onTap: () => changeInfo(context: context, info: TTexts.email),
               ),
 
               // Phone Number
               TProfileSection(
                 title: TTexts.phoneNoShort,
                 value: TTexts.phoneNoSpecial,
-                onTap: () {},
+                onTap: () => changeInfo(context: context, info: TTexts.phoneNo),
               ),
 
               // Password
               TProfileSection(
                 title: TTexts.password,
                 value: '**********',
-                onTap: () {},
+                onTap: () =>
+                    changeInfo(context: context, info: TTexts.password),
               ),
 
               const SizedBox(height: TSizes.spaceBtwSections),
