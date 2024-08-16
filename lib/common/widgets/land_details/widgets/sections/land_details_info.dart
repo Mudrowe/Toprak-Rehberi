@@ -53,7 +53,7 @@ class TLandDetailsInfo extends StatelessWidget {
         ),
 
         // Add Product Button
-        const TAddProductButton(),
+        TAddProductButton(land: land,),
       ],
     );
   }

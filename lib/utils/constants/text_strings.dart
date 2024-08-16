@@ -76,6 +76,10 @@ class TTexts {
   static const String plantedArea = 'Ürün Ekili Alan';
   static const String landType = 'Arazi Tipi';
 
+  // Add Product
+  static const String choseProduct = 'Eklemek İstediğiniz Ürünü Seçin';
+  static const String productArea = 'Eklemek İstediğiniz Alan';
+
   // Land Details
   static const String noPorducts = 'Bu Arazide Ekili Ürün Yok';
 

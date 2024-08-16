@@ -89,4 +89,6 @@ class TSizes {
 
   // Suggestions
   static const double suggestionCardHeight = 55.0;
+  static const double scoreTextBackgroundHeight = 25.0;
+  static const double scoreTextBackgroundWidth = 80.0;
 }
