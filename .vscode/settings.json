@@ -1,4 +1,13 @@
 {
     "editor.unicodeHighlight.nonBasicASCII": false,
-    "editor.unicodeHighlight.ambiguousCharacters": false
+    "editor.unicodeHighlight.ambiguousCharacters": false,
+    "explorer.compactFolders": false,
+    "explorer.confirmDragAndDrop": true,
+    "explorer.openEditors.sortOrder": "editorOrder",
+    "search.collapseResults": "alwaysExpand",
+    "explorer.openEditors.visible": 9,
+    "explorer.sortOrder": "default",
+    "outline.collapseItems": "alwaysExpand",
+    "outline.icons": true,
+    "outline.showArrays": true
 }

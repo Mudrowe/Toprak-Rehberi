@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:toprak_rehberi/features/main_pages/products/filter_screen/filter_screen.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/device/device_utility.dart';
@@ -54,7 +55,7 @@ class TSearchContainer extends StatelessWidget {
             // Filter icon
             GestureDetector(
               child: Icon(icon2, color: TColors.primaryColor),
-              onTap: () {},
+              onTap: () => filter(context: context),
             )
           ],
         ),

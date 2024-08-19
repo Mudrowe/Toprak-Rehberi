@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:toprak_rehberi/common/styles/card_style.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/device/device_utility.dart';
@@ -30,27 +31,20 @@ class TProfileSection extends StatelessWidget {
         child: Container(
           width: TDeviceUtils.getScreenWidth(context),
           padding: const EdgeInsets.all(TSizes.md),
-          decoration: BoxDecoration(
-            color: showBackground
-                ? dark
-                    ? TColors.dark
-                    : TColors.light
-                : Colors.transparent,
-            borderRadius: BorderRadius.circular(TSizes.cardRadiusLg),
-            border: showBorder ? Border.all(color: TColors.grey) : null,
-          ),
+          decoration: getCardDecoration(context),
           child: Row(
             children: [
+              // Title
               Expanded(
                 flex: 2,
                 child: Text(
                   title,
-                  style: const TextStyle(
-                    color: TColors.darkGrey,
-                  ),
+                  style: const TextStyle(color: TColors.darkGrey),
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
+
+              // Personal Info
               Expanded(
                 flex: 5,
                 child: Text(
@@ -61,6 +55,8 @@ class TProfileSection extends StatelessWidget {
                   ),
                 ),
               ),
+
+              // Arrow Icon
               const Expanded(child: Icon(Icons.arrow_right_sharp)),
             ],
           ),

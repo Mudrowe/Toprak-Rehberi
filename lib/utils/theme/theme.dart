@@ -9,6 +9,7 @@ import 'package:toprak_rehberi/utils/theme/custom_themes/elevated_button_theme.d
 import 'package:toprak_rehberi/utils/theme/custom_themes/icon_button_theme.dart';
 import 'package:toprak_rehberi/utils/theme/custom_themes/navigation_bar_theme.dart';
 import 'package:toprak_rehberi/utils/theme/custom_themes/outlined_button_theme.dart';
+import 'package:toprak_rehberi/utils/theme/custom_themes/radio_theme.dart';
 import 'package:toprak_rehberi/utils/theme/custom_themes/text_button_theme.dart';
 import 'package:toprak_rehberi/utils/theme/custom_themes/text_field_theme.dart';
 import 'package:toprak_rehberi/utils/theme/custom_themes/text_theme.dart';
@@ -35,6 +36,7 @@ class TAppTheme {
     navigationBarTheme: TNavigationBarTheme.lightNavigationBarTheme,
     iconButtonTheme: TIconButtonTheme.iconButtonTheme,
     dialogTheme: TAlertDialogTheme.lightAlertDialogTheme,
+    radioTheme: TRadioTheme.radioTheme,
   );
 
 
@@ -57,5 +59,6 @@ class TAppTheme {
     navigationBarTheme: TNavigationBarTheme.darkNavigationBarTheme,
     iconButtonTheme: TIconButtonTheme.iconButtonTheme,
     dialogTheme: TAlertDialogTheme.darkAlertDialogTheme,
+    radioTheme: TRadioTheme.radioTheme,
   );
 }
