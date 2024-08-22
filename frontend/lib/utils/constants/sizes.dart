@@ -77,7 +77,7 @@ class TSizes {
   static const double imageCarouselHeight = 200.0;
 
   // Progress bar sizes
-  static const double pieChartRadius = 55.0;
+  static const double pieChartRadius = 50.0;
 
   // Logo sizes
   static const double logoHeight = 120.0;
