@@ -18,15 +18,19 @@ public class City {
     @OneToMany(mappedBy = "city")
     private List<District> districts;
 
-    public byte id() {
+    public City() {
+    }
+
+    public byte getId() {
         return id;
     }
 
-    public String name() {
+    public String getName() {
         return name;
     }
 
     public List<District> getDistricts() {
         return districts;
     }
+
 }

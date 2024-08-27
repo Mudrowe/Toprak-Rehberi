@@ -17,15 +17,18 @@ public class Neighborhood {
     @JoinColumn(name = "district_id", nullable = false)
     private District district;
 
-    public int id() {
+    public Neighborhood() {
+    }
+
+    public int getId() {
         return id;
     }
 
-    public String name() {
+    public String getName() {
         return name;
     }
 
-    public District district() {
+    public District getDistrict() {
         return district;
     }
 }

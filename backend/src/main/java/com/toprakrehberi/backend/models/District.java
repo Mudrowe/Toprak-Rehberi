@@ -23,16 +23,18 @@ public class District {
     @OneToMany(mappedBy = "district")
     private List<Neighborhood> neighborhoods;
 
+    public District() {
+    }
 
-    public short id() {
+    public short getId() {
         return id;
     }
 
-    public String name() {
+    public String getName() {
         return name;
     }
 
-    public City city() {
+    public City getCity() {
         return city;
     }
 }
