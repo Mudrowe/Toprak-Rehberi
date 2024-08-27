@@ -2,7 +2,10 @@ package com.toprakrehberi.backend.models;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
+@Table(name = "Users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +25,9 @@ public class User {
 
     @Column(unique = true, length = 15)
     private String phoneNumber;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Land> lands;
 
     public User() {
     }
@@ -90,7 +96,9 @@ public class User {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
+    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
+
+    public Set<Land> getLands() { return lands; }
+
+    public void setLands(Set<Land> lands) { this.lands = lands; }
 }
