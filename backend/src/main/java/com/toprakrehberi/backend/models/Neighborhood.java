@@ -3,7 +3,7 @@ package com.toprakrehberi.backend.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Neighborhoods")
+@Table(name = "neighborhood")
 public class Neighborhood {
     @Id
     @GeneratedValue

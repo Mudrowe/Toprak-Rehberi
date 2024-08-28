@@ -1,36 +1,21 @@
-package com.toprakrehberi.backend.models;
+package com.toprakrehberi.backend.dtos;
 
-import jakarta.persistence.*;
+public class LandDTO {
 
-@Entity
-@Table(name = "land")
-public class Land {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
-    @Column(name = "name", nullable = false)
+    private Long userId; // Reference to the user ID
     private String name;
-
-    @Column(name = "neighborhood", nullable = false)
-    private Long neighborhoodId;
-
-    @Column(name = "parcelNo", nullable = false)
+    private Long neighborhoodId; // Reference to the neighborhood ID
     private String parcelNo;
-
-    @Column(name = "adaNo", nullable = false)
     private String adaNo;
-
-    @Column(name = "size", nullable = false)
     private double size;
 
-    public Land(Long id, User user, String name, Long neighborhoodId, String parcelNo, String adaNo, double size) {
+    // Constructors
+    public LandDTO() {}
+
+    public LandDTO(Long id, Long userId, String name, Long neighborhoodId, String parcelNo, String adaNo, double size) {
         this.id = id;
-        this.user = user;
+        this.userId = userId;
         this.name = name;
         this.neighborhoodId = neighborhoodId;
         this.parcelNo = parcelNo;
@@ -38,9 +23,7 @@ public class Land {
         this.size = size;
     }
 
-    public Land() {
-    }
-
+    // Getters and setters
     public Long getId() {
         return id;
     }
@@ -49,12 +32,12 @@ public class Land {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getName() {

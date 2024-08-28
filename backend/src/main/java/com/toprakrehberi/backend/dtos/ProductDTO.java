@@ -1,44 +1,29 @@
-package com.toprakrehberi.backend.models;
-
-import jakarta.persistence.*;
+package com.toprakrehberi.backend.dtos;
 
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "product")
-public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ProductDTO {
+
     private long id;
-
-    @Column(name = "planting_date", nullable = false)
     private LocalDate plantingDate;
-
-    @Column(name = "harvest_date", nullable = false)
     private LocalDate harvestDate;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "land_id", nullable = false)
-    private Land land;
-
-    @Column(name = "score")
+    private Long landId; // Reference to the land ID
     private double score;
-
-    @Column(name = "product_option_id")
     private Long productOptionId;
 
-    public Product() {
-    }
+    // Constructors
+    public ProductDTO() {}
 
-    public Product(long id, LocalDate plantingDate, LocalDate harvestDate, Land land, double score, Long productOptionId) {
+    public ProductDTO(long id, LocalDate plantingDate, LocalDate harvestDate, Long landId, double score, Long productOptionId) {
         this.id = id;
         this.plantingDate = plantingDate;
         this.harvestDate = harvestDate;
-        this.land = land;
+        this.landId = landId;
         this.score = score;
         this.productOptionId = productOptionId;
     }
 
+    // Getters and setters
     public long getId() {
         return id;
     }
@@ -63,12 +48,12 @@ public class Product {
         this.harvestDate = harvestDate;
     }
 
-    public Land getLand() {
-        return land;
+    public Long getLandId() {
+        return landId;
     }
 
-    public void setLand(Land land) {
-        this.land = land;
+    public void setLandId(Long landId) {
+        this.landId = landId;
     }
 
     public double getScore() {
