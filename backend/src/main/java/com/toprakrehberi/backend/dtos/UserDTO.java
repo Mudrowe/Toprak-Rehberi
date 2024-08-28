@@ -1,4 +1,4 @@
-package com.toprakrehberi.backend.dto;
+package com.toprakrehberi.backend.dtos;
 
 import java.util.Set;
 
