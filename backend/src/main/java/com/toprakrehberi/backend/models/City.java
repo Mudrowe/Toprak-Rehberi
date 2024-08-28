@@ -1,11 +1,12 @@
 package com.toprakrehberi.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
-@Table(name = "Cities")
+@Table(name = "city")
 public class City {
     @Id
     @GeneratedValue()
@@ -15,7 +16,8 @@ public class City {
     private String name;
 
     // One city can have many districts
-    @OneToMany(mappedBy = "city")
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<District> districts;
 
     public City() {

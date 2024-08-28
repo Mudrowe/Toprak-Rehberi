@@ -3,7 +3,7 @@ package com.toprakrehberi.backend.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Lands")
+@Table(name = "land")
 public class Land {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
