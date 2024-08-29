@@ -3,6 +3,7 @@ package com.toprakrehberi.backend.controllers;
 import com.toprakrehberi.backend.dtos.UserDTO;
 import com.toprakrehberi.backend.models.User;
 import com.toprakrehberi.backend.models.Land;
+import com.toprakrehberi.backend.repositories.UserRepository;
 import com.toprakrehberi.backend.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/user")
 public class UserController {
 
     @Autowired
@@ -51,7 +52,30 @@ public class UserController {
                 user.getLastName(),
                 user.getEmail(),
                 user.getPhoneNumber(),
-                landIds
+                landIds,
+                user.getPassword()
         );
+    }
+
+    private User convertToEntity(UserDTO userDTO) {
+        User user = new User();
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
+        user.setEmail(userDTO.getEmail());
+        user.setPhoneNumber(userDTO.getPhoneNumber());
+        user.setPassword(userDTO.getPassword());
+
+        return user;
+    }
+
+    @PostMapping
+    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
+        User user = convertToEntity(userDTO);
+
+        User savedUser = userService.saveUser(user);
+
+        UserDTO savedUserDTO = convertToDTO(savedUser);
+
+        return new ResponseEntity<>(savedUserDTO, HttpStatus.CREATED);
     }
 }

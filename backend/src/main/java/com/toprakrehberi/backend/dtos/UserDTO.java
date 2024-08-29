@@ -2,6 +2,8 @@ package com.toprakrehberi.backend.dtos;
 
 import java.util.Set;
 
+// ! PASSWORD WILL BE REMOVED
+
 public class UserDTO {
 
     private long id;
@@ -10,17 +12,19 @@ public class UserDTO {
     private String email;
     private String phoneNumber;
     private Set<Long> landIds; // Reference to land IDs
+    private String password;
 
     // Constructors
     public UserDTO() {}
 
-    public UserDTO(long id, String firstName, String lastName, String email, String phoneNumber, Set<Long> landIds) {
+    public UserDTO(long id, String firstName, String lastName, String email, String phoneNumber, Set<Long> landIds, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.landIds = landIds;
+        this.password = password;
     }
 
     // Getters and setters
@@ -66,6 +70,14 @@ public class UserDTO {
 
     public Set<Long> getLandIds() {
         return landIds;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void setLandIds(Set<Long> landIds) {
