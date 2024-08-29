@@ -1,12 +1,14 @@
 import 'dart:convert';
 
+// ! PASSWORD WILL BE REMOVED
+
 class UserDTO {
   final int id;
   final String firstName;
   final String lastName;
   final String email;
   final String phoneNumber;
-  final Set<int> landIds; // Reference to land IDs
+  final String password;
 
   UserDTO({
     required this.id,
@@ -14,7 +16,7 @@ class UserDTO {
     required this.lastName,
     required this.email,
     required this.phoneNumber,
-    required this.landIds,
+    required this.password
   });
 
   factory UserDTO.fromJson(Map<String, dynamic> json) {
@@ -24,7 +26,7 @@ class UserDTO {
       lastName: json['lastName'],
       email: json['email'],
       phoneNumber: json['phoneNumber'],
-      landIds: (json['landIds'] as List<dynamic>).map((e) => e as int).toSet(),
+      password: json['password'],
     );
   }
 
@@ -34,6 +36,6 @@ class UserDTO {
     'lastName': lastName,
     'email': email,
     'phoneNumber': phoneNumber,
-    'landIds': landIds.toList(),
+    'password': password,
   };
 }

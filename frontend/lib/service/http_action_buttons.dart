@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:toprak_rehberi/features/authentication/screens/signup/widgets/signup_form.dart';
 import 'package:toprak_rehberi/service/http_get_cities_screen.dart';
 import 'package:toprak_rehberi/service/http_city_service.dart';
+import 'package:toprak_rehberi/service/signup_form_test.dart';
 
 import 'http_get_districts_screen.dart';
 
-class TGetCitiesButton extends StatelessWidget {
-  TGetCitiesButton({super.key});
+class TActionButtons extends StatelessWidget {
+  TActionButtons({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +29,13 @@ class TGetCitiesButton extends StatelessWidget {
               child: const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text('Get Districts'),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () => Get.to(() => TSignupFormTest()),
+              child: const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text('Add User'),
               ),
             ),
           ],
