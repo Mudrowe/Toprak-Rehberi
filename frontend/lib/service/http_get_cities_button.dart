@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:toprak_rehberi/service/http_get_cities_screen.dart';
 import 'package:toprak_rehberi/service/http_city_service.dart';
 
+import 'http_get_districts_screen.dart';
+
 class TGetCitiesButton extends StatelessWidget {
   TGetCitiesButton({super.key});
 
@@ -21,7 +23,7 @@ class TGetCitiesButton extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-              onPressed: () => Get.to(() => HttpGetCitiesScreen()),
+              onPressed: () => Get.to(() => HttpGetDistrictsScreen()),
               child: const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text('Get Districts'),

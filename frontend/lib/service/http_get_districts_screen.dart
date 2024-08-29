@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/widgets/appbar/appbar.dart';
-import '../dtos/CityDTO.dart';
-import 'http_city_service.dart';
+import '../dtos/DistrictDTO.dart';
+import 'http_district_service.dart'; // Import the district service
 
 class HttpGetDistrictsScreen extends StatelessWidget {
-  final HttpCityService httpService = HttpCityService();
+  final HttpDistrictService httpService = HttpDistrictService(); // Use the district service
 
   HttpGetDistrictsScreen({super.key});
 
@@ -15,21 +15,21 @@ class HttpGetDistrictsScreen extends StatelessWidget {
         title: 'HTTP GET DISTRICTS',
         showBackButton: false,
       ),
-      body: FutureBuilder<List<CityDTO>>(
-        future: httpService.fetchCities(),
+      body: FutureBuilder<List<DistrictDTO>>(
+        future: httpService.fetchDistricts(), // Fetch districts
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error ?? 'Unknown error'}'));
           } else if (snapshot.hasData && snapshot.data != null && snapshot.data!.isNotEmpty) {
-            final List<CityDTO> cities = snapshot.data!;
+            final List<DistrictDTO> districts = snapshot.data!;
             return ListView.builder(
-              itemCount: cities.length,
+              itemCount: districts.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text(cities[index].name),
-                  subtitle: Text('ID: ${cities[index].id}'),
+                  title: Text(districts[index].name),
+                  subtitle: Text('ID: ${districts[index].id}'),
                 );
               },
             );
