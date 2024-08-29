@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/widgets/appbar/appbar.dart';
 import '../dtos/CityDTO.dart';
@@ -5,7 +7,6 @@ import 'http_city_service.dart';
 
 class HttpGetCitiesScreen extends StatelessWidget {
   final HttpCityService httpService = HttpCityService();
-
   HttpGetCitiesScreen({super.key});
 
   @override
@@ -26,9 +27,12 @@ class HttpGetCitiesScreen extends StatelessWidget {
             final List<CityDTO> cities = snapshot.data!;
             return ListView.builder(
               itemCount: cities.length,
+
               itemBuilder: (context, index) {
+                var name = utf8.decode(cities[index].name.codeUnits);
                 return ListTile(
-                  title: Text(cities[index].name),
+
+                  title: Text(name.toString()),
                   subtitle: Text('ID: ${cities[index].id}'),
                 );
               },

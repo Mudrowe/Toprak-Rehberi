@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/widgets/appbar/appbar.dart';
 import '../dtos/DistrictDTO.dart';
@@ -26,9 +28,11 @@ class HttpGetDistrictsScreen extends StatelessWidget {
             final List<DistrictDTO> districts = snapshot.data!;
             return ListView.builder(
               itemCount: districts.length,
+
               itemBuilder: (context, index) {
+                var name = utf8.decode(districts[index].name.codeUnits);
                 return ListTile(
-                  title: Text(districts[index].name),
+                  title: Text(name),
                   subtitle: Text('ID: ${districts[index].id}'),
                 );
               },
