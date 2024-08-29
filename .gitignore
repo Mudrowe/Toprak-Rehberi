@@ -30,6 +30,7 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 frontend/build/
+frontend/.env
 
 # Symbolication related
 app.*.symbols

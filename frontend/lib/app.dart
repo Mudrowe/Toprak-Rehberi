@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:toprak_rehberi/features/authentication/screens/first_screen/first_screen.dart';
+import 'package:toprak_rehberi/service/http_get_cities_button.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 import 'package:toprak_rehberi/utils/theme/theme.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -23,7 +24,8 @@ class App extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
 
-      home:const FirstScreen(),
+      //home:const FirstScreen(),
+      home: TGetCitiesButton(),
       );
   }
 }
