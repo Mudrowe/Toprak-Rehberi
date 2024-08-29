@@ -1,0 +1,51 @@
+package com.toprakrehberi.backend.controllers;
+
+import com.toprakrehberi.backend.dtos.LandDTO;
+import com.toprakrehberi.backend.models.Land;
+import com.toprakrehberi.backend.services.LandService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@RestController
+@RequestMapping("/api/lands")
+public class LandController {
+
+    @Autowired
+    private LandService landService;
+
+    @GetMapping
+    public ResponseEntity<List<LandDTO>> getAllLands() {
+        List<Land> lands = landService.getAllLands();
+        List<LandDTO> landDTOs = lands.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(landDTOs, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<LandDTO> getLandById(@PathVariable("id") Long id) {
+        Land land = landService.getLandById(id);
+        if (land != null) {
+            return new ResponseEntity<>(convertToDTO(land), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    private LandDTO convertToDTO(Land land) {
+        return new LandDTO(
+                land.getId(),
+                land.getUser().getId(),
+                land.getName(),
+                land.getNeighborhoodId(),
+                land.getParcelNo(),
+                land.getAdaNo(),
+                land.getSize()
+        );
+    }
+}

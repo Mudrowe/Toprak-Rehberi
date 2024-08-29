@@ -13,4 +13,6 @@ public class LandService {
     private LandRepository landRepository;
 
     public List<Land> getAllLands() { return landRepository.findAll(); }
+
+    public Land getLandById(long id) { return landRepository.findById(id).orElse(null); }
 }

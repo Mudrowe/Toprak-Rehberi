@@ -13,4 +13,6 @@ public class DistrictService {
     private DistrictRepository districtRepository;
 
     public List<District> getAllDistricts() { return districtRepository.findAll(); }
+
+    public District getDistrictByID(short id) { return districtRepository.findById(id).orElse(null); }
 }

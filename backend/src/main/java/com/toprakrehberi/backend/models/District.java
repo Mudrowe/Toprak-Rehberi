@@ -39,4 +39,8 @@ public class District {
     public City getCity() {
         return city;
     }
+
+    public List<Neighborhood> getNeighborhoods() {
+        return neighborhoods;
+    }
 }

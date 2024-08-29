@@ -13,4 +13,6 @@ public class NeighborhoodService {
     private NeighborhoodRepository neighborhoodRepository;
 
     public List<Neighborhood> getAllNeighborhoods() { return neighborhoodRepository.findAll(); }
+
+    public Neighborhood getNeighborhoodById(int id) { return neighborhoodRepository.findById(id).orElse(null); }
 }
