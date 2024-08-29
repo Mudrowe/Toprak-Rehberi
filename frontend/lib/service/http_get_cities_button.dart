@@ -17,7 +17,14 @@ class TGetCitiesButton extends StatelessWidget {
               onPressed: () => Get.to(() => HttpGetCitiesScreen()),
               child: const Padding(
                 padding: EdgeInsets.all(8.0),
-                child: Text('Get HTTP'),
+                child: Text('Get Cities'),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () => Get.to(() => HttpGetCitiesScreen()),
+              child: const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text('Get Districts'),
               ),
             ),
           ],
