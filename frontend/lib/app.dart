@@ -5,6 +5,8 @@ import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 import 'package:toprak_rehberi/utils/theme/theme.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'features/authentication/screens/first_screen/first_screen.dart';
+
 class App extends StatelessWidget {
   const App({super.key});
 
@@ -23,8 +25,8 @@ class App extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
 
-      //home:const FirstScreen(),
-      home: TActionButtons(),
+      home:const FirstScreen(),
+      //home: TActionButtons(),
       );
   }
 }

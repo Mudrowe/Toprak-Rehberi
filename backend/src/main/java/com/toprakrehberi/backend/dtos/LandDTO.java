@@ -1,5 +1,8 @@
 package com.toprakrehberi.backend.dtos;
 
+import com.toprakrehberi.backend.models.Land;
+import com.toprakrehberi.backend.models.LandType;
+
 public class LandDTO {
 
     private Long id;
@@ -9,11 +12,12 @@ public class LandDTO {
     private String parcelNo;
     private String adaNo;
     private double size;
+    private LandType landType;
 
     // Constructors
     public LandDTO() {}
 
-    public LandDTO(Long id, Long userId, String name, Long neighborhoodId, String parcelNo, String adaNo, double size) {
+    public LandDTO(Long id, Long userId, String name, Long neighborhoodId, String parcelNo, String adaNo, double size, LandType landType) {
         this.id = id;
         this.userId = userId;
         this.name = name;
@@ -21,6 +25,7 @@ public class LandDTO {
         this.parcelNo = parcelNo;
         this.adaNo = adaNo;
         this.size = size;
+        this.landType = landType;
     }
 
     // Getters and setters
@@ -78,5 +83,13 @@ public class LandDTO {
 
     public void setSize(double size) {
         this.size = size;
+    }
+
+    public LandType getlandType() {
+        return landType;
+    }
+
+    public void setLandTypeID(LandType landType) {
+        this.landType = landType;
     }
 }

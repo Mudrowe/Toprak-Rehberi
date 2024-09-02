@@ -2,11 +2,11 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import '../dtos/UserDTO.dart';
+import '../dtos/LandDTO.dart';
 
-Future<void> createUser(UserDTO user) async {
+Future<void> addLand(LandDTO land) async {
   var ipAddress = dotenv.env['IP_ADDRESS'];
-  var baseUrl = 'http://$ipAddress:8080/api/user';
+  var baseUrl = 'http://$ipAddress:8080/api/land';
   final url = Uri.parse(baseUrl);
 
   final response = await http.post(
@@ -14,14 +14,14 @@ Future<void> createUser(UserDTO user) async {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: jsonEncode(user.toJson()),
+    body: jsonEncode(land.toJson()),
   );
 
   if (response.statusCode == 201) {
-    // User created successfully
-    print('User created: ${response.body}');
+    // Land added successfully
+    print('Land added: ${response.body}');
   } else {
     // Error handling
-    print('Failed to create user: ${response.statusCode}');
+    print('Failed to add land: ${response.statusCode}');
   }
 }

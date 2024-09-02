@@ -45,7 +45,8 @@ public class LandController {
                 land.getNeighborhoodId(),
                 land.getParcelNo(),
                 land.getAdaNo(),
-                land.getSize()
+                land.getSize(),
+                land.getLandType()
         );
     }
 }

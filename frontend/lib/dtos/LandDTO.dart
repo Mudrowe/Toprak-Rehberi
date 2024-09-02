@@ -8,6 +8,7 @@ class LandDTO {
   final String parcelNo;
   final String adaNo;
   final double size;
+  final int? landTypeId;
 
   LandDTO({
     this.id,
@@ -17,6 +18,7 @@ class LandDTO {
     required this.parcelNo,
     required this.adaNo,
     required this.size,
+    required this.landTypeId,
   });
 
   factory LandDTO.fromJson(Map<String, dynamic> json) {
@@ -28,6 +30,7 @@ class LandDTO {
       parcelNo: json['parcelNo'],
       adaNo: json['adaNo'],
       size: json['size'].toDouble(),
+      landTypeId: json['landTypeId'] != null ? json['landTypeId'] as int : null,
     );
   }
 

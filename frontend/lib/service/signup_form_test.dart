@@ -23,7 +23,7 @@ class TSignupFormTest extends StatelessWidget {
       _formKey.currentState?.save();
 
       UserDTO user = UserDTO(
-        id: 0, // ID is typically set by the backend, so you can use 0 or null
+        id: 0,
         firstName: _firstName!,
         lastName: _lastName!,
         email: _email!,
