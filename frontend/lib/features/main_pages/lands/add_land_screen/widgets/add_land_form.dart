@@ -63,7 +63,7 @@ class _TAddLandFormState extends State<TAddLandForm> {
 
   void _loadDistricts(int cityId) async {
     try {
-      List<DistrictDTO> districts = await fetchDistricts(cityId);
+      List<DistrictDTO> districts = await fetchDistricts();
       setState(() {
         _districts = districts;
       });
@@ -77,7 +77,7 @@ class _TAddLandFormState extends State<TAddLandForm> {
   void _loadNeighborhoods(int districtId) async {
     try {
       List<NeighborhoodDTO> neighborhoods =
-          await fetchNeighborhoods(districtId);
+          await fetchNeighborhoods();
       setState(() {
         _neighborhoods = neighborhoods;
       });
@@ -97,7 +97,7 @@ class _TAddLandFormState extends State<TAddLandForm> {
       _neighborhood = null;
     });
     if (selectedCity != null) {
-      _districts = await fetchDistricts(selectedCity.id);
+      _districts = await fetchDistricts();
       setState(() {});
     }
   }
@@ -109,7 +109,7 @@ class _TAddLandFormState extends State<TAddLandForm> {
       _neighborhood = null;
     });
     if (selectedDistrict != null) {
-      _neighborhoods = await fetchNeighborhoods(selectedDistrict.id);
+      _neighborhoods = await fetchNeighborhoods();
       setState(() {});
     }
   }
@@ -168,10 +168,7 @@ class _TAddLandFormState extends State<TAddLandForm> {
               setState(() {
                 _landType = value;
               });
-            },
-            onSaved: (LandTypeDTO? value) {
-              _landType = value;
-            },
+            }
           ),
 
           const SizedBox(height: TSizes.spaceBtwItems),
@@ -201,9 +198,6 @@ class _TAddLandFormState extends State<TAddLandForm> {
                       _loadDistricts(newValue.id);
                     }
                   },
-                  onSaved: (CityDTO? value) {
-                    _city = value;
-                  },
                 ),
               ),
 
@@ -229,9 +223,6 @@ class _TAddLandFormState extends State<TAddLandForm> {
                       _loadNeighborhoods(newValue.id);
                     }
                   },
-                  onSaved: (DistrictDTO? value) {
-                    _district = value;
-                  },
                 ),
               ),
             ],
@@ -256,9 +247,6 @@ class _TAddLandFormState extends State<TAddLandForm> {
                     setState(() {
                       _neighborhood = newValue;
                     });
-                  },
-                  onSaved: (NeighborhoodDTO? value) {
-                    _neighborhood = value;
                   },
                 ),
               ),

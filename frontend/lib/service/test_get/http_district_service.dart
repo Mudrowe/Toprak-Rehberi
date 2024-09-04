@@ -6,7 +6,7 @@ import '../../dtos/DistrictDTO.dart';
 class HttpDistrictService {
   Future<List<DistrictDTO>> fetchDistricts() async {
     var ipAddress = dotenv.env['IP_ADDRESS'];
-    var baseUrl = 'http://$ipAddress:8080/api/districts'; // Update URL for districts
+    var baseUrl = 'http://$ipAddress:8080/api/districts';
 
     try {
       final response = await http.get(Uri.parse(baseUrl));

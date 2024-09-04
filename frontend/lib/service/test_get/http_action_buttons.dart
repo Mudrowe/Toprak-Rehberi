@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:toprak_rehberi/features/authentication/screens/signup/widgets/signup_form.dart';
 import 'package:toprak_rehberi/service/test_get/http_get_cities_screen.dart';
 import 'package:toprak_rehberi/service/test_get/http_city_service.dart';
+import 'package:toprak_rehberi/service/test_get/http_get_land_types.dart';
 import 'package:toprak_rehberi/service/user/signup_form_test.dart';
 
 import 'http_get_districts_screen.dart';
@@ -36,6 +37,13 @@ class TActionButtons extends StatelessWidget {
               child: const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text('Add User'),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () => Get.to(() => HttpGetLandTypesScreen()),
+              child: const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text('Get Land Types'),
               ),
             ),
           ],

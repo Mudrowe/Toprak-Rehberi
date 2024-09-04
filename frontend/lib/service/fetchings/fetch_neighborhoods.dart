@@ -4,17 +4,21 @@ import 'dart:convert';
 
 import '../../dtos/NeighborhoodDTO.dart';
 
-Future<List<NeighborhoodDTO>> fetchNeighborhoods(int districtId) async {
+Future<List<NeighborhoodDTO>> fetchNeighborhoods() async {
   var ipAddress = dotenv.env['IP_ADDRESS'];
-  var baseUrl = 'http://$ipAddress:8080/api/neighborhoods/$districtId';
+  var baseUrl = 'http://$ipAddress:8080/api/neighborhoods';
   final url = Uri.parse(baseUrl);
 
-  final response = await http.get(url);
+  try {
+    final response = await http.get(url);
 
-  if (response.statusCode == 200) {
-    List<dynamic> data = jsonDecode(response.body);
-    return data.map((json) => NeighborhoodDTO.fromJson(json)).toList();
-  } else {
-    throw Exception('Failed to load neighborhoods');
+    if (response.statusCode == 200) {
+      List<dynamic> data = jsonDecode(response.body);
+      return data.map((json) => NeighborhoodDTO.fromJson(json)).toList();
+    } else {
+      throw Exception('Failed to load neighborhoods');
+    }
+  } catch (e) {
+    throw Exception('Failed to fetch neighborhoods.');
   }
 }

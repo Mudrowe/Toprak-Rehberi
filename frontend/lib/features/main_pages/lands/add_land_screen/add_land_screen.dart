@@ -13,11 +13,11 @@ class TAddLandScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const TAppBar(),
+    return const Scaffold(
+      appBar: TAppBar(),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(TSizes.defaulSpace),
+          padding: EdgeInsets.all(TSizes.defaulSpace),
           child: Column(
             children: [
               // Form

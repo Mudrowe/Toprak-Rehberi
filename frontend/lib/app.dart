@@ -26,9 +26,9 @@ class App extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
 
-      home: TAddLandScreen(),
+      //home: TAddLandScreen(),
       //home:const FirstScreen(),
-      //home: TActionButtons(),
+      home: TActionButtons(),
       );
   }
 }

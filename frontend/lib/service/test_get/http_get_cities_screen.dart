@@ -22,16 +22,17 @@ class HttpGetCitiesScreen extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error ?? 'Unknown error'}'));
-          } else if (snapshot.hasData && snapshot.data != null && snapshot.data!.isNotEmpty) {
+            return Center(
+                child: Text('Error: ${snapshot.error ?? 'Unknown error'}'));
+          } else if (snapshot.hasData &&
+              snapshot.data != null &&
+              snapshot.data!.isNotEmpty) {
             final List<CityDTO> cities = snapshot.data!;
             return ListView.builder(
               itemCount: cities.length,
-
               itemBuilder: (context, index) {
                 var name = utf8.decode(cities[index].name.codeUnits);
                 return ListTile(
-
                   title: Text(name.toString()),
                   subtitle: Text('ID: ${cities[index].id}'),
                 );
