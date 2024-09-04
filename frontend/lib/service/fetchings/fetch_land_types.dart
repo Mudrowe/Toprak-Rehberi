@@ -6,7 +6,7 @@ import '../../dtos/LandTypeDTO.dart';
 
 Future<List<LandTypeDTO>> fetchLandTypes() async {
   var ipAddress = dotenv.env['IP_ADDRESS'];
-  var baseUrl = 'http://$ipAddress:8080/api/land_type';
+  var baseUrl = 'http://$ipAddress:8080/api/land_types';
   final url = Uri.parse(baseUrl);
 
   final response = await http.get(url);

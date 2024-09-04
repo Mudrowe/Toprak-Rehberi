@@ -1,26 +1,118 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/dtos/LandDTO.dart';
+import 'package:toprak_rehberi/service/fetchings/fetch_cities.dart';
+import 'package:toprak_rehberi/service/fetchings/fetch_districts.dart';
+import 'package:toprak_rehberi/service/fetchings/fetch_land_types.dart';
+import 'package:toprak_rehberi/service/fetchings/fetch_neighborhoods.dart';
 import 'package:toprak_rehberi/service/land/add_land.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
+import '../../../../../dtos/CityDTO.dart';
+import '../../../../../dtos/DistrictDTO.dart';
 import '../../../../../dtos/LandTypeDTO.dart';
 import '../../../../../dtos/NeighborhoodDTO.dart';
 
 // ! Change the color theme of DropdownButtonFormField
 
-class TAddLandForm extends StatelessWidget {
+class TAddLandForm extends StatefulWidget {
+  const TAddLandForm({super.key});
+
+  @override
+  State<TAddLandForm> createState() => _TAddLandFormState();
+}
+
+class _TAddLandFormState extends State<TAddLandForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String? _fieldName;
   LandTypeDTO? _landType;
-  String? _city;
-  String? _district;
+  CityDTO? _city;
+  DistrictDTO? _district;
   NeighborhoodDTO? _neighborhood;
   double? _size;
   String? _parcelNo;
   String? _adaNo;
 
-  TAddLandForm({super.key});
+  List<CityDTO> _cities = [];
+  List<DistrictDTO> _districts = [];
+  List<NeighborhoodDTO> _neighborhoods = [];
+  List<LandTypeDTO> _landTypes = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadInitialData();
+  }
+
+  void _loadInitialData() async {
+    try {
+      List<CityDTO> cities = await fetchCities();
+      List<LandTypeDTO> landTypes = await fetchLandTypes();
+      setState(() {
+        _cities = cities;
+        _landTypes = landTypes;
+      });
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to load initial data: $error')),
+      );
+    }
+  }
+
+  void _loadDistricts(int cityId) async {
+    try {
+      List<DistrictDTO> districts = await fetchDistricts(cityId);
+      setState(() {
+        _districts = districts;
+      });
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to load districts: $error')),
+      );
+    }
+  }
+
+  void _loadNeighborhoods(int districtId) async {
+    try {
+      List<NeighborhoodDTO> neighborhoods =
+          await fetchNeighborhoods(districtId);
+      setState(() {
+        _neighborhoods = neighborhoods;
+      });
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to load neighborhoods: $error')),
+      );
+    }
+  }
+
+  void _onCityChanged(CityDTO? selectedCity) async {
+    setState(() {
+      _city = selectedCity;
+      _districts = [];
+      _neighborhoods = [];
+      _district = null;
+      _neighborhood = null;
+    });
+    if (selectedCity != null) {
+      _districts = await fetchDistricts(selectedCity.id);
+      setState(() {});
+    }
+  }
+
+  void _onDistrictChanged(DistrictDTO? selectedDistrict) async {
+    setState(() {
+      _district = selectedDistrict;
+      _neighborhoods = [];
+      _neighborhood = null;
+    });
+    if (selectedDistrict != null) {
+      _neighborhoods = await fetchNeighborhoods(selectedDistrict.id);
+      setState(() {});
+    }
+  }
 
   void _saveForm(BuildContext context) {
     if (_formKey.currentState?.validate() ?? false) {
@@ -36,9 +128,11 @@ class TAddLandForm extends StatelessWidget {
       );
 
       addLand(land).then((_) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Land created succesffully!')));
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Land created successfully!')));
       }).catchError((error) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Failed to create land.')));
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Failed to create land.')));
       });
     }
   }
@@ -62,26 +156,22 @@ class TAddLandForm extends StatelessWidget {
           const SizedBox(height: TSizes.spaceBtwItems),
 
           // Land Type
-          DropdownButtonFormField(
+          DropdownButtonFormField<LandTypeDTO>(
             hint: const Text(TTexts.landType),
-            items: const [
-              DropdownMenuItem(
-                value: 'Tarla',
-                child: Text('Tarla'),
-              ),
-              DropdownMenuItem(
-                value: 'Bağ',
-                child: Text('Bağ'),
-              ),
-              DropdownMenuItem(
-                value: 'Bahçe',
-                child: Text('Bahçe'),
-              ),
-            ],
-            onSaved: (String? value) {
-              _landType = value as LandTypeDTO;
+            items: _landTypes.map((LandTypeDTO landType) {
+              return DropdownMenuItem<LandTypeDTO>(
+                value: landType,
+                child: Text(utf8.decode(landType.name.codeUnits)),
+              );
+            }).toList(),
+            onChanged: (LandTypeDTO? value) {
+              setState(() {
+                _landType = value;
+              });
             },
-            onChanged: (value) {},
+            onSaved: (LandTypeDTO? value) {
+              _landType = value;
+            },
           ),
 
           const SizedBox(height: TSizes.spaceBtwItems),
@@ -89,29 +179,31 @@ class TAddLandForm extends StatelessWidget {
           // City & District
           Row(
             children: [
-
               // City
               Expanded(
-                child: DropdownButtonFormField(
+                child: DropdownButtonFormField<CityDTO>(
                   hint: const Text(TTexts.city),
-                  items: const [
-                    DropdownMenuItem(
-                      value: 'Ankara',
-                      child: Text('Ankara'),
-                    ),
-                    DropdownMenuItem(
-                      value: 'İstanbul',
-                      child: Text('İstanbul'),
-                    ),
-                    DropdownMenuItem(
-                      value: 'İzmir',
-                      child: Text('İzmir'),
-                    ),
-                  ],
-                  onSaved: (String? value) {
+                  items: _cities.map((CityDTO city) {
+                    return DropdownMenuItem<CityDTO>(
+                      value: city,
+                      child: Text(utf8.decode(city.name.codeUnits)),
+                    );
+                  }).toList(),
+                  onChanged: (CityDTO? newValue) {
+                    setState(() {
+                      _city = newValue;
+                      _district = null;
+                      _neighborhood = null;
+                      _districts = [];
+                      _neighborhoods = [];
+                    });
+                    if (newValue != null) {
+                      _loadDistricts(newValue.id);
+                    }
+                  },
+                  onSaved: (CityDTO? value) {
                     _city = value;
                   },
-                  onChanged: (value) {},
                 ),
               ),
 
@@ -119,26 +211,27 @@ class TAddLandForm extends StatelessWidget {
 
               // District
               Expanded(
-                child: DropdownButtonFormField(
+                child: DropdownButtonFormField<DistrictDTO>(
                   hint: const Text(TTexts.district),
-                  items: const [
-                    DropdownMenuItem(
-                      value: 'İlçe 1',
-                      child: Text('İlçe 1'),
-                    ),
-                    DropdownMenuItem(
-                      value: 'İlçe 2',
-                      child: Text('İlçe 2'),
-                    ),
-                    DropdownMenuItem(
-                      value: 'İlçe 3',
-                      child: Text('İlçe 3'),
-                    ),
-                  ],
-                  onSaved: (String? value) {
+                  items: _districts.map((DistrictDTO district) {
+                    return DropdownMenuItem<DistrictDTO>(
+                      value: district,
+                      child: Text(utf8.decode(district.name.codeUnits)),
+                    );
+                  }).toList(),
+                  onChanged: (DistrictDTO? newValue) {
+                    setState(() {
+                      _district = newValue;
+                      _neighborhood = null;
+                      _neighborhoods = [];
+                    });
+                    if (newValue != null) {
+                      _loadNeighborhoods(newValue.id);
+                    }
+                  },
+                  onSaved: (DistrictDTO? value) {
                     _district = value;
                   },
-                  onChanged: (value) {},
                 ),
               ),
             ],
@@ -149,29 +242,24 @@ class TAddLandForm extends StatelessWidget {
           // Neighborhood & Area
           Row(
             children: [
-
               // Neighborhood
               Expanded(
-                child: DropdownButtonFormField(
+                child: DropdownButtonFormField<NeighborhoodDTO>(
                   hint: const Text(TTexts.neighborhood),
-                  items: const [
-                    DropdownMenuItem(
-                      value: 'Köy 1',
-                      child: Text('Köy 1'),
-                    ),
-                    DropdownMenuItem(
-                      value: 'Köy 2',
-                      child: Text('Köy 2'),
-                    ),
-                    DropdownMenuItem(
-                      value: 'Köy 3',
-                      child: Text('Köy 3'),
-                    ),
-                  ],
-                  onSaved: (String? value) {
-                    _neighborhood?.id = value as int;
+                  items: _neighborhoods.map((NeighborhoodDTO neighborhood) {
+                    return DropdownMenuItem<NeighborhoodDTO>(
+                      value: neighborhood,
+                      child: Text(utf8.decode(neighborhood.name.codeUnits)),
+                    );
+                  }).toList(),
+                  onChanged: (NeighborhoodDTO? newValue) {
+                    setState(() {
+                      _neighborhood = newValue;
+                    });
                   },
-                  onChanged: (value) {},
+                  onSaved: (NeighborhoodDTO? value) {
+                    _neighborhood = value;
+                  },
                 ),
               ),
 
@@ -184,7 +272,7 @@ class TAddLandForm extends StatelessWidget {
                     labelText: '${TTexts.size} (${TTexts.squareSymbol})',
                   ),
                   onSaved: (String? value) {
-                    _size = value as double;
+                    _size = double.tryParse(value ?? '');
                   },
                 ),
               ),
@@ -196,7 +284,6 @@ class TAddLandForm extends StatelessWidget {
           // Parcel No & Ada No
           Row(
             children: [
-
               // Parcel No
               Expanded(
                 child: TextFormField(

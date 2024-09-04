@@ -6,7 +6,7 @@ import '../../dtos/DistrictDTO.dart';
 
 Future<List<DistrictDTO>> fetchDistricts(int cityId) async {
   var ipAddress = dotenv.env['IP_ADDRESS'];
-  var baseUrl = 'http://$ipAddress:8080/api/districts?cityId=$cityId';
+  var baseUrl = 'http://$ipAddress:8080/api/districts/$cityId';
   final url = Uri.parse(baseUrl);
 
   final response = await http.get(url);
