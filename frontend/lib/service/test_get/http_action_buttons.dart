@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:toprak_rehberi/features/authentication/screens/signup/widgets/signup_form.dart';
-import 'package:toprak_rehberi/service/http_get_cities_screen.dart';
-import 'package:toprak_rehberi/service/http_city_service.dart';
-import 'package:toprak_rehberi/service/signup_form_test.dart';
+import 'package:toprak_rehberi/service/test_get/http_get_cities_screen.dart';
+import 'package:toprak_rehberi/service/test_get/http_city_service.dart';
+import 'package:toprak_rehberi/service/user/signup_form_test.dart';
 
 import 'http_get_districts_screen.dart';
 

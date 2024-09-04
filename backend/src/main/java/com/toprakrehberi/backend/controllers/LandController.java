@@ -49,4 +49,27 @@ public class LandController {
                 land.getLandType()
         );
     }
+
+    private Land convertToEntity(LandDTO landDTO) {
+        Land land = new Land();
+        land.setId(landDTO.getId());
+        land.setName(landDTO.getName());
+        land.setNeighborhoodId(landDTO.getNeighborhoodId());
+        land.setParcelNo(landDTO.getParcelNo());
+        land.setAdaNo(landDTO.getAdaNo());
+        land.setSize(landDTO.getSize());
+
+        return land;
+    }
+
+    @PostMapping
+    public ResponseEntity<LandDTO> createLand(@RequestBody LandDTO landDTO) {
+        Land land = convertToEntity(landDTO);
+
+        Land savedLand = landService.saveLand(land);
+
+        LandDTO savedLandDTO = convertToDTO(savedLand);
+
+        return new ResponseEntity<>(savedLandDTO, HttpStatus.CREATED);
+    }
 }

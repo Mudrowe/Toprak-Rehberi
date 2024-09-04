@@ -4,7 +4,7 @@ import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 import 'package:toprak_rehberi/features/authentication/screens/signup/widgets/terms_and_conditions_checkbox.dart';
 
-import '../dtos/UserDTO.dart';
+import '../../dtos/UserDTO.dart';
 import 'http_add_user_service.dart';
 
 class TSignupFormTest extends StatelessWidget {
@@ -32,7 +32,7 @@ class TSignupFormTest extends StatelessWidget {
       );
 
       createUser(user).then((_) {
-        // Handle success, show a message or navigate
+        // Handle success
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('User created successfully!')));
       }).catchError((error) {
         // Handle error
@@ -53,6 +53,7 @@ class TSignupFormTest extends StatelessWidget {
             children: [
               Row(
                 children: [
+
                   // First Name
                   Expanded(
                     child: TextFormField(
@@ -69,7 +70,9 @@ class TSignupFormTest extends StatelessWidget {
                       },
                     ),
                   ),
+
                   const SizedBox(width: TSizes.spaceBtwInputFields),
+
                   // Last Name
                   Expanded(
                     child: TextFormField(
@@ -87,7 +90,9 @@ class TSignupFormTest extends StatelessWidget {
                   ),
                 ],
               ),
+
               const SizedBox(height: TSizes.spaceBtwInputFields),
+
               // Email
               TextFormField(
                 decoration: const InputDecoration(
@@ -103,7 +108,9 @@ class TSignupFormTest extends StatelessWidget {
                 },
                  */
               ),
+
               const SizedBox(height: TSizes.spaceBtwInputFields),
+
               // Phone Number
               TextFormField(
                 decoration: const InputDecoration(
@@ -119,7 +126,9 @@ class TSignupFormTest extends StatelessWidget {
                 },
                 */
               ),
+
               const SizedBox(height: TSizes.spaceBtwInputFields),
+
               // Password
               TextFormField(
                 decoration: const InputDecoration(
@@ -135,7 +144,9 @@ class TSignupFormTest extends StatelessWidget {
                   return (value != null && value.length < 6) ? 'Password must be at least 6 characters long.' : null;
                 },
               ),
+
               const SizedBox(height: TSizes.spaceBtwInputFields),
+
               // Confirm Password
               TextFormField(
                 decoration: const InputDecoration(
@@ -148,9 +159,13 @@ class TSignupFormTest extends StatelessWidget {
                   _confirmPassword = value;
                 },
               ),
+
               const SizedBox(height: TSizes.spaceBtwSections),
+
               const TTermsAndConditionsCheckBox(),
+
               const SizedBox(height: TSizes.spaceBtwSections),
+
               ElevatedButton(
                 onPressed: () => _saveForm(context),
                 child: const Text('Submit'),
