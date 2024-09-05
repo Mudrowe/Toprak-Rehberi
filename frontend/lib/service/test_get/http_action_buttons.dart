@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:toprak_rehberi/features/authentication/screens/signup/widgets/signup_form.dart';
+import 'package:toprak_rehberi/features/main_pages/lands/add_land_screen/widgets/add_land_form.dart';
 import 'package:toprak_rehberi/service/test_get/http_get_cities_screen.dart';
 import 'package:toprak_rehberi/service/test_get/http_city_service.dart';
 import 'package:toprak_rehberi/service/test_get/http_get_land_types.dart';
 import 'package:toprak_rehberi/service/user/signup_form_test.dart';
 
+import '../../features/main_pages/lands/add_land_screen/add_land_screen.dart';
 import 'http_get_districts_screen.dart';
 
 class TActionButtons extends StatelessWidget {
@@ -44,6 +46,13 @@ class TActionButtons extends StatelessWidget {
               child: const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text('Get Land Types'),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () => Get.to(() => TAddLandScreen()),
+              child: const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text('Add Land '),
               ),
             ),
           ],

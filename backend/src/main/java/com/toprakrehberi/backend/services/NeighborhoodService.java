@@ -12,7 +12,16 @@ public class NeighborhoodService {
     @Autowired
     private NeighborhoodRepository neighborhoodRepository;
 
-    public List<Neighborhood> getAllNeighborhoods() { return neighborhoodRepository.findAll(); }
+    public List<Neighborhood> getAllNeighborhoods() {
+        return neighborhoodRepository.findAll();
+    }
 
-    public Neighborhood getNeighborhoodById(int id) { return neighborhoodRepository.findById(id).orElse(null); }
+    public Neighborhood getNeighborhoodById(int id) {
+        return neighborhoodRepository.findById(id).orElse(null);
+    }
+
+
+    public List<Neighborhood> getNeighborhoodsByDistrictId(int districtId) {
+        return neighborhoodRepository.findByDistrictId(districtId);
+    }
 }

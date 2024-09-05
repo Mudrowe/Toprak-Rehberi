@@ -15,8 +15,6 @@ import '../../../../../dtos/DistrictDTO.dart';
 import '../../../../../dtos/LandTypeDTO.dart';
 import '../../../../../dtos/NeighborhoodDTO.dart';
 
-// ! Change the color theme of DropdownButtonFormField
-
 class TAddLandForm extends StatefulWidget {
   const TAddLandForm({super.key});
 
@@ -63,7 +61,7 @@ class _TAddLandFormState extends State<TAddLandForm> {
 
   void _loadDistricts(int cityId) async {
     try {
-      List<DistrictDTO> districts = await fetchDistricts();
+      List<DistrictDTO> districts = await fetchDistricts(cityId);
       setState(() {
         _districts = districts;
       });
@@ -77,7 +75,7 @@ class _TAddLandFormState extends State<TAddLandForm> {
   void _loadNeighborhoods(int districtId) async {
     try {
       List<NeighborhoodDTO> neighborhoods =
-      await fetchNeighborhoods();
+      await fetchNeighborhoods(districtId);
       setState(() {
         _neighborhoods = neighborhoods;
       });
@@ -97,8 +95,16 @@ class _TAddLandFormState extends State<TAddLandForm> {
       _neighborhood = null;
     });
     if (selectedCity != null) {
-      _districts = await fetchDistricts();
-      setState(() {});
+      try {
+        List<DistrictDTO> districts = await fetchDistricts(selectedCity.id);
+        setState(() {
+          _districts = districts;
+        });
+      } catch (error) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to load districts: $error')),
+        );
+      }
     }
   }
 
@@ -109,8 +115,16 @@ class _TAddLandFormState extends State<TAddLandForm> {
       _neighborhood = null;
     });
     if (selectedDistrict != null) {
-      _neighborhoods = await fetchNeighborhoods();
-      setState(() {});
+      try {
+        List<NeighborhoodDTO> neighborhoods = await fetchNeighborhoods(selectedDistrict.id);
+        setState(() {
+          _neighborhoods = neighborhoods;
+        });
+      } catch (error) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to load neighborhoods: $error')),
+        );
+      }
     }
   }
 
@@ -183,16 +197,7 @@ class _TAddLandFormState extends State<TAddLandForm> {
               );
             }).toList(),
             onChanged: (CityDTO? newValue) {
-              setState(() {
-                _city = newValue;
-                _district = null;
-                _neighborhood = null;
-                _districts = [];
-                _neighborhoods = [];
-              });
-              if (newValue != null) {
-                _loadDistricts(newValue.id);
-              }
+              _onCityChanged(newValue);
             },
           ),
 
@@ -208,14 +213,7 @@ class _TAddLandFormState extends State<TAddLandForm> {
               );
             }).toList(),
             onChanged: (DistrictDTO? newValue) {
-              setState(() {
-                _district = newValue;
-                _neighborhood = null;
-                _neighborhoods = [];
-              });
-              if (newValue != null) {
-                _loadNeighborhoods(newValue.id);
-              }
+              _onDistrictChanged(newValue);
             },
           ),
 

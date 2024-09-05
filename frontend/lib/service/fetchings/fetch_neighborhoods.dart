@@ -4,9 +4,9 @@ import 'dart:convert';
 
 import '../../dtos/NeighborhoodDTO.dart';
 
-Future<List<NeighborhoodDTO>> fetchNeighborhoods() async {
+Future<List<NeighborhoodDTO>> fetchNeighborhoods(int districtId) async {
   var ipAddress = dotenv.env['IP_ADDRESS'];
-  var baseUrl = 'http://$ipAddress:8080/api/neighborhoods';
+  var baseUrl = 'http://$ipAddress:8080/api/neighborhoods/byDistrict/$districtId';
   final url = Uri.parse(baseUrl);
 
   try {
