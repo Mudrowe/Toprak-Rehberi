@@ -28,7 +28,7 @@ public class LandTypeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<LandTypeDTO> getLandTypeById(@PathVariable("id") Long id) {
+    public ResponseEntity<LandTypeDTO> getLandTypeById(@PathVariable("id") int id) {
         LandType landType = landTypeService.getLandTypeById(id);
         if (landType != null) {
             return new ResponseEntity<>(convertToDTO(landType), HttpStatus.OK);

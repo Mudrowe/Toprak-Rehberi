@@ -28,11 +28,10 @@ public class Land {
     @Column(name = "size", nullable = false)
     private double size;
 
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "land_type_id", nullable = false)
-    private LandType landType;
+    private int landTypeId;
 
-    public Land(Long id, User user, String name, Long neighborhoodId, String parcelNo, String adaNo, double size, LandType landType) {
+    public Land(Long id, User user, String name, Long neighborhoodId, String parcelNo, String adaNo, double size, int landTypeId) {
         this.id = id;
         this.user = user;
         this.name = name;
@@ -40,7 +39,7 @@ public class Land {
         this.parcelNo = parcelNo;
         this.adaNo = adaNo;
         this.size = size;
-        this.landType = landType;
+        this.landTypeId = landTypeId;
     }
 
     public Land() {
@@ -102,11 +101,11 @@ public class Land {
         this.size = size;
     }
 
-    public LandType getLandType() {
-        return landType;
+    public int getLandTypeId() {
+        return landTypeId;
     }
 
-    public void setLandType(LandType landType) {
-        this.landType = landType;
+    public void setLandTypeId(int landTypeId) {
+        this.landTypeId = landTypeId;
     }
 }

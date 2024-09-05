@@ -59,32 +59,6 @@ class _TAddLandFormState extends State<TAddLandForm> {
     }
   }
 
-  void _loadDistricts(int cityId) async {
-    try {
-      List<DistrictDTO> districts = await fetchDistricts(cityId);
-      setState(() {
-        _districts = districts;
-      });
-    } catch (error) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to load districts: $error')),
-      );
-    }
-  }
-
-  void _loadNeighborhoods(int districtId) async {
-    try {
-      List<NeighborhoodDTO> neighborhoods =
-      await fetchNeighborhoods(districtId);
-      setState(() {
-        _neighborhoods = neighborhoods;
-      });
-    } catch (error) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to load neighborhoods: $error')),
-      );
-    }
-  }
 
   void _onCityChanged(CityDTO? selectedCity) async {
     setState(() {

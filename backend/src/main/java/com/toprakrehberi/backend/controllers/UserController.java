@@ -68,7 +68,7 @@ public class UserController {
         return user;
     }
 
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
         User user = convertToEntity(userDTO);
 

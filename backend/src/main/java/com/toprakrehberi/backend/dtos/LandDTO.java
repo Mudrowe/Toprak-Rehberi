@@ -12,12 +12,12 @@ public class LandDTO {
     private String parcelNo;
     private String adaNo;
     private double size;
-    private LandType landType;
+    private int landTypeId;
 
     // Constructors
     public LandDTO() {}
 
-    public LandDTO(Long id, Long userId, String name, Long neighborhoodId, String parcelNo, String adaNo, double size, LandType landType) {
+    public LandDTO(Long id, Long userId, String name, Long neighborhoodId, String parcelNo, String adaNo, double size, int landTypeId) {
         this.id = id;
         this.userId = userId;
         this.name = name;
@@ -25,7 +25,21 @@ public class LandDTO {
         this.parcelNo = parcelNo;
         this.adaNo = adaNo;
         this.size = size;
-        this.landType = landType;
+        this.landTypeId = landTypeId;
+    }
+
+    @Override
+    public String toString() {
+        return "LandDTO{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", name='" + name + '\'' +
+                ", neighborhoodId=" + neighborhoodId +
+                ", parcelNo='" + parcelNo + '\'' +
+                ", adaNo='" + adaNo + '\'' +
+                ", size=" + size +
+                ", landTypeId=" + landTypeId +
+                '}';
     }
 
     // Getters and setters
@@ -85,11 +99,7 @@ public class LandDTO {
         this.size = size;
     }
 
-    public LandType getlandType() {
-        return landType;
-    }
-
-    public void setLandTypeID(LandType landType) {
-        this.landType = landType;
+    public int getLandTypeId() {
+        return landTypeId;
     }
 }

@@ -17,7 +17,7 @@ public class LandTypeService {
         return landTypeRepository.findAll();
     }
 
-    public LandType getLandTypeById(Long id) {
+    public LandType getLandTypeById(int id) {
         return landTypeRepository.findById(id).orElse(null);
     }
 }

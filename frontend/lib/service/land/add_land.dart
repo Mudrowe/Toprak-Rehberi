@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import '../../dtos/LandDTO.dart';
 
-Future<void> addLand(LandDTO land) async {
+Future<void> addLand(LandDTO landDTO) async {
   var ipAddress = dotenv.env['IP_ADDRESS'];
   var baseUrl = 'http://$ipAddress:8080/api/land';
   final url = Uri.parse(baseUrl);
@@ -14,8 +14,11 @@ Future<void> addLand(LandDTO land) async {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: jsonEncode(land.toJson()),
+    body: jsonEncode(landDTO.toJson()),
   );
+
+  // Log the JSON payload being sent to the backend
+  print('Sending LandDTO JSON: ${jsonEncode(landDTO.toJson())}');
 
   if (response.statusCode == 201) {
     // Land added successfully
