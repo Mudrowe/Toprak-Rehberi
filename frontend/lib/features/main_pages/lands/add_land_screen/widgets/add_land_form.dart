@@ -77,7 +77,7 @@ class _TAddLandFormState extends State<TAddLandForm> {
   void _loadNeighborhoods(int districtId) async {
     try {
       List<NeighborhoodDTO> neighborhoods =
-          await fetchNeighborhoods();
+      await fetchNeighborhoods();
       setState(() {
         _neighborhoods = neighborhoods;
       });
@@ -168,132 +168,105 @@ class _TAddLandFormState extends State<TAddLandForm> {
               setState(() {
                 _landType = value;
               });
-            }
+            },
           ),
 
           const SizedBox(height: TSizes.spaceBtwItems),
 
-          // City & District
-          Row(
-            children: [
-              // City
-              Expanded(
-                child: DropdownButtonFormField<CityDTO>(
-                  hint: const Text(TTexts.city),
-                  items: _cities.map((CityDTO city) {
-                    return DropdownMenuItem<CityDTO>(
-                      value: city,
-                      child: Text(utf8.decode(city.name.codeUnits)),
-                    );
-                  }).toList(),
-                  onChanged: (CityDTO? newValue) {
-                    setState(() {
-                      _city = newValue;
-                      _district = null;
-                      _neighborhood = null;
-                      _districts = [];
-                      _neighborhoods = [];
-                    });
-                    if (newValue != null) {
-                      _loadDistricts(newValue.id);
-                    }
-                  },
-                ),
-              ),
-
-              const SizedBox(width: TSizes.spaceBtwItems),
-
-              // District
-              Expanded(
-                child: DropdownButtonFormField<DistrictDTO>(
-                  hint: const Text(TTexts.district),
-                  items: _districts.map((DistrictDTO district) {
-                    return DropdownMenuItem<DistrictDTO>(
-                      value: district,
-                      child: Text(utf8.decode(district.name.codeUnits)),
-                    );
-                  }).toList(),
-                  onChanged: (DistrictDTO? newValue) {
-                    setState(() {
-                      _district = newValue;
-                      _neighborhood = null;
-                      _neighborhoods = [];
-                    });
-                    if (newValue != null) {
-                      _loadNeighborhoods(newValue.id);
-                    }
-                  },
-                ),
-              ),
-            ],
+          // City
+          DropdownButtonFormField<CityDTO>(
+            hint: const Text(TTexts.city),
+            items: _cities.map((CityDTO city) {
+              return DropdownMenuItem<CityDTO>(
+                value: city,
+                child: Text(utf8.decode(city.name.codeUnits)),
+              );
+            }).toList(),
+            onChanged: (CityDTO? newValue) {
+              setState(() {
+                _city = newValue;
+                _district = null;
+                _neighborhood = null;
+                _districts = [];
+                _neighborhoods = [];
+              });
+              if (newValue != null) {
+                _loadDistricts(newValue.id);
+              }
+            },
           ),
 
           const SizedBox(height: TSizes.spaceBtwItems),
 
-          // Neighborhood & Area
-          Row(
-            children: [
-              // Neighborhood
-              Expanded(
-                child: DropdownButtonFormField<NeighborhoodDTO>(
-                  hint: const Text(TTexts.neighborhood),
-                  items: _neighborhoods.map((NeighborhoodDTO neighborhood) {
-                    return DropdownMenuItem<NeighborhoodDTO>(
-                      value: neighborhood,
-                      child: Text(utf8.decode(neighborhood.name.codeUnits)),
-                    );
-                  }).toList(),
-                  onChanged: (NeighborhoodDTO? newValue) {
-                    setState(() {
-                      _neighborhood = newValue;
-                    });
-                  },
-                ),
-              ),
-
-              const SizedBox(width: TSizes.spaceBtwItems),
-
-              // Size
-              Expanded(
-                child: TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: '${TTexts.size} (${TTexts.squareSymbol})',
-                  ),
-                  onSaved: (String? value) {
-                    _size = double.tryParse(value ?? '');
-                  },
-                ),
-              ),
-            ],
+          // District
+          DropdownButtonFormField<DistrictDTO>(
+            hint: const Text(TTexts.district),
+            items: _districts.map((DistrictDTO district) {
+              return DropdownMenuItem<DistrictDTO>(
+                value: district,
+                child: Text(utf8.decode(district.name.codeUnits)),
+              );
+            }).toList(),
+            onChanged: (DistrictDTO? newValue) {
+              setState(() {
+                _district = newValue;
+                _neighborhood = null;
+                _neighborhoods = [];
+              });
+              if (newValue != null) {
+                _loadNeighborhoods(newValue.id);
+              }
+            },
           ),
 
           const SizedBox(height: TSizes.spaceBtwItems),
 
-          // Parcel No & Ada No
-          Row(
-            children: [
-              // Parcel No
-              Expanded(
-                child: TextFormField(
-                  decoration: const InputDecoration(labelText: TTexts.parcelNo),
-                  onSaved: (String? value) {
-                    _parcelNo = value;
-                  },
-                ),
-              ),
+          // Neighborhood
+          DropdownButtonFormField<NeighborhoodDTO>(
+            hint: const Text(TTexts.neighborhood),
+            items: _neighborhoods.map((NeighborhoodDTO neighborhood) {
+              return DropdownMenuItem<NeighborhoodDTO>(
+                value: neighborhood,
+                child: Text(utf8.decode(neighborhood.name.codeUnits)),
+              );
+            }).toList(),
+            onChanged: (NeighborhoodDTO? newValue) {
+              setState(() {
+                _neighborhood = newValue;
+              });
+            },
+          ),
 
-              const SizedBox(width: TSizes.spaceBtwItems),
+          const SizedBox(height: TSizes.spaceBtwItems),
 
-              // Ada No
-              Expanded(
-                child: TextFormField(
-                  decoration: const InputDecoration(labelText: TTexts.adaNo),
-                  onSaved: (String? value) {
-                    _adaNo = value;
-                  },
-                ),
-              ),
-            ],
+          // Size
+          TextFormField(
+            decoration: const InputDecoration(
+              labelText: '${TTexts.size} (${TTexts.squareSymbol})',
+            ),
+            onSaved: (String? value) {
+              _size = double.tryParse(value ?? '');
+            },
+          ),
+
+          const SizedBox(height: TSizes.spaceBtwItems),
+
+          // Parcel No
+          TextFormField(
+            decoration: const InputDecoration(labelText: TTexts.parcelNo),
+            onSaved: (String? value) {
+              _parcelNo = value;
+            },
+          ),
+
+          const SizedBox(height: TSizes.spaceBtwItems),
+
+          // Ada No
+          TextFormField(
+            decoration: const InputDecoration(labelText: TTexts.adaNo),
+            onSaved: (String? value) {
+              _adaNo = value;
+            },
           ),
 
           const SizedBox(height: TSizes.spaceBtwSections),

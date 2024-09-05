@@ -16,8 +16,6 @@ class HttpLandTypeService {
       final responseString = utf8.decode(response.bodyBytes);
       List<dynamic> jsonResponse = json.decode(responseString);
 
-      print('JSON Response: $jsonResponse');
-
       // Convert JSON data to List<LandTypeDTO>
       List<LandTypeDTO> landTypes = jsonResponse.map((data) => LandTypeDTO.fromJson(data)).toList();
 
