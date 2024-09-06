@@ -2,15 +2,23 @@ package com.toprakrehberi.backend.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "district")
 public class District {
     @Id
     @GeneratedValue
-    private short district_id;
+    private short id;
 
     @Column(nullable = false)
     private String name;
@@ -25,22 +33,4 @@ public class District {
     @OneToMany(mappedBy = "district")
     private List<Neighborhood> neighborhoods;
 
-    public District() {
-    }
-
-    public short getId() {
-        return district_id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public City getCity() {
-        return city;
-    }
-
-    public List<Neighborhood> getNeighborhoods() {
-        return neighborhoods;
-    }
 }

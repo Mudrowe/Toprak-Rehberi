@@ -42,7 +42,7 @@ public class LandController {
     private LandDTO convertToDTO(Land land) {
         return new LandDTO(
                 land.getId(),
-                land.getUser(),
+                land.getUserId(),
                 land.getName(),
                 land.getNeighborhoodId(),
                 land.getParcelNo(),

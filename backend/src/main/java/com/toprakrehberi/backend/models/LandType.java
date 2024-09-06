@@ -1,7 +1,15 @@
 package com.toprakrehberi.backend.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "land_type")
 public class LandType {
@@ -14,37 +22,4 @@ public class LandType {
 
     @Column(name = "image_url", nullable = false)
     private String imageUrl;
-
-    public LandType(int id, String name, String imageUrl) {
-        this.id = id;
-        this.name = name;
-        this.imageUrl = imageUrl;
-    }
-
-    public LandType() {}
-
-    // Getters and setters
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 }

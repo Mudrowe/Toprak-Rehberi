@@ -1,9 +1,17 @@
 package com.toprakrehberi.backend.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "product")
 public class Product {
@@ -26,64 +34,4 @@ public class Product {
 
     @Column(name = "product_option_id")
     private Long productOptionId;
-
-    public Product() {
-    }
-
-    public Product(long id, LocalDate plantingDate, LocalDate harvestDate, Land land, double score, Long productOptionId) {
-        this.id = id;
-        this.plantingDate = plantingDate;
-        this.harvestDate = harvestDate;
-        this.land = land;
-        this.score = score;
-        this.productOptionId = productOptionId;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public LocalDate getPlantingDate() {
-        return plantingDate;
-    }
-
-    public void setPlantingDate(LocalDate plantingDate) {
-        this.plantingDate = plantingDate;
-    }
-
-    public LocalDate getHarvestDate() {
-        return harvestDate;
-    }
-
-    public void setHarvestDate(LocalDate harvestDate) {
-        this.harvestDate = harvestDate;
-    }
-
-    public Land getLand() {
-        return land;
-    }
-
-    public void setLand(Land land) {
-        this.land = land;
-    }
-
-    public double getScore() {
-        return score;
-    }
-
-    public void setScore(double score) {
-        this.score = score;
-    }
-
-    public Long getProductOptionId() {
-        return productOptionId;
-    }
-
-    public void setProductOptionId(Long productOptionId) {
-        this.productOptionId = productOptionId;
-    }
 }
