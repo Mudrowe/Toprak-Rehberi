@@ -42,7 +42,7 @@ public class LandController {
     private LandDTO convertToDTO(Land land) {
         return new LandDTO(
                 land.getId(),
-                land.getUser() != null ? land.getUser().getId() : null,
+                land.getUser(),
                 land.getName(),
                 land.getNeighborhoodId(),
                 land.getParcelNo(),
@@ -70,10 +70,11 @@ public class LandController {
         System.out.println("Received LandDTO JSON: " + landDTO.toString());
 
         Land land = convertToEntity(landDTO);
-
         Land savedLand = landService.saveLand(land);
 
         LandDTO savedLandDTO = convertToDTO(savedLand);
+
+        System.out.println("Saved LandDTO: " + savedLandDTO.toString());
 
         return new ResponseEntity<>(savedLandDTO, HttpStatus.CREATED);
     }

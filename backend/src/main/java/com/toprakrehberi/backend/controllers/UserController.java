@@ -41,10 +41,11 @@ public class UserController {
     }
 
     private UserDTO convertToDTO(User user) {
-        // Convert lands to their IDs
+        /* Convert lands to their IDs
         Set<Long> landIds = user.getLands().stream()
                 .map(Land::getId)
                 .collect(Collectors.toSet());
+         */
 
         return new UserDTO(
                 user.getId(),
@@ -52,7 +53,7 @@ public class UserController {
                 user.getLastName(),
                 user.getEmail(),
                 user.getPhoneNumber(),
-                landIds,
+                //landIds,
                 user.getPassword()
         );
     }
@@ -70,11 +71,14 @@ public class UserController {
 
     @PostMapping()
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
-        User user = convertToEntity(userDTO);
+        System.out.println("Received UserDTO: " + userDTO.toString());
 
+        User user = convertToEntity(userDTO);
         User savedUser = userService.saveUser(user);
 
         UserDTO savedUserDTO = convertToDTO(savedUser);
+
+        System.out.println("Saved UserDTO: " + savedUserDTO.toString());
 
         return new ResponseEntity<>(savedUserDTO, HttpStatus.CREATED);
     }

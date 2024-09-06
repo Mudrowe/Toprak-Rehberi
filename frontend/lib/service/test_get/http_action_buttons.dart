@@ -53,13 +53,6 @@ class TActionButtons extends StatelessWidget {
                 child: Text('Add Land '),
               ),
             ),
-            ElevatedButton(
-              onPressed: () => Get.to(() => AddProductScreen()),
-              child: const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text('Add Product '),
-              ),
-            ),
           ],
         ),
       ),

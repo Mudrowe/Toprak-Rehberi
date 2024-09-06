@@ -32,7 +32,7 @@ public class LandDTO {
     public String toString() {
         return "LandDTO{" +
                 "id=" + id +
-                ", userId=" + userId +
+                //", userId=" + userId +
                 ", name='" + name + '\'' +
                 ", neighborhoodId=" + neighborhoodId +
                 ", parcelNo='" + parcelNo + '\'' +

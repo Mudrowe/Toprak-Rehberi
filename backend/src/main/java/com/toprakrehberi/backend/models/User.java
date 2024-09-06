@@ -11,23 +11,24 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(length = 64)
+    @Column(name = "first_name", length = 64)
     private String firstName;
 
-    @Column(length = 64)
+    @Column(name = "last_name", length = 64)
     private String lastName;
 
-    @Column
+    @Column(name = "password")
     private String password;
 
-    @Column(unique = true, length = 160)
+    @Column(name = "email", unique = true, length = 160)
     private String email;
 
-    @Column(unique = true, length = 15)
+    @Column(name = "phone_number", unique = true, length = 15)
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    /*@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Land> lands;
+     */
 
     public User() {
     }
@@ -98,7 +99,9 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
 
+    /*
     public Set<Land> getLands() { return lands; }
 
     public void setLands(Set<Land> lands) { this.lands = lands; }
+     */
 }

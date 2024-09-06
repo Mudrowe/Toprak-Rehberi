@@ -9,20 +9,19 @@ public class Land {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private long user_id;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "neighborhood", nullable = false)
+    @Column(name = "neighborhood_id", nullable = false)
     private Long neighborhoodId;
 
-    @Column(name = "parcelNo", nullable = false)
+    @Column(name = "parcel_no", nullable = false)
     private String parcelNo;
 
-    @Column(name = "adaNo", nullable = false)
+    @Column(name = "ada_no", nullable = false)
     private String adaNo;
 
     @Column(name = "size", nullable = false)
@@ -31,9 +30,9 @@ public class Land {
     @JoinColumn(name = "land_type_id", nullable = false)
     private int landTypeId;
 
-    public Land(Long id, User user, String name, Long neighborhoodId, String parcelNo, String adaNo, double size, int landTypeId) {
+    public Land(Long id, long user_id, String name, Long neighborhoodId, String parcelNo, String adaNo, double size, int landTypeId) {
         this.id = id;
-        this.user = user;
+        this.user_id = user_id;
         this.name = name;
         this.neighborhoodId = neighborhoodId;
         this.parcelNo = parcelNo;
@@ -53,12 +52,12 @@ public class Land {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public long getUser() {
+        return user_id;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(int user) {
+        this.user_id = user;
     }
 
     public String getName() {

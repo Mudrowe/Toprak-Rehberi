@@ -1,6 +1,6 @@
 package com.toprakrehberi.backend.dtos;
 
-import java.util.Set;
+
 
 // ! PASSWORD WILL BE REMOVED
 
@@ -11,20 +11,32 @@ public class UserDTO {
     private String lastName;
     private String email;
     private String phoneNumber;
-    private Set<Long> landIds; // Reference to land IDs
+    //private Set<Long> landIds; // Reference to land IDs
     private String password;
 
     // Constructors
     public UserDTO() {}
 
-    public UserDTO(long id, String firstName, String lastName, String email, String phoneNumber, Set<Long> landIds, String password) {
+    public UserDTO(long id, String firstName, String lastName, String email, String phoneNumber, /*Set<Long> landIds*/ String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.landIds = landIds;
+        //this.landIds = landIds;
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDTO{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 
     // Getters and setters
@@ -68,9 +80,11 @@ public class UserDTO {
         this.phoneNumber = phoneNumber;
     }
 
-    public Set<Long> getLandIds() {
+    /*public Set<Long> getLandIds() {
         return landIds;
     }
+
+     */
 
     public String getPassword() {
         return password;
@@ -80,7 +94,9 @@ public class UserDTO {
         this.password = password;
     }
 
-    public void setLandIds(Set<Long> landIds) {
+    /*public void setLandIds(Set<Long> landIds) {
         this.landIds = landIds;
     }
+
+     */
 }
