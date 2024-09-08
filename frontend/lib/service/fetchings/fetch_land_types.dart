@@ -1,5 +1,6 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
 import '../../dtos/LandTypeDTO.dart';
@@ -9,8 +10,24 @@ Future<List<LandTypeDTO>> fetchLandTypes() async {
   var baseUrl = 'http://$ipAddress:8080/api/land_type';
   final url = Uri.parse(baseUrl);
 
+  // Get token from SharedPreferences
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? token = prefs.getString('authToken');
 
-    final response = await http.get(url);
+  if (token == null) {
+    throw Exception('Token is null, please log in again.');
+  }
+
+  print('Token (Fetch Land Types Function): $token');
+
+  try {
+    final response = await http.get(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
 
     if (response.statusCode == 200) {
       List<dynamic> data = jsonDecode(response.body);
@@ -18,20 +35,7 @@ Future<List<LandTypeDTO>> fetchLandTypes() async {
     } else {
       throw Exception('Failed to load land types');
     }
-
-}
-
-
-
-Future<LandTypeDTO> fetchLandType(int id) async {
-  var ipAddress = dotenv.env['IP_ADDRESS'];
-  var baseUrl = 'http://$ipAddress:8080/api/landtype/$id';
-  final url = Uri.parse(baseUrl);
-  final response = await http.get(url);
-
-  if (response.statusCode == 200) {
-    return LandTypeDTO.fromJson(json.decode(response.body));
-  } else {
-    throw Exception('Failed to load land type');
+  } catch (e) {
+    throw Exception('Error fetching land types: $e');
   }
 }

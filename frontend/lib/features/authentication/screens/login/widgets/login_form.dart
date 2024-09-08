@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toprak_rehberi/features/authentication/screens/signup/signup.dart';
 import 'package:toprak_rehberi/navigation_menu.dart';
+import 'package:toprak_rehberi/service/auth/token_service.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -57,6 +59,9 @@ class _TLoginFormState extends State<TLoginForm> {
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
         final token = responseData['token'];
+        setAuthToken(token);
+
+
         Get.to(() => const NavigationMenu());
       } else {
         setState(() {

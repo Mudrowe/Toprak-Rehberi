@@ -1,5 +1,6 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
 import '../../dtos/LandDTO.dart';
@@ -7,12 +8,21 @@ import '../../dtos/LandDTO.dart';
 Future<void> addLand(LandDTO landDTO) async {
   var ipAddress = dotenv.env['IP_ADDRESS'];
   var baseUrl = 'http://$ipAddress:8080/api/land';
+
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? token = prefs.getString('authToken');
+
+  if (token == null) {
+    throw Exception('No auth token found. Please log in.');
+  }
+
   final url = Uri.parse(baseUrl);
 
   final response = await http.post(
     url,
     headers: {
       'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token',
     },
     body: jsonEncode(landDTO.toJson()),
   );

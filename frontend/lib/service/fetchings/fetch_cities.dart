@@ -1,16 +1,26 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
 import '../../dtos/CityDTO.dart';
-import '../auth/token_service.dart';
 
 Future<List<CityDTO>> fetchCities() async {
   var ipAddress = dotenv.env['IP_ADDRESS'];
   var baseUrl = 'http://$ipAddress:8080/api/cities';
   final url = Uri.parse(baseUrl);
 
-  String? token = await getAuthToken();
+
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? token = prefs.getString('authToken');
+
+  if (token == null) {
+    throw Exception('Token is null, please log in again.');
+  }
+
+
+  print('Token (Fetch Cities Function): $token');
+
 
   try {
     final response = await http.get(
