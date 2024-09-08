@@ -5,25 +5,26 @@ import 'package:toprak_rehberi/common/widgets/product_details/widgets/sections/p
 import 'package:toprak_rehberi/common/widgets/product_details/widgets/sections/product_details_planting_date.dart';
 import 'package:toprak_rehberi/features/main_pages/products/product_scoring_screen/widgets/scoring_bar.dart';
 import 'package:toprak_rehberi/features/main_pages/products/widgets/helpers/score_display.dart';
-import 'package:toprak_rehberi/models/product/product.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/image_strings.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
-class ProductScoringScreen extends StatefulWidget {
-  final Product product;
+import '../../../../dtos/ProductDTO.dart';
 
-  const ProductScoringScreen({super.key, required this.product});
+class ProductScoringScreen extends StatefulWidget {
+  final ProductDTO productDTO;
+
+  const ProductScoringScreen({super.key, required this.productDTO});
 
   @override
   _ProductScoringScreenState createState() => _ProductScoringScreenState();
 }
 
 class _ProductScoringScreenState extends State<ProductScoringScreen> {
-  int _selectedScore = 3;
+  double _selectedScore = 3;
 
-  void _updateScore(int newScore) {
+  void _updateScore(double newScore) {
     setState(() {
       _selectedScore = newScore;
     });
@@ -38,18 +39,18 @@ class _ProductScoringScreenState extends State<ProductScoringScreen> {
         child: Center(
           child: Column(
             children: [
-              Text(widget.product.productName, style: textTheme.headlineMedium),
+              Text(widget.productDTO.productName, style: textTheme.headlineMedium),
 
               const SizedBox(height: TSizes.spaceBtwItems),
 
               // Product image
-              TProductDetailsImage(product: widget.product),
+              TProductDetailsImage(productDTO: widget.productDTO),
 
               const SizedBox(height: TSizes.spaceBtwItems),
 
               // Planting Date
               TProductDetailsPlantingDate(
-                  textTheme: textTheme, product: widget.product),
+                  textTheme: textTheme, productDTO: widget.productDTO),
 
               const SizedBox(height: TSizes.spaceBtwItems),
 
@@ -62,8 +63,8 @@ class _ProductScoringScreenState extends State<ProductScoringScreen> {
                 decoration: getCardDecoration(context),
                 child: Column(
                   children: [
-                    Text(widget.product.landName),
-                    Text(widget.product.area.toString())
+                    Text(widget.productDTO.landName),
+                    Text(widget.productDTO.area.toString())
                   ],
                 ),
               ),

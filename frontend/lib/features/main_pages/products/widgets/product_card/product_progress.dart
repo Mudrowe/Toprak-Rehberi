@@ -5,13 +5,15 @@ import 'package:toprak_rehberi/models/product/product.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
+import '../../../../../dtos/ProductDTO.dart';
+
 class TProductProgress extends StatelessWidget {
   const TProductProgress({
     super.key,
-    required this.product,
+    required this.productDTO,
   });
 
-  final Product product;
+  final ProductDTO productDTO;
 
   @override
   Widget build(BuildContext context) {
@@ -24,27 +26,27 @@ class TProductProgress extends StatelessWidget {
         // Harvest Date
         children: [
           Text(
-            product.isHarvested
+            productDTO.isHarvested
                 ? TTexts.harvestDate
                 : TTexts.estimatedHarvestDate,
             style: textTheme.bodyLarge
           ),
           Text(
-            product.harvestDate,
+            productDTO.harvestDate.toIso8601String(),
             style: textTheme.bodyMedium
           ),
 
           // Progress Bar
-          if (product.isHarvested) ...[
+          if (productDTO.isHarvested) ...[
             const SizedBox(height: TSizes.sm), // Spacing
-            TScoreDisplay(score: product.score)
+            TScoreDisplay(score: productDTO.score)
           ] else ...[
             Text(
               TTexts.progress,
               style: textTheme.bodyMedium
             ),
             TArcProgressBar(
-              progress: product.progressPercentage,
+              progress: productDTO.progressPercentage,
             ),
           ],
         ]);

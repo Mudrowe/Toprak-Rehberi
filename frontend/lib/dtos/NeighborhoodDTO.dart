@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 class NeighborhoodDTO {
-  final int id;
+  int id;
   final String name;
-  final int districtId; // Reference to the district ID
+  final int districtId;
 
   NeighborhoodDTO({
     required this.id,

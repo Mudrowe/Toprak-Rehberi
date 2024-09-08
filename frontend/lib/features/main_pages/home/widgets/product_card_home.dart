@@ -7,6 +7,8 @@ import 'package:toprak_rehberi/models/product/product.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
+import '../../../../dtos/ProductDTO.dart';
+
 // ? pieChartColor1 is too dark for dark mod. Consider to change it
 
 // ! IconButton theme breaks the left-right arrows in the TProductCardHome.
@@ -14,16 +16,16 @@ import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 class TProductCardHome extends StatelessWidget {
   const TProductCardHome({
     super.key,
-    required this.product,
+    required this.productDTO,
   });
 
-  final Product product;
+  final ProductDTO productDTO;
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return GestureDetector(
-      onTap: () => Get.to(() => TProductDetails(product: product)),
+      onTap: () => Get.to(() => TProductDetails(productDTO: productDTO)),
       child: Container(
         width: TSizes.cardWidth,
         height: TSizes.cardHeight,
@@ -36,7 +38,7 @@ class TProductCardHome extends StatelessWidget {
             Column(
               children: [
                 Text(TTexts.progress, style: textTheme.bodyLarge),
-                TArcProgressBar(progress: product.progressPercentage)
+                TArcProgressBar(progress: productDTO.progressPercentage)
               ],
             ),
             const SizedBox(width: TSizes.spaceBtwItems),
@@ -45,13 +47,13 @@ class TProductCardHome extends StatelessWidget {
               children: [
                 // Product Name
                 Text(
-                  product.productName,
+                  productDTO.productName,
                   style: textTheme.bodyMedium,
                 ),
 
                 // Land Name
                 Text(
-                  product.landName,
+                  productDTO.landName,
                   style: textTheme.bodyMedium,
                 ),
 
@@ -63,7 +65,7 @@ class TProductCardHome extends StatelessWidget {
 
                 // Harvest Date
                 Text(
-                  product.harvestDate,
+                  productDTO.harvestDate.toIso8601String(),
                   style: textTheme.bodyMedium,
                 ),
               ],

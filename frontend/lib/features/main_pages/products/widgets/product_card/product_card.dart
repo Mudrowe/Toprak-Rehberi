@@ -7,21 +7,23 @@ import 'package:toprak_rehberi/features/main_pages/products/widgets/product_card
 import 'package:toprak_rehberi/models/product/product.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
+import '../../../../../dtos/ProductDTO.dart';
+
 class TProductCard extends StatelessWidget {
   const TProductCard({
     super.key,
-    required this.product,
+    required this.productDTO,
     this.showBackground = true,
     this.showBorder = true,
   });
 
-  final Product product;
+  final ProductDTO productDTO;
   final bool showBackground, showBorder;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.to(() => TProductDetails(product: product)),
+      onTap: () => Get.to(() => TProductDetails(productDTO: productDTO)),
       child: Container(
         width: TSizes.cardWidth,
         height: TSizes.cardHeight,
@@ -30,11 +32,11 @@ class TProductCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             TProductCardImage(
-              product: product,
-              imagePath: product.imagePath,
+              productDTO: productDTO,
+              imagePath: productDTO.imageUrl,
             ),
             TProductProgress(
-              product: product,
+              productDTO: productDTO,
             ),
           ],
         ),

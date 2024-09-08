@@ -12,7 +12,15 @@ public class DistrictService {
     @Autowired
     private DistrictRepository districtRepository;
 
-    public List<District> getAllDistricts() { return districtRepository.findAll(); }
+    public List<District> getAllDistricts() {
+        return districtRepository.findAll();
+    }
 
-    public District getDistrictByID(short id) { return districtRepository.findById(id).orElse(null); }
+    public District getDistrictByID(short id) {
+        return districtRepository.findById(id).orElse(null);
+    }
+
+    public List<District> getDistrictsByCityId(int cityId) {
+        return districtRepository.findByCityId(cityId);
+    }
 }

@@ -37,6 +37,15 @@ public class NeighborhoodController {
         }
     }
 
+    @GetMapping("/byDistrict/{districtId}")
+    public ResponseEntity<List<NeighborhoodDTO>> getNeighborhoodsByDistrictId(@PathVariable("districtId") int districtId) {
+        List<Neighborhood> neighborhoods = neighborhoodService.getNeighborhoodsByDistrictId(districtId);
+        List<NeighborhoodDTO> neighborhoodDTOs = neighborhoods.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(neighborhoodDTOs, HttpStatus.OK);
+    }
+
     private NeighborhoodDTO convertToDTO(Neighborhood neighborhood) {
         return new NeighborhoodDTO(
                 neighborhood.getId(),

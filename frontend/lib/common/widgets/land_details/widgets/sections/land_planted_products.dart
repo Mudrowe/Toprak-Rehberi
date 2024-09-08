@@ -22,7 +22,7 @@ class TLandPlantedProducts extends StatelessWidget {
               for (var product in land.plantedProducts!)
                 Column(
                   children: [
-                    TProductCard(product: product),
+                    //TProductCard(product: product),
                     const SizedBox(height: TSizes.spaceBtwItems)
                   ],
                 ),

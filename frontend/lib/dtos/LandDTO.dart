@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import '../utils/constants/enums.dart';
+
 class LandDTO {
   final int? id; // Nullable to handle cases where ID might be missing
   final int? userId; // Nullable
@@ -26,7 +28,8 @@ class LandDTO {
       id: json['id'] != null ? json['id'] as int : null,
       userId: json['userId'] != null ? json['userId'] as int : null,
       name: json['name'],
-      neighborhoodId: json['neighborhoodId'] != null ? json['neighborhoodId'] as int : null,
+      neighborhoodId:
+          json['neighborhoodId'] != null ? json['neighborhoodId'] as int : null,
       parcelNo: json['parcelNo'],
       adaNo: json['adaNo'],
       size: json['size'].toDouble(),
@@ -35,12 +38,13 @@ class LandDTO {
   }
 
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'userId': userId,
-    'name': name,
-    'neighborhoodId': neighborhoodId,
-    'parcelNo': parcelNo,
-    'adaNo': adaNo,
-    'size': size,
-  };
+        'id': id,
+        'userId': userId,
+        'name': name,
+        'neighborhoodId': neighborhoodId,
+        'parcelNo': parcelNo,
+        'adaNo': adaNo,
+        'size': size,
+        'landTypeId': landTypeId,
+      };
 }

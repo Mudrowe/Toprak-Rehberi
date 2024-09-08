@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/widgets/appbar/appbar.dart';
-import '../dtos/DistrictDTO.dart';
+import '../../dtos/DistrictDTO.dart';
 import 'http_district_service.dart';
 
 class HttpGetDistrictsScreen extends StatelessWidget {

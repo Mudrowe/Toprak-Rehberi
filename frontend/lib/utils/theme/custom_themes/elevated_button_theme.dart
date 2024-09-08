@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
-class TElevatedButtonheme {
-  TElevatedButtonheme._();
+class TElevatedButtonTheme {
+  TElevatedButtonTheme._();
 
   // Light Theme
   static final lightElevatedButtonTheme = ElevatedButtonThemeData(

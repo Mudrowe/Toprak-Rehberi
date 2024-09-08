@@ -1,5 +1,6 @@
 package com.toprakrehberi.backend.controllers;
 
+import com.toprakrehberi.backend.auth.RegisterRequest;
 import com.toprakrehberi.backend.dtos.UserDTO;
 import com.toprakrehberi.backend.models.User;
 import com.toprakrehberi.backend.models.Land;
@@ -15,7 +16,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/v1/user")
 public class UserController {
 
     @Autowired
@@ -41,10 +42,11 @@ public class UserController {
     }
 
     private UserDTO convertToDTO(User user) {
-        // Convert lands to their IDs
+        /* Convert lands to their IDs
         Set<Long> landIds = user.getLands().stream()
                 .map(Land::getId)
                 .collect(Collectors.toSet());
+         */
 
         return new UserDTO(
                 user.getId(),
@@ -52,12 +54,12 @@ public class UserController {
                 user.getLastName(),
                 user.getEmail(),
                 user.getPhoneNumber(),
-                landIds,
+                //landIds,
                 user.getPassword()
         );
     }
 
-    private User convertToEntity(UserDTO userDTO) {
+    private User convertToEntity2(UserDTO userDTO) {
         User user = new User();
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
@@ -68,13 +70,38 @@ public class UserController {
         return user;
     }
 
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
-        User user = convertToEntity(userDTO);
+        System.out.println("Received UserDTO: " + userDTO.toString());
 
+        User user = convertToEntity2(userDTO);
         User savedUser = userService.saveUser(user);
 
         UserDTO savedUserDTO = convertToDTO(savedUser);
+
+        System.out.println("Saved UserDTO: " + savedUserDTO);
+
+        return new ResponseEntity<>(savedUserDTO, HttpStatus.CREATED);
+    }
+
+    private User convertToEntity(RegisterRequest registerRequest) {
+        User user = new User();
+        user.setFirstName(registerRequest.getFirstName());
+        user.setLastName(registerRequest.getLastName());
+        user.setEmail(registerRequest.getEmail());
+        user.setPhoneNumber(registerRequest.getPhoneNumber());
+        user.setPassword(registerRequest.getPassword());
+        return user;
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<UserDTO> registerUser(@RequestBody RegisterRequest registerRequest) {
+        System.out.println("Received UserDTO: " + registerRequest.toString());
+
+        User user = convertToEntity(registerRequest);
+        User savedUser = userService.saveUser(user);
+        UserDTO savedUserDTO = convertToDTO(savedUser);
+        System.out.println("Saved UserDTO: " + savedUserDTO);
 
         return new ResponseEntity<>(savedUserDTO, HttpStatus.CREATED);
     }

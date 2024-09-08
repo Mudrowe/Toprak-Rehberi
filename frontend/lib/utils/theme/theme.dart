@@ -5,6 +5,7 @@ import 'package:toprak_rehberi/utils/theme/custom_themes/appbar_theme.dart';
 import 'package:toprak_rehberi/utils/theme/custom_themes/buttom_sheet_theme.dart';
 import 'package:toprak_rehberi/utils/theme/custom_themes/checkbox_theme.dart';
 import 'package:toprak_rehberi/utils/theme/custom_themes/chip_theme.dart';
+import 'package:toprak_rehberi/utils/theme/custom_themes/drop_down_menu_theme.dart';
 import 'package:toprak_rehberi/utils/theme/custom_themes/elevated_button_theme.dart';
 import 'package:toprak_rehberi/utils/theme/custom_themes/icon_button_theme.dart';
 import 'package:toprak_rehberi/utils/theme/custom_themes/navigation_bar_theme.dart';
@@ -29,7 +30,7 @@ class TAppTheme {
     appBarTheme: TAppBarTheme.lightAppBarTheme,
     checkboxTheme: TCheckboxTheme.lightCheckboxTheme,
     bottomSheetTheme: TBottomSheetTheme.lightButtomSheetTheme,
-    elevatedButtonTheme: TElevatedButtonheme.lightElevatedButtonTheme,
+    elevatedButtonTheme: TElevatedButtonTheme.lightElevatedButtonTheme,
     outlinedButtonTheme: TOutlinedButtonTheme.lightOutlinedButtonTheme,
     inputDecorationTheme: TTextFormFieldTheme.lightInputDecorationTheme,
     textButtonTheme: TTextButtonTheme.lightTextButtonTheme,
@@ -37,6 +38,7 @@ class TAppTheme {
     iconButtonTheme: TIconButtonTheme.iconButtonTheme,
     dialogTheme: TAlertDialogTheme.lightAlertDialogTheme,
     radioTheme: TRadioTheme.radioTheme,
+    dropdownMenuTheme: TDropdownMenuTheme.lightDropdownButtonTheme,
   );
 
 
@@ -52,7 +54,7 @@ class TAppTheme {
     appBarTheme: TAppBarTheme.darkAppBarTheme,
     checkboxTheme: TCheckboxTheme.darkCheckboxTheme,
     bottomSheetTheme: TBottomSheetTheme.darkBottomSheetTheme,
-    elevatedButtonTheme: TElevatedButtonheme.darkElevatedButtonTheme,
+    elevatedButtonTheme: TElevatedButtonTheme.darkElevatedButtonTheme,
     outlinedButtonTheme: TOutlinedButtonTheme.darkOutlinedButtonTheme,
     inputDecorationTheme: TTextFormFieldTheme.darkInputDecorationTheme,
     textButtonTheme: TTextButtonTheme.darkTextButtonTheme,
@@ -60,5 +62,6 @@ class TAppTheme {
     iconButtonTheme: TIconButtonTheme.iconButtonTheme,
     dialogTheme: TAlertDialogTheme.darkAlertDialogTheme,
     radioTheme: TRadioTheme.radioTheme,
+    dropdownMenuTheme: TDropdownMenuTheme.darkDropdownButtonTheme,
   );
 }
