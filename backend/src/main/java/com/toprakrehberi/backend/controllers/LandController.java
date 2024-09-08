@@ -55,6 +55,7 @@ public class LandController {
     private Land convertToEntity(LandDTO landDTO) {
         Land land = new Land();
         land.setId(landDTO.getId());
+        land.setUserId(landDTO.getUserId());
         land.setName(landDTO.getName());
         land.setNeighborhoodId(landDTO.getNeighborhoodId());
         land.setParcelNo(landDTO.getParcelNo());

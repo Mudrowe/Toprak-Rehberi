@@ -9,9 +9,12 @@ import com.toprakrehberi.backend.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -59,31 +62,6 @@ public class UserController {
         );
     }
 
-    private User convertToEntity2(UserDTO userDTO) {
-        User user = new User();
-        user.setFirstName(userDTO.getFirstName());
-        user.setLastName(userDTO.getLastName());
-        user.setEmail(userDTO.getEmail());
-        user.setPhoneNumber(userDTO.getPhoneNumber());
-        user.setPassword(userDTO.getPassword());
-
-        return user;
-    }
-
-    @PostMapping()
-    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
-        System.out.println("Received UserDTO: " + userDTO.toString());
-
-        User user = convertToEntity2(userDTO);
-        User savedUser = userService.saveUser(user);
-
-        UserDTO savedUserDTO = convertToDTO(savedUser);
-
-        System.out.println("Saved UserDTO: " + savedUserDTO);
-
-        return new ResponseEntity<>(savedUserDTO, HttpStatus.CREATED);
-    }
-
     private User convertToEntity(RegisterRequest registerRequest) {
         User user = new User();
         user.setFirstName(registerRequest.getFirstName());
@@ -105,4 +83,27 @@ public class UserController {
 
         return new ResponseEntity<>(savedUserDTO, HttpStatus.CREATED);
     }
+
+    @GetMapping("/byEmail/{email}")
+    public ResponseEntity<UserDTO> getUserByEmail(@PathVariable String email) {
+        User user = userService.getUserByEmail(email);
+        System.out.println(user.toString());
+        if (user != null) {
+            return new ResponseEntity<>(convertToDTO(user), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/me")
+    public UserDTO getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = (String) authentication.getPrincipal();
+
+        // Fetch the user details using the username or user ID
+        User user = userService.getUserByEmail(username);
+
+        return convertToDTO(user);
+    }
+
 }

@@ -1,8 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/features/main_pages/home/widgets/card_slider.dart';
-import 'package:toprak_rehberi/features/main_pages/home/widgets/legend_item.dart';
-import 'package:toprak_rehberi/features/main_pages/home/widgets/pie_chart.dart';
 import 'package:toprak_rehberi/features/main_pages/home/widgets/product_card_home.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
@@ -165,4 +163,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-

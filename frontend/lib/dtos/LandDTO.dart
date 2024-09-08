@@ -4,7 +4,7 @@ import '../utils/constants/enums.dart';
 
 class LandDTO {
   final int? id; // Nullable to handle cases where ID might be missing
-  final int? userId; // Nullable
+  int? userId; // Nullable
   final String name;
   final int? neighborhoodId; // Nullable
   final String parcelNo;
@@ -29,11 +29,11 @@ class LandDTO {
       userId: json['userId'] != null ? json['userId'] as int : null,
       name: json['name'],
       neighborhoodId:
-          json['neighborhoodId'] != null ? json['neighborhoodId'] as int : null,
+          json['neighborhoodId'],
       parcelNo: json['parcelNo'],
       adaNo: json['adaNo'],
       size: json['size'].toDouble(),
-      landTypeId: json['landTypeId'] != null ? json['landTypeId'] as int : null,
+      landTypeId: json['landTypeId'],
     );
   }
 
