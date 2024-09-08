@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import '../utils/constants/enums.dart';
+
 class LandDTO {
   final int? id; // Nullable to handle cases where ID might be missing
   final int? userId; // Nullable

@@ -7,17 +7,19 @@ import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
-class THarvestButton extends StatelessWidget {
-  final Product product;
+import '../../../../../dtos/ProductDTO.dart';
 
-  const THarvestButton({super.key, required this.product});
+class THarvestButton extends StatelessWidget {
+  final ProductDTO productDTO;
+
+  const THarvestButton({super.key, required this.productDTO});
 
   @override
   Widget build(BuildContext context) {
-    return product.isHarvested
+    return productDTO.isHarvested
         ? const SizedBox()
         : CustomElevatedButton(
-            onPressed: () => Get.to(() => ProductScoringScreen(product: product)),
+            onPressed: () => Get.to(() => ProductScoringScreen(productDTO: productDTO)),
             text: TTexts.harvest,
             backgroundColor: TColors.primaryColor,
             textColor: TColors.white,

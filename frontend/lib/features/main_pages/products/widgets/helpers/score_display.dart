@@ -12,7 +12,7 @@ class TScoreDisplay extends StatelessWidget {
     required this.score,
   });
 
-  final int score;
+  final double score;
 
   @override
   Widget build(BuildContext context) {

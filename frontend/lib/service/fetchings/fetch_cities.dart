@@ -3,14 +3,23 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import '../../dtos/CityDTO.dart';
+import '../auth/token_service.dart';
 
 Future<List<CityDTO>> fetchCities() async {
   var ipAddress = dotenv.env['IP_ADDRESS'];
   var baseUrl = 'http://$ipAddress:8080/api/cities';
   final url = Uri.parse(baseUrl);
 
+  String? token = await getAuthToken();
+
   try {
-    final response = await http.get(url);
+    final response = await http.get(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
 
     if (response.statusCode == 200) {
       List<dynamic> data = jsonDecode(response.body);
@@ -22,3 +31,4 @@ Future<List<CityDTO>> fetchCities() async {
     throw Exception('Failed to fetch cities');
   }
 }
+

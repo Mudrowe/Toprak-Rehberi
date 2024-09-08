@@ -1,6 +1,5 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:toprak_rehberi/features/main_pages/products/seed/products_lists.dart';
 import 'package:toprak_rehberi/features/main_pages/home/widgets/card_slider.dart';
 import 'package:toprak_rehberi/features/main_pages/home/widgets/legend_item.dart';
 import 'package:toprak_rehberi/features/main_pages/home/widgets/pie_chart.dart';
@@ -10,166 +9,155 @@ import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
+import '../../../dtos/LandDTO.dart';
+import '../../../dtos/ProductDTO.dart';
+import '../../../dtos/UserDTO.dart';
+import '../../../service/fetchings/pages/fetch_lands.dart';
+import '../../../service/fetchings/pages/fetch_products.dart';
+import '../../../service/fetchings/pages/fetch_user.dart';
+
 // TODO: So, Stats are not compatible with products in the productsScreen
 
 // ! FIX: There isn't any length check for legendItems.
 // ! FIX: If there would be too many items, the screen will break
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  late Future<List<ProductDTO>> _products;
+  late Future<List<LandDTO>> _lands;
+  late Future<UserDTO> _user;
+
+  @override
+  void initState() {
+    super.initState();
+    _products = fetchProducts();
+    _lands = fetchLands();
+    _user = fetchUser();
+  }
 
   @override
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
     final Color textColor = dark ? TColors.white : TColors.black;
-    final List<TProductCardHome> cards = [
-      for (var product in plantedProductsList)
-        TProductCardHome(product: product),
-    ];
 
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
             const SizedBox(height: TSizes.spaceBtwSections),
-        
-            // Carousel Slider
-            TCardSlider(cards: cards),
-        
-            const SizedBox(height: TSizes.spaceBtwItems),
-        
-            // Products stats
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text(
-                  TTexts.totalProducts,
-                  style: TextStyle(
-                      color: textColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16),
-                ),
-                Text(
-                  '200',
-                  style: TextStyle(
-                      color: textColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16),
-                ),
-              ],
+
+            // User Information
+            FutureBuilder<UserDTO>(
+              future: _user,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                } else if (snapshot.hasData) {
+                  final user = snapshot.data!;
+                  return Text(
+                    'Welcome, ${user.firstName} ${user.lastName}',
+                    style: TextStyle(
+                        color: textColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18),
+                  );
+                } else {
+                  return const Text('No user data available');
+                }
+              },
             ),
-        
-            // Products Pie Chart
-            TPieChart(
-              chartName: TTexts.productDistribution,
-              sections: [
-                PieChartSectionData(
-                    value: 25,
-                    showTitle: false,
-                    color: TColors.pieChartColor1,
-                    title: '25%'),
-                PieChartSectionData(
-                    value: 29,
-                    showTitle: false,
-                    color: TColors.pieChartColor2,
-                    title: '%29'),
-                PieChartSectionData(
-                  value: 28,
-                  showTitle: false,
-                  color: TColors.pieChartColor3,
-                ),
-                PieChartSectionData(
-                    value: 18,
-                    showTitle: false,
-                    color: TColors.pieChartColor4,
-                    title: '%18'),
-              ],
-              legendItems: const [
-                LegendItem(
-                  color: TColors.pieChartColor1,
-                  productName: 'Patates',
-                  percentage: '25%',
-                ),
-                LegendItem(
-                  color: TColors.pieChartColor2,
-                  productName: 'Buğday',
-                  percentage: '29%',
-                ),
-                LegendItem(
-                  color: TColors.pieChartColor3,
-                  productName: 'Havuç',
-                  percentage: '28%',
-                ),
-                LegendItem(
-                  color: TColors.pieChartColor4,
-                  productName: 'Çilek',
-                  percentage: '18%',
-                ),
-              ],
-            ),
-        
+
             const SizedBox(height: TSizes.spaceBtwItems),
-        
+
+            // Carousel Slider for Products
+            FutureBuilder<List<ProductDTO>>(
+              future: _products,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                } else if (snapshot.hasData) {
+                  List<TProductCardHome> cards = snapshot.data!.map((product) {
+                    return TProductCardHome(productDTO: product);
+                  }).toList();
+
+                  return TCardSlider(cards: cards);
+                } else {
+                  return const Text('No products available');
+                }
+              },
+            ),
+
+            const SizedBox(height: TSizes.spaceBtwItems),
+
             // Lands Stats
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text(
-                  TTexts.totalLands,
-                  style: TextStyle(
-                      color: textColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16),
-                ),
-                Text(
-                  '100',
-                  style: TextStyle(
-                      color: textColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16),
-                ),
-              ],
-            ),
-        
-            // Lands Pie Chart
-            TPieChart(
-              chartName: TTexts.landDistribution,
-              sections: [
-                PieChartSectionData(
-                    value: 60,
-                    showTitle: false,
-                    color: TColors.pieChartColor4,
-                    title: '60%'),
-                PieChartSectionData(
-                    value: 15,
-                    showTitle: false,
-                    color: TColors.pieChartColor2,
-                    title: '%15'),
-                PieChartSectionData(
-                    value: 25,
-                    showTitle: false,
-                    color: TColors.pieChartColor3,
-                    title: '%25'),
-              ],
-              legendItems: const [
-                LegendItem(
-                  color: TColors.pieChartColor4,
-                  productName: 'Tarla',
-                  percentage: '60%',
-                ),
-                LegendItem(
-                  color: TColors.pieChartColor2,
-                  productName: 'Bahçe',
-                  percentage: '15%',
-                ),
-                LegendItem(
-                  color: TColors.pieChartColor3,
-                  productName: 'Bağ',
-                  percentage: '25%',
-                ),
-              ],
+            FutureBuilder<List<LandDTO>>(
+              future: _lands,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                } else if (snapshot.hasData) {
+                  final lands = snapshot.data!;
+                  return Column(
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            TTexts.totalLands,
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16),
+                          ),
+                          Text(
+                            '${lands.length}',
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16),
+                          ),
+                        ],
+                      ),
+
+                      /*
+                      TPieChart(
+                        chartName: TTexts.landDistribution,
+                        sections: lands.map((land) {
+                          return PieChartSectionData(
+                            value: land.areaPercentage,
+                            showTitle: false,
+                            color: TColors.pieChartColor4,
+                          );
+                        }).toList(),
+                        legendItems: lands.map((land) {
+                          return LegendItem(
+                            color: TColors.pieChartColor4,
+                            productName: land.name,
+                            percentage: '${land.areaPercentage}%',
+                          );
+                        }).toList(),
+                      ),
+
+                       */
+                    ],
+                  );
+                } else {
+                  return const Text('No lands available');
+                }
+              },
             ),
           ],
         ),
@@ -177,3 +165,4 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+

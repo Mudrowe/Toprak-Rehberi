@@ -42,9 +42,19 @@ public class ProductController {
                 product.getId(),
                 product.getPlantingDate(),
                 product.getHarvestDate(),
-                product.getLand().getId(),
+                product.getLandId(),
                 product.getScore(),
                 product.getProductOptionId()
         );
+    }
+
+    @GetMapping("/planted")
+    public List<ProductDTO> getPlantedProducts() {
+        return productService.getPlantedProducts();
+    }
+
+    @GetMapping("/harvested")
+    public List<ProductDTO> getHarvestedProducts() {
+        return productService.getHarvestedProducts();
     }
 }

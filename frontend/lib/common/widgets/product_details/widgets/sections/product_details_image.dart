@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/styles/card_style.dart';
-import 'package:toprak_rehberi/models/product/product.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
+
+import '../../../../../dtos/ProductDTO.dart';
 
 class TProductDetailsImage extends StatelessWidget {
   const TProductDetailsImage({
     super.key,
-    required this.product,
+    required this.productDTO,
   });
 
-  final Product product;
+  final ProductDTO productDTO;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,14 @@ class TProductDetailsImage extends StatelessWidget {
       decoration: getCardDecoration(context),
       child: FittedBox(
         fit: BoxFit.contain,
-        child: Image.asset(product.imagePath),
+        child: productDTO.imageUrl != null && productDTO.imageUrl!.isNotEmpty
+            ? Image.network(
+                productDTO.imageUrl!, // Loading image from a URL
+                errorBuilder: (context, error, stackTrace) =>
+                    const Icon(Icons.error), // Fallback in case of an error
+              )
+            : const Icon(
+                Icons.image_not_supported), // Placeholder if no image URL
       ),
     );
   }

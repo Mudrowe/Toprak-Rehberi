@@ -5,13 +5,14 @@ import 'package:toprak_rehberi/common/widgets/product_details/widgets/sections/h
 import 'package:toprak_rehberi/common/widgets/product_details/widgets/sections/product_details_image.dart';
 import 'package:toprak_rehberi/common/widgets/product_details/widgets/sections/product_details_planting_date.dart';
 import 'package:toprak_rehberi/features/main_pages/products/widgets/product_card/product_progress.dart';
-import 'package:toprak_rehberi/models/product/product.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
-class TProductDetails extends StatelessWidget {
-  final Product product;
+import '../../../dtos/ProductDTO.dart';
 
-  const TProductDetails({super.key, required this.product});
+class TProductDetails extends StatelessWidget {
+  final ProductDTO productDTO;
+
+  const TProductDetails({super.key, required this.productDTO});
 
   @override
   Widget build(BuildContext context) {
@@ -23,32 +24,33 @@ class TProductDetails extends StatelessWidget {
           child: Column(
             children: [
               // Product Name
-              Text(product.productName, style: textTheme.headlineMedium),
+              Text(productDTO.productName ?? 'Unknown',
+                  style: textTheme.headlineMedium),
 
               const SizedBox(height: TSizes.spaceBtwItems),
 
               // Product image
-              TProductDetailsImage(product: product),
+              TProductDetailsImage(productDTO: productDTO),
 
               const SizedBox(height: TSizes.spaceBtwItems),
 
               // Planting Date
               TProductDetailsPlantingDate(
-                  textTheme: textTheme, product: product),
+                textTheme: textTheme,
+                productDTO: productDTO,
+              ),
 
               const SizedBox(height: TSizes.spaceBtwItems),
 
-              // ! There should be TLandDetailsInfo in here
-              // ! So, products must have land variable
-              // Field Info
+              // Land Info
               Container(
                 height: 150,
                 width: TSizes.cardWidth / 1.2,
                 decoration: getCardDecoration(context),
                 child: Column(
                   children: [
-                    Text(product.landName),
-                    Text(product.area.toString())
+                    Text(productDTO.landName ?? 'Unknown'),
+                    Text(productDTO.area?.toString() ?? 'Unknown')
                   ],
                 ),
               ),
@@ -56,11 +58,11 @@ class TProductDetails extends StatelessWidget {
               const SizedBox(height: TSizes.spaceBtwItems),
 
               // Progress Bar
-              TProductProgress(product: product),
+              TProductProgress(productDTO: productDTO),
 
               const SizedBox(height: TSizes.spaceBtwItems),
 
-              THarvestButton(product: product),
+              THarvestButton(productDTO: productDTO),
             ],
           ),
         ),

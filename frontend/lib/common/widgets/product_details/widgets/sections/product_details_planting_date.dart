@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/styles/card_style.dart';
-import 'package:toprak_rehberi/models/product/product.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
+
+import '../../../../../dtos/ProductDTO.dart';
 
 class TProductDetailsPlantingDate extends StatelessWidget {
   const TProductDetailsPlantingDate({
     super.key,
     required this.textTheme,
-    required this.product,
+    required this.productDTO,
   });
 
   final TextTheme textTheme;
-  final Product product;
+  final ProductDTO productDTO;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class TProductDetailsPlantingDate extends StatelessWidget {
             style: textTheme.headlineSmall,
           ),
           Text(
-            product.plantingDate,
+            productDTO.plantingDate.toIso8601String(),
             style: textTheme.headlineSmall,
           ),
         ],

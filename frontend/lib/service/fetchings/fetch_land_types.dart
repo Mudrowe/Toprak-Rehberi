@@ -20,3 +20,18 @@ Future<List<LandTypeDTO>> fetchLandTypes() async {
     }
 
 }
+
+
+
+Future<LandTypeDTO> fetchLandType(int id) async {
+  var ipAddress = dotenv.env['IP_ADDRESS'];
+  var baseUrl = 'http://$ipAddress:8080/api/landtype/$id';
+  final url = Uri.parse(baseUrl);
+  final response = await http.get(url);
+
+  if (response.statusCode == 200) {
+    return LandTypeDTO.fromJson(json.decode(response.body));
+  } else {
+    throw Exception('Failed to load land type');
+  }
+}
