@@ -28,8 +28,8 @@ class App extends StatelessWidget {
       ],
 
       //home: const TAddLandForm(),
-      //home:const FirstScreen(),
-      home: TActionButtons(),
+      home:const FirstScreen(),
+      //home: TActionButtons(),
       );
   }
 }

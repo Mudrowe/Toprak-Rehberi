@@ -1,5 +1,6 @@
 package com.toprakrehberi.backend.controllers;
 
+import com.toprakrehberi.backend.auth.RegisterRequest;
 import com.toprakrehberi.backend.dtos.UserDTO;
 import com.toprakrehberi.backend.models.User;
 import com.toprakrehberi.backend.models.Land;
@@ -15,7 +16,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/v1/user")
 public class UserController {
 
     @Autowired
@@ -58,7 +59,7 @@ public class UserController {
         );
     }
 
-    private User convertToEntity(UserDTO userDTO) {
+    private User convertToEntity2(UserDTO userDTO) {
         User user = new User();
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
@@ -73,12 +74,34 @@ public class UserController {
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
         System.out.println("Received UserDTO: " + userDTO.toString());
 
-        User user = convertToEntity(userDTO);
+        User user = convertToEntity2(userDTO);
         User savedUser = userService.saveUser(user);
 
         UserDTO savedUserDTO = convertToDTO(savedUser);
 
-        System.out.println("Saved UserDTO: " + savedUserDTO.toString());
+        System.out.println("Saved UserDTO: " + savedUserDTO);
+
+        return new ResponseEntity<>(savedUserDTO, HttpStatus.CREATED);
+    }
+
+    private User convertToEntity(RegisterRequest registerRequest) {
+        User user = new User();
+        user.setFirstName(registerRequest.getFirstName());
+        user.setLastName(registerRequest.getLastName());
+        user.setEmail(registerRequest.getEmail());
+        user.setPhoneNumber(registerRequest.getPhoneNumber());
+        user.setPassword(registerRequest.getPassword());
+        return user;
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<UserDTO> registerUser(@RequestBody RegisterRequest registerRequest) {
+        System.out.println("Received UserDTO: " + registerRequest.toString());
+
+        User user = convertToEntity(registerRequest);
+        User savedUser = userService.saveUser(user);
+        UserDTO savedUserDTO = convertToDTO(savedUser);
+        System.out.println("Saved UserDTO: " + savedUserDTO);
 
         return new ResponseEntity<>(savedUserDTO, HttpStatus.CREATED);
     }

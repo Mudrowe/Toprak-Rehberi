@@ -1,16 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:toprak_rehberi/features/authentication/screens/signup/widgets/terms_and_conditions_checkbox.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
+import 'package:toprak_rehberi/features/authentication/screens/signup/widgets/terms_and_conditions_checkbox.dart';
+
+import '../../../../../dtos/UserDTO.dart';
+import '../../../../../service/user/http_add_user_service.dart';
 
 class TSignupForm extends StatelessWidget {
-  const TSignupForm({
-    super.key,
-  });
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String? _firstName;
+  String? _lastName;
+  String? _email;
+  String? _phoneNo;
+  String? _password;
+  String? _confirmPassword;
+
+  TSignupForm({super.key});
+
+  void _saveForm(BuildContext context) {
+    if (_formKey.currentState?.validate() ?? false) {
+      _formKey.currentState?.save();
+
+      UserDTO user = UserDTO(
+        firstName: _firstName!,
+        lastName: _lastName!,
+        email: _email!,
+        phoneNumber: _phoneNo!,
+        password: _password!,
+      );
+
+      createUser(user).then((_) {
+        // Handle success
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('User created successfully!')));
+      }).catchError((error) {
+        // Handle error
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('Failed to create user.')));
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: _formKey,
       child: Column(
         children: [
           Row(
@@ -23,6 +57,14 @@ class TSignupForm extends StatelessWidget {
                     prefixIcon: Icon(Icons.person),
                     labelText: TTexts.firstName,
                   ),
+                  onSaved: (String? value) {
+                    _firstName = value;
+                  },
+                  validator: (String? value) {
+                    return (value != null && value.contains('@'))
+                        ? 'Do not use the @ char.'
+                        : null;
+                  },
                 ),
               ),
 
@@ -35,6 +77,14 @@ class TSignupForm extends StatelessWidget {
                     prefixIcon: Icon(Icons.person),
                     labelText: TTexts.lastName,
                   ),
+                  onSaved: (String? value) {
+                    _lastName = value;
+                  },
+                  validator: (String? value) {
+                    return (value != null && value.contains('@'))
+                        ? 'Do not use the @ char.'
+                        : null;
+                  },
                 ),
               ),
             ],
@@ -48,6 +98,14 @@ class TSignupForm extends StatelessWidget {
               prefixIcon: Icon(Icons.email),
               labelText: TTexts.email,
             ),
+            onSaved: (String? value) {
+              _email = value;
+            },
+            /*
+                validator: (String? value) {
+                  return (value != null && !value.contains('@')) ? 'Enter a valid email address.' : null;
+                },
+                 */
           ),
 
           const SizedBox(height: TSizes.spaceBtwInputFields),
@@ -58,6 +116,14 @@ class TSignupForm extends StatelessWidget {
               prefixIcon: Icon(Icons.phone),
               labelText: TTexts.phoneNo,
             ),
+            onSaved: (String? value) {
+              _phoneNo = value;
+            },
+            /*
+                validator: (String? value) {
+                  return (value != null && value.length != 10) ? 'Enter a valid phone number.' : null;
+                },
+                */
           ),
 
           const SizedBox(height: TSizes.spaceBtwInputFields),
@@ -69,22 +135,46 @@ class TSignupForm extends StatelessWidget {
               labelText: TTexts.password,
               suffixIcon: Icon(Icons.visibility),
             ),
+            obscureText: true,
+            onSaved: (String? value) {
+              _password = value;
+            },
+            validator: (String? value) {
+              return (value != null && value.length < 6)
+                  ? 'Password must be at least 6 characters long.'
+                  : null;
+            },
           ),
 
           const SizedBox(height: TSizes.spaceBtwInputFields),
 
-          // Password Again
+          // Confirm Password
           TextFormField(
             decoration: const InputDecoration(
               prefixIcon: Icon(Icons.lock),
               labelText: TTexts.password,
               suffixIcon: Icon(Icons.visibility),
             ),
+            obscureText: true,
+            onSaved: (String? value) {
+              _confirmPassword = value;
+            },
           ),
 
           const SizedBox(height: TSizes.spaceBtwSections),
 
           const TTermsAndConditionsCheckBox(),
+
+          const SizedBox(height: TSizes.spaceBtwSections),
+
+          // Signup Button
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: () => _saveForm(context),
+              child: const Text(TTexts.createAccount),
+            ),
+          ),
         ],
       ),
     );
