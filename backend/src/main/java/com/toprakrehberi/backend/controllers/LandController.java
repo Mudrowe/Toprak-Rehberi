@@ -20,25 +20,6 @@ public class LandController {
     @Autowired
     private LandService landService;
 
-    @GetMapping
-    public ResponseEntity<List<LandDTO>> getAllLands() {
-        List<Land> lands = landService.getAllLands();
-        List<LandDTO> landDTOs = lands.stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
-        return new ResponseEntity<>(landDTOs, HttpStatus.OK);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<LandDTO> getLandById(@PathVariable("id") long id) {
-        Land land = landService.getLandById(id);
-        if (land != null) {
-            return new ResponseEntity<>(convertToDTO(land), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
     private LandDTO convertToDTO(Land land) {
         return new LandDTO(
                 land.getId(),
@@ -64,6 +45,36 @@ public class LandController {
         land.setLandTypeId(landDTO.getLandTypeId());
 
         return land;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<LandDTO>> getAllLands() {
+        List<Land> lands = landService.getAllLands();
+        List<LandDTO> landDTOs = lands.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(landDTOs, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<LandDTO> getLandById(@PathVariable("id") long id) {
+        Land land = landService.getLandById(id);
+        if (land != null) {
+            return new ResponseEntity<>(convertToDTO(land), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<LandDTO>> getLandsByUserId(@PathVariable Long userId) {
+        List<Land> lands = landService.getLandsByUserId(userId);
+
+        List<LandDTO> landDTOs = lands.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(landDTOs);
     }
 
     @PostMapping()

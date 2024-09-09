@@ -11,7 +11,9 @@ Future<UserDTO> fetchUser() async {
   var baseUrl = 'http://$ipAddress:8080/api/user/me';
   final url = Uri.parse(baseUrl);
 
-  Future<String?> token = getAuthToken();
+  // Get token from SharedPreferences
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? token = prefs.getString('authToken');
 
   try {
     final response = await http.get(url, headers: {
@@ -35,7 +37,9 @@ Future<int?> getUserIdByEmail(String email) async {
   var baseUrl = 'http://$ipAddress:8080/api/v1/user/byEmail/$email';
   final url = Uri.parse(baseUrl);
 
-  Future<String?> token = getAuthToken();
+  // Get token from SharedPreferences
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? token = prefs.getString('authToken');
 
   try {
     final response = await http.get(url, headers: {

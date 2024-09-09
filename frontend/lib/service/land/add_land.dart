@@ -25,22 +25,23 @@ Future<void> addLand(LandDTO landDTO) async {
     throw Exception('Failed to extract email from token');
   }
 
-  print("Sending LandDTO JSON: $landDTO");
+  print("Sending LandDTO JSON: " + landDTO.toString());
   // Fetch user ID using email
   final userId = await getUserIdByEmail(email);
+
 
   print("User id from getUserIdByEmail2: $userId");
   if (userId == null) {
     throw Exception('Failed to retrieve user ID');
   }
 
-  print("Sending LandDTO JSON: $landDTO");
+  print("Sending LandDTO JSON: " + landDTO.toString());
   // Update LandDTO with the userId
   landDTO.userId = userId;
 
   final url = Uri.parse(baseUrl);
 
-  print("Sending LandDTO JSON: $landDTO");
+  print("Sending LandDTO JSON: " + landDTO.toString());
   final response = await http.post(
     url,
     headers: {

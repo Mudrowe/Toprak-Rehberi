@@ -17,4 +17,8 @@ public class LandService {
     public Land getLandById(long id) { return landRepository.findById(id).orElse(null); }
 
     public Land saveLand(Land land) { return landRepository.save(land); }
+
+    public List<Land> getLandsByUserId(Long userId) { return landRepository.findByUserId(userId) ;
+
+    }
 }
