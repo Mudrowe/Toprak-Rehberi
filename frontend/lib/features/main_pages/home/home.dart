@@ -10,9 +10,9 @@ import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 import '../../../dtos/LandDTO.dart';
 import '../../../dtos/ProductDTO.dart';
 import '../../../dtos/UserDTO.dart';
-import '../../../service/fetchings/pages/fetch_lands.dart';
-import '../../../service/fetchings/pages/fetch_products.dart';
-import '../../../service/fetchings/pages/fetch_user.dart';
+import '../../../service/fetching/pages/fetch_lands.dart';
+import '../../../service/fetching/pages/fetch_products.dart';
+import '../../../service/fetching/pages/fetch_user.dart';
 
 // TODO: So, Stats are not compatible with products in the productsScreen
 

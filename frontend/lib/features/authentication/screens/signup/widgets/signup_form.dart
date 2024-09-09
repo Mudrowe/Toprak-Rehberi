@@ -6,7 +6,14 @@ import 'package:toprak_rehberi/features/authentication/screens/signup/widgets/te
 import '../../../../../dtos/UserDTO.dart';
 import '../../../../../service/user/http_add_user_service.dart';
 
-class TSignupForm extends StatelessWidget {
+class TSignupForm extends StatefulWidget {
+  const TSignupForm({super.key});
+
+  @override
+  _TSignupFormState createState() => _TSignupFormState();
+}
+
+class _TSignupFormState extends State<TSignupForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String? _firstName;
   String? _lastName;
@@ -15,7 +22,8 @@ class TSignupForm extends StatelessWidget {
   String? _password;
   String? _confirmPassword;
 
-  TSignupForm({super.key});
+  bool _isPasswordVisible = false;
+  bool _isConfirmPasswordVisible = false;
 
   void _saveForm(BuildContext context) {
     if (_formKey.currentState?.validate() ?? false) {
@@ -31,12 +39,12 @@ class TSignupForm extends StatelessWidget {
 
       createUser(user).then((_) {
         // Handle success
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('User created successfully!')));
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text('Kullanıcı oluşturuldu!')));
       }).catchError((error) {
         // Handle error
         ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('Failed to create user.')));
+            .showSnackBar(const SnackBar(content: Text('Kullanıcı oluşturulamadı.')));
       });
     }
   }
@@ -130,18 +138,27 @@ class TSignupForm extends StatelessWidget {
 
           // Password
           TextFormField(
-            decoration: const InputDecoration(
-              prefixIcon: Icon(Icons.lock),
+            decoration: InputDecoration(
+              prefixIcon: const Icon(Icons.lock),
               labelText: TTexts.password,
-              suffixIcon: Icon(Icons.visibility),
+              suffixIcon: IconButton(
+                icon: Icon(
+                  _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _isPasswordVisible = !_isPasswordVisible;
+                  });
+                },
+              ),
             ),
-            obscureText: true,
+            obscureText: !_isPasswordVisible,
             onSaved: (String? value) {
               _password = value;
             },
             validator: (String? value) {
               return (value != null && value.length < 6)
-                  ? 'Password must be at least 6 characters long.'
+                  ? 'Şifre en az 6 karakter uzunluğunda olmalıdır..'
                   : null;
             },
           ),
@@ -150,12 +167,23 @@ class TSignupForm extends StatelessWidget {
 
           // Confirm Password
           TextFormField(
-            decoration: const InputDecoration(
-              prefixIcon: Icon(Icons.lock),
+            decoration: InputDecoration(
+              prefixIcon: const Icon(Icons.lock),
               labelText: TTexts.password,
-              suffixIcon: Icon(Icons.visibility),
+              suffixIcon: IconButton(
+                icon: Icon(
+                  _isConfirmPasswordVisible
+                      ? Icons.visibility
+                      : Icons.visibility_off,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _isConfirmPasswordVisible = !_isConfirmPasswordVisible;
+                  });
+                },
+              ),
             ),
-            obscureText: true,
+            obscureText: !_isConfirmPasswordVisible,
             onSaved: (String? value) {
               _confirmPassword = value;
             },

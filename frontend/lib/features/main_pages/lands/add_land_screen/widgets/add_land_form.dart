@@ -2,10 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/dtos/LandDTO.dart';
-import 'package:toprak_rehberi/service/fetchings/fetch_cities.dart';
-import 'package:toprak_rehberi/service/fetchings/fetch_districts.dart';
-import 'package:toprak_rehberi/service/fetchings/fetch_land_types.dart';
-import 'package:toprak_rehberi/service/fetchings/fetch_neighborhoods.dart';
+import 'package:toprak_rehberi/service/fetching/constants/fetch_cities.dart';
+import 'package:toprak_rehberi/service/fetching/constants/fetch_districts.dart';
+import 'package:toprak_rehberi/service/fetching/constants/fetch_neighborhoods.dart';
 import 'package:toprak_rehberi/service/land/add_land.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
@@ -14,6 +13,7 @@ import '../../../../../dtos/CityDTO.dart';
 import '../../../../../dtos/DistrictDTO.dart';
 import '../../../../../dtos/LandTypeDTO.dart';
 import '../../../../../dtos/NeighborhoodDTO.dart';
+import '../../../../../service/fetching/constants/fetch_land_types.dart';
 
 class TAddLandForm extends StatefulWidget {
   const TAddLandForm({super.key});
@@ -117,10 +117,10 @@ class _TAddLandFormState extends State<TAddLandForm> {
 
       addLand(land).then((_) {
         ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Land created successfully!')));
+            const SnackBar(content: Text('Arazi başarıyla kaydedildi!')));
       }).catchError((error) {
         ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Failed to create land.')));
+            const SnackBar(content: Text('Arazi kaydedilemedi.')));
       });
     }
   }

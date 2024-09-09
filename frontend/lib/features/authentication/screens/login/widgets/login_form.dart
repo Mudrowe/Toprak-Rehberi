@@ -33,7 +33,7 @@ class _TLoginFormState extends State<TLoginForm> {
 
     if (email.isEmpty || password.isEmpty) {
       setState(() {
-        _errorMessage = 'Please enter both email and password.';
+        _errorMessage = 'Lütfen hem e-mail hem de şifre girin.';
       });
       return;
     }
