@@ -4,11 +4,10 @@ import 'package:toprak_rehberi/common/styles/card_style.dart';
 import 'package:toprak_rehberi/common/widgets/land_details/land_details.dart';
 import 'package:toprak_rehberi/features/main_pages/lands/widgets/land_card/land_banner.dart';
 import 'package:toprak_rehberi/features/main_pages/lands/widgets/land_card/land_card_info.dart';
-import 'package:toprak_rehberi/models/land/land.dart';
+import 'package:toprak_rehberi/models/land.dart';
 import 'package:toprak_rehberi/utils/constants/enums.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
-// TODO Write a generic text color
 
 class TLandCard extends StatelessWidget {
   const TLandCard({

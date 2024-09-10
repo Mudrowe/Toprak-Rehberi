@@ -83,3 +83,19 @@ Future<String> extractEmailFromToken(String token) async {
     throw Exception('Failed to decode token: $e');
   }
 }
+
+Future<int?> getUserId(String token) async {
+  // Extract email from the token
+  String? email = await extractEmailFromToken(token);
+  if (email == null) {
+    throw Exception('Failed to extract email from token');
+  }
+
+  // Fetch user ID using email
+  final userId = await getUserIdByEmail(email);
+  if (userId == null) {
+    throw Exception('Failed to retrieve user ID');
+  }
+
+  return userId;
+}

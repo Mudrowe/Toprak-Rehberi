@@ -31,3 +31,32 @@ Future<List<LandDTO>> fetchLands() async {
     throw Exception('Failed to load lands');
   }
 }
+
+
+Future<List<LandDTO>> fetchLandsByUserId(int userId) async {
+  var ipAddress = dotenv.env['IP_ADDRESS'];
+  var baseUrl = 'http://$ipAddress:8080/api/land/byUserId/$userId';
+  final url = Uri.parse(baseUrl);
+
+
+  // Get token from SharedPreferences
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? token = prefs.getString('authToken');
+
+
+  final response = await http.get(
+    url,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token',
+    },
+  );
+
+  if (response.statusCode == 200) {
+    final List<dynamic> landsJson = json.decode(response.body);
+    return landsJson.map((json) => LandDTO.fromJson(json)).toList();
+
+  } else {
+    throw Exception('Failed to load lands');
+  }
+}

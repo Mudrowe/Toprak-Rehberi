@@ -19,9 +19,16 @@ class TBuildLandInfoRow extends StatelessWidget {
         children: [
           Text(
             '$label: ',
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          Text(value),
+          Flexible(
+            child: Text(
+              value,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
         ],
       ),
     );

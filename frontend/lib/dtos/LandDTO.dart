@@ -1,8 +1,11 @@
+import '../models/land.dart';
+import '../utils/constants/enums.dart';
+
 class LandDTO {
-  final int? id; // Nullable to handle cases where ID might be missing
-  int? userId; // Nullable
+  final int? id;
+  int? userId;
   final String name;
-  final int? neighborhoodId; // Nullable
+  final int? neighborhoodId;
   final String parcelNo;
   final String adaNo;
   final double size;
@@ -43,4 +46,17 @@ class LandDTO {
         'size': size,
         'landTypeId': landTypeId,
       };
+}
+
+Land convertLandDTOToLand(LandDTO landDTO, LandType landType, Address address) {
+  return Land(
+    landName: landDTO.name,
+    landType: landType,
+    area: landDTO.size,
+    plantedArea: 0.0, // Default or computed value
+    isPlanted: false, // Default or computed value
+    address: address,
+    plantedProducts: [], // Default or fetched value
+    harvestedProducts: [], // Default or fetched value
+  );
 }

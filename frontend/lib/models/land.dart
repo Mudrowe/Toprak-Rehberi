@@ -1,4 +1,4 @@
-import 'package:toprak_rehberi/models/product/product.dart';
+import 'package:toprak_rehberi/models/product.dart';
 import 'package:toprak_rehberi/utils/constants/enums.dart';
 
 

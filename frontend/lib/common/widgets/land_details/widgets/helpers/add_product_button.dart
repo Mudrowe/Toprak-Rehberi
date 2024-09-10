@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:toprak_rehberi/common/widgets/land_details/add_product_screen/add_product_screen.dart';
-import 'package:toprak_rehberi/models/land/land.dart';
+import 'package:toprak_rehberi/models/land.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 

@@ -18,17 +18,7 @@ Future<void> addLand(LandDTO landDTO) async {
     throw Exception('No auth token found. Please log in.');
   }
 
-  // Extract email from the token
-  String? email = await extractEmailFromToken(token);
-  print("Email in the addLand (extractEmailFromToken function): $email");
-  if (email == null) {
-    throw Exception('Failed to extract email from token');
-  }
-
-  print("Sending LandDTO JSON: " + landDTO.toString());
-  // Fetch user ID using email
-  final userId = await getUserIdByEmail(email);
-
+  final userId = await getUserId(token);
 
   print("User id from getUserIdByEmail2: $userId");
   if (userId == null) {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/styles/card_style.dart';
-import 'package:toprak_rehberi/models/land/land.dart';
+import 'package:toprak_rehberi/models/land.dart';
 import 'package:toprak_rehberi/utils/constants/enums.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 

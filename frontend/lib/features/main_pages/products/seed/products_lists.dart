@@ -1,5 +1,5 @@
 //import 'package:toprak_rehberi/features/main_pages/lands/widgets/lands_list.dart';
-import 'package:toprak_rehberi/models/product/product.dart';
+import 'package:toprak_rehberi/models/product.dart';
 import 'package:toprak_rehberi/utils/constants/image_strings.dart';
 
 // List of harvested products
