@@ -30,10 +30,10 @@ class _LandsScreenState extends State<LandsScreen> {
   void initState() {
     super.initState();
     _landTypesFuture = fetchLandTypes();
-    _fetchLands();
+    _landsFuture = _fetchLands();
   }
 
-  Future<void> _fetchLands() async {
+  Future<List<LandDTO>> _fetchLands() async {
     try {
       // Retrieve the token from SharedPreferences
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -50,14 +50,10 @@ class _LandsScreenState extends State<LandsScreen> {
       final userId = await getUserId(token);
 
       // Fetch lands for the user
-      setState(() {
-        _landsFuture = fetchLandsByUserId(userId!);
-      });
+      return await fetchLandsByUserId(userId!);
     } catch (e) {
       print('Error fetching lands: $e');
-      setState(() {
-        _landsFuture = Future.error(e);
-      });
+      throw e;
     }
   }
 
