@@ -1,12 +1,11 @@
-import 'dart:convert';
-
+import '../models/land.dart';
 import '../utils/constants/enums.dart';
 
 class LandDTO {
-  final int? id; // Nullable to handle cases where ID might be missing
-  final int? userId; // Nullable
+  final int? id;
+  int? userId;
   final String name;
-  final int? neighborhoodId; // Nullable
+  final int? neighborhoodId;
   final String parcelNo;
   final String adaNo;
   final double size;
@@ -29,11 +28,11 @@ class LandDTO {
       userId: json['userId'] != null ? json['userId'] as int : null,
       name: json['name'],
       neighborhoodId:
-          json['neighborhoodId'] != null ? json['neighborhoodId'] as int : null,
+          json['neighborhoodId'],
       parcelNo: json['parcelNo'],
       adaNo: json['adaNo'],
       size: json['size'].toDouble(),
-      landTypeId: json['landTypeId'] != null ? json['landTypeId'] as int : null,
+      landTypeId: json['landTypeId'],
     );
   }
 
@@ -47,4 +46,32 @@ class LandDTO {
         'size': size,
         'landTypeId': landTypeId,
       };
+}
+
+LandType _landTypeFromId(int? landTypeId) {
+  switch (landTypeId) {
+    case 4:
+      return LandType.tarla;
+    case 5:
+      return LandType.bag;
+    case 6:
+      return LandType.bahce;
+    default:
+      return LandType.tarla;
+  }
+}
+
+Land convertLandDTOToLand(LandDTO landDTO, LandType landType, Address address) {
+  LandType landType = _landTypeFromId(landDTO.landTypeId);
+
+  return Land(
+    landName: landDTO.name,
+    landType: landType,
+    area: landDTO.size,
+    plantedArea: 0.0, // Default or computed value
+    isPlanted: false, // Default or computed value
+    address: address,
+    plantedProducts: [], // Default or fetched value
+    harvestedProducts: [], // Default or fetched value
+  );
 }

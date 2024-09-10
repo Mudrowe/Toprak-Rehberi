@@ -27,7 +27,8 @@ public class ProductService {
                         product.getHarvestDate(),
                         product.getLandId(),
                         product.getScore(),
-                        product.getProductOptionId()
+                        product.getProductOptionId(),
+                        product.getSize()
                 ))
                 .collect(Collectors.toList());
     }
@@ -41,8 +42,12 @@ public class ProductService {
                         product.getHarvestDate(),
                         product.getLandId(),
                         product.getScore(),
-                        product.getProductOptionId()
+                        product.getProductOptionId(),
+                        product.getSize()
+
                 ))
                 .collect(Collectors.toList());
     }
+
+    public Product saveProduct(Product product) { return productRepository.save(product); }
 }

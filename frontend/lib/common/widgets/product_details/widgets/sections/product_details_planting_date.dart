@@ -29,7 +29,7 @@ class TProductDetailsPlantingDate extends StatelessWidget {
             style: textTheme.headlineSmall,
           ),
           Text(
-            productDTO.plantingDate.toIso8601String(),
+            productDTO.plantingDate!.toIso8601String(),
             style: textTheme.headlineSmall,
           ),
         ],

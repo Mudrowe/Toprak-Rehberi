@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/styles/card_style.dart';
-import 'package:toprak_rehberi/models/product/product.dart';
+import 'package:toprak_rehberi/models/product.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
 import '../../../../../dtos/ProductDTO.dart';
@@ -30,7 +30,7 @@ class TProductCardImage extends StatelessWidget {
           ),
           decoration: getCardDecoration(context),
           child: Text(
-            productDTO.productName,
+            productDTO.productName!,
             style: textTheme.bodyLarge,
             overflow: TextOverflow.ellipsis,
           ),

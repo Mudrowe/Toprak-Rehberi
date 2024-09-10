@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/widgets/custom_shapes/arc_progress_bar.dart';
 import 'package:toprak_rehberi/features/main_pages/products/widgets/helpers/score_display.dart';
-import 'package:toprak_rehberi/models/product/product.dart';
+import 'package:toprak_rehberi/models/product.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
@@ -32,14 +32,14 @@ class TProductProgress extends StatelessWidget {
             style: textTheme.bodyLarge
           ),
           Text(
-            productDTO.harvestDate.toIso8601String(),
+            productDTO.harvestDate!.toIso8601String(),
             style: textTheme.bodyMedium
           ),
 
           // Progress Bar
           if (productDTO.isHarvested) ...[
             const SizedBox(height: TSizes.sm), // Spacing
-            TScoreDisplay(score: productDTO.score)
+            TScoreDisplay(score: productDTO.score!)
           ] else ...[
             Text(
               TTexts.progress,

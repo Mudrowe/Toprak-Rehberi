@@ -1,5 +1,5 @@
 //import 'package:toprak_rehberi/features/main_pages/lands/widgets/lands_list.dart';
-import 'package:toprak_rehberi/models/product/product.dart';
+import 'package:toprak_rehberi/models/product.dart';
 import 'package:toprak_rehberi/utils/constants/image_strings.dart';
 
 // List of harvested products
@@ -88,6 +88,8 @@ final List<Product> harvestedProductsList = [
     //land: landsList[3],
   ),
 ];
+
+
 
 // List of planted products (not yet harvested)
 final List<Product> plantedProductsList = [

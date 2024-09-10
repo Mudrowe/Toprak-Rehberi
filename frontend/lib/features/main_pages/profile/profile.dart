@@ -14,7 +14,7 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(TSizes.defaulSpace),
+          padding: const EdgeInsets.all(TSizes.defaultSpace),
           child: Column(
             children: [
               const SizedBox(height: TSizes.appBarHeight),

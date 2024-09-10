@@ -3,12 +3,11 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
-import '../../dtos/NeighborhoodDTO.dart';
+import '../../../dtos/DistrictDTO.dart';
 
-Future<List<NeighborhoodDTO>> fetchNeighborhoods(int districtId) async {
+Future<List<DistrictDTO>> fetchDistricts(int cityId) async {
   var ipAddress = dotenv.env['IP_ADDRESS'];
-  var baseUrl =
-      'http://$ipAddress:8080/api/neighborhoods/byDistrict/$districtId';
+  var baseUrl = 'http://$ipAddress:8080/api/districts/byCity/$cityId';
   final url = Uri.parse(baseUrl);
 
   // Get token from SharedPreferences
@@ -19,7 +18,7 @@ Future<List<NeighborhoodDTO>> fetchNeighborhoods(int districtId) async {
     throw Exception('Token is null, please log in again.');
   }
 
-  print('Token (Fetch Neighborhoods Function): $token');
+  print('Token (Fetch Districts Function): $token');
 
   try {
     final response = await http.get(
@@ -32,11 +31,13 @@ Future<List<NeighborhoodDTO>> fetchNeighborhoods(int districtId) async {
 
     if (response.statusCode == 200) {
       List<dynamic> data = jsonDecode(response.body);
-      return data.map((json) => NeighborhoodDTO.fromJson(json)).toList();
+      return data.map((json) => DistrictDTO.fromJson(json)).toList();
     } else {
-      throw Exception('Failed to load neighborhoods');
+      print(Exception);
+      throw Exception('Failed to load districts');
     }
   } catch (e) {
-    throw Exception('Failed to fetch neighborhoods.');
+    print(Exception);
+    throw Exception('Failed to fetch districts: $e');
   }
 }

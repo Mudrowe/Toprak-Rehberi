@@ -3,7 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
-import '../../dtos/LandTypeDTO.dart';
+import '../../../dtos/LandTypeDTO.dart';
+
 
 Future<List<LandTypeDTO>> fetchLandTypes() async {
   var ipAddress = dotenv.env['IP_ADDRESS'];

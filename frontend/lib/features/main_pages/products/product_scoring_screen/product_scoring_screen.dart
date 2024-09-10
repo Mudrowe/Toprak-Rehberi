@@ -39,7 +39,7 @@ class _ProductScoringScreenState extends State<ProductScoringScreen> {
         child: Center(
           child: Column(
             children: [
-              Text(widget.productDTO.productName, style: textTheme.headlineMedium),
+              Text(widget.productDTO.productName!, style: textTheme.headlineMedium),
 
               const SizedBox(height: TSizes.spaceBtwItems),
 

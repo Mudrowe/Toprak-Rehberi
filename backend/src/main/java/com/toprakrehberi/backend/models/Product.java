@@ -33,4 +33,7 @@ public class Product {
 
     @Column(name = "product_option_id")
     private Long productOptionId;
+
+    @Column(name = "size")
+    private double size;
 }

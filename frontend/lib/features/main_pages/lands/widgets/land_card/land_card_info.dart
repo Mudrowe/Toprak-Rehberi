@@ -1,5 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:toprak_rehberi/models/land/land.dart';
+import 'package:toprak_rehberi/models/land.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
 class TLandCardInfo extends StatelessWidget {
@@ -14,38 +16,48 @@ class TLandCardInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Column(
-          children: [
-            Text(
-              land.landName,
-              style: textTheme.bodyMedium,
-            ),
-            Text(
-              '${land.address.city}  ${land.address.district}',
-              style: textTheme.bodyMedium,
-            ),
-            Text(
-              '${land.area.toInt()} ${TTexts.squareSymbol}',
-              style: textTheme.bodyMedium,
-            ),
-          ],
-        ),
+    return Expanded(
+      child: Column(
+        children: [
+          Column(
+            children: [
+              Text(
+                utf8.decode(land.landName.codeUnits),
+                style: textTheme.bodyMedium,
+                overflow: TextOverflow.ellipsis,
+              ),
+              Text(
+                land.address.city,
+                style: textTheme.bodyMedium,
+                overflow: TextOverflow.ellipsis,
+              ),
+              Text(
+                land.address.district,
+                style: textTheme.bodyMedium,
+                overflow: TextOverflow.ellipsis,
+              ),
+              Text(
+                '${land.area.toInt()} ${TTexts.squareSymbol}',
+                style: textTheme.bodyMedium,
+                overflow: TextOverflow.ellipsis,
+              ),
 
-        // Is Planted Checkbox
-        Row(
-          children: [
-            Text(
-              TTexts.isPlanted,
-              style: textTheme.bodyMedium,
-            ),
-            Checkbox(value: land.isPlanted, onChanged: (value) {}),
-          ],
-        ),
-      ],
+              // Is Planted Checkbox
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    TTexts.isPlanted,
+                    style: textTheme.bodyMedium,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Checkbox(value: land.isPlanted, onChanged: (value) {}),
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

@@ -31,7 +31,7 @@ class TSuggestionsScore extends StatelessWidget {
           child: Align(
             alignment: Alignment.center,
             child: Text(
-              '${suggestionProduct.score.toString()}%',
+              '${suggestionProduct.score.toStringAsFixed(2)}%',
               style: const TextStyle(
                   color: TColors.black,
                   fontSize: TSizes.fontSizeMd,

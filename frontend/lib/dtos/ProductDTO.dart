@@ -1,20 +1,20 @@
 class ProductDTO {
-  final int id;
-  final DateTime plantingDate;
-  final DateTime harvestDate;
-  final int landId;
-  final double score;
+  final int? id;
+  final DateTime? plantingDate;
+  final DateTime? harvestDate;
+  final int? landId;
+  final double? score;
   final int productOptionId;
-  final String productName;
-  final String imageUrl;
+  final String? productName;
+  final String? imageUrl;
   final String landName;
   final double area;
 
   ProductDTO({
-    required this.id,
+    this.id,
     required this.plantingDate,
     required this.harvestDate,
-    required this.landId,
+    this.landId,
     required this.score,
     required this.productOptionId,
     required this.productName,
@@ -25,17 +25,17 @@ class ProductDTO {
 
   double get progressPercentage {
     final currentDate = DateTime.now();
-    if (currentDate.isAfter(harvestDate)) {
+    if (currentDate.isAfter(harvestDate!)) {
       return 100.0; // Fully harvested
     }
-    if (currentDate.isBefore(plantingDate)) {
+    if (currentDate.isBefore(plantingDate!)) {
       return 0.0; // Not started
     }
 
-    final totalDuration = harvestDate.difference(plantingDate).inDays;
-    final currentDuration = currentDate.difference(plantingDate).inDays;
+    final totalDuration = harvestDate?.difference(plantingDate!).inDays;
+    final currentDuration = currentDate.difference(plantingDate!).inDays;
 
-    return (currentDuration / totalDuration) * 100;
+    return (currentDuration / totalDuration!) * 100;
   }
 
   bool get isHarvested => progressPercentage == 100;
@@ -57,12 +57,13 @@ class ProductDTO {
 
   Map<String, dynamic> toJson() => {
     'id': id,
-    'plantingDate': plantingDate.toIso8601String(),
-    'harvestDate': harvestDate.toIso8601String(),
+    'plantingDate': plantingDate?.toIso8601String(),
+    'harvestDate': harvestDate?.toIso8601String(),
     'landId': landId,
     'score': score,
     'productOptionId': productOptionId,
     'productName': productName,
     'imageUrl': imageUrl,
+    'size': area,
   };
 }

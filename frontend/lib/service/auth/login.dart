@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:toprak_rehberi/service/auth/token_service.dart';
 
 Future<void> login(String email, String password) async {
   var ipAddress = dotenv.env['IP_ADDRESS'];
@@ -18,11 +19,9 @@ Future<void> login(String email, String password) async {
 
     if (response.statusCode == 200) {
       var responseBody = jsonDecode(response.body);
-      String token = responseBody['token'];  // Adjust according to your API response structure
+      String token = responseBody['token'];
 
-      // Save the token in SharedPreferences
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString('authToken', token);
+      setAuthToken(token);
 
       print('Token saved: $token');
     } else {

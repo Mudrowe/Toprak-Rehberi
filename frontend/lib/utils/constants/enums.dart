@@ -26,6 +26,8 @@ extension LandTypeExtension on LandType {
   }
 }
 
+
+
 extension LandTypeColorExtension on LandType {
   Color get color {
     switch (this) {

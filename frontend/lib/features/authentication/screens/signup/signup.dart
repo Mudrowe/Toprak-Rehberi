@@ -13,7 +13,7 @@ class SignupScreen extends StatelessWidget {
       appBar: const TAppBar(),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(TSizes.defaulSpace),
+          padding: const EdgeInsets.all(TSizes.defaultSpace),
           child: Column(
             children: [
               // Titles

@@ -6,7 +6,7 @@ import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
 
 import '../../../../dtos/ProductDTO.dart';
-import '../../../../service/fetchings/pages/fetch_products.dart';
+import '../../../../service/fetching/pages/fetch_products.dart';
 
 class TPlantedProducts extends StatelessWidget {
   const TPlantedProducts({

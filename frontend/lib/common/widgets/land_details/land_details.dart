@@ -4,7 +4,7 @@ import 'package:toprak_rehberi/common/widgets/land_details/widgets/helpers/sugge
 import 'package:toprak_rehberi/common/widgets/land_details/widgets/sections/land_details_info.dart';
 import 'package:toprak_rehberi/common/widgets/land_details/widgets/sections/land_planted_products.dart';
 import 'package:toprak_rehberi/common/widgets/land_details/widgets/sections/land_type_image.dart';
-import 'package:toprak_rehberi/models/land/land.dart';
+import 'package:toprak_rehberi/models/land.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
 class TLandDetails extends StatelessWidget {

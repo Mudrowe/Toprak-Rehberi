@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
 import '../../dtos/LandDTO.dart';
+import '../fetching/pages/fetch_user.dart';
 
 Future<void> addLand(LandDTO landDTO) async {
   var ipAddress = dotenv.env['IP_ADDRESS'];
@@ -12,9 +13,20 @@ Future<void> addLand(LandDTO landDTO) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString('authToken');
 
+
   if (token == null) {
     throw Exception('No auth token found. Please log in.');
   }
+
+  final userId = await getUserId(token);
+
+  print("User id from getUserIdByEmail2: $userId");
+  if (userId == null) {
+    throw Exception('Failed to retrieve user ID');
+  }
+
+  // Update LandDTO with the userId
+  landDTO.userId = userId;
 
   final url = Uri.parse(baseUrl);
 

@@ -20,6 +20,33 @@ public class LandController {
     @Autowired
     private LandService landService;
 
+    private LandDTO convertToDTO(Land land) {
+        return new LandDTO(
+                land.getId(),
+                land.getUserId(),
+                land.getName(),
+                land.getNeighborhoodId(),
+                land.getParcelNo(),
+                land.getAdaNo(),
+                land.getSize(),
+                land.getLandTypeId()
+        );
+    }
+
+    private Land convertToEntity(LandDTO landDTO) {
+        Land land = new Land();
+        land.setId(landDTO.getId());
+        land.setUserId(landDTO.getUserId());
+        land.setName(landDTO.getName());
+        land.setNeighborhoodId(landDTO.getNeighborhoodId());
+        land.setParcelNo(landDTO.getParcelNo());
+        land.setAdaNo(landDTO.getAdaNo());
+        land.setSize(landDTO.getSize());
+        land.setLandTypeId(landDTO.getLandTypeId());
+
+        return land;
+    }
+
     @GetMapping
     public ResponseEntity<List<LandDTO>> getAllLands() {
         List<Land> lands = landService.getAllLands();
@@ -39,30 +66,26 @@ public class LandController {
         }
     }
 
-    private LandDTO convertToDTO(Land land) {
-        return new LandDTO(
-                land.getId(),
-                land.getUserId(),
-                land.getName(),
-                land.getNeighborhoodId(),
-                land.getParcelNo(),
-                land.getAdaNo(),
-                land.getSize(),
-                land.getLandTypeId()
-        );
+
+    @GetMapping("/byName/{name}")
+    public ResponseEntity<LandDTO> getLandByName(@PathVariable String name) {
+        Land land = landService.getLandByName(name);
+        if (land != null) {
+            return new ResponseEntity<>(convertToDTO(land), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
-    private Land convertToEntity(LandDTO landDTO) {
-        Land land = new Land();
-        land.setId(landDTO.getId());
-        land.setName(landDTO.getName());
-        land.setNeighborhoodId(landDTO.getNeighborhoodId());
-        land.setParcelNo(landDTO.getParcelNo());
-        land.setAdaNo(landDTO.getAdaNo());
-        land.setSize(landDTO.getSize());
-        land.setLandTypeId(landDTO.getLandTypeId());
+    @GetMapping("/byUserId/{userId}")
+    public ResponseEntity<List<LandDTO>> getLandsByUserId(@PathVariable Long userId) {
+        List<Land> lands = landService.getLandsByUserId(userId);
 
-        return land;
+        List<LandDTO> landDTOs = lands.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(landDTOs);
     }
 
     @PostMapping()
@@ -74,7 +97,7 @@ public class LandController {
 
         LandDTO savedLandDTO = convertToDTO(savedLand);
 
-        System.out.println("Saved LandDTO: " + savedLandDTO.toString());
+        System.out.println("Saved LandDTO: " + savedLandDTO);
 
         return new ResponseEntity<>(savedLandDTO, HttpStatus.CREATED);
     }

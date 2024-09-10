@@ -25,8 +25,8 @@ Future<List<ProductDTO>> fetchPlantedProducts() async {
 
 
   if (response.statusCode == 200) {
-    final List<dynamic> data = json.decode(response.body);
-    return data.map((json) => ProductDTO.fromJson(json)).toList();
+    final List<dynamic> plantedProducts = json.decode(response.body);
+    return plantedProducts.map((json) => ProductDTO.fromJson(json)).toList();
   } else {
     throw Exception('Failed to load planted products');
   }
@@ -40,8 +40,8 @@ Future<List<ProductDTO>> fetchHarvestedProducts() async {
 
 
   if (response.statusCode == 200) {
-    final List<dynamic> data = json.decode(response.body);
-    return data.map((json) => ProductDTO.fromJson(json)).toList();
+    final List<dynamic> harvestedProducts = json.decode(response.body);
+    return harvestedProducts.map((json) => ProductDTO.fromJson(json)).toList();
   } else {
     throw Exception('Failed to load harvested products');
   }

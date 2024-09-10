@@ -6,7 +6,7 @@ class TIconButtonTheme {
 
   static IconButtonThemeData iconButtonTheme = const IconButtonThemeData(
       style: ButtonStyle(
-        backgroundColor: WidgetStatePropertyAll<Color>(TColors.primaryColor),
-        iconColor: WidgetStatePropertyAll<Color>(TColors.white),
+        //backgroundColor: WidgetStatePropertyAll<Color>(TColors.primaryColor),
+        iconColor: WidgetStatePropertyAll<Color>(TColors.primaryColor),
   ));
 }
