@@ -106,6 +106,8 @@ class _TAddLandFormState extends State<TAddLandForm> {
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
 
+      print("Selected LandType ID: ${_landType?.id}");
+
       LandDTO land = LandDTO(
         name: _fieldName!,
         neighborhoodId: _neighborhood?.id,
@@ -156,6 +158,7 @@ class _TAddLandFormState extends State<TAddLandForm> {
               setState(() {
                 _landType = value;
               });
+              print("Selected LandType: ${_landType?.name}");
             },
           ),
 

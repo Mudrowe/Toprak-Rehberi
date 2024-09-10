@@ -48,7 +48,22 @@ class LandDTO {
       };
 }
 
+LandType _landTypeFromId(int? landTypeId) {
+  switch (landTypeId) {
+    case 4:
+      return LandType.tarla;
+    case 5:
+      return LandType.bag;
+    case 6:
+      return LandType.bahce;
+    default:
+      return LandType.tarla;
+  }
+}
+
 Land convertLandDTOToLand(LandDTO landDTO, LandType landType, Address address) {
+  LandType landType = _landTypeFromId(landDTO.landTypeId);
+
   return Land(
     landName: landDTO.name,
     landType: landType,
