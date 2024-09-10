@@ -5,8 +5,11 @@ import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
 class TSelectProductDropdownMenu extends StatelessWidget {
+  final ValueChanged<int?> onChanged;
+
   const TSelectProductDropdownMenu({
     super.key,
+    required this.onChanged,
   });
 
   @override
@@ -15,9 +18,9 @@ class TSelectProductDropdownMenu extends StatelessWidget {
     return DropdownButtonFormField(
       hint: Text(TTexts.choseProduct, style: textTheme.bodyLarge),
       items: [
-        for (var product in suggesionsList)
+        for (var product in suggestionsList)
           DropdownMenuItem(
-            value: product.name,
+            value: product.productOptionId,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -30,7 +33,7 @@ class TSelectProductDropdownMenu extends StatelessWidget {
             ),
           ),
       ],
-      onChanged: (value) {},
+      onChanged: onChanged,
     );
   }
 }

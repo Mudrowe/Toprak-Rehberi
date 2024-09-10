@@ -47,7 +47,7 @@ class TProductCardHome extends StatelessWidget {
               children: [
                 // Product Name
                 Text(
-                  productDTO.productName,
+                  productDTO.productName!,
                   style: textTheme.bodyMedium,
                 ),
 
@@ -65,7 +65,7 @@ class TProductCardHome extends StatelessWidget {
 
                 // Harvest Date
                 Text(
-                  productDTO.harvestDate.toIso8601String(),
+                  productDTO.harvestDate!.toIso8601String(),
                   style: textTheme.bodyMedium,
                 ),
               ],

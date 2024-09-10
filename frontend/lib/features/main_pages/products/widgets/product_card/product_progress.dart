@@ -32,14 +32,14 @@ class TProductProgress extends StatelessWidget {
             style: textTheme.bodyLarge
           ),
           Text(
-            productDTO.harvestDate.toIso8601String(),
+            productDTO.harvestDate!.toIso8601String(),
             style: textTheme.bodyMedium
           ),
 
           // Progress Bar
           if (productDTO.isHarvested) ...[
             const SizedBox(height: TSizes.sm), // Spacing
-            TScoreDisplay(score: productDTO.score)
+            TScoreDisplay(score: productDTO.score!)
           ] else ...[
             Text(
               TTexts.progress,

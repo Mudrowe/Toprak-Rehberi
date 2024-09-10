@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toprak_rehberi/dtos/UserDTO.dart';
 
-import '../../auth/token_service.dart';
 
 Future<UserDTO> fetchUser() async {
   var ipAddress = dotenv.env['IP_ADDRESS'];

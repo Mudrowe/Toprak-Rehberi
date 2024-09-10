@@ -8,7 +8,6 @@ import 'package:toprak_rehberi/models/land.dart';
 import 'package:toprak_rehberi/utils/constants/enums.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
-
 class TLandCard extends StatelessWidget {
   const TLandCard({
     super.key,
@@ -22,10 +21,6 @@ class TLandCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('Land Type: ${land.landType}');
-    print('Land Type Image Path: ${land.landType.imagePath}');
-    print('Land Type Display Name: ${land.landType.displayName}');
-
     return GestureDetector(
       onTap: () => Get.to(() => TLandDetails(land: land)),
       child: Container(

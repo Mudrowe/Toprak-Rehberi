@@ -35,7 +35,7 @@ class SuggestionsScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: TSizes.lg),
               child: Column(children: [
-                for (var suggestionProduct in suggesionsList)
+                for (var suggestionProduct in suggestionsList)
                   Column(
                     children: [
                       TSuggestionCard(suggestionProduct: suggestionProduct),

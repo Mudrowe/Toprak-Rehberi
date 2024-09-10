@@ -1,5 +1,4 @@
 class Product {
-  // TODO: Name can be too long and it breaks the card
   final String productName;
   final String plantingDate;
   final String harvestDate;

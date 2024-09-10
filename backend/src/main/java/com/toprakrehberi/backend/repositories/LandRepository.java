@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface LandRepository extends JpaRepository<Land, Long> {
     List<Land> findByUserId(Long userId);
+    Land findByName(String name);
 }

@@ -30,7 +30,7 @@ class TProductCardImage extends StatelessWidget {
           ),
           decoration: getCardDecoration(context),
           child: Text(
-            productDTO.productName,
+            productDTO.productName!,
             style: textTheme.bodyLarge,
             overflow: TextOverflow.ellipsis,
           ),

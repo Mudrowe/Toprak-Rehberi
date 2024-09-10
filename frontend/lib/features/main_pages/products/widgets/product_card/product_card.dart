@@ -33,7 +33,7 @@ class TProductCard extends StatelessWidget {
           children: [
             TProductCardImage(
               productDTO: productDTO,
-              imagePath: productDTO.imageUrl,
+              imagePath: productDTO.imageUrl!,
             ),
             TProductProgress(
               productDTO: productDTO,

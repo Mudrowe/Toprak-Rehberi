@@ -25,13 +25,11 @@ Future<void> addLand(LandDTO landDTO) async {
     throw Exception('Failed to retrieve user ID');
   }
 
-  print("Sending LandDTO JSON: " + landDTO.toString());
   // Update LandDTO with the userId
   landDTO.userId = userId;
 
   final url = Uri.parse(baseUrl);
 
-  print("Sending LandDTO JSON: " + landDTO.toString());
   final response = await http.post(
     url,
     headers: {
@@ -43,7 +41,6 @@ Future<void> addLand(LandDTO landDTO) async {
 
   // Log the JSON payload being sent to the backend
   print('Sending LandDTO JSON: ${jsonEncode(landDTO.toJson())}');
-
 
   if (response.statusCode == 201) {
     // Land added successfully
