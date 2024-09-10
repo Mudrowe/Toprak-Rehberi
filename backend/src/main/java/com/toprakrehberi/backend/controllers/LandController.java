@@ -66,7 +66,7 @@ public class LandController {
         }
     }
 
-    @GetMapping("/user/{userId}")
+    @GetMapping("/byUserId/{userId}")
     public ResponseEntity<List<LandDTO>> getLandsByUserId(@PathVariable Long userId) {
         List<Land> lands = landService.getLandsByUserId(userId);
 
@@ -86,7 +86,7 @@ public class LandController {
 
         LandDTO savedLandDTO = convertToDTO(savedLand);
 
-        System.out.println("Saved LandDTO: " + savedLandDTO.toString());
+        System.out.println("Saved LandDTO: " + savedLandDTO);
 
         return new ResponseEntity<>(savedLandDTO, HttpStatus.CREATED);
     }
