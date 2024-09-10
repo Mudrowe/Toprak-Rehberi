@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/widgets/land_details/widgets/helpers/add_product_button.dart';
 import 'package:toprak_rehberi/common/widgets/land_details/widgets/helpers/build_land_info_row.dart';
@@ -24,7 +26,7 @@ class TLandDetailsInfo extends StatelessWidget {
               children: [
                 TBuildLandInfoRow(
                   label: TTexts.landName,
-                  value: land.landName,
+                  value: utf8.decode(land.landName.codeUnits),
                 ),
                 TBuildLandInfoRow(
                   label: TTexts.city,
