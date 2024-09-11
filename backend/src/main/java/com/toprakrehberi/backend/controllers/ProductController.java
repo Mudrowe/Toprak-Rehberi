@@ -67,6 +67,14 @@ public class ProductController {
         }
     }
 
+    @GetMapping("/byLand/{landId}")
+    public ResponseEntity<List<ProductDTO>> getProductsByLandId(@PathVariable("landId") long landId) {
+        List<ProductDTO> productsDTO = productService.getProductsByLandId(landId);
+        if (productsDTO.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(productsDTO, HttpStatus.OK);
+    }
 
     @PostMapping()
     public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO) {
@@ -87,6 +95,7 @@ public class ProductController {
 
         return new ResponseEntity<>(savedProductDTO, HttpStatus.CREATED);
     }
+
 
 
     @GetMapping("/planted")

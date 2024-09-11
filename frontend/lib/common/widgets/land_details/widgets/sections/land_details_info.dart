@@ -1,10 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/widgets/land_details/widgets/helpers/add_product_button.dart';
 import 'package:toprak_rehberi/common/widgets/land_details/widgets/helpers/build_land_info_row.dart';
 import 'package:toprak_rehberi/models/land.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
+import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
 import '../../../../../utils/constants/sizes.dart';
 
@@ -26,7 +25,7 @@ class TLandDetailsInfo extends StatelessWidget {
               children: [
                 TBuildLandInfoRow(
                   label: TTexts.landName,
-                  value: utf8.decode(land.landName.codeUnits),
+                  value: THelperFunctions.decodeUtf8(land.landName),
                 ),
                 TBuildLandInfoRow(
                   label: TTexts.city,
@@ -61,7 +60,6 @@ class TLandDetailsInfo extends StatelessWidget {
               ],
             ),
           ),
-
 
           // Add Product Button
           TAddProductButton(

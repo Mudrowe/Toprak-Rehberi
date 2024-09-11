@@ -4,11 +4,11 @@ class ProductDTO {
   final DateTime? harvestDate;
   final int? landId;
   final double? score;
-  final int productOptionId;
+  final int? productOptionId;
   final String? productName;
   final String? imageUrl;
-  final String landName;
-  final double area;
+  final String? landName;
+  final double? area;
 
   ProductDTO({
     this.id,
@@ -18,8 +18,8 @@ class ProductDTO {
     required this.score,
     required this.productOptionId,
     required this.productName,
-    required this.imageUrl,
-    required this.landName,
+    this.imageUrl,
+    this.landName,
     required this.area,
   });
 
@@ -51,7 +51,7 @@ class ProductDTO {
       productName: json['productName'],
       imageUrl: json['imageUrl'],
       landName: json['landName'],
-      area: json['area']
+      area: json['size']
     );
   }
 

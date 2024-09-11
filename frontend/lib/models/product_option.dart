@@ -15,8 +15,15 @@ class ProductOption {
     return ProductOption(
       id: json['id'],
       name: json['name'],
-      plantingDuration: json['planting_duration'],
-      imageUrl: json['image_url'],
+      plantingDuration: json['plantingDuration'],
+      imageUrl: json['imageUrl'],
     );
   }
+
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'name': name,
+    'plantingDuration': plantingDuration,
+    'imageUrl': imageUrl,
+  };
 }

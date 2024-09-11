@@ -68,6 +68,11 @@ class _TAddProductFormState extends State<TAddProductForm> {
     );
   }
 
+  DateTime addMinutes(DateTime date, int minutes) {
+    return date.add(Duration(minutes: minutes));
+  }
+
+
   Future<void> _saveForm(BuildContext context) async {
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
@@ -91,6 +96,7 @@ class _TAddProductFormState extends State<TAddProductForm> {
         landName: widget.land.landName,
         plantingDate: _plantingDate,
         harvestDate: addMonths(_plantingDate!, _productOption?.plantingDuration ?? 0),
+        //harvestDate: addMinutes(_plantingDate!, _productOption?.plantingDuration ?? 0),
         imageUrl: _productOption?.imageUrl,
         productName: _productOption?.name,
         score: _score,

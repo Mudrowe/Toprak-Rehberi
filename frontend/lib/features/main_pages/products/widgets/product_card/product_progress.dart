@@ -4,6 +4,7 @@ import 'package:toprak_rehberi/features/main_pages/products/widgets/helpers/scor
 import 'package:toprak_rehberi/models/product.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
+import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
 import '../../../../../dtos/ProductDTO.dart';
 
@@ -32,7 +33,7 @@ class TProductProgress extends StatelessWidget {
             style: textTheme.bodyLarge
           ),
           Text(
-            productDTO.harvestDate!.toIso8601String(),
+            THelperFunctions.getFormattedDate(productDTO.harvestDate!),
             style: textTheme.bodyMedium
           ),
 

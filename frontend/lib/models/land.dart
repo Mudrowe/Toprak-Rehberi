@@ -31,14 +31,7 @@ class Land {
       plantedArea: json['plantedArea'],
       isPlanted: json['isPlanted'] ?? false,
       address: Address.fromJson(json['address']),
-      /*
-      plantedProducts: (json['plantedProducts'] as List<dynamic>?)
-          ?.map((item) => Product.fromJson(item))
-          .toList(),
-      harvestedProducts: (json['harvestedProducts'] as List<dynamic>?)
-          ?.map((item) => Product.fromJson(item))
-          .toList(),
-       */
+
     );
   }
 }

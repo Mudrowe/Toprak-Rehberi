@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -91,8 +93,8 @@ class THelperFunctions {
     return MediaQuery.of(Get.context!).size.width;
   }
 
-  static String getFormattedDate(DateTime date, {String format = 'dd MMM yyyy'}) {
-    return DateFormat(format).format(date);
+  static String getFormattedDate(DateTime date, {String format = 'dd MMMM yyyy', String locale = 'tr'}) {
+    return DateFormat(format, locale).format(date);
   }
 
   static List<T> removeDuplicates<T>(List<T> list) {
@@ -106,5 +108,9 @@ class THelperFunctions {
       wrappedList.add(Row(children: rowChildren));
     }
     return wrappedList;
+  }
+
+  static String decodeUtf8(String input) {
+    return utf8.decode(input.codeUnits);
   }
 }
