@@ -53,7 +53,7 @@ class TProductCardHome extends StatelessWidget {
 
                 // Land Name
                 Text(
-                  productDTO.landName,
+                  productDTO.landName!,
                   style: textTheme.bodyMedium,
                 ),
 

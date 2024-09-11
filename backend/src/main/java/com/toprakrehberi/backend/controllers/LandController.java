@@ -2,9 +2,7 @@ package com.toprakrehberi.backend.controllers;
 
 import com.toprakrehberi.backend.dtos.LandDTO;
 import com.toprakrehberi.backend.models.Land;
-import com.toprakrehberi.backend.models.LandType;
 import com.toprakrehberi.backend.services.LandService;
-import com.toprakrehberi.backend.services.LandTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,7 +54,7 @@ public class LandController {
         return new ResponseEntity<>(landDTOs, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/byId/{id}")
     public ResponseEntity<LandDTO> getLandById(@PathVariable("id") long id) {
         Land land = landService.getLandById(id);
         if (land != null) {
@@ -76,6 +74,7 @@ public class LandController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
 
     @GetMapping("/byUserId/{userId}")
     public ResponseEntity<List<LandDTO>> getLandsByUserId(@PathVariable Long userId) {

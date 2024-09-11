@@ -21,7 +21,7 @@ public class ProductOptionController {
         return productOptionService.getAllProductOptions();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/byId/{id}")
     public ResponseEntity<ProductOption> getProductOptionById(@PathVariable Long id) {
         Optional<ProductOption> productOption = productOptionService.getProductOptionById(id);
         return productOption.map(ResponseEntity::ok)

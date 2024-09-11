@@ -54,8 +54,6 @@ class _ProductScoringScreenState extends State<ProductScoringScreen> {
 
               const SizedBox(height: TSizes.spaceBtwItems),
 
-              // ! There should be TLandDetailsInfo in here
-              // ! So, products must have land variable
               // Field Info
               Container(
                 height: 150,
@@ -63,7 +61,7 @@ class _ProductScoringScreenState extends State<ProductScoringScreen> {
                 decoration: getCardDecoration(context),
                 child: Column(
                   children: [
-                    Text(widget.productDTO.landName),
+                    Text(widget.productDTO.landName!),
                     Text(widget.productDTO.area.toString())
                   ],
                 ),

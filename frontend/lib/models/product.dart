@@ -6,7 +6,7 @@ class Product {
   final String imagePath;
   final double progressPercentage;
   final bool isHarvested;
-  final int score;
+  final int? score;
   final double area;
 
   Product({
@@ -18,6 +18,6 @@ class Product {
     required this.progressPercentage,
     required this.area,
     this.isHarvested = false,
-    this.score = 3,
+    this.score,
   });
 }

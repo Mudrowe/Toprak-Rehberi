@@ -6,39 +6,59 @@ import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
+import '../../../../../dtos/ProductDTO.dart';
+import '../../../../../service/fetching/pages/fetch_lands.dart';
+import '../../../../../service/fetching/product/fetch_product.dart';
+
 class TLandPlantedProducts extends StatelessWidget {
   final Land land;
 
   const TLandPlantedProducts({super.key, required this.land});
 
+  Future<List<ProductDTO>> _fetchProducts() async {
+    int landId = (await fetchLandByName(land.landName)).id!;
+
+    return fetchProductsByLandId(landId);
+  }
+
   @override
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
-    return land.isPlanted
-        ? Column(
-            children: [
-              const Text(TTexts.plantedProducts),
-              const SizedBox(height: TSizes.spaceBtwItems),
-              for (var product in land.plantedProducts!)
-                Column(
-                  children: [
-                    //TProductCard(product: product),
-                    const SizedBox(height: TSizes.spaceBtwItems)
-                  ],
-                ),
-            ],
-          )
-        : Column(
+
+    return FutureBuilder<List<ProductDTO>>(
+      future: _fetchProducts(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Center(child: Text('Error: ${snapshot.error}'));
+        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return Column(
             children: [
               Image.asset(dark ? TImages.darkAppLogo : TImages.lightAppLogo),
-              const SizedBox(
-                height: TSizes.spaceBtwItems,
-              ),
+              const SizedBox(height: TSizes.spaceBtwItems),
               const Text(
-                TTexts.noPorducts,
+                TTexts.noProducts,
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ],
           );
+        } else {
+          return Column(
+            children: [
+              const Text(TTexts.plantedProducts),
+              const SizedBox(height: TSizes.spaceBtwItems),
+              for (var product in snapshot.data!)
+                Column(
+                  children: [
+                    TProductCard(productDTO: product),
+                    const SizedBox(height: TSizes.spaceBtwItems),
+                  ],
+                ),
+            ],
+          );
+        }
+      },
+    );
   }
 }

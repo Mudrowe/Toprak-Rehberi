@@ -82,7 +82,7 @@ class TTexts {
   static const String productArea = 'Eklemek İstediğiniz Alan';
 
   // Land Details
-  static const String noPorducts = 'Bu Arazide Ekili Ürün Yok';
+  static const String noProducts = 'Bu Arazide Ekili Ürün Yok';
 
   // Product Details
   static const String scoreProduct = 'Hasat Veriminizi Değerlendirin';
