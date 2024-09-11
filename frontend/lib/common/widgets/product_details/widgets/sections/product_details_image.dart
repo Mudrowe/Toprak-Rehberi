@@ -15,20 +15,19 @@ class TProductDetailsImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: TSizes.cardHeight / 1.2,
+      height: TSizes.cardHeight / 1.5,
       width: TSizes.cardWidth / 1.2,
       padding: const EdgeInsets.all(TSizes.sm),
       decoration: getCardDecoration(context),
       child: FittedBox(
         fit: BoxFit.contain,
         child: productDTO.imageUrl != null && productDTO.imageUrl!.isNotEmpty
-            ? Image.network(
-                productDTO.imageUrl!, // Loading image from a URL
+            ? Image.asset(
+                productDTO.imageUrl!,
                 errorBuilder: (context, error, stackTrace) =>
-                    const Icon(Icons.error), // Fallback in case of an error
+                    const Icon(Icons.error),
               )
-            : const Icon(
-                Icons.image_not_supported), // Placeholder if no image URL
+            : const Icon(Icons.image_not_supported),
       ),
     );
   }
