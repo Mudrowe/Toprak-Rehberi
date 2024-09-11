@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:toprak_rehberi/features/main_pages/lands/add_land_screen/add_land_screen.dart';
-import 'package:toprak_rehberi/features/main_pages/lands/add_land_screen/widgets/add_land_form.dart';
-import 'package:toprak_rehberi/service/test_get/http_action_buttons.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 import 'package:toprak_rehberi/utils/theme/theme.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -27,7 +24,6 @@ class App extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
 
-      //home: const TAddLandForm(),
       home:const FirstScreen(),
       //home: TActionButtons(),
       );

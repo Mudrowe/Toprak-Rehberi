@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/styles/card_style.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
+import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
 import '../../../../../dtos/ProductDTO.dart';
 
@@ -18,7 +19,7 @@ class TProductDetailsPlantingDate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: TSizes.cardHeight / 2.5,
+      height: TSizes.cardHeight / 3,
       width: TSizes.cardWidth / 1.2,
       decoration: getCardDecoration(context),
       child: Column(
@@ -29,7 +30,7 @@ class TProductDetailsPlantingDate extends StatelessWidget {
             style: textTheme.headlineSmall,
           ),
           Text(
-            productDTO.plantingDate!.toIso8601String(),
+            THelperFunctions.getFormattedDate(productDTO.plantingDate!),
             style: textTheme.headlineSmall,
           ),
         ],

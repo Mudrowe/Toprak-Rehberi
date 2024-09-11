@@ -61,7 +61,7 @@ LandType _landTypeFromId(int? landTypeId) {
   }
 }
 
-Land convertLandDTOToLand(LandDTO landDTO, LandType landType, Address address) {
+Land convertLandDTOToLand(LandDTO landDTO, Address address) {
   LandType landType = _landTypeFromId(landDTO.landTypeId);
 
   return Land(

@@ -119,7 +119,6 @@ class _LandsScreenState extends State<LandsScreen> {
                       final landsList = landsDTOList.map((landDTO) {
                         return convertLandDTOToLand(
                           landDTO,
-                          _getLandType(landDTO.landTypeId),
                           _convertToAddress(landDTO),
                         );
                       }).toList();
