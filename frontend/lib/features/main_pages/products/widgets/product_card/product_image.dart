@@ -8,12 +8,10 @@ import '../../../../../dtos/ProductDTO.dart';
 class TProductCardImage extends StatelessWidget {
   const TProductCardImage({
     super.key,
-    required this.imagePath,
     required this.productDTO,
   });
 
   final ProductDTO productDTO;
-  final String imagePath;
 
   @override
   Widget build(BuildContext context) {
@@ -23,31 +21,40 @@ class TProductCardImage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Product name
-        Container(
-          padding: const EdgeInsets.symmetric(
-            vertical: TSizes.xxs,
-            horizontal: TSizes.md,
-          ),
-          decoration: getCardDecoration(context),
-          child: Text(
-            THelperFunctions.decodeUtf8(productDTO.productName!),
-            style: textTheme.bodyLarge,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
+        if (productDTO.productName != null)
+          Container(
+            padding: const EdgeInsets.symmetric(
+              vertical: TSizes.xxs,
+              horizontal: TSizes.md,
+            ),
+            decoration: getCardDecoration(context),
+            child: Text(
+              productDTO.productName!,
+              style: textTheme.bodyLarge,
+              overflow: TextOverflow.ellipsis,
+            ),
+          )
+        else
+          const Text('Product name not available'),
 
         // Product image
-        Image.asset(
-          imagePath,
-          height: TSizes.productImageHeight,
-          width: TSizes.productImageWidth,
-        ),
+        if (productDTO.imageUrl != null)
+          Image.asset(
+            productDTO.imageUrl!,
+            height: TSizes.productImageHeight,
+            width: TSizes.productImageWidth,
+          )
+        else
+          const Text('Image not available'),
 
         // Land name
-        Text(
-          THelperFunctions.decodeUtf8(productDTO.landName!),
-          style: textTheme.bodyLarge,
-        )
+        if (productDTO.landName != null)
+          Text(
+            productDTO.landName!,
+            style: textTheme.bodyLarge,
+          )
+        else
+          const Text('Land name not available'),
       ],
     );
   }

@@ -69,11 +69,20 @@ public class ProductController {
 
     @GetMapping("/byLand/{landId}")
     public ResponseEntity<List<ProductDTO>> getProductsByLandId(@PathVariable("landId") long landId) {
-        List<ProductDTO> productsDTO = productService.getProductsByLandId(landId);
-        if (productsDTO.isEmpty()) {
+        List<ProductDTO> productDTOs = productService.getProductsByLandId(landId);
+        if (productDTOs.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(productsDTO, HttpStatus.OK);
+        return new ResponseEntity<>(productDTOs, HttpStatus.OK);
+    }
+
+    @GetMapping("/byUserId/{userId}")
+    public ResponseEntity<List<ProductDTO>> getProductsByUserId(@PathVariable("userId") long userId) {
+        List<ProductDTO> productDTOs = productService.getProductsByUserId(userId);
+        if (productDTOs.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(productDTOs, HttpStatus.OK);
     }
 
     @PostMapping()

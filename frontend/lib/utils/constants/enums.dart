@@ -9,7 +9,7 @@ enum ProductStatus { growing, harvested }
 
 enum LandType { tarla, bag, bahce }
 
-enum Times { last30days, last3months, thisYear, lastYear, speacialFilter}
+enum Times { last30days, last3months, thisYear, lastYear, specialFilter}
 
 extension LandTypeExtension on LandType {
   String get displayName {

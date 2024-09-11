@@ -5,9 +5,9 @@ class ProductDTO {
   final int? landId;
   final double? score;
   final int? productOptionId;
-  final String? productName;
-  final String? imageUrl;
-  final String? landName;
+  String? productName;
+  String? imageUrl;
+  String? landName;
   final double? area;
 
   ProductDTO({

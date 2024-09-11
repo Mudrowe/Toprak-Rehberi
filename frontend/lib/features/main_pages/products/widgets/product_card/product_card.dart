@@ -30,12 +30,15 @@ class TProductCard extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            TProductCardImage(
-              productDTO: productDTO,
-              imagePath: productDTO.imageUrl!,
+            Expanded(
+              child: TProductCardImage(
+                productDTO: productDTO,
+              ),
             ),
-            TProductProgress(
-              productDTO: productDTO,
+            Expanded(
+              child: TProductProgress(
+                productDTO: productDTO,
+              ),
             ),
           ],
         ),

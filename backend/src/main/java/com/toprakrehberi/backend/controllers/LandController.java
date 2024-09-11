@@ -75,6 +75,16 @@ public class LandController {
         }
     }
 
+    @GetMapping("/name/byId/{landId}")
+    public ResponseEntity<String> getLandNameById(@PathVariable long landId) {
+        Land land = landService.getLandById(landId);
+        if (land != null) {
+            return ResponseEntity.ok(land.getName());
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 
     @GetMapping("/byUserId/{userId}")
     public ResponseEntity<List<LandDTO>> getLandsByUserId(@PathVariable Long userId) {

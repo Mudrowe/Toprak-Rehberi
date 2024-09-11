@@ -10,5 +10,6 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByHarvestDateIsNull();
     List<Product> findByHarvestDateIsNotNull();
-    List<Product> findByLandId(Long userId);
+    List<Product> findByLandId(Long landId);
+    List<Product> findByLandIdIn(List<Long> landIds);
 }
