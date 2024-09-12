@@ -19,4 +19,6 @@ public class LandDTO {
     private String adaNo;
     private double area;
     private int landTypeId;
+    private String landTypeName;
+    private String landTypeImageUrl;
 }

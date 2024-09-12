@@ -5,7 +5,6 @@ import com.toprakrehberi.backend.dtos.NeighborhoodDTO;
 import com.toprakrehberi.backend.models.District;
 import com.toprakrehberi.backend.models.Neighborhood;
 import com.toprakrehberi.backend.services.DistrictService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +16,11 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/districts")
 public class DistrictController {
 
-    @Autowired
-    private DistrictService districtService;
+    private final DistrictService districtService;
+
+    public DistrictController(DistrictService districtService) {
+        this.districtService = districtService;
+    }
 
     @GetMapping
     public ResponseEntity<List<DistrictDTO>> getAllDistricts() {
@@ -38,7 +40,6 @@ public class DistrictController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
 
     @GetMapping("/byCity/{cityId}")
     public ResponseEntity<List<DistrictDTO>> getDistrictsByCityId(@PathVariable("cityId") int cityId) {
@@ -61,7 +62,6 @@ public class DistrictController {
                 neighborhoodIds
         );
     }
-
 
     private NeighborhoodDTO convertNeighborhoodToDTO(Neighborhood neighborhood) {
         return new NeighborhoodDTO(

@@ -13,8 +13,11 @@ import java.util.Optional;
 @RequestMapping("/api/product_option")
 public class ProductOptionController {
 
-    @Autowired
-    private ProductOptionService productOptionService;
+    private final ProductOptionService productOptionService;
+
+    public ProductOptionController(final ProductOptionService productOptionService) {
+        this.productOptionService = productOptionService;
+    }
 
     @GetMapping
     public List<ProductOption> getAllProductOptions() {

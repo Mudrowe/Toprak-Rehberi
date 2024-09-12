@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -35,6 +37,10 @@ public class Land {
     @Column(name = "area", nullable = false)
     private double area;
 
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "land_type_id", nullable = false)
-    private int landTypeId;
+    private LandType landType;
+
+    @OneToMany(mappedBy = "land", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Product> products;
 }

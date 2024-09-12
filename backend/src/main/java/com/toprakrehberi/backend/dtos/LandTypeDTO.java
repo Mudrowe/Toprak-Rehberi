@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LandTypeDTO {
+
     private int id;
     private String name;
     private String imageUrl;

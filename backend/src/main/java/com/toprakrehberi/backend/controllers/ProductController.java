@@ -17,19 +17,20 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/product")
 public class ProductController {
 
-    @Autowired
-    private ProductService productService;
+    private final ProductService productService;
+    private final LandService landService;
 
-    @Autowired
-    private LandService landService;
-
+    public ProductController(ProductService productService, LandService landService) {
+        this.productService = productService;
+        this.landService = landService;
+    }
 
     private ProductDTO convertToDTO(Product product) {
         return new ProductDTO(
                 product.getId(),
                 product.getPlantingDate(),
                 product.getHarvestDate(),
-                product.getLandId(),
+                product.getLand().getId(),
                 product.getScore(),
                 product.getProductOptionId(),
                 product.getArea(),
@@ -38,11 +39,12 @@ public class ProductController {
     }
 
     private Product convertToEntity(ProductDTO productDTO) {
+        Land land = landService.getLandById(productDTO.getLandId());
         return new Product(
                 productDTO.getId(),
                 productDTO.getPlantingDate(),
                 productDTO.getHarvestDate(),
-                productDTO.getLandId(),
+                land,
                 productDTO.getScore(),
                 productDTO.getProductOptionId(),
                 productDTO.getArea(),
@@ -107,15 +109,4 @@ public class ProductController {
         return new ResponseEntity<>(savedProductDTO, HttpStatus.CREATED);
     }
 
-
-
-    @GetMapping("/planted")
-    public List<ProductDTO> getPlantedProducts() {
-        return productService.getPlantedProducts();
-    }
-
-    @GetMapping("/harvested")
-    public List<ProductDTO> getHarvestedProducts() {
-        return productService.getHarvestedProducts();
-    }
 }

@@ -15,8 +15,11 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/neighborhoods")
 public class NeighborhoodController {
 
-    @Autowired
-    private NeighborhoodService neighborhoodService;
+    private final NeighborhoodService neighborhoodService;
+
+    public NeighborhoodController(NeighborhoodService neighborhoodService) {
+        this.neighborhoodService = neighborhoodService;
+    }
 
     @GetMapping
     public ResponseEntity<List<NeighborhoodDTO>> getAllNeighborhoods() {

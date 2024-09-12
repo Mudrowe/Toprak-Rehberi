@@ -2,15 +2,18 @@ package com.toprakrehberi.backend.services;
 
 import com.toprakrehberi.backend.models.District;
 import com.toprakrehberi.backend.repositories.DistrictRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class DistrictService {
-    @Autowired
-    private DistrictRepository districtRepository;
+
+    private final DistrictRepository districtRepository;
+
+    public DistrictService(DistrictRepository districtRepository) {
+        this.districtRepository = districtRepository;
+    }
 
     public List<District> getAllDistricts() {
         return districtRepository.findAll();

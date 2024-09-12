@@ -10,7 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class NeighborhoodDTO {
+
     private int id;
     private String name;
-    private int districtId; // Reference to the district ID
+    private int districtId;
 }

@@ -46,17 +46,20 @@ class _TAddLandFormState extends State<TAddLandForm> {
     try {
       List<CityDTO> cities = await fetchCities();
       List<LandTypeDTO> landTypes = await fetchLandTypes();
-      setState(() {
-        _cities = cities;
-        _landTypes = landTypes;
-      });
+      if (mounted) {
+        setState(() {
+          _cities = cities;
+          _landTypes = landTypes;
+        });
+      }
     } catch (error) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to load initial data: $error')),
-      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to load initial data: $error')),
+        );
+      }
     }
   }
-
 
   void _onCityChanged(CityDTO? selectedCity) async {
     setState(() {
@@ -67,13 +70,17 @@ class _TAddLandFormState extends State<TAddLandForm> {
     if (selectedCity != null) {
       try {
         List<DistrictDTO> districts = await fetchDistricts(selectedCity.id);
-        setState(() {
-          _districts = districts;
-        });
+        if (mounted) {
+          setState(() {
+            _districts = districts;
+          });
+        }
       } catch (error) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to load districts: $error')),
-        );
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Failed to load districts: $error')),
+          );
+        }
       }
     }
   }
@@ -86,18 +93,23 @@ class _TAddLandFormState extends State<TAddLandForm> {
     if (selectedDistrict != null) {
       try {
         List<NeighborhoodDTO> neighborhoods = await fetchNeighborhoods(selectedDistrict.id);
-        setState(() {
-          _neighborhoods = neighborhoods;
-        });
+        if (mounted) {
+          setState(() {
+            _neighborhoods = neighborhoods;
+          });
+        }
       } catch (error) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to load neighborhoods: $error')),
-        );
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Failed to load neighborhoods: $error')),
+          );
+        }
       }
     }
   }
 
-  void _saveForm(BuildContext context) {
+
+  void _saveForm(BuildContext context) async {
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
 
@@ -112,15 +124,23 @@ class _TAddLandFormState extends State<TAddLandForm> {
         landTypeId: _landType?.id,
       );
 
-      addLand(land).then((_) {
-        ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Arazi başarıyla kaydedildi!')));
-      }).catchError((error) {
-        ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Arazi kaydedilemedi.')));
-      });
+      try {
+        await addLand(land);
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Arazi başarıyla kaydedildi!')),
+          );
+        }
+      } catch (error) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Arazi kaydedilemedi.')),
+          );
+        }
+      }
     }
   }
+
 
   @override
   Widget build(BuildContext context) {

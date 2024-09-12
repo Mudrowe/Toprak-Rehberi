@@ -16,7 +16,7 @@ public class ProductDTO {
     private long id;
     private LocalDate plantingDate;
     private LocalDate harvestDate;
-    private Long landId; // Reference to the land ID
+    private Long landId;
     private double score;
     private Long productOptionId;
     private double area;

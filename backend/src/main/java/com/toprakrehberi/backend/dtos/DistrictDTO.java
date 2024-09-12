@@ -15,6 +15,6 @@ public class DistrictDTO {
 
     private short id;
     private String name;
-    private int cityId; // Reference to the city ID
-    private List<Integer> neighborhoodIds; // List of neighborhood IDs
+    private int cityId;
+    private List<Integer> neighborhoodIds;
 }

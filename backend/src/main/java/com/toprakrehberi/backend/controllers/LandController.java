@@ -2,6 +2,7 @@ package com.toprakrehberi.backend.controllers;
 
 import com.toprakrehberi.backend.dtos.LandDTO;
 import com.toprakrehberi.backend.models.Land;
+import com.toprakrehberi.backend.models.LandType;
 import com.toprakrehberi.backend.services.LandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,8 +16,11 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/land")
 public class LandController {
 
-    @Autowired
-    private LandService landService;
+    private final LandService landService;
+
+    public LandController(LandService landService) {
+        this.landService = landService;
+    }
 
     private LandDTO convertToDTO(Land land) {
         return new LandDTO(
@@ -27,7 +31,9 @@ public class LandController {
                 land.getParcelNo(),
                 land.getAdaNo(),
                 land.getArea(),
-                land.getLandTypeId()
+                land.getLandType().getId(),
+                land.getLandType().getName(),
+                land.getLandType().getImageUrl()
         );
     }
 
@@ -40,7 +46,11 @@ public class LandController {
         land.setParcelNo(landDTO.getParcelNo());
         land.setAdaNo(landDTO.getAdaNo());
         land.setArea(landDTO.getArea());
-        land.setLandTypeId(landDTO.getLandTypeId());
+
+        LandType landType = landService.getLandTypeById(landDTO.getLandTypeId());
+        if (landType != null) {
+            land.setLandType(landType);
+        }
 
         return land;
     }
@@ -89,7 +99,6 @@ public class LandController {
     @GetMapping("/byUserId/{userId}")
     public ResponseEntity<List<LandDTO>> getLandsByUserId(@PathVariable Long userId) {
         List<Land> lands = landService.getLandsByUserId(userId);
-
         List<LandDTO> landDTOs = lands.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
