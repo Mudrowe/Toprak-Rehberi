@@ -26,16 +26,16 @@ public class LandTypeController {
         List<LandTypeDTO> landTypeDTOs = landTypes.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
-        return new ResponseEntity<>(landTypeDTOs, HttpStatus.OK);
+        return ResponseEntity.ok(landTypeDTOs);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<LandTypeDTO> getLandTypeById(@PathVariable("id") int id) {
         LandType landType = landTypeService.getLandTypeById(id);
         if (landType != null) {
-            return new ResponseEntity<>(convertToDTO(landType), HttpStatus.OK);
+            return ResponseEntity.ok(convertToDTO(landType));
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 

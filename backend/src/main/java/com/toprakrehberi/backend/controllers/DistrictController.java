@@ -22,34 +22,6 @@ public class DistrictController {
         this.districtService = districtService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<DistrictDTO>> getAllDistricts() {
-        List<District> districts = districtService.getAllDistricts();
-        List<DistrictDTO> districtDTOs = districts.stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
-        return new ResponseEntity<>(districtDTOs, HttpStatus.OK);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<DistrictDTO> getDistrictById(@PathVariable("id") short id) {
-        District district = districtService.getDistrictByID(id);
-        if (district != null) {
-            return new ResponseEntity<>(convertToDTO(district), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @GetMapping("/byCity/{cityId}")
-    public ResponseEntity<List<DistrictDTO>> getDistrictsByCityId(@PathVariable("cityId") int cityId) {
-        List<District> districts = districtService.getDistrictsByCityId(cityId);
-        List<DistrictDTO> districtDTOs = districts.stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
-        return new ResponseEntity<>(districtDTOs, HttpStatus.OK);
-    }
-
     private DistrictDTO convertToDTO(District district) {
         List<Integer> neighborhoodIds = district.getNeighborhoods().stream()
                 .map(Neighborhood::getId)
@@ -70,4 +42,34 @@ public class DistrictController {
                 neighborhood.getDistrict().getId()
         );
     }
+
+    @GetMapping
+    public ResponseEntity<List<DistrictDTO>> getAllDistricts() {
+        List<District> districts = districtService.getAllDistricts();
+        List<DistrictDTO> districtDTOs = districts.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(districtDTOs);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DistrictDTO> getDistrictById(@PathVariable("id") short id) {
+        District district = districtService.getDistrictByID(id);
+        if (district != null) {
+            return ResponseEntity.ok(convertToDTO(district));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+    @GetMapping("/byCity/{cityId}")
+    public ResponseEntity<List<DistrictDTO>> getDistrictsByCityId(@PathVariable("cityId") int cityId) {
+        List<District> districts = districtService.getDistrictsByCityId(cityId);
+        List<DistrictDTO> districtDTOs = districts.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(districtDTOs);
+    }
+
+
 }

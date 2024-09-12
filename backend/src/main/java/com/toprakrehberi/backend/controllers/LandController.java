@@ -4,7 +4,6 @@ import com.toprakrehberi.backend.dtos.LandDTO;
 import com.toprakrehberi.backend.models.Land;
 import com.toprakrehberi.backend.models.LandType;
 import com.toprakrehberi.backend.services.LandService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -61,16 +60,16 @@ public class LandController {
         List<LandDTO> landDTOs = lands.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
-        return new ResponseEntity<>(landDTOs, HttpStatus.OK);
+        return ResponseEntity.ok(landDTOs);
     }
 
     @GetMapping("/byId/{id}")
     public ResponseEntity<LandDTO> getLandById(@PathVariable("id") long id) {
         Land land = landService.getLandById(id);
         if (land != null) {
-            return new ResponseEntity<>(convertToDTO(land), HttpStatus.OK);
+            return ResponseEntity.ok(convertToDTO(land));
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 
@@ -79,9 +78,9 @@ public class LandController {
     public ResponseEntity<LandDTO> getLandByName(@PathVariable String name) {
         Land land = landService.getLandByName(name);
         if (land != null) {
-            return new ResponseEntity<>(convertToDTO(land), HttpStatus.OK);
+            return ResponseEntity.ok(convertToDTO(land));
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 
@@ -91,7 +90,7 @@ public class LandController {
         if (land != null) {
             return ResponseEntity.ok(land.getName());
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 
@@ -117,6 +116,6 @@ public class LandController {
 
         System.out.println("Saved LandDTO: " + savedLandDTO);
 
-        return new ResponseEntity<>(savedLandDTO, HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedLandDTO);
     }
 }

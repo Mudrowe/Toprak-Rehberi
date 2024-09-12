@@ -3,10 +3,7 @@ package com.toprakrehberi.backend.controllers;
 import com.toprakrehberi.backend.auth.RegisterRequest;
 import com.toprakrehberi.backend.dtos.UserDTO;
 import com.toprakrehberi.backend.models.User;
-import com.toprakrehberi.backend.models.Land;
-import com.toprakrehberi.backend.repositories.UserRepository;
 import com.toprakrehberi.backend.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -14,8 +11,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -26,25 +21,6 @@ public class UserController {
 
     public UserController(UserService userService) {
         this.userService = userService;
-    }
-
-    @GetMapping
-    public ResponseEntity<List<UserDTO>> getAllUsers() {
-        List<User> users = userService.getAllUsers();
-        List<UserDTO> userDTOs = users.stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
-        return new ResponseEntity<>(userDTOs, HttpStatus.OK);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<UserDTO> getUserById(@PathVariable("id") long id) {
-        User user = userService.getUserById(id);
-        if (user != null) {
-            return new ResponseEntity<>(convertToDTO(user), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
     }
 
     private UserDTO convertToDTO(User user) {
@@ -75,6 +51,25 @@ public class UserController {
         return user;
     }
 
+    @GetMapping
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        List<User> users = userService.getAllUsers();
+        List<UserDTO> userDTOs = users.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(userDTOs);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDTO> getUserById(@PathVariable("id") long id) {
+        User user = userService.getUserById(id);
+        if (user != null) {
+            return ResponseEntity.ok(convertToDTO(user));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
     @PostMapping("/register")
     public ResponseEntity<UserDTO> registerUser(@RequestBody RegisterRequest registerRequest) {
         System.out.println("Received UserDTO: " + registerRequest.toString());
@@ -84,7 +79,7 @@ public class UserController {
         UserDTO savedUserDTO = convertToDTO(savedUser);
         System.out.println("Saved UserDTO: " + savedUserDTO);
 
-        return new ResponseEntity<>(savedUserDTO, HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedUserDTO);
     }
 
     @GetMapping("/byEmail/{email}")
@@ -92,9 +87,9 @@ public class UserController {
         User user = userService.getUserByEmail(email);
         System.out.println(user.toString());
         if (user != null) {
-            return new ResponseEntity<>(convertToDTO(user), HttpStatus.OK);
+            return ResponseEntity.ok(convertToDTO(user));
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 

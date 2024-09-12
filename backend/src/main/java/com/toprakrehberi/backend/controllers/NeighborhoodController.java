@@ -3,7 +3,6 @@ package com.toprakrehberi.backend.controllers;
 import com.toprakrehberi.backend.dtos.NeighborhoodDTO;
 import com.toprakrehberi.backend.models.Neighborhood;
 import com.toprakrehberi.backend.services.NeighborhoodService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +26,7 @@ public class NeighborhoodController {
         List<NeighborhoodDTO> neighborhoodDTOs = neighborhoods.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
-        return new ResponseEntity<>(neighborhoodDTOs, HttpStatus.OK);
+        return ResponseEntity.ok(neighborhoodDTOs);
     }
 
     @GetMapping("/{id}")
@@ -36,7 +35,7 @@ public class NeighborhoodController {
         if (neighborhood != null) {
             return new ResponseEntity<>(convertToDTO(neighborhood), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 
@@ -46,7 +45,7 @@ public class NeighborhoodController {
         List<NeighborhoodDTO> neighborhoodDTOs = neighborhoods.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
-        return new ResponseEntity<>(neighborhoodDTOs, HttpStatus.OK);
+        return ResponseEntity.ok(neighborhoodDTOs);
     }
 
     private NeighborhoodDTO convertToDTO(Neighborhood neighborhood) {

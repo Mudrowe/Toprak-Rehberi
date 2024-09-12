@@ -3,7 +3,6 @@ package com.toprakrehberi.backend.controllers;
 import com.toprakrehberi.backend.dtos.CityDTO;
 import com.toprakrehberi.backend.models.City;
 import com.toprakrehberi.backend.services.CityService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +25,7 @@ public class CityController {
         List<CityDTO> cityDTOs = cities.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
-        return new ResponseEntity<>(cityDTOs, HttpStatus.OK);
+        return ResponseEntity.ok(cityDTOs);
     }
 
     private CityDTO convertToDTO(City city) {

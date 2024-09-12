@@ -23,7 +23,6 @@ public class NeighborhoodService {
         return neighborhoodRepository.findById(id).orElse(null);
     }
 
-
     public List<Neighborhood> getNeighborhoodsByDistrictId(int districtId) {
         return neighborhoodRepository.findByDistrictId(districtId);
     }
