@@ -26,7 +26,7 @@ public class LandController {
                 land.getNeighborhoodId(),
                 land.getParcelNo(),
                 land.getAdaNo(),
-                land.getSize(),
+                land.getArea(),
                 land.getLandTypeId()
         );
     }
@@ -39,7 +39,7 @@ public class LandController {
         land.setNeighborhoodId(landDTO.getNeighborhoodId());
         land.setParcelNo(landDTO.getParcelNo());
         land.setAdaNo(landDTO.getAdaNo());
-        land.setSize(landDTO.getSize());
+        land.setArea(landDTO.getArea());
         land.setLandTypeId(landDTO.getLandTypeId());
 
         return land;

@@ -17,6 +17,6 @@ public class LandDTO {
     private Long neighborhoodId;
     private String parcelNo;
     private String adaNo;
-    private double size;
+    private double area;
     private int landTypeId;
 }

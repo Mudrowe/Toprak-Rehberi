@@ -56,7 +56,7 @@ class _TProductDetailsState extends State<TProductDetails> {
             children: [
               // Product Name
               Text(
-                THelperFunctions.decodeUtf8(widget.productDTO.productName!) ??
+                widget.productDTO.productName! ??
                     'Unknown',
                 style: textTheme.headlineMedium,
               ),

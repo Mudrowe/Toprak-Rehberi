@@ -51,13 +51,11 @@ class TPlantedProducts extends StatelessWidget {
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
               return const Text('No planted products available');
             } else {
-              /*
+
               // Print the DTOs to the console
               for (var productDTO in snapshot.data!) {
                 print('ProductDTO in the planted products screen: ${productDTO.toJson()}');
               }
-
-               */
 
               // Display the total number of planted products
               return Column(

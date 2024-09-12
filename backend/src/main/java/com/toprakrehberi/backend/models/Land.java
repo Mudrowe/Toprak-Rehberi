@@ -32,8 +32,8 @@ public class Land {
     @Column(name = "ada_no", nullable = false)
     private String adaNo;
 
-    @Column(name = "size", nullable = false)
-    private double size;
+    @Column(name = "area", nullable = false)
+    private double area;
 
     @JoinColumn(name = "land_type_id", nullable = false)
     private int landTypeId;

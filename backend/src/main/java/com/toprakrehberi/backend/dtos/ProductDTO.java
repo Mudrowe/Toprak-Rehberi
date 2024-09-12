@@ -19,5 +19,6 @@ public class ProductDTO {
     private Long landId; // Reference to the land ID
     private double score;
     private Long productOptionId;
-    private double size;
+    private double area;
+    private boolean isHarvested;
 }

@@ -8,7 +8,7 @@ class ProductDTO {
   String? productName;
   String? imageUrl;
   String? landName;
-  final double? area;
+  double? area;
 
   ProductDTO({
     this.id,
@@ -51,7 +51,7 @@ class ProductDTO {
       productName: json['productName'],
       imageUrl: json['imageUrl'],
       landName: json['landName'],
-      area: json['size']
+      area: json['area']
     );
   }
 
@@ -64,6 +64,6 @@ class ProductDTO {
     'productOptionId': productOptionId,
     'productName': productName,
     'imageUrl': imageUrl,
-    'size': area,
+    'area': area,
   };
 }

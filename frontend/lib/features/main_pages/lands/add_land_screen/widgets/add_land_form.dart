@@ -26,10 +26,8 @@ class _TAddLandFormState extends State<TAddLandForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String? _fieldName;
   LandTypeDTO? _landType;
-  CityDTO? _city;
-  DistrictDTO? _district;
   NeighborhoodDTO? _neighborhood;
-  double? _size;
+  double? _area;
   String? _parcelNo;
   String? _adaNo;
 
@@ -62,10 +60,8 @@ class _TAddLandFormState extends State<TAddLandForm> {
 
   void _onCityChanged(CityDTO? selectedCity) async {
     setState(() {
-      _city = selectedCity;
       _districts = [];
       _neighborhoods = [];
-      _district = null;
       _neighborhood = null;
     });
     if (selectedCity != null) {
@@ -84,7 +80,6 @@ class _TAddLandFormState extends State<TAddLandForm> {
 
   void _onDistrictChanged(DistrictDTO? selectedDistrict) async {
     setState(() {
-      _district = selectedDistrict;
       _neighborhoods = [];
       _neighborhood = null;
     });
@@ -113,7 +108,7 @@ class _TAddLandFormState extends State<TAddLandForm> {
         neighborhoodId: _neighborhood?.id,
         parcelNo: _parcelNo!,
         adaNo: _adaNo!,
-        size: _size!,
+        area: _area!,
         landTypeId: _landType?.id,
       );
 
@@ -217,10 +212,10 @@ class _TAddLandFormState extends State<TAddLandForm> {
           // Size
           TextFormField(
             decoration: const InputDecoration(
-              labelText: '${TTexts.size} (${TTexts.squareSymbol})',
+              labelText: '${TTexts.area} (${TTexts.squareSymbol})',
             ),
             onSaved: (String? value) {
-              _size = double.tryParse(value ?? '');
+              _area = double.tryParse(value ?? '');
             },
           ),
 

@@ -34,6 +34,9 @@ public class Product {
     @Column(name = "product_option_id")
     private Long productOptionId;
 
-    @Column(name = "size")
-    private double size;
+    @Column(name = "area")
+    private double area;
+
+    @Column(name = "is_harvested", nullable = false)
+    private boolean isHarvested;
 }

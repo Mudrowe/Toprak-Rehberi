@@ -27,7 +27,7 @@ class Land {
     return Land(
       landName: json['name'],
       landType: LandType.values[json['landTypeId']],
-      area: json['size'],
+      area: json['area'],
       plantedArea: json['plantedArea'],
       isPlanted: json['isPlanted'] ?? false,
       address: Address.fromJson(json['address']),

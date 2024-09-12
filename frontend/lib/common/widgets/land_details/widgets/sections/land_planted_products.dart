@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/features/main_pages/products/widgets/product_card/product_card.dart';
 import 'package:toprak_rehberi/models/land.dart';
@@ -17,8 +19,14 @@ class TLandPlantedProducts extends StatelessWidget {
 
   Future<List<ProductDTO>> _fetchProducts() async {
     int landId = (await fetchLandByName(land.landName)).id!;
+    List<ProductDTO> products = await fetchProductsByLandId(landId);
 
-    return fetchProductsByLandId(landId);
+    for (var product in products) {
+      product.productName = THelperFunctions.decodeUtf8(product.productName!);
+    }
+
+    return products;
+
   }
 
   @override
@@ -44,6 +52,10 @@ class TLandPlantedProducts extends StatelessWidget {
             ],
           );
         } else {
+
+          for (var product in snapshot.data!) {
+            print('Sending ProductDTO JSON 1: ${jsonEncode(product.toJson())}');
+          }
           return Column(
             children: [
               const Text(TTexts.plantedProducts),

@@ -32,7 +32,8 @@ public class ProductController {
                 product.getLandId(),
                 product.getScore(),
                 product.getProductOptionId(),
-                product.getSize()
+                product.getArea(),
+                product.isHarvested()
         );
     }
 
@@ -44,7 +45,8 @@ public class ProductController {
                 productDTO.getLandId(),
                 productDTO.getScore(),
                 productDTO.getProductOptionId(),
-                productDTO.getSize()
+                productDTO.getArea(),
+                productDTO.isHarvested()
         );
     }
 

@@ -42,7 +42,7 @@ class TLandDetailsColumn extends StatelessWidget {
           value: land.address.parcelNo,
         ),
         TBuildLandInfoRow(
-          label: TTexts.size,
+          label: TTexts.area,
           value: '${land.area.toInt().toString()} ${TTexts.squareSymbol}',
         ),
         TBuildLandInfoRow(

@@ -8,7 +8,7 @@ class LandDTO {
   final int? neighborhoodId;
   final String parcelNo;
   final String adaNo;
-  final double size;
+  final double area;
   final int? landTypeId;
 
   LandDTO({
@@ -18,7 +18,7 @@ class LandDTO {
     this.neighborhoodId,
     required this.parcelNo,
     required this.adaNo,
-    required this.size,
+    required this.area,
     required this.landTypeId,
   });
 
@@ -31,7 +31,7 @@ class LandDTO {
           json['neighborhoodId'],
       parcelNo: json['parcelNo'],
       adaNo: json['adaNo'],
-      size: json['size'].toDouble(),
+      area: json['area'].toDouble(),
       landTypeId: json['landTypeId'],
     );
   }
@@ -43,7 +43,7 @@ class LandDTO {
         'neighborhoodId': neighborhoodId,
         'parcelNo': parcelNo,
         'adaNo': adaNo,
-        'size': size,
+        'area': area,
         'landTypeId': landTypeId,
       };
 }
@@ -67,7 +67,7 @@ Land convertLandDTOToLand(LandDTO landDTO, Address address) {
   return Land(
     landName: landDTO.name,
     landType: landType,
-    area: landDTO.size,
+    area: landDTO.area,
     plantedArea: 0.0, // Default or computed value
     isPlanted: false, // Default or computed value
     address: address,

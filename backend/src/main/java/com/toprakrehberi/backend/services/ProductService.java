@@ -25,7 +25,8 @@ public class ProductService {
                 product.getLandId(),
                 product.getScore(),
                 product.getProductOptionId(),
-                product.getSize()
+                product.getArea(),
+                product.isHarvested()
         );
     }
 
@@ -37,7 +38,8 @@ public class ProductService {
         product.setLandId(productDTO.getLandId());
         product.setScore(productDTO.getScore());
         product.setProductOptionId(productDTO.getProductOptionId());
-        product.setSize(productDTO.getSize());
+        product.setArea(productDTO.getArea());
+        product.setHarvested(productDTO.isHarvested());
 
         return product;
     }
