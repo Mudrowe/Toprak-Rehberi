@@ -44,7 +44,7 @@ class _TLoginFormState extends State<TLoginForm> {
     });
 
     var ipAddress = dotenv.env['IP_ADDRESS'];
-    var baseUrl = 'http://$ipAddress:8080/api/v1/auth/authenticate';
+    var baseUrl = 'http://$ipAddress:8080/api/auth/authenticate';
 
     try {
       final response = await http.post(

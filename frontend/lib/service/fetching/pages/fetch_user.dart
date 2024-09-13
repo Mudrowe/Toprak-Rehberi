@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toprak_rehberi/dtos/UserDTO.dart';
 
-
 Future<UserDTO> fetchUser() async {
   var ipAddress = dotenv.env['IP_ADDRESS'];
   var baseUrl = 'http://$ipAddress:8080/api/user/me';
@@ -15,10 +14,13 @@ Future<UserDTO> fetchUser() async {
   String? token = prefs.getString('authToken');
 
   try {
-    final response = await http.get(url, headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer $token',
-    });
+    final response = await http.get(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
 
     if (response.statusCode == 200) {
       return UserDTO.fromJson(json.decode(response.body));
@@ -33,7 +35,7 @@ Future<UserDTO> fetchUser() async {
 
 Future<int?> getUserIdByEmail(String email) async {
   var ipAddress = dotenv.env['IP_ADDRESS'];
-  var baseUrl = 'http://$ipAddress:8080/api/v1/user/byEmail/$email';
+  var baseUrl = 'http://$ipAddress:8080/api/user/byEmail/$email';
   final url = Uri.parse(baseUrl);
 
   // Get token from SharedPreferences
@@ -41,10 +43,13 @@ Future<int?> getUserIdByEmail(String email) async {
   String? token = prefs.getString('authToken');
 
   try {
-    final response = await http.get(url, headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer $token',
-    });
+    final response = await http.get(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
 
     if (response.statusCode == 200) {
       Map<String, dynamic> data = jsonDecode(response.body);
@@ -86,9 +91,6 @@ Future<String> extractEmailFromToken(String token) async {
 Future<int?> getUserId(String token) async {
   // Extract email from the token
   String? email = await extractEmailFromToken(token);
-  if (email == null) {
-    throw Exception('Failed to extract email from token');
-  }
 
   // Fetch user ID using email
   final userId = await getUserIdByEmail(email);

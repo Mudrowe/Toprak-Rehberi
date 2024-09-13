@@ -1,10 +1,10 @@
-package com.toprakrehberi.backend.controllers;
+package com.toprakrehberi.backend.controllers.location;
 
-import com.toprakrehberi.backend.dtos.DistrictDTO;
-import com.toprakrehberi.backend.dtos.NeighborhoodDTO;
-import com.toprakrehberi.backend.models.District;
-import com.toprakrehberi.backend.models.Neighborhood;
-import com.toprakrehberi.backend.services.DistrictService;
+import com.toprakrehberi.backend.dtos.location.DistrictDTO;
+import com.toprakrehberi.backend.dtos.location.NeighborhoodDTO;
+import com.toprakrehberi.backend.models.location.District;
+import com.toprakrehberi.backend.models.location.Neighborhood;
+import com.toprakrehberi.backend.services.location.DistrictService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

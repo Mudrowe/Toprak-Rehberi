@@ -16,9 +16,9 @@ public class ProductDTO {
     private long id;
     private LocalDate plantingDate;
     private LocalDate harvestDate;
-    private Long landId;
+    private LandDTO land;
     private double score;
-    private Long productOptionId;
+    private ProductOptionDTO productOption;
     private double area;
     private boolean isHarvested;
 }

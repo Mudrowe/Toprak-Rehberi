@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/user")
 public class UserController {
 
     private final UserService userService;
@@ -24,20 +24,12 @@ public class UserController {
     }
 
     private UserDTO convertToDTO(User user) {
-        /* Convert lands to their IDs
-        Set<Long> landIds = user.getLands().stream()
-                .map(Land::getId)
-                .collect(Collectors.toSet());
-         */
-
         return new UserDTO(
                 user.getId(),
                 user.getFirstName(),
                 user.getLastName(),
                 user.getEmail(),
-                user.getPhoneNumber(),
-                //landIds,
-                user.getPassword()
+                user.getPhoneNumber()
         );
     }
 
@@ -47,7 +39,6 @@ public class UserController {
         user.setLastName(registerRequest.getLastName());
         user.setEmail(registerRequest.getEmail());
         user.setPhoneNumber(registerRequest.getPhoneNumber());
-        user.setPassword(registerRequest.getPassword());
         return user;
     }
 

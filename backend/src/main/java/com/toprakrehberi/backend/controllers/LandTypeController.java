@@ -1,6 +1,7 @@
 package com.toprakrehberi.backend.controllers;
 
 import com.toprakrehberi.backend.dtos.LandTypeDTO;
+import com.toprakrehberi.backend.dtos.UserDTO;
 import com.toprakrehberi.backend.models.LandType;
 import com.toprakrehberi.backend.services.LandTypeService;
 import org.springframework.http.HttpStatus;
@@ -46,4 +47,5 @@ public class LandTypeController {
                 landType.getImageUrl()
         );
     }
+
 }

@@ -1,4 +1,4 @@
-package com.toprakrehberi.backend.models;
+package com.toprakrehberi.backend.models.location;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;

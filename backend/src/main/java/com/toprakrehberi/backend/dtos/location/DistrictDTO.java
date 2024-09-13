@@ -1,16 +1,20 @@
-package com.toprakrehberi.backend.dtos;
+package com.toprakrehberi.backend.dtos.location;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CityDTO {
+public class DistrictDTO {
 
-    private byte id;
+    private short id;
     private String name;
+    private int cityId;
+    private List<Integer> neighborhoodIds;
 }

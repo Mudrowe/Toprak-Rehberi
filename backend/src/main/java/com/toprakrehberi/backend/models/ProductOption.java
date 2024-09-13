@@ -1,4 +1,5 @@
 package com.toprakrehberi.backend.models;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,7 +23,7 @@ public class ProductOption {
     @Column(nullable = false)
     private int plantingDuration;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String imageUrl;
 
 }

@@ -32,8 +32,9 @@ public class Product {
     @Column(name = "score")
     private double score;
 
-    @Column(name = "product_option_id")
-    private Long productOptionId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_option_id", nullable = false)
+    private ProductOption productOption;
 
     @Column(name = "area")
     private double area;

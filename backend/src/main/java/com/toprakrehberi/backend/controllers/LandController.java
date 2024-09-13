@@ -1,9 +1,15 @@
 package com.toprakrehberi.backend.controllers;
 
 import com.toprakrehberi.backend.dtos.LandDTO;
+import com.toprakrehberi.backend.dtos.LandTypeDTO;
+import com.toprakrehberi.backend.dtos.location.NeighborhoodDTO;
 import com.toprakrehberi.backend.models.Land;
 import com.toprakrehberi.backend.models.LandType;
+import com.toprakrehberi.backend.models.location.Neighborhood;
 import com.toprakrehberi.backend.services.LandService;
+import com.toprakrehberi.backend.services.LandTypeService;
+import com.toprakrehberi.backend.services.location.NeighborhoodService;
+import com.toprakrehberi.backend.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,40 +22,49 @@ import java.util.stream.Collectors;
 public class LandController {
 
     private final LandService landService;
+    private final LandTypeService landTypeService;
+    private final NeighborhoodService neighborhoodService;
+    private final UserService userService;
 
-    public LandController(LandService landService) {
+    public LandController(LandService landService, LandTypeService landTypeService, NeighborhoodService neighborhoodService, UserService userService) {
         this.landService = landService;
+        this.landTypeService = landTypeService;
+        this.neighborhoodService = neighborhoodService;
+        this.userService = userService;
     }
 
     private LandDTO convertToDTO(Land land) {
         return new LandDTO(
                 land.getId(),
-                land.getUserId(),
+                land.getUser().getId(),
                 land.getName(),
-                land.getNeighborhoodId(),
+                new NeighborhoodDTO(land.getNeighborhood().getId(), land.getNeighborhood().getName()),
                 land.getParcelNo(),
                 land.getAdaNo(),
                 land.getArea(),
-                land.getLandType().getId(),
-                land.getLandType().getName(),
-                land.getLandType().getImageUrl()
+                new LandTypeDTO(land.getLandType().getId(), land.getLandType().getName(), land.getLandType().getImageUrl())
         );
     }
 
     private Land convertToEntity(LandDTO landDTO) {
         Land land = new Land();
         land.setId(landDTO.getId());
-        land.setUserId(landDTO.getUserId());
+        land.setUser(userService.getUserById(landDTO.getUserId()));
         land.setName(landDTO.getName());
-        land.setNeighborhoodId(landDTO.getNeighborhoodId());
-        land.setParcelNo(landDTO.getParcelNo());
-        land.setAdaNo(landDTO.getAdaNo());
-        land.setArea(landDTO.getArea());
 
-        LandType landType = landService.getLandTypeById(landDTO.getLandTypeId());
+        Neighborhood neighborhood = neighborhoodService.getNeighborhoodById(landDTO.getNeighborhood().getId());
+        if (neighborhood != null) {
+            land.setNeighborhood(neighborhood);
+        }
+
+        LandType landType = landTypeService.getLandTypeById(landDTO.getLandType().getId());
         if (landType != null) {
             land.setLandType(landType);
         }
+
+        land.setParcelNo(landDTO.getParcelNo());
+        land.setAdaNo(landDTO.getAdaNo());
+        land.setArea(landDTO.getArea());
 
         return land;
     }
@@ -73,7 +88,6 @@ public class LandController {
         }
     }
 
-
     @GetMapping("/byName/{name}")
     public ResponseEntity<LandDTO> getLandByName(@PathVariable String name) {
         Land land = landService.getLandByName(name);
@@ -93,7 +107,6 @@ public class LandController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
-
 
     @GetMapping("/byUserId/{userId}")
     public ResponseEntity<List<LandDTO>> getLandsByUserId(@PathVariable Long userId) {

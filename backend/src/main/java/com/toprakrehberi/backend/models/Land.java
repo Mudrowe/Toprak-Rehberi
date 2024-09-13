@@ -1,5 +1,6 @@
 package com.toprakrehberi.backend.models;
 
+import com.toprakrehberi.backend.models.location.Neighborhood;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,14 +20,17 @@ public class Land {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // Many lands belong to one user
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
-    private long userId;
+    private User user;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "neighborhood_id", nullable = false)
-    private Long neighborhoodId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "neighborhood_id", nullable = false)
+    private Neighborhood neighborhood;
 
     @Column(name = "parcel_no", nullable = false)
     private String parcelNo;

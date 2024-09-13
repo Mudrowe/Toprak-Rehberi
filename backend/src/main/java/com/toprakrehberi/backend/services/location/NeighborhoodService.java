@@ -1,7 +1,7 @@
-package com.toprakrehberi.backend.services;
+package com.toprakrehberi.backend.services.location;
 
-import com.toprakrehberi.backend.models.Neighborhood;
-import com.toprakrehberi.backend.repositories.NeighborhoodRepository;
+import com.toprakrehberi.backend.models.location.Neighborhood;
+import com.toprakrehberi.backend.repositories.location.NeighborhoodRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

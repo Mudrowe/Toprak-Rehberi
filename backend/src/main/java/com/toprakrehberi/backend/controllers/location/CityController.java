@@ -1,8 +1,8 @@
-package com.toprakrehberi.backend.controllers;
+package com.toprakrehberi.backend.controllers.location;
 
-import com.toprakrehberi.backend.dtos.CityDTO;
-import com.toprakrehberi.backend.models.City;
-import com.toprakrehberi.backend.services.CityService;
+import com.toprakrehberi.backend.dtos.location.CityDTO;
+import com.toprakrehberi.backend.models.location.City;
+import com.toprakrehberi.backend.services.location.CityService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +19,11 @@ public class CityController {
         this.cityService = cityService;
     }
 
+
+    private CityDTO convertToDTO(City city) {
+        return new CityDTO(city.getId(), city.getName());
+    }
+
     @GetMapping
     public ResponseEntity<List<CityDTO>> getAllCities() {
         List<City> cities = cityService.getAllCities();
@@ -28,7 +33,4 @@ public class CityController {
         return ResponseEntity.ok(cityDTOs);
     }
 
-    private CityDTO convertToDTO(City city) {
-        return new CityDTO(city.getId(), city.getName());
-    }
 }

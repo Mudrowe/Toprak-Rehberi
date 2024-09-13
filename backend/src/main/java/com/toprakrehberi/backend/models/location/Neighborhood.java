@@ -1,4 +1,4 @@
-package com.toprakrehberi.backend.models;
+package com.toprakrehberi.backend.models.location;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
