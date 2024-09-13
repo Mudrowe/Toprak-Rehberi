@@ -27,12 +27,12 @@ class TLandCardInfo extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
               Text(
-                land.address.city,
+                land.address.city.name,
                 style: textTheme.bodyMedium,
                 overflow: TextOverflow.ellipsis,
               ),
               Text(
-                land.address.district,
+                land.address.district.name,
                 style: textTheme.bodyMedium,
                 overflow: TextOverflow.ellipsis,
               ),

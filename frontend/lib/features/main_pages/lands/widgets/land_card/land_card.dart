@@ -40,7 +40,7 @@ class TLandCard extends StatelessWidget {
               children: [
                 // Land Type Image
                 Image.asset(
-                  land.landType.imagePath,
+                  land.landType.imageUrl,
                   height: TSizes.typeImageHeight,
                   width: TSizes.typeImageWidth,
                 ),

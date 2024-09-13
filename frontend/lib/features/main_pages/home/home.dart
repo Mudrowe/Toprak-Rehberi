@@ -1,16 +1,12 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:toprak_rehberi/features/main_pages/home/widgets/card_slider.dart';
-import 'package:toprak_rehberi/features/main_pages/home/widgets/product_card_home.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
 import '../../../dtos/LandDTO.dart';
-import '../../../dtos/ProductDTO.dart';
 import '../../../service/fetching/pages/fetch_lands.dart';
-import '../../../service/fetching/pages/fetch_products.dart';
 
 // TODO: So, Stats are not compatible with products in the productsScreen
 

@@ -25,6 +25,7 @@ Future<UserDTO> fetchUser() async {
     );
 
     if (response.statusCode == 200) {
+      print('Response body in fetchUser: ${response.body}');
       return UserDTO.fromJson(json.decode(response.body));
     } else {
       print('Failed with status code: ${response.statusCode}');

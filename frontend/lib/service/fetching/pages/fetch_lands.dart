@@ -55,6 +55,12 @@ Future<List<LandDTO>> fetchLandsByUserId(int userId) async {
 
   if (response.statusCode == 200) {
     final List<dynamic> landsJson = json.decode(response.body);
+
+    // Print the received JSON
+    for (var landJson in landsJson) {
+      print('Land JSON: $landJson');
+    }
+
     return landsJson.map((json) => LandDTO.fromJson(json)).toList();
 
   } else {

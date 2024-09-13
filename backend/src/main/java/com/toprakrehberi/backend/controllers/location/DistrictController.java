@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,15 +24,10 @@ public class DistrictController {
     }
 
     private DistrictDTO convertToDTO(District district) {
-        List<Integer> neighborhoodIds = district.getNeighborhoods().stream()
-                .map(Neighborhood::getId)
-                .collect(Collectors.toList());
-
         return new DistrictDTO(
                 district.getId(),
                 district.getName(),
-                district.getCity().getId(),
-                neighborhoodIds
+                district.getCity().getId()
         );
     }
 
@@ -64,12 +60,12 @@ public class DistrictController {
 
     @GetMapping("/byCity/{cityId}")
     public ResponseEntity<List<DistrictDTO>> getDistrictsByCityId(@PathVariable("cityId") int cityId) {
-        List<District> districts = districtService.getDistrictsByCityId(cityId);
+                List<District> districts = districtService.getDistrictsByCityId(cityId);
+
         List<DistrictDTO> districtDTOs = districts.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(districtDTOs);
     }
-
 
 }

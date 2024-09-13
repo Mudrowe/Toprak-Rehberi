@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
+import '../../../dtos/ProductOptionDTO.dart';
 import '../../../models/product_option.dart';
 
 Future<List<ProductOption>> fetchProductOptions() async {
@@ -34,7 +35,7 @@ Future<List<ProductOption>> fetchProductOptions() async {
   }
 }
 
-Future<ProductOption> fetchProductOptionById(int? id) async {
+Future<ProductOptionDTO> fetchProductOptionById(int? id) async {
   var ipAddress = dotenv.env['IP_ADDRESS'];
   var baseUrl = 'http://$ipAddress:8080/api/product_option/byId/$id';
 
@@ -54,7 +55,7 @@ Future<ProductOption> fetchProductOptionById(int? id) async {
   if (response.statusCode == 200) {
     final jsonData = jsonDecode(response.body);
     print('Received Product Option JSON: ${jsonEncode(jsonData)}');
-    return ProductOption.fromJson(jsonData);
+    return ProductOptionDTO.fromJson(jsonData);
   } else {
     throw Exception(
         'Failed to load product option. Status code: ${response.statusCode}');

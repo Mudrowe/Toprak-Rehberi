@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class NeighborhoodDTO {
   int id;
   final String name;

@@ -42,3 +42,35 @@ Future<List<CityDTO>> fetchCities() async {
   }
 }
 
+Future<CityDTO> fetchCityById(int cityId) async {
+  var ipAddress = dotenv.env['IP_ADDRESS'];
+  var baseUrl = 'http://$ipAddress:8080/api/cities/$cityId';
+  final url = Uri.parse(baseUrl);
+
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? token = prefs.getString('authToken');
+
+  if (token == null) {
+    throw Exception('Token is null, please log in again.');
+  }
+
+  print('Token (Fetch City by Id Function): $token');
+
+  try {
+    final response = await http.get(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return CityDTO.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed to load city');
+    }
+  } catch (e) {
+    throw Exception('Failed to fetch city: $e');
+  }
+}

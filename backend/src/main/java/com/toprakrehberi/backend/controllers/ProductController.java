@@ -37,7 +37,10 @@ public class ProductController {
                 land.getId(),
                 land.getUser().getId(),
                 land.getName(),
-                new NeighborhoodDTO(land.getNeighborhood().getId(), land.getNeighborhood().getName()),
+                new NeighborhoodDTO(
+                        land.getNeighborhood().getId(),
+                        land.getNeighborhood().getName(),
+                        land.getNeighborhood().getDistrict().getId()),
                 land.getParcelNo(),
                 land.getAdaNo(),
                 land.getArea(),

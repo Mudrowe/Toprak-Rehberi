@@ -1,10 +1,14 @@
+import 'package:toprak_rehberi/dtos/location/CityDTO.dart';
+import 'package:toprak_rehberi/dtos/location/DistrictDTO.dart';
+import 'package:toprak_rehberi/dtos/location/NeighborhoodDTO.dart';
 import 'package:toprak_rehberi/models/product.dart';
-import 'package:toprak_rehberi/utils/constants/enums.dart';
+
+import '../dtos/LandTypeDTO.dart';
 
 
 class Land {
   final String landName;
-  final LandType landType;
+  final LandTypeDTO landType;
   final double area;
   final double plantedArea;
   bool isPlanted = false;
@@ -26,7 +30,7 @@ class Land {
   factory Land.fromJson(Map<String, dynamic> json) {
     return Land(
       landName: json['name'],
-      landType: LandType.values[json['landTypeId']],
+      landType: json['landTypeId'],
       area: json['area'],
       plantedArea: json['plantedArea'],
       isPlanted: json['isPlanted'] ?? false,
@@ -37,9 +41,9 @@ class Land {
 }
 
 class Address {
-  final String city;
-  final String district;
-  final String neighborhood;
+  final CityDTO city;
+  final DistrictDTO district;
+  final NeighborhoodDTO neighborhood;
   final String parcelNo;
   final String adaNo;
 

@@ -4,7 +4,7 @@ import 'package:toprak_rehberi/utils/constants/enums.dart';
 
 
 
-
+/*
 final List<Land> landsList = [
   // 0
   Land(
@@ -78,3 +78,5 @@ final List<Land> landsList = [
     harvestedProducts: harvestedProductsList.sublist(4), // 4 5
   ),
 ];
+
+ */

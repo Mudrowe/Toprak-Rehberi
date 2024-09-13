@@ -23,15 +23,15 @@ class TLandDetailsColumn extends StatelessWidget {
         ),
         TBuildLandInfoRow(
           label: TTexts.city,
-          value: land.address.city,
+          value: land.address.city.name,
         ),
         TBuildLandInfoRow(
           label: TTexts.district,
-          value: land.address.district,
+          value: land.address.district.name,
         ),
         TBuildLandInfoRow(
           label: TTexts.neighborhood,
-          value: land.address.neighborhood,
+          value: land.address.neighborhood.name,
         ),
         TBuildLandInfoRow(
           label: TTexts.adaNo,

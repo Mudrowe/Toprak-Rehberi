@@ -8,6 +8,7 @@ import 'package:toprak_rehberi/service/fetching/constants/fetch_neighborhoods.da
 import 'package:toprak_rehberi/service/land/add_land.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
+import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
 import '../../../../../dtos/location/CityDTO.dart';
 import '../../../../../dtos/LandTypeDTO.dart';
@@ -92,7 +93,8 @@ class _TAddLandFormState extends State<TAddLandForm> {
     });
     if (selectedDistrict != null) {
       try {
-        List<NeighborhoodDTO> neighborhoods = await fetchNeighborhoods(selectedDistrict.id);
+        List<NeighborhoodDTO> neighborhoods =
+            await fetchNeighborhoods(selectedDistrict.id);
         if (mounted) {
           setState(() {
             _neighborhoods = neighborhoods;
@@ -108,7 +110,6 @@ class _TAddLandFormState extends State<TAddLandForm> {
     }
   }
 
-
   void _saveForm(BuildContext context) async {
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
@@ -117,11 +118,11 @@ class _TAddLandFormState extends State<TAddLandForm> {
 
       LandDTO land = LandDTO(
         name: _fieldName!,
-        neighborhoodId: _neighborhood?.id,
+        neighborhoodDTO: _neighborhood!,
         parcelNo: _parcelNo!,
         adaNo: _adaNo!,
         area: _area!,
-        landTypeId: _landType?.id,
+        landTypeDTO: _landType!,
       );
 
       try {
@@ -140,7 +141,6 @@ class _TAddLandFormState extends State<TAddLandForm> {
       }
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -185,7 +185,9 @@ class _TAddLandFormState extends State<TAddLandForm> {
             items: _cities.map((CityDTO city) {
               return DropdownMenuItem<CityDTO>(
                 value: city,
-                child: Text(utf8.decode(city.name.codeUnits)),
+                child: Text(
+                  THelperFunctions.decodeUtf8(city.name),
+                ),
               );
             }).toList(),
             onChanged: (CityDTO? newValue) {
@@ -201,7 +203,9 @@ class _TAddLandFormState extends State<TAddLandForm> {
             items: _districts.map((DistrictDTO district) {
               return DropdownMenuItem<DistrictDTO>(
                 value: district,
-                child: Text(utf8.decode(district.name.codeUnits)),
+                child: Text(
+                  THelperFunctions.decodeUtf8(district.name),
+                ),
               );
             }).toList(),
             onChanged: (DistrictDTO? newValue) {
@@ -217,7 +221,9 @@ class _TAddLandFormState extends State<TAddLandForm> {
             items: _neighborhoods.map((NeighborhoodDTO neighborhood) {
               return DropdownMenuItem<NeighborhoodDTO>(
                 value: neighborhood,
-                child: Text(utf8.decode(neighborhood.name.codeUnits)),
+                child: Text(
+                  THelperFunctions.decodeUtf8(neighborhood.name),
+                ),
               );
             }).toList(),
             onChanged: (NeighborhoodDTO? newValue) {
@@ -234,6 +240,7 @@ class _TAddLandFormState extends State<TAddLandForm> {
             decoration: const InputDecoration(
               labelText: '${TTexts.area} (${TTexts.squareSymbol})',
             ),
+            keyboardType: TextInputType.number,
             onSaved: (String? value) {
               _area = double.tryParse(value ?? '');
             },
@@ -244,6 +251,7 @@ class _TAddLandFormState extends State<TAddLandForm> {
           // Parcel No
           TextFormField(
             decoration: const InputDecoration(labelText: TTexts.parcelNo),
+            keyboardType: TextInputType.number,
             onSaved: (String? value) {
               _parcelNo = value;
             },
@@ -254,6 +262,7 @@ class _TAddLandFormState extends State<TAddLandForm> {
           // Ada No
           TextFormField(
             decoration: const InputDecoration(labelText: TTexts.adaNo),
+            keyboardType: TextInputType.number,
             onSaved: (String? value) {
               _adaNo = value;
             },

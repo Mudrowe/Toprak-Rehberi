@@ -18,4 +18,9 @@ public class CityService {
     public List<City> getAllCities() {
         return cityRepository.findAll();
     }
+
+    public City getCityById(byte id) {
+        return cityRepository.findById(id).orElse(null);
+    }
+
 }

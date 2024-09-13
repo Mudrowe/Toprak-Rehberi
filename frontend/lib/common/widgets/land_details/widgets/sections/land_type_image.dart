@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/styles/card_style.dart';
 import 'package:toprak_rehberi/models/land.dart';
-import 'package:toprak_rehberi/utils/constants/enums.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
 class TLandTypeImage extends StatelessWidget {
@@ -21,7 +20,7 @@ class TLandTypeImage extends StatelessWidget {
           height: TSizes.landCardHeight,
           width: TSizes.landCardWidth,
           decoration: getCardDecoration(context),
-          child: Image.asset(land.landType.imagePath),
+          child: Image.asset(land.landType.imageUrl),
         ),
 
         // Type Text
@@ -33,7 +32,7 @@ class TLandTypeImage extends StatelessWidget {
               horizontal: TSizes.md,
             ),
             decoration: getCardDecoration(context),
-            child: Text(land.landType.displayName),
+            child: Text(land.landType.name),
           ),
         ),
       ],

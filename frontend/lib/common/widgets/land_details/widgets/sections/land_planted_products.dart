@@ -21,9 +21,12 @@ class TLandPlantedProducts extends StatelessWidget {
     int landId = (await fetchLandByName(land.landName)).id!;
     List<ProductDTO> products = await fetchProductsByLandId(landId);
 
+    /*
     for (var product in products) {
       product.productName = THelperFunctions.decodeUtf8(product.productName!);
     }
+
+     */
 
     return products;
 

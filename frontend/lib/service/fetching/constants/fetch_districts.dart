@@ -41,3 +41,36 @@ Future<List<DistrictDTO>> fetchDistricts(int cityId) async {
     throw Exception('Failed to fetch districts: $e');
   }
 }
+
+Future<DistrictDTO> fetchDistrictById(int districtId) async {
+  var ipAddress = dotenv.env['IP_ADDRESS'];
+  var baseUrl = 'http://$ipAddress:8080/api/districts/$districtId';
+  final url = Uri.parse(baseUrl);
+
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? token = prefs.getString('authToken');
+
+  if (token == null) {
+    throw Exception('Token is null, please log in again.');
+  }
+
+  print('Token (Fetch District by Id Function): $token');
+
+  try {
+    final response = await http.get(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return DistrictDTO.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed to load district');
+    }
+  } catch (e) {
+    throw Exception('Failed to fetch district: $e');
+  }
+}

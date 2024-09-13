@@ -19,7 +19,6 @@ public class CityController {
         this.cityService = cityService;
     }
 
-
     private CityDTO convertToDTO(City city) {
         return new CityDTO(city.getId(), city.getName());
     }
@@ -31,6 +30,17 @@ public class CityController {
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(cityDTOs);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CityDTO> getCityById(@PathVariable byte id) {
+        City city = cityService.getCityById(id);
+        if (city != null) {
+            return ResponseEntity.ok(convertToDTO(city));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+
     }
 
 }

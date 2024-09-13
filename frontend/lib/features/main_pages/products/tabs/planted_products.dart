@@ -9,6 +9,7 @@ import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
 import '../../../../dtos/ProductDTO.dart';
+import '../../../../dtos/ProductOptionDTO.dart';
 import '../../../../service/fetching/pages/fetch_products.dart';
 
 class TPlantedProducts extends StatelessWidget {
@@ -20,11 +21,8 @@ class TPlantedProducts extends StatelessWidget {
     List<ProductDTO> products = await fetchProducts();
 
     for (var product in products) {
-      ProductOption productOption = await fetchProductOptionById(product.productOptionId);
-      String landName = await fetchLandNameById(product.landId!);
-      product.productName = THelperFunctions.decodeUtf8(productOption.name);
-      product.landName = landName;
-      product.imageUrl = productOption.imageUrl;
+      ProductOptionDTO productOptionDTO = product.productOptionDTO;
+      print(productOptionDTO.toJson());
     }
 
     return products;

@@ -39,7 +39,8 @@ class _ProductScoringScreenState extends State<ProductScoringScreen> {
         child: Center(
           child: Column(
             children: [
-              Text(widget.productDTO.productName!, style: textTheme.headlineMedium),
+              Text(widget.productDTO.land.name,
+                  style: textTheme.headlineMedium),
 
               const SizedBox(height: TSizes.spaceBtwItems),
 
@@ -50,7 +51,9 @@ class _ProductScoringScreenState extends State<ProductScoringScreen> {
 
               // Planting Date
               TProductDetailsPlantingDate(
-                  textTheme: textTheme, productDTO: widget.productDTO),
+                textTheme: textTheme,
+                productDTO: widget.productDTO,
+              ),
 
               const SizedBox(height: TSizes.spaceBtwItems),
 
@@ -61,14 +64,13 @@ class _ProductScoringScreenState extends State<ProductScoringScreen> {
                 decoration: getCardDecoration(context),
                 child: Column(
                   children: [
-                    Text(widget.productDTO.landName!),
+                    Text(widget.productDTO.land.name),
                     Text(widget.productDTO.area.toString())
                   ],
                 ),
               ),
 
               const SizedBox(height: TSizes.spaceBtwItems),
-
 
               // Score Your Harvest
               const Text(TTexts.scoreProduct),

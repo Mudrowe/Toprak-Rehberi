@@ -38,7 +38,7 @@ public class LandController {
                 land.getId(),
                 land.getUser().getId(),
                 land.getName(),
-                new NeighborhoodDTO(land.getNeighborhood().getId(), land.getNeighborhood().getName()),
+                new NeighborhoodDTO(land.getNeighborhood().getId(), land.getNeighborhood().getName(), land.getNeighborhood().getDistrict().getId()),
                 land.getParcelNo(),
                 land.getAdaNo(),
                 land.getArea(),
@@ -53,6 +53,7 @@ public class LandController {
         land.setName(landDTO.getName());
 
         Neighborhood neighborhood = neighborhoodService.getNeighborhoodById(landDTO.getNeighborhood().getId());
+        System.out.println(neighborhood.getName());
         if (neighborhood != null) {
             land.setNeighborhood(neighborhood);
         }

@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 
 @Data
 @Builder
@@ -16,5 +15,4 @@ public class DistrictDTO {
     private short id;
     private String name;
     private int cityId;
-    private List<Integer> neighborhoodIds;
 }
