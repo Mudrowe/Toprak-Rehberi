@@ -13,6 +13,8 @@ Future<UserDTO> fetchUser() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString('authToken');
 
+  print('Token in the fetchUser/me $token');
+
   try {
     final response = await http.get(
       url,
@@ -25,12 +27,14 @@ Future<UserDTO> fetchUser() async {
     if (response.statusCode == 200) {
       return UserDTO.fromJson(json.decode(response.body));
     } else {
+      print('Failed with status code: ${response.statusCode}');
       throw Exception('Failed to load user data');
     }
   } catch (e) {
     print('Error: $e');
     throw Exception('Failed to fetch user.');
   }
+
 }
 
 Future<int?> getUserIdByEmail(String email) async {

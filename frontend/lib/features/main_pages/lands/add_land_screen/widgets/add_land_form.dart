@@ -9,10 +9,10 @@ import 'package:toprak_rehberi/service/land/add_land.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
-import '../../../../../dtos/CityDTO.dart';
-import '../../../../../dtos/DistrictDTO.dart';
+import '../../../../../dtos/location/CityDTO.dart';
 import '../../../../../dtos/LandTypeDTO.dart';
-import '../../../../../dtos/NeighborhoodDTO.dart';
+import '../../../../../dtos/location/DistrictDTO.dart';
+import '../../../../../dtos/location/NeighborhoodDTO.dart';
 import '../../../../../service/fetching/constants/fetch_land_types.dart';
 
 class TAddLandForm extends StatefulWidget {

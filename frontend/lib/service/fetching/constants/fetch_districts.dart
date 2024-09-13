@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
-import '../../../dtos/DistrictDTO.dart';
+import '../../../dtos/location/DistrictDTO.dart';
 
 Future<List<DistrictDTO>> fetchDistricts(int cityId) async {
   var ipAddress = dotenv.env['IP_ADDRESS'];

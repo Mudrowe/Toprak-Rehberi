@@ -42,15 +42,6 @@ public class UserController {
         return user;
     }
 
-    @GetMapping
-    public ResponseEntity<List<UserDTO>> getAllUsers() {
-        List<User> users = userService.getAllUsers();
-        List<UserDTO> userDTOs = users.stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(userDTOs);
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable("id") long id) {
         User user = userService.getUserById(id);
@@ -61,38 +52,19 @@ public class UserController {
         }
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<UserDTO> registerUser(@RequestBody RegisterRequest registerRequest) {
-        System.out.println("Received UserDTO: " + registerRequest.toString());
-
-        User user = convertToEntity(registerRequest);
-        User savedUser = userService.saveUser(user);
-        UserDTO savedUserDTO = convertToDTO(savedUser);
-        System.out.println("Saved UserDTO: " + savedUserDTO);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedUserDTO);
-    }
-
     @GetMapping("/byEmail/{email}")
     public ResponseEntity<UserDTO> getUserByEmail(@PathVariable String email) {
         User user = userService.getUserByEmail(email);
-        System.out.println(user.toString());
-        if (user != null) {
-            return ResponseEntity.ok(convertToDTO(user));
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+        System.out.println("Get User By Email: " + user.toString());
+
+        return ResponseEntity.ok(convertToDTO(user));
     }
 
     @GetMapping("/me")
-    public UserDTO getCurrentUser() {
+    public ResponseEntity<UserDTO> getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = (String) authentication.getPrincipal();
-
-        // Fetch the user details using the username or user ID
-        User user = userService.getUserByEmail(username);
-
-        return convertToDTO(user);
+        User user = (User) authentication.getPrincipal();
+        
+        return ResponseEntity.ok(convertToDTO(user));
     }
-
 }

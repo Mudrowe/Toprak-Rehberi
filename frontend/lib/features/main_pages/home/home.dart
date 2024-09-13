@@ -9,10 +9,8 @@ import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
 import '../../../dtos/LandDTO.dart';
 import '../../../dtos/ProductDTO.dart';
-import '../../../dtos/UserDTO.dart';
 import '../../../service/fetching/pages/fetch_lands.dart';
 import '../../../service/fetching/pages/fetch_products.dart';
-import '../../../service/fetching/pages/fetch_user.dart';
 
 // TODO: So, Stats are not compatible with products in the productsScreen
 
@@ -27,16 +25,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late Future<List<ProductDTO>> _products;
+  //late Future<List<ProductDTO>> _products;
   late Future<List<LandDTO>> _lands;
-  late Future<UserDTO> _user;
 
   @override
   void initState() {
     super.initState();
-    _products = fetchProducts();
+    //_products = fetchProducts();
     _lands = fetchLands();
-    _user = fetchUser();
   }
 
   @override
@@ -50,31 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             const SizedBox(height: TSizes.spaceBtwSections),
 
-            // User Information
-            FutureBuilder<UserDTO>(
-              future: _user,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator();
-                } else if (snapshot.hasError) {
-                  return Text('Error: ${snapshot.error}');
-                } else if (snapshot.hasData) {
-                  final user = snapshot.data!;
-                  return Text(
-                    'Welcome, ${user.firstName} ${user.lastName}',
-                    style: TextStyle(
-                        color: textColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18),
-                  );
-                } else {
-                  return const Text('No user data available');
-                }
-              },
-            ),
-
-            const SizedBox(height: TSizes.spaceBtwItems),
-
+            /*
             // Carousel Slider for Products
             FutureBuilder<List<ProductDTO>>(
               future: _products,
@@ -94,6 +66,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 }
               },
             ),
+
+             */
 
             const SizedBox(height: TSizes.spaceBtwItems),
 
