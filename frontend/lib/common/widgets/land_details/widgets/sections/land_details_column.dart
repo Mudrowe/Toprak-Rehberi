@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../../../../models/land.dart';
+import '../../../../../dtos/LandDTO.dart';
 import '../../../../../utils/constants/text_strings.dart';
 import '../../../../../utils/helpers/helper_functions.dart';
 import '../helpers/build_land_info_row.dart';
@@ -8,10 +8,10 @@ import '../helpers/build_land_info_row.dart';
 class TLandDetailsColumn extends StatelessWidget {
   const TLandDetailsColumn({
     super.key,
-    required this.land,
+    required this.landDTO,
   });
 
-  final Land land;
+  final LandDTO landDTO;
 
   @override
   Widget build(BuildContext context) {
@@ -19,37 +19,40 @@ class TLandDetailsColumn extends StatelessWidget {
       children: [
         TBuildLandInfoRow(
           label: TTexts.landName,
-          value: THelperFunctions.decodeUtf8(land.landName),
+          value: THelperFunctions.decodeUtf8(landDTO.name),
         ),
         TBuildLandInfoRow(
           label: TTexts.city,
-          value: land.address.city.name,
+          value: THelperFunctions.decodeUtf8(landDTO.cityDTO?.name ?? 'Unknown City'),
         ),
         TBuildLandInfoRow(
           label: TTexts.district,
-          value: land.address.district.name,
+          value: THelperFunctions.decodeUtf8(landDTO.districtDTO?.name ?? 'Unknown District'),
         ),
         TBuildLandInfoRow(
           label: TTexts.neighborhood,
-          value: land.address.neighborhood.name,
+          value: THelperFunctions.decodeUtf8(landDTO.neighborhoodDTO.name),
         ),
         TBuildLandInfoRow(
           label: TTexts.adaNo,
-          value: land.address.adaNo,
+          value: landDTO.adaNo,
         ),
         TBuildLandInfoRow(
           label: TTexts.parcelNo,
-          value: land.address.parcelNo,
+          value: landDTO.parcelNo,
         ),
         TBuildLandInfoRow(
           label: TTexts.area,
-          value: '${land.area.toInt().toString()} ${TTexts.squareSymbol}',
+          value: '${landDTO.area.toInt().toString()} ${TTexts.squareSymbol}',
         ),
+        /*
         TBuildLandInfoRow(
           label: TTexts.plantedArea,
           value:
               '${land.plantedArea.toInt().toString()} ${TTexts.squareSymbol}',
         ),
+
+         */
       ],
     );
   }

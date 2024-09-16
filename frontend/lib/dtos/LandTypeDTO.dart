@@ -13,13 +13,13 @@ class LandTypeDTO {
     return LandTypeDTO(
       id: json['id'],
       name: json['name'],
-      imageUrl: json['image_url'] ?? '',
+      imageUrl: json['imageUrl'],
     );
   }
 
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'name': name,
-    'image_url': imageUrl,
-  };
+        'id': id,
+        'name': name,
+        'imageUrl': imageUrl,
+      };
 }

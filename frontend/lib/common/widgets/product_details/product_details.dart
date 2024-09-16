@@ -9,15 +9,12 @@ import 'package:toprak_rehberi/features/main_pages/products/widgets/product_card
 import 'package:toprak_rehberi/service/fetching/constants/fetch_cities.dart';
 import 'package:toprak_rehberi/service/fetching/constants/fetch_districts.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
-import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 import 'package:toprak_rehberi/dtos/ProductDTO.dart';
 import 'package:toprak_rehberi/dtos/LandDTO.dart';
 
-import '../../../models/land.dart';
 import '../../../service/fetching/pages/fetch_lands.dart';
 import '../../styles/card_style.dart';
 import '../land_details/widgets/sections/land_details_column.dart';
-import '../land_details/widgets/sections/land_details_info.dart';
 
 class TProductDetails extends StatefulWidget {
   final ProductDTO productDTO;
@@ -45,18 +42,6 @@ class _TProductDetailsState extends State<TProductDetails> {
 
     return (district, city);
   }
-
-  Address _convertToAddress(LandDTO landDTO) {
-    dynamic location = _getCityAndDistrict(landDTO);
-    return Address(
-      city: location[0],
-      district: location[1],
-      neighborhood: landDTO.neighborhoodDTO,
-      parcelNo: landDTO.parcelNo,
-      adaNo: landDTO.adaNo,
-    );
-  }
-
 
 
   @override
@@ -110,10 +95,7 @@ class _TProductDetailsState extends State<TProductDetails> {
                           TSizes.md,
                         ),
                         child: TLandDetailsColumn(
-                          land: convertLandDTOToLand(
-                            land,
-                            _convertToAddress(land)
-                          ),
+                          landDTO: land
                         ),
                       ),
                     );

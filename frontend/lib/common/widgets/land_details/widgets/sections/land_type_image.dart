@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/styles/card_style.dart';
-import 'package:toprak_rehberi/models/land.dart';
+import 'package:toprak_rehberi/dtos/LandDTO.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
+import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
 class TLandTypeImage extends StatelessWidget {
   const TLandTypeImage({
     super.key,
-    required this.land,
+    required this.landDTO,
   });
 
-  final Land land;
+  final LandDTO landDTO;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class TLandTypeImage extends StatelessWidget {
           height: TSizes.landCardHeight,
           width: TSizes.landCardWidth,
           decoration: getCardDecoration(context),
-          child: Image.asset(land.landType.imageUrl),
+          child: Image.asset(THelperFunctions.decodeUtf8(landDTO.landTypeDTO.imageUrl)),
         ),
 
         // Type Text
@@ -32,7 +33,7 @@ class TLandTypeImage extends StatelessWidget {
               horizontal: TSizes.md,
             ),
             decoration: getCardDecoration(context),
-            child: Text(land.landType.name),
+            child: Text(THelperFunctions.decodeUtf8(landDTO.landTypeDTO.name)),
           ),
         ),
       ],

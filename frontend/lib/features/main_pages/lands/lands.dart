@@ -9,11 +9,6 @@ import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
 import '../../../dtos/LandDTO.dart';
 import '../../../dtos/UserDTO.dart';
-import '../../../dtos/location/CityDTO.dart';
-import '../../../dtos/location/DistrictDTO.dart';
-import '../../../models/land.dart';
-import '../../../service/fetching/constants/fetch_cities.dart';
-import '../../../service/fetching/constants/fetch_districts.dart';
 import '../../../service/fetching/pages/fetch_lands.dart';
 import '../../../service/fetching/pages/fetch_user.dart';
 
@@ -28,30 +23,16 @@ class _LandsScreenState extends State<LandsScreen> {
   late Future<List<LandDTO>> _landsFuture;
   late Future<UserDTO> _userFuture;
 
-  @override
-  void initState() {
-    super.initState();
+  void _fetchLands() {
     _userFuture = fetchUser();
     _landsFuture = _userFuture.then((user) => fetchLandsByUserId(user.id!));
   }
 
-  Future<dynamic> _getCityAndDistrict(LandDTO landDTO) async {
-    int districtId = landDTO.neighborhoodDTO.districtId;
-    DistrictDTO district = await fetchDistrictById(districtId);
-    CityDTO city = await fetchCityById(district.cityId);
+  @override
+  void initState() {
+    super.initState();
 
-    return (district, city);
-  }
-
-  Address _convertToAddress(LandDTO landDTO) {
-    dynamic location = _getCityAndDistrict(landDTO);
-    return Address(
-      city: location[0],
-      district: location[1],
-      neighborhood: landDTO.neighborhoodDTO,
-      parcelNo: landDTO.parcelNo,
-      adaNo: landDTO.adaNo,
-    );
+    _fetchLands();
   }
 
   @override
@@ -68,27 +49,19 @@ class _LandsScreenState extends State<LandsScreen> {
             return const Center(child: Text('No user data available.'));
           }
 
+          // Print the UserDTO data
+          print('UserDTO: ${userSnapshot.data!.toJson()}');
+
           return FutureBuilder<List<LandDTO>>(
             future: _landsFuture,
             builder: (context, landsSnapshot) {
               if (landsSnapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
               } else if (landsSnapshot.hasError) {
-                return Center(child: Text('Error: ${landsSnapshot.error}'));
+                print(Text('Error 2: ${landsSnapshot.error}'));
               }
 
               final landsDTOList = landsSnapshot.data!;
-
-              for (var landDTO in landsDTOList) {
-                print('LandDTO in Lands screen: ${jsonEncode(landDTO.toJson())}');
-              }
-
-              final landsList = landsDTOList.map((landDTO) {
-                return convertLandDTOToLand(
-                  landDTO,
-                  _convertToAddress(landDTO),
-                );
-              }).toList();
 
               return SingleChildScrollView(
                 child: Padding(
@@ -103,13 +76,11 @@ class _LandsScreenState extends State<LandsScreen> {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-
                       IconButton(
                         iconSize: TSizes.iconLg,
                         onPressed: () => Get.to(() => const TAddLandScreen()),
                         icon: const Icon(Icons.add),
                       ),
-
                       const SizedBox(height: TSizes.spaceBtwSections),
 
                       // Total Land Info
@@ -120,20 +91,19 @@ class _LandsScreenState extends State<LandsScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               const Text(TTexts.totalLands),
-                              Text(landsList.length.toString()),
+                              Text(landsDTOList.length.toString()),
                             ],
                           ),
-
                           const Divider(
                             indent: TSizes.dividerIndent,
                             endIndent: TSizes.dividerIndent,
                           ),
 
                           // Lands
-                          for (var land in landsList)
+                          for (var land in landsDTOList)
                             Column(
                               children: [
-                                TLandCard(land: land),
+                                TLandCard(landDTO: land),
                                 const SizedBox(height: TSizes.spaceBtwItems),
                               ],
                             ),
@@ -150,4 +120,3 @@ class _LandsScreenState extends State<LandsScreen> {
     );
   }
 }
-

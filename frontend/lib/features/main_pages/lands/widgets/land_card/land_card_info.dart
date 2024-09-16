@@ -1,16 +1,17 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:toprak_rehberi/models/land.dart';
+import 'package:toprak_rehberi/dtos/LandDTO.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
+import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
 class TLandCardInfo extends StatelessWidget {
   const TLandCardInfo({
     super.key,
-    required this.land,
+    required this.landDTO,
   });
 
-  final Land land;
+  final LandDTO landDTO;
 
   @override
   Widget build(BuildContext context) {
@@ -22,22 +23,22 @@ class TLandCardInfo extends StatelessWidget {
           Column(
             children: [
               Text(
-                utf8.decode(land.landName.codeUnits),
+                utf8.decode(landDTO.name.codeUnits),
                 style: textTheme.bodyMedium,
                 overflow: TextOverflow.ellipsis,
               ),
               Text(
-                land.address.city.name,
+                THelperFunctions.decodeUtf8(landDTO.cityDTO?.name ?? 'Unknown City'),
                 style: textTheme.bodyMedium,
                 overflow: TextOverflow.ellipsis,
               ),
               Text(
-                land.address.district.name,
+                THelperFunctions.decodeUtf8(landDTO.districtDTO?.name ?? 'Unknown District'),
                 style: textTheme.bodyMedium,
                 overflow: TextOverflow.ellipsis,
               ),
               Text(
-                '${land.area.toInt()} ${TTexts.squareSymbol}',
+                '${landDTO.area.toInt()} ${TTexts.squareSymbol}',
                 style: textTheme.bodyMedium,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -51,7 +52,7 @@ class TLandCardInfo extends StatelessWidget {
                     style: textTheme.bodyMedium,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  Checkbox(value: land.isPlanted, onChanged: (value) {}),
+                  Checkbox(value: false, onChanged: (value) {}),
                 ],
               ),
             ],

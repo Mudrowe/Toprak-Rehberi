@@ -46,7 +46,7 @@ class ProductDTO {
       harvestDate: DateTime.parse(json['harvestDate']),
       land: json['land'],
       score: json['score'].toDouble(),
-      productOptionDTO: json['productOptionDTO'],
+      productOptionDTO: json['productOption'],
       area: json['area'],
       isHarvested: json['isHarvested'],
     );
@@ -58,7 +58,7 @@ class ProductDTO {
         'harvestDate': THelperFunctions.getFormattedDate(harvestDate!),
         'land': land,
         'score': score,
-        'productOptionDTO': productOptionDTO,
+        'productOption': productOptionDTO,
         'area': area,
         'isHarvested': isHarvested,
       };

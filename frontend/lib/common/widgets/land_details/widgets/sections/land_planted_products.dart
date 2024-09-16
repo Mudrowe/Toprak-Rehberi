@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:toprak_rehberi/dtos/LandDTO.dart';
 import 'package:toprak_rehberi/features/main_pages/products/widgets/product_card/product_card.dart';
-import 'package:toprak_rehberi/models/land.dart';
 import 'package:toprak_rehberi/utils/constants/image_strings.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
@@ -13,12 +13,12 @@ import '../../../../../service/fetching/pages/fetch_lands.dart';
 import '../../../../../service/fetching/product/fetch_product.dart';
 
 class TLandPlantedProducts extends StatelessWidget {
-  final Land land;
+  final LandDTO land;
 
   const TLandPlantedProducts({super.key, required this.land});
 
   Future<List<ProductDTO>> _fetchProducts() async {
-    int landId = (await fetchLandByName(land.landName)).id!;
+    int landId = (await fetchLandByName(land.name)).id!;
     List<ProductDTO> products = await fetchProductsByLandId(landId);
 
     /*

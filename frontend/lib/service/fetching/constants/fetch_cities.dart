@@ -10,7 +10,6 @@ Future<List<CityDTO>> fetchCities() async {
   var baseUrl = 'http://$ipAddress:8080/api/cities';
   final url = Uri.parse(baseUrl);
 
-
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString('authToken');
 
@@ -18,9 +17,7 @@ Future<List<CityDTO>> fetchCities() async {
     throw Exception('Token is null, please log in again.');
   }
 
-
   print('Token (Fetch Cities Function): $token');
-
 
   try {
     final response = await http.get(

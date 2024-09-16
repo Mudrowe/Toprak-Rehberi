@@ -10,14 +10,12 @@ import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
 import '../../../../../dtos/LandDTO.dart';
 import '../../../../../dtos/ProductOptionDTO.dart';
-import '../../../../../models/land.dart';
-import '../../../../../models/product_option.dart';
 import '../../../../../service/product/add_product.dart';
 
 class TAddProductForm extends StatefulWidget {
-  final Land land;
+  final LandDTO landDTO;
 
-  const TAddProductForm({super.key, required this.land});
+  const TAddProductForm({super.key, required this.landDTO});
 
   @override
   State<TAddProductForm> createState() => _TAddProductFormState();
@@ -90,13 +88,13 @@ class _TAddProductFormState extends State<TAddProductForm> {
       ProductDTO productDTO = ProductDTO(
         //land: LandDTO(id: (await fetchLandByName(widget.land.landName)).id,
         land: LandDTO(
-          id: (await fetchLandByName(widget.land.landName)).id,
-          name: widget.land.landName,
-          area: widget.land.area,
-          adaNo: widget.land.address.adaNo,
-          parcelNo: widget.land.address.parcelNo,
-          landTypeDTO: widget.land.landType,
-          neighborhoodDTO: widget.land.address.neighborhood,
+          id: (await fetchLandByName(widget.landDTO.name)).id,
+          name: widget.landDTO.name,
+          area: widget.landDTO.area,
+          adaNo: widget.landDTO.adaNo,
+          parcelNo: widget.landDTO.parcelNo,
+          landTypeDTO: widget.landDTO.landTypeDTO,
+          neighborhoodDTO: widget.landDTO.neighborhoodDTO,
         ),
         area: _area!,
         productOptionDTO: _productOptionDTO!,

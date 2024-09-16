@@ -1,8 +1,10 @@
 import 'package:toprak_rehberi/dtos/LandTypeDTO.dart';
 import 'package:toprak_rehberi/dtos/location/NeighborhoodDTO.dart';
 
-import '../models/land.dart';
-import '../utils/constants/enums.dart';
+import '../service/fetching/constants/fetch_cities.dart';
+import '../service/fetching/constants/fetch_districts.dart';
+import 'location/CityDTO.dart';
+import 'location/DistrictDTO.dart';
 
 class LandDTO {
   final int? id;
@@ -13,6 +15,8 @@ class LandDTO {
   final String adaNo;
   final double area;
   final LandTypeDTO landTypeDTO;
+  CityDTO? cityDTO;
+  DistrictDTO? districtDTO;
 
   LandDTO({
     this.id,
@@ -23,44 +27,46 @@ class LandDTO {
     required this.adaNo,
     required this.area,
     required this.landTypeDTO,
-  });
+  }) {
+    _initializeCityAndDistrict();
+  }
 
   factory LandDTO.fromJson(Map<String, dynamic> json) {
-    return LandDTO(
-      id: json['id'] != null ? json['id'] as int : null,
-      userId: json['userId'] != null ? json['userId'] as int : null,
+    final landDTO = LandDTO(
+      id: json['id'],
+      userId: json['userId'],
       name: json['name'],
-      neighborhoodDTO: json['neighborhoodDTO'],
+      neighborhoodDTO: NeighborhoodDTO.fromJson(json['neighborhood']),
       parcelNo: json['parcelNo'],
       adaNo: json['adaNo'],
-      area: json['area'].toDouble(),
-      landTypeDTO: json['landTypeDTO'],
+      area: json['area'],
+      landTypeDTO: LandTypeDTO.fromJson(json['landType']),
     );
+
+    return landDTO;
   }
 
   Map<String, dynamic> toJson() => {
         'id': id,
         'userId': userId,
         'name': name,
-        'neighborhoodDTO': neighborhoodDTO,
+        'neighborhood': neighborhoodDTO.toJson(),
         'parcelNo': parcelNo,
         'adaNo': adaNo,
         'area': area,
-        'landTypeDTO': landTypeDTO,
+        'landType': landTypeDTO.toJson(),
       };
-}
 
-Land convertLandDTOToLand(LandDTO landDTO, Address address) {
-  LandTypeDTO landType = landDTO.landTypeDTO;
+  Future<void> _initializeCityAndDistrict() async {
+    try {
+      DistrictDTO district =
+          await fetchDistrictById(neighborhoodDTO.districtId!);
+      CityDTO city = await fetchCityById(district.cityId);
 
-  return Land(
-    landName: landDTO.name,
-    landType: landType,
-    area: landDTO.area,
-    plantedArea: 0.0, // Default or computed value
-    isPlanted: false, // Default or computed value
-    address: address,
-    plantedProducts: [], // Default or fetched value
-    harvestedProducts: [], // Default or fetched value
-  );
+      districtDTO = district;
+      cityDTO = city;
+    } catch (e) {
+      print('Failed to fetch city or district: $e');
+    }
+  }
 }

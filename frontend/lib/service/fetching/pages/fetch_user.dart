@@ -13,7 +13,7 @@ Future<UserDTO> fetchUser() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString('authToken');
 
-  print('Token in the fetchUser/me $token');
+  //print('Token in the fetchUser/me $token');
 
   try {
     final response = await http.get(
@@ -25,7 +25,7 @@ Future<UserDTO> fetchUser() async {
     );
 
     if (response.statusCode == 200) {
-      print('Response body in fetchUser: ${response.body}');
+      //print('Response body in fetchUser: ${response.body}');
       return UserDTO.fromJson(json.decode(response.body));
     } else {
       print('Failed with status code: ${response.statusCode}');
@@ -38,35 +38,7 @@ Future<UserDTO> fetchUser() async {
 
 }
 
-Future<int?> getUserIdByEmail(String email) async {
-  var ipAddress = dotenv.env['IP_ADDRESS'];
-  var baseUrl = 'http://$ipAddress:8080/api/user/byEmail/$email';
-  final url = Uri.parse(baseUrl);
 
-  // Get token from SharedPreferences
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String? token = prefs.getString('authToken');
-
-  try {
-    final response = await http.get(
-      url,
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $token',
-      },
-    );
-
-    if (response.statusCode == 200) {
-      Map<String, dynamic> data = jsonDecode(response.body);
-      return data["id"];
-    } else {
-      throw Exception('Failed to fetch user ID: ${response.statusCode}');
-    }
-  } catch (e) {
-    print('Error: $e');
-    throw Exception('Failed to fetch user ID.');
-  }
-}
 
 Future<String> extractEmailFromToken(String token) async {
   try {
@@ -87,21 +59,9 @@ Future<String> extractEmailFromToken(String token) async {
 
     print("PayloadMap: $payloadMap");
     // Extract the email
-    return payloadMap['sub'] as String;
+    return payloadMap['sub'];
   } catch (e) {
     throw Exception('Failed to decode token: $e');
   }
 }
 
-Future<int?> getUserId(String token) async {
-  // Extract email from the token
-  String? email = await extractEmailFromToken(token);
-
-  // Fetch user ID using email
-  final userId = await getUserIdByEmail(email);
-  if (userId == null) {
-    throw Exception('Failed to retrieve user ID');
-  }
-
-  return userId;
-}

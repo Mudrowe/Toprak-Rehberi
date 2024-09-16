@@ -26,7 +26,6 @@ class ProfileScreen extends StatelessWidget {
             return const Center(child: Text('No user data available.'));
           }
 
-          // Unwrapping the fetched user data
           UserDTO user = snapshot.data!;
 
           return SingleChildScrollView(
