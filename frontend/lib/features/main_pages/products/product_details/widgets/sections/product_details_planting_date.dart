@@ -4,7 +4,7 @@ import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
-import '../../../../../dtos/ProductDTO.dart';
+import '../../../../../../dtos/ProductDTO.dart';
 
 class TProductDetailsPlantingDate extends StatelessWidget {
   const TProductDetailsPlantingDate({

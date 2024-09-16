@@ -3,7 +3,7 @@ import 'package:toprak_rehberi/common/styles/card_style.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
-import '../../../../../dtos/ProductDTO.dart';
+import '../../../../../../dtos/ProductDTO.dart';
 
 class TProductDetailsImage extends StatelessWidget {
   const TProductDetailsImage({

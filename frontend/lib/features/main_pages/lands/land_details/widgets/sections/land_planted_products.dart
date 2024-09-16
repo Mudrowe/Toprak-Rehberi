@@ -6,8 +6,8 @@ import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
-import '../../../../../dtos/ProductDTO.dart';
-import '../../../../../service/fetching/product/fetch_products.dart';
+import '../../../../../../dtos/ProductDTO.dart';
+import '../../../../../../service/fetching/product/fetch_products.dart';
 
 class TLandPlantedProducts extends StatelessWidget {
   final LandDTO landDTO;

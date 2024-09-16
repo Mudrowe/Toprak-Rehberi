@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:toprak_rehberi/common/widgets/land_details/widgets/helpers/add_product_button.dart';
 import 'package:toprak_rehberi/dtos/LandDTO.dart';
 
-import '../../../../../utils/constants/sizes.dart';
+import '../../../../../../utils/constants/sizes.dart';
+import '../helpers/add_product_button.dart';
 import 'land_details_column.dart';
 
 class TLandDetailsInfo extends StatelessWidget {

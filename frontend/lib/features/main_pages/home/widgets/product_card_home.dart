@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:toprak_rehberi/common/styles/card_style.dart';
 import 'package:toprak_rehberi/common/widgets/custom_shapes/arc_progress_bar.dart';
-import 'package:toprak_rehberi/common/widgets/product_details/product_details.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
 import '../../../../dtos/ProductDTO.dart';
+import '../../products/product_details/info/product_details.dart';
 
 
 class TProductCardHome extends StatelessWidget {

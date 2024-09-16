@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/styles/card_style.dart';
 import 'package:toprak_rehberi/common/widgets/appbar/appbar.dart';
-import 'package:toprak_rehberi/common/widgets/land_details/add_product_screen/widgets/add_product_form.dart';
-import 'package:toprak_rehberi/common/widgets/land_details/widgets/helpers/suggestions_button.dart';
 import 'package:toprak_rehberi/dtos/LandDTO.dart';
+import 'package:toprak_rehberi/features/main_pages/lands/land_details/add_product_screen/widgets/add_product_form.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
+
+import '../widgets/helpers/suggestions_button.dart';
 
 // ! There will be all of the products in the dropdown menu in the final form
 // ! So, what is the point of show suggestion button?

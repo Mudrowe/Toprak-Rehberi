@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../../../../dtos/LandDTO.dart';
-import '../../../../../utils/constants/text_strings.dart';
-import '../../../../../utils/helpers/helper_functions.dart';
+import '../../../../../../dtos/LandDTO.dart';
+import '../../../../../../utils/constants/text_strings.dart';
+import '../../../../../../utils/helpers/helper_functions.dart';
 import '../helpers/build_land_info_row.dart';
 
 class TLandDetailsColumn extends StatelessWidget {
