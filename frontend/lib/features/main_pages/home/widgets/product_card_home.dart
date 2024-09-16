@@ -5,12 +5,10 @@ import 'package:toprak_rehberi/common/widgets/custom_shapes/arc_progress_bar.dar
 import 'package:toprak_rehberi/common/widgets/product_details/product_details.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
+import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
 import '../../../../dtos/ProductDTO.dart';
 
-// ? pieChartColor1 is too dark for dark mod. Consider to change it
-
-// ! IconButton theme breaks the left-right arrows in the TProductCardHome.
 
 class TProductCardHome extends StatelessWidget {
   const TProductCardHome({
@@ -32,8 +30,6 @@ class TProductCardHome extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            // ! IconButton theme breaks the left-right arrows in the TProductCardHome.
-            //IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_left_sharp)),
             Column(
               children: [
                 Text(TTexts.progress, style: textTheme.bodyLarge),
@@ -46,13 +42,13 @@ class TProductCardHome extends StatelessWidget {
               children: [
                 // Product Name
                 Text(
-                  productDTO.productOptionDTO.name,
+                  THelperFunctions.decodeUtf8(productDTO.productOptionDTO.name),
                   style: textTheme.bodyMedium,
                 ),
 
                 // Land Name
                 Text(
-                  productDTO.land.name,
+                  THelperFunctions.decodeUtf8(productDTO.land.name),
                   style: textTheme.bodyMedium,
                 ),
 
@@ -64,13 +60,11 @@ class TProductCardHome extends StatelessWidget {
 
                 // Harvest Date
                 Text(
-                  productDTO.harvestDate!.toIso8601String(),
+                  THelperFunctions.getFormattedDate(productDTO.harvestDate!),
                   style: textTheme.bodyMedium,
                 ),
               ],
             ),
-            // ! IconButton theme breaks the left-right arrows in the TProductCardHome.
-            //IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_right_sharp)),
           ],
         ),
       ),

@@ -49,9 +49,6 @@ class _LandsScreenState extends State<LandsScreen> {
             return const Center(child: Text('No user data available.'));
           }
 
-          // Print the UserDTO data
-          print('UserDTO: ${userSnapshot.data!.toJson()}');
-
           return FutureBuilder<List<LandDTO>>(
             future: _landsFuture,
             builder: (context, landsSnapshot) {

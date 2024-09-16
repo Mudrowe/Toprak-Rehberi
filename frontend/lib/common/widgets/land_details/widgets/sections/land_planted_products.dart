@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/dtos/LandDTO.dart';
 import 'package:toprak_rehberi/features/main_pages/products/widgets/product_card/product_card.dart';
@@ -9,8 +7,7 @@ import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
 import '../../../../../dtos/ProductDTO.dart';
-import '../../../../../service/fetching/pages/fetch_lands.dart';
-import '../../../../../service/fetching/product/fetch_product.dart';
+import '../../../../../service/fetching/product/fetch_products.dart';
 
 class TLandPlantedProducts extends StatelessWidget {
   final LandDTO landDTO;
@@ -18,19 +15,9 @@ class TLandPlantedProducts extends StatelessWidget {
   const TLandPlantedProducts({super.key, required this.landDTO});
 
   Future<List<ProductDTO>> _fetchProducts() async {
-    int landId = (await fetchLandByName(landDTO.name)).id!;
-    List<ProductDTO> products = await fetchProductsByLandId(landId);
-
-
-    /*
-    for (var product in products) {
-      product.productName = THelperFunctions.decodeUtf8(product.productName!);
-    }
-
-     */
+    List<ProductDTO> products = await fetchProductsByLandId(landDTO.id!);
 
     return products;
-
   }
 
   @override
@@ -56,10 +43,6 @@ class TLandPlantedProducts extends StatelessWidget {
             ],
           );
         } else {
-
-          for (var product in snapshot.data!) {
-            print('Sending ProductDTO JSON 1: ${jsonEncode(product.toJson())}');
-          }
           return Column(
             children: [
               const Text(TTexts.plantedProducts),

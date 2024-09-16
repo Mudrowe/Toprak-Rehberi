@@ -4,6 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
 import '../../dtos/ProductDTO.dart';
+import '../../dtos/UserDTO.dart';
+import '../fetching/pages/fetch_user.dart';
 
 Future<void> addProduct(ProductDTO productDTO) async {
   var ipAddress = dotenv.env['IP_ADDRESS'];
@@ -16,7 +18,12 @@ Future<void> addProduct(ProductDTO productDTO) async {
     throw Exception('No auth token found. Please log in.');
   }
 
+  UserDTO user = await fetchUser();
+  int userId = user.id!;
+
   final url = Uri.parse(baseUrl);
+
+  productDTO.land.userId = userId;
 
 
   final response = await http.post(
@@ -29,7 +36,8 @@ Future<void> addProduct(ProductDTO productDTO) async {
   );
 
   // Log the JSON payload being sent to the backend
-  print('Sending ProductDTO JSON 2: ${jsonEncode(productDTO.toJson())}');
+  //print('Sending ProductDTO JSON 2: ${jsonEncode(productDTO.toJson())}');
+  print('Planting Date: ${productDTO.plantingDate}');
 
   if (response.statusCode == 201) {
     // Product added successfully

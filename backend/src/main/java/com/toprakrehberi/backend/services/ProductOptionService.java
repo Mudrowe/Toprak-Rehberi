@@ -28,11 +28,4 @@ public class ProductOptionService {
         return productOptionRepository.findByName(name);
     }
 
-    public ProductOption saveProductOption(ProductOption productOption) {
-        return productOptionRepository.save(productOption);
-    }
-
-    public void deleteProductOption(Long id) {
-        productOptionRepository.deleteById(id);
-    }
 }

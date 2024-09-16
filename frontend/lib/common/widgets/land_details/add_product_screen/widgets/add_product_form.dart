@@ -86,9 +86,8 @@ class _TAddProductFormState extends State<TAddProductForm> {
       }
 
       ProductDTO productDTO = ProductDTO(
-        //land: LandDTO(id: (await fetchLandByName(widget.land.landName)).id,
         land: LandDTO(
-          id: (await fetchLandByName(widget.landDTO.name)).id,
+          id: widget.landDTO.id,
           name: widget.landDTO.name,
           area: widget.landDTO.area,
           adaNo: widget.landDTO.adaNo,

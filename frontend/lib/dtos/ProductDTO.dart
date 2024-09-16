@@ -54,8 +54,8 @@ class ProductDTO {
 
   Map<String, dynamic> toJson() => {
         'id': id,
-        'plantingDate': THelperFunctions.getFormattedDate(plantingDate!),
-        'harvestDate': THelperFunctions.getFormattedDate(harvestDate!),
+        'plantingDate': THelperFunctions.getIso8601Date(plantingDate!),
+        'harvestDate': THelperFunctions.getIso8601Date(harvestDate!),
         'land': land.toJson(),
         'score': score,
         'productOption': productOptionDTO.toJson(),

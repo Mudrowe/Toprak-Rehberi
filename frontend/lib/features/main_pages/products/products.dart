@@ -4,7 +4,8 @@ import 'package:toprak_rehberi/features/main_pages/products/tabs/harvested_produ
 import 'package:toprak_rehberi/features/main_pages/products/tabs/planted_products.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 import 'package:toprak_rehberi/dtos/ProductDTO.dart';
-import 'package:toprak_rehberi/service/fetching/pages/fetch_products.dart';
+
+import '../../../service/fetching/product/fetch_products.dart';
 
 class ProductsScreen extends StatefulWidget {
   const ProductsScreen({super.key});

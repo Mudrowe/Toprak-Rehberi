@@ -32,6 +32,11 @@ class THelperFunctions {
     return DateFormat(format, locale).format(date);
   }
 
+  static String getIso8601Date(DateTime date) {
+    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    return formatter.format(date);
+  }
+
   static String decodeUtf8(String input) {
     return utf8.decode(input.codeUnits);
   }
