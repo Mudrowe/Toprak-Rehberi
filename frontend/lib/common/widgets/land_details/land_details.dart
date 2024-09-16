@@ -35,7 +35,7 @@ class TLandDetails extends StatelessWidget {
 
               const SizedBox(height: TSizes.spaceBtwSections),
 
-              TLandPlantedProducts(land: landDTO)
+              TLandPlantedProducts(landDTO: landDTO)
             ],
           ),
         ),

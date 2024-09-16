@@ -11,6 +11,7 @@ import 'package:toprak_rehberi/service/fetching/constants/fetch_districts.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/dtos/ProductDTO.dart';
 import 'package:toprak_rehberi/dtos/LandDTO.dart';
+import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
 import '../../../service/fetching/pages/fetch_lands.dart';
 import '../../styles/card_style.dart';
@@ -34,16 +35,6 @@ class _TProductDetailsState extends State<TProductDetails> {
     _landFuture = fetchLandByName(widget.productDTO.land.name);
   }
 
-
-  Future<dynamic> _getCityAndDistrict(LandDTO landDTO) async {
-    int districtId = landDTO.neighborhoodDTO.districtId;
-    DistrictDTO district = await fetchDistrictById(districtId);
-    CityDTO city = await fetchCityById(district.cityId);
-
-    return (district, city);
-  }
-
-
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -55,7 +46,7 @@ class _TProductDetailsState extends State<TProductDetails> {
             children: [
               // Product Name
               Text(
-                widget.productDTO.productOptionDTO.name ?? 'Unknown',
+                THelperFunctions.decodeUtf8(widget.productDTO.productOptionDTO.name ?? 'Unknown'),
                 style: textTheme.headlineMedium,
               ),
 

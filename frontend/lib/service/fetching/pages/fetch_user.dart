@@ -13,8 +13,6 @@ Future<UserDTO> fetchUser() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString('authToken');
 
-  //print('Token in the fetchUser/me $token');
-
   try {
     final response = await http.get(
       url,
@@ -37,31 +35,3 @@ Future<UserDTO> fetchUser() async {
   }
 
 }
-
-
-
-Future<String> extractEmailFromToken(String token) async {
-  try {
-    // Split the JWT token into header, payload, and signature
-    List<String> parts = token.split('.');
-    if (parts.length != 3) {
-      throw Exception('Invalid token format');
-    }
-
-    // Decode the payload (second part) from Base64
-    String payload = parts[1];
-    String decodedPayload =
-        utf8.decode(base64Url.decode(base64Url.normalize(payload)));
-
-    print("Payload: $payload");
-    // Convert the payload into a Map
-    Map<String, dynamic> payloadMap = jsonDecode(decodedPayload);
-
-    print("PayloadMap: $payloadMap");
-    // Extract the email
-    return payloadMap['sub'];
-  } catch (e) {
-    throw Exception('Failed to decode token: $e');
-  }
-}
-

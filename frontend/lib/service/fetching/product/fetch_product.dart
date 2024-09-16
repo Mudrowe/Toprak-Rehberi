@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:toprak_rehberi/models/product_option.dart';
 import 'package:toprak_rehberi/service/fetching/product/fetch_product_options.dart';
 import '../../../dtos/LandDTO.dart';
 import '../../../dtos/ProductDTO.dart';
@@ -36,27 +35,27 @@ Future<List<ProductDTO>> fetchProductsByLandId(int landId) async {
       List<dynamic> productsJson = jsonDecode(response.body);
       List<ProductDTO> products = [];
 
+      for ( var product in productsJson) {
+        print('Product JSON $product');
+      }
+
       for (var productJson in productsJson) {
-        // Existing logic to parse and build ProductDTO
         int? landId = productJson['landId'];
         int? productOptionId = productJson['productOptionId'];
 
-        // Fetch the land details to get the landName
         LandDTO land = await fetchLandById(landId!);
         ProductOptionDTO productOptionDTO =
-        await fetchProductOptionById(productOptionId);
+            await fetchProductOptionById(productOptionId);
 
         ProductDTO productDTO = ProductDTO.fromJson({
           'id': productJson['id'],
           'plantingDate': productJson['plantingDate'],
           'harvestDate': productJson['harvestDate'],
-          'landId': productJson['landId'],
+          'land': productJson['land'],
           'score': productJson['score'],
-          'productOptionId': productJson['productOptionId'],
-          'productName': productOptionDTO.name,
-          'imageUrl': productOptionDTO.imageUrl,
-          'landName': land.name,
+          'productOption': productJson['productOption'],
           'area': productJson['size'],
+          'isHarvested': productJson['isHarvested'],
         });
 
         products.add(productDTO);

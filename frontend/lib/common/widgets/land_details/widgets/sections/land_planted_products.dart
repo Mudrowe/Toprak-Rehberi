@@ -13,13 +13,14 @@ import '../../../../../service/fetching/pages/fetch_lands.dart';
 import '../../../../../service/fetching/product/fetch_product.dart';
 
 class TLandPlantedProducts extends StatelessWidget {
-  final LandDTO land;
+  final LandDTO landDTO;
 
-  const TLandPlantedProducts({super.key, required this.land});
+  const TLandPlantedProducts({super.key, required this.landDTO});
 
   Future<List<ProductDTO>> _fetchProducts() async {
-    int landId = (await fetchLandByName(land.name)).id!;
+    int landId = (await fetchLandByName(landDTO.name)).id!;
     List<ProductDTO> products = await fetchProductsByLandId(landId);
+
 
     /*
     for (var product in products) {

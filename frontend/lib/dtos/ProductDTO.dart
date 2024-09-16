@@ -44,11 +44,11 @@ class ProductDTO {
       id: json['id'],
       plantingDate: DateTime.parse(json['plantingDate']),
       harvestDate: DateTime.parse(json['harvestDate']),
-      land: json['land'],
+      land: LandDTO.fromJson(json['land']),
       score: json['score'].toDouble(),
-      productOptionDTO: json['productOption'],
+      productOptionDTO: ProductOptionDTO.fromJson(json['productOption']),
       area: json['area'],
-      isHarvested: json['isHarvested'],
+      isHarvested: json['harvested'],
     );
   }
 
@@ -56,10 +56,10 @@ class ProductDTO {
         'id': id,
         'plantingDate': THelperFunctions.getFormattedDate(plantingDate!),
         'harvestDate': THelperFunctions.getFormattedDate(harvestDate!),
-        'land': land,
+        'land': land.toJson(),
         'score': score,
-        'productOption': productOptionDTO,
+        'productOption': productOptionDTO.toJson(),
         'area': area,
-        'isHarvested': isHarvested,
+        'harvested': isHarvested,
       };
 }
