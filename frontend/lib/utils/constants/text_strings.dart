@@ -9,7 +9,7 @@ class TTexts {
   static const String tContinue = "İlerle";
   static const String squareSymbol = 'm\u00B2';
 
-  // Personal Informations
+  // Personal Information
   static const String firstNameSpecial = "Deniz";
   static const String lastNameSpecial = "Yılmaz";
   static const String emailSpecial = "deniz_yilmaz@gmail.com";
@@ -57,7 +57,7 @@ class TTexts {
   static const String good = "İyi";
   static const String veryGood = "Çok İyi";
 
-  // Card Informations
+  // Card Information
   static const String plantingDate = 'Ekim Tarihi';
   static const String harvestDate = 'Hasat Tarihi';
   static const String estimatedHarvestDate = 'Tahmini Hasat Tarihi';
@@ -66,14 +66,14 @@ class TTexts {
   static const String isPlanted = 'Ürün Ekili Mi?';
   static const String progress = 'İlerleme';
 
-  // Adress Sections
+  // Address Sections
   static const String landName = 'Arazi İsmi';
   static const String city = 'Şehir';
   static const String district = 'İlçe';
   static const String neighborhood = 'Mahalle/Köy';
   static const String adaNo = 'Ada No';
   static const String parcelNo = 'Parsel No';
-  static const String size = 'Alan';
+  static const String area = 'Alan';
   static const String plantedArea = 'Ürün Ekili Alan';
   static const String landType = 'Arazi Tipi';
 

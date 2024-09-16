@@ -21,13 +21,9 @@ class TProductDetailsImage extends StatelessWidget {
       decoration: getCardDecoration(context),
       child: FittedBox(
         fit: BoxFit.contain,
-        child: productDTO.imageUrl != null && productDTO.imageUrl!.isNotEmpty
-            ? Image.asset(
-                productDTO.imageUrl!,
-                errorBuilder: (context, error, stackTrace) =>
-                    const Icon(Icons.error),
-              )
-            : const Icon(Icons.image_not_supported),
+        child: Image.asset(
+          productDTO.productOptionDTO.imageUrl,
+        ),
       ),
     );
   }

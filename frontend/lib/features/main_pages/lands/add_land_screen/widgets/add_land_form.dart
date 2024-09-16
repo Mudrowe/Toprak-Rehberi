@@ -8,11 +8,12 @@ import 'package:toprak_rehberi/service/fetching/constants/fetch_neighborhoods.da
 import 'package:toprak_rehberi/service/land/add_land.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
+import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
-import '../../../../../dtos/CityDTO.dart';
-import '../../../../../dtos/DistrictDTO.dart';
+import '../../../../../dtos/location/CityDTO.dart';
 import '../../../../../dtos/LandTypeDTO.dart';
-import '../../../../../dtos/NeighborhoodDTO.dart';
+import '../../../../../dtos/location/DistrictDTO.dart';
+import '../../../../../dtos/location/NeighborhoodDTO.dart';
 import '../../../../../service/fetching/constants/fetch_land_types.dart';
 
 class TAddLandForm extends StatefulWidget {
@@ -26,10 +27,8 @@ class _TAddLandFormState extends State<TAddLandForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String? _fieldName;
   LandTypeDTO? _landType;
-  CityDTO? _city;
-  DistrictDTO? _district;
   NeighborhoodDTO? _neighborhood;
-  double? _size;
+  double? _area;
   String? _parcelNo;
   String? _adaNo;
 
@@ -48,61 +47,70 @@ class _TAddLandFormState extends State<TAddLandForm> {
     try {
       List<CityDTO> cities = await fetchCities();
       List<LandTypeDTO> landTypes = await fetchLandTypes();
-      setState(() {
-        _cities = cities;
-        _landTypes = landTypes;
-      });
+      if (mounted) {
+        setState(() {
+          _cities = cities;
+          _landTypes = landTypes;
+        });
+      }
     } catch (error) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to load initial data: $error')),
-      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to load initial data: $error')),
+        );
+      }
     }
   }
 
-
   void _onCityChanged(CityDTO? selectedCity) async {
     setState(() {
-      _city = selectedCity;
       _districts = [];
       _neighborhoods = [];
-      _district = null;
       _neighborhood = null;
     });
     if (selectedCity != null) {
       try {
         List<DistrictDTO> districts = await fetchDistricts(selectedCity.id);
-        setState(() {
-          _districts = districts;
-        });
+        if (mounted) {
+          setState(() {
+            _districts = districts;
+          });
+        }
       } catch (error) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to load districts: $error')),
-        );
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Failed to load districts: $error')),
+          );
+        }
       }
     }
   }
 
   void _onDistrictChanged(DistrictDTO? selectedDistrict) async {
     setState(() {
-      _district = selectedDistrict;
       _neighborhoods = [];
       _neighborhood = null;
     });
     if (selectedDistrict != null) {
       try {
-        List<NeighborhoodDTO> neighborhoods = await fetchNeighborhoods(selectedDistrict.id);
-        setState(() {
-          _neighborhoods = neighborhoods;
-        });
+        List<NeighborhoodDTO> neighborhoods =
+            await fetchNeighborhoods(selectedDistrict.id);
+        if (mounted) {
+          setState(() {
+            _neighborhoods = neighborhoods;
+          });
+        }
       } catch (error) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to load neighborhoods: $error')),
-        );
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Failed to load neighborhoods: $error')),
+          );
+        }
       }
     }
   }
 
-  void _saveForm(BuildContext context) {
+  void _saveForm(BuildContext context) async {
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
 
@@ -110,20 +118,27 @@ class _TAddLandFormState extends State<TAddLandForm> {
 
       LandDTO land = LandDTO(
         name: _fieldName!,
-        neighborhoodId: _neighborhood?.id,
+        neighborhoodDTO: _neighborhood!,
         parcelNo: _parcelNo!,
         adaNo: _adaNo!,
-        size: _size!,
-        landTypeId: _landType?.id,
+        area: _area!,
+        landTypeDTO: _landType!,
       );
 
-      addLand(land).then((_) {
-        ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Arazi başarıyla kaydedildi!')));
-      }).catchError((error) {
-        ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Arazi kaydedilemedi.')));
-      });
+      try {
+        await addLand(land);
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Arazi başarıyla kaydedildi!')),
+          );
+        }
+      } catch (error) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Arazi kaydedilemedi.')),
+          );
+        }
+      }
     }
   }
 
@@ -170,7 +185,9 @@ class _TAddLandFormState extends State<TAddLandForm> {
             items: _cities.map((CityDTO city) {
               return DropdownMenuItem<CityDTO>(
                 value: city,
-                child: Text(utf8.decode(city.name.codeUnits)),
+                child: Text(
+                  THelperFunctions.decodeUtf8(city.name),
+                ),
               );
             }).toList(),
             onChanged: (CityDTO? newValue) {
@@ -186,7 +203,9 @@ class _TAddLandFormState extends State<TAddLandForm> {
             items: _districts.map((DistrictDTO district) {
               return DropdownMenuItem<DistrictDTO>(
                 value: district,
-                child: Text(utf8.decode(district.name.codeUnits)),
+                child: Text(
+                  THelperFunctions.decodeUtf8(district.name),
+                ),
               );
             }).toList(),
             onChanged: (DistrictDTO? newValue) {
@@ -202,7 +221,9 @@ class _TAddLandFormState extends State<TAddLandForm> {
             items: _neighborhoods.map((NeighborhoodDTO neighborhood) {
               return DropdownMenuItem<NeighborhoodDTO>(
                 value: neighborhood,
-                child: Text(utf8.decode(neighborhood.name.codeUnits)),
+                child: Text(
+                  THelperFunctions.decodeUtf8(neighborhood.name),
+                ),
               );
             }).toList(),
             onChanged: (NeighborhoodDTO? newValue) {
@@ -217,10 +238,11 @@ class _TAddLandFormState extends State<TAddLandForm> {
           // Size
           TextFormField(
             decoration: const InputDecoration(
-              labelText: '${TTexts.size} (${TTexts.squareSymbol})',
+              labelText: '${TTexts.area} (${TTexts.squareSymbol})',
             ),
+            keyboardType: TextInputType.number,
             onSaved: (String? value) {
-              _size = double.tryParse(value ?? '');
+              _area = double.tryParse(value ?? '');
             },
           ),
 
@@ -229,6 +251,7 @@ class _TAddLandFormState extends State<TAddLandForm> {
           // Parcel No
           TextFormField(
             decoration: const InputDecoration(labelText: TTexts.parcelNo),
+            keyboardType: TextInputType.number,
             onSaved: (String? value) {
               _parcelNo = value;
             },
@@ -239,6 +262,7 @@ class _TAddLandFormState extends State<TAddLandForm> {
           // Ada No
           TextFormField(
             decoration: const InputDecoration(labelText: TTexts.adaNo),
+            keyboardType: TextInputType.number,
             onSaved: (String? value) {
               _adaNo = value;
             },

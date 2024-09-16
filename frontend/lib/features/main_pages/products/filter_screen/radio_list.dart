@@ -60,13 +60,13 @@ class _TRadioListTileState extends State<TRadioListTile> {
         ),
         RadioListTile<Times>(
           title: const Text('Özel Filtre'),
-          value: Times.speacialFilter,
+          value: Times.specialFilter,
           groupValue: _character,
           onChanged: (Times? value) {
             setState(() {
               _character = value;
             });
-            if (value == Times.speacialFilter) {
+            if (value == Times.specialFilter) {
               selectDateRange(
                 context: context,
                 info: 'Select a custom date range',

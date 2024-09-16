@@ -6,7 +6,7 @@ import '../../dtos/UserDTO.dart';
 
 Future<void> createUser(UserDTO user) async {
   var ipAddress = dotenv.env['IP_ADDRESS'];
-  var baseUrl = 'http://$ipAddress:8080/api/v1/auth/register';
+  var baseUrl = 'http://$ipAddress:8080/api/auth/register';
   final url = Uri.parse(baseUrl);
 
 

@@ -4,13 +4,13 @@ import 'package:toprak_rehberi/common/widgets/land_details/widgets/helpers/sugge
 import 'package:toprak_rehberi/common/widgets/land_details/widgets/sections/land_details_info.dart';
 import 'package:toprak_rehberi/common/widgets/land_details/widgets/sections/land_planted_products.dart';
 import 'package:toprak_rehberi/common/widgets/land_details/widgets/sections/land_type_image.dart';
-import 'package:toprak_rehberi/models/land.dart';
+import 'package:toprak_rehberi/dtos/LandDTO.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
 class TLandDetails extends StatelessWidget {
-  final Land land;
+  final LandDTO landDTO;
 
-  const TLandDetails({super.key, required this.land});
+  const TLandDetails({super.key, required this.landDTO});
 
   @override
   Widget build(BuildContext context) {
@@ -26,16 +26,16 @@ class TLandDetails extends StatelessWidget {
               const SizedBox(height: TSizes.spaceBtwItems),
 
               // Land Type Image
-              TLandTypeImage(land: land),
+              TLandTypeImage(landDTO: landDTO),
 
               const SizedBox(height: TSizes.spaceBtwItems),
 
               // Land Info
-              TLandDetailsInfo(land: land),
+              TLandDetailsInfo(landDTO: landDTO),
 
               const SizedBox(height: TSizes.spaceBtwSections),
 
-              TLandPlantedProducts(land: land)
+              TLandPlantedProducts(land: landDTO)
             ],
           ),
         ),

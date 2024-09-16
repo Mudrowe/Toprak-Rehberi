@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/widgets/land_details/widgets/helpers/add_product_button.dart';
-import 'package:toprak_rehberi/models/land.dart';
+import 'package:toprak_rehberi/dtos/LandDTO.dart';
 
 import '../../../../../utils/constants/sizes.dart';
 import 'land_details_column.dart';
 
 class TLandDetailsInfo extends StatelessWidget {
-  final Land land;
+  final LandDTO landDTO;
 
-  const TLandDetailsInfo({super.key, required this.land});
+  const TLandDetailsInfo({super.key, required this.landDTO});
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +18,12 @@ class TLandDetailsInfo extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Expanded(
-            child: TLandDetailsColumn(land: land),
+            child: TLandDetailsColumn(landDTO: landDTO),
           ),
 
           // Add Product Button
           TAddProductButton(
-            land: land,
+            landDTO: landDTO,
           ),
         ],
       ),

@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:toprak_rehberi/common/styles/card_style.dart';
 import 'package:toprak_rehberi/common/widgets/custom_shapes/arc_progress_bar.dart';
 import 'package:toprak_rehberi/common/widgets/product_details/product_details.dart';
-import 'package:toprak_rehberi/models/product.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
@@ -47,13 +46,13 @@ class TProductCardHome extends StatelessWidget {
               children: [
                 // Product Name
                 Text(
-                  productDTO.productName!,
+                  productDTO.productOptionDTO.name,
                   style: textTheme.bodyMedium,
                 ),
 
                 // Land Name
                 Text(
-                  productDTO.landName!,
+                  productDTO.land.name,
                   style: textTheme.bodyMedium,
                 ),
 

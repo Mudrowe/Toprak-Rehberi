@@ -1,26 +1,27 @@
+import 'package:toprak_rehberi/dtos/LandDTO.dart';
+import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
+
+import 'ProductOptionDTO.dart';
+
 class ProductDTO {
   final int? id;
   final DateTime? plantingDate;
   final DateTime? harvestDate;
-  final int? landId;
+  final LandDTO land;
   final double? score;
-  final int? productOptionId;
-  final String? productName;
-  final String? imageUrl;
-  final String? landName;
-  final double? area;
+  final ProductOptionDTO productOptionDTO;
+  double? area;
+  bool isHarvested;
 
   ProductDTO({
     this.id,
     required this.plantingDate,
     required this.harvestDate,
-    this.landId,
+    required this.land,
     required this.score,
-    required this.productOptionId,
-    required this.productName,
-    this.imageUrl,
-    this.landName,
+    required this.productOptionDTO,
     required this.area,
+    required this.isHarvested,
   });
 
   double get progressPercentage {
@@ -38,32 +39,27 @@ class ProductDTO {
     return (currentDuration / totalDuration!) * 100;
   }
 
-  bool get isHarvested => progressPercentage == 100;
-
   factory ProductDTO.fromJson(Map<String, dynamic> json) {
     return ProductDTO(
       id: json['id'],
       plantingDate: DateTime.parse(json['plantingDate']),
       harvestDate: DateTime.parse(json['harvestDate']),
-      landId: json['landId'],
+      land: json['land'],
       score: json['score'].toDouble(),
-      productOptionId: json['productOptionId'],
-      productName: json['productName'],
-      imageUrl: json['imageUrl'],
-      landName: json['landName'],
-      area: json['size']
+      productOptionDTO: json['productOption'],
+      area: json['area'],
+      isHarvested: json['isHarvested'],
     );
   }
 
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'plantingDate': plantingDate?.toIso8601String(),
-    'harvestDate': harvestDate?.toIso8601String(),
-    'landId': landId,
-    'score': score,
-    'productOptionId': productOptionId,
-    'productName': productName,
-    'imageUrl': imageUrl,
-    'size': area,
-  };
+        'id': id,
+        'plantingDate': THelperFunctions.getFormattedDate(plantingDate!),
+        'harvestDate': THelperFunctions.getFormattedDate(harvestDate!),
+        'land': land,
+        'score': score,
+        'productOption': productOptionDTO,
+        'area': area,
+        'isHarvested': isHarvested,
+      };
 }

@@ -3,7 +3,7 @@ import 'package:toprak_rehberi/common/styles/card_style.dart';
 import 'package:toprak_rehberi/common/widgets/appbar/appbar.dart';
 import 'package:toprak_rehberi/common/widgets/land_details/add_product_screen/widgets/add_product_form.dart';
 import 'package:toprak_rehberi/common/widgets/land_details/widgets/helpers/suggestions_button.dart';
-import 'package:toprak_rehberi/models/land.dart';
+import 'package:toprak_rehberi/dtos/LandDTO.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
 // ! There will be all of the products in the dropdown menu in the final form
@@ -14,9 +14,9 @@ import 'package:toprak_rehberi/utils/constants/sizes.dart';
 // TODO     selected product and suggestion score
 
 class AddProductScreen extends StatelessWidget {
-  final Land land;
+  final LandDTO landDTO;
 
-  const AddProductScreen({super.key, required this.land});
+  const AddProductScreen({super.key, required this.landDTO});
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class AddProductScreen extends StatelessWidget {
                 decoration: getCardDecoration(context),
                 child: Center(
                   child: Text(
-                    land.landName,
+                    landDTO.name,
                     style: textTheme.titleLarge
                   ),
                 ),
@@ -51,7 +51,7 @@ class AddProductScreen extends StatelessWidget {
 
               const SizedBox(height: TSizes.spaceBtwSections * 2),
 
-              TAddProductForm(land: land),
+              TAddProductForm(landDTO: landDTO),
             ],
           ),
         ),

@@ -18,5 +18,5 @@ Future<void> setAuthToken(String token) async {
 // Function to decode JWT token and extract email
 String? getEmailFromToken(String token) {
   Map<String, dynamic> decodedToken = JwtDecoder.decode(token);
-  return decodedToken['sub'] as String?;
+  return decodedToken['sub'];
 }

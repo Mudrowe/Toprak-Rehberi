@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/widgets/custom_shapes/search_container.dart';
 import 'package:toprak_rehberi/features/main_pages/products/widgets/product_card/product_card.dart';
+import 'package:toprak_rehberi/models/product_option.dart';
+import 'package:toprak_rehberi/service/fetching/pages/fetch_lands.dart';
+import 'package:toprak_rehberi/service/fetching/product/fetch_product_options.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
-
+import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
 import '../../../../dtos/ProductDTO.dart';
+import '../../../../dtos/ProductOptionDTO.dart';
 import '../../../../service/fetching/pages/fetch_products.dart';
 
 class TPlantedProducts extends StatelessWidget {
@@ -13,6 +17,16 @@ class TPlantedProducts extends StatelessWidget {
     super.key,
   });
 
+  Future<List<ProductDTO>> _fetchProducts() async {
+    List<ProductDTO> products = await fetchProducts();
+
+    for (var product in products) {
+      ProductOptionDTO productOptionDTO = product.productOptionDTO;
+      print(productOptionDTO.toJson());
+    }
+
+    return products;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +40,7 @@ class TPlantedProducts extends StatelessWidget {
         const SizedBox(height: TSizes.spaceBtwSections),
 
         FutureBuilder<List<ProductDTO>>(
-          future: fetchPlantedProducts(),
+          future: _fetchProducts(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const CircularProgressIndicator();
@@ -35,6 +49,12 @@ class TPlantedProducts extends StatelessWidget {
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
               return const Text('No planted products available');
             } else {
+
+              // Print the DTOs to the console
+              for (var productDTO in snapshot.data!) {
+                print('ProductDTO in the planted products screen: ${productDTO.toJson()}');
+              }
+
               // Display the total number of planted products
               return Column(
                 children: [
@@ -65,7 +85,7 @@ class TPlantedProducts extends StatelessWidget {
               );
             }
           },
-        ),
+        )
       ],
     );
   }

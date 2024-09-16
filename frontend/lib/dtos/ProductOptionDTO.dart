@@ -1,18 +1,21 @@
-class LandTypeDTO {
+class ProductOptionDTO {
   final int id;
   final String name;
+  final int plantingDuration;
   final String imageUrl;
 
-  LandTypeDTO({
+  ProductOptionDTO({
     required this.id,
     required this.name,
+    required this.plantingDuration,
     required this.imageUrl,
   });
 
-  factory LandTypeDTO.fromJson(Map<String, dynamic> json) {
-    return LandTypeDTO(
+  factory ProductOptionDTO.fromJson(Map<String, dynamic> json) {
+    return ProductOptionDTO(
       id: json['id'],
       name: json['name'],
+      plantingDuration: json['plantingDuration'],
       imageUrl: json['imageUrl'],
     );
   }
@@ -20,6 +23,7 @@ class LandTypeDTO {
   Map<String, dynamic> toJson() => {
         'id': id,
         'name': name,
+        'plantingDuration': plantingDuration,
         'imageUrl': imageUrl,
       };
 }

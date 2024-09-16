@@ -1,6 +1,7 @@
-package com.toprakrehberi.backend.models;
+package com.toprakrehberi.backend.models.location;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,6 +32,7 @@ public class District {
 
     // One district can have many neighborhoods
     @OneToMany(mappedBy = "district")
+    @JsonManagedReference
     private List<Neighborhood> neighborhoods;
 
 }

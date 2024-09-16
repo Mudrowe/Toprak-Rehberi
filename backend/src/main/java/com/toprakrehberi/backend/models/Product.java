@@ -25,15 +25,20 @@ public class Product {
     @Column(name = "harvest_date", nullable = false)
     private LocalDate harvestDate;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "land_id", nullable = false)
-    private long landId;
+    private Land land;
 
     @Column(name = "score")
     private double score;
 
-    @Column(name = "product_option_id")
-    private Long productOptionId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_option_id", nullable = false)
+    private ProductOption productOption;
 
-    @Column(name = "size")
-    private double size;
+    @Column(name = "area")
+    private double area;
+
+    @Column(name = "is_harvested", nullable = false)
+    private boolean isHarvested;
 }

@@ -7,6 +7,7 @@ import 'package:toprak_rehberi/models/product_option.dart';
 import 'package:toprak_rehberi/service/fetching/product/fetch_product_options.dart';
 import '../../../dtos/LandDTO.dart';
 import '../../../dtos/ProductDTO.dart';
+import '../../../dtos/ProductOptionDTO.dart';
 import '../pages/fetch_lands.dart';
 
 Future<List<ProductDTO>> fetchProductsByLandId(int landId) async {
@@ -42,7 +43,7 @@ Future<List<ProductDTO>> fetchProductsByLandId(int landId) async {
 
         // Fetch the land details to get the landName
         LandDTO land = await fetchLandById(landId!);
-        ProductOption productOption =
+        ProductOptionDTO productOptionDTO =
         await fetchProductOptionById(productOptionId);
 
         ProductDTO productDTO = ProductDTO.fromJson({
@@ -52,8 +53,8 @@ Future<List<ProductDTO>> fetchProductsByLandId(int landId) async {
           'landId': productJson['landId'],
           'score': productJson['score'],
           'productOptionId': productJson['productOptionId'],
-          'productName': productOption.name,
-          'imageUrl': productOption.imageUrl,
+          'productName': productOptionDTO.name,
+          'imageUrl': productOptionDTO.imageUrl,
           'landName': land.name,
           'area': productJson['size'],
         });

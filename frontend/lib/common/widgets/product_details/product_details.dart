@@ -3,17 +3,18 @@ import 'package:toprak_rehberi/common/widgets/appbar/appbar.dart';
 import 'package:toprak_rehberi/common/widgets/product_details/widgets/sections/harvest_button.dart';
 import 'package:toprak_rehberi/common/widgets/product_details/widgets/sections/product_details_image.dart';
 import 'package:toprak_rehberi/common/widgets/product_details/widgets/sections/product_details_planting_date.dart';
+import 'package:toprak_rehberi/dtos/location/CityDTO.dart';
+import 'package:toprak_rehberi/dtos/location/DistrictDTO.dart';
 import 'package:toprak_rehberi/features/main_pages/products/widgets/product_card/product_progress.dart';
+import 'package:toprak_rehberi/service/fetching/constants/fetch_cities.dart';
+import 'package:toprak_rehberi/service/fetching/constants/fetch_districts.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
-import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 import 'package:toprak_rehberi/dtos/ProductDTO.dart';
 import 'package:toprak_rehberi/dtos/LandDTO.dart';
 
-import '../../../models/land.dart';
 import '../../../service/fetching/pages/fetch_lands.dart';
 import '../../styles/card_style.dart';
 import '../land_details/widgets/sections/land_details_column.dart';
-import '../land_details/widgets/sections/land_details_info.dart';
 
 class TProductDetails extends StatefulWidget {
   final ProductDTO productDTO;
@@ -30,20 +31,18 @@ class _TProductDetailsState extends State<TProductDetails> {
   @override
   void initState() {
     super.initState();
-    if (widget.productDTO.landName != null) {
-      _landFuture = fetchLandByName(widget.productDTO.landName!);
-    }
+    _landFuture = fetchLandByName(widget.productDTO.land.name);
   }
 
-  Address _convertToAddress(LandDTO landDTO) {
-    return Address(
-      city: 'City Placeholder',
-      district: 'District Placeholder',
-      neighborhood: 'Neighborhood',
-      parcelNo: landDTO.parcelNo,
-      adaNo: landDTO.adaNo,
-    );
+
+  Future<dynamic> _getCityAndDistrict(LandDTO landDTO) async {
+    int districtId = landDTO.neighborhoodDTO.districtId;
+    DistrictDTO district = await fetchDistrictById(districtId);
+    CityDTO city = await fetchCityById(district.cityId);
+
+    return (district, city);
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +55,7 @@ class _TProductDetailsState extends State<TProductDetails> {
             children: [
               // Product Name
               Text(
-                THelperFunctions.decodeUtf8(widget.productDTO.productName!) ??
-                    'Unknown',
+                widget.productDTO.productOptionDTO.name ?? 'Unknown',
                 style: textTheme.headlineMedium,
               ),
 
@@ -97,10 +95,7 @@ class _TProductDetailsState extends State<TProductDetails> {
                           TSizes.md,
                         ),
                         child: TLandDetailsColumn(
-                          land: convertLandDTOToLand(
-                            land,
-                            _convertToAddress(land),
-                          ),
+                          landDTO: land
                         ),
                       ),
                     );

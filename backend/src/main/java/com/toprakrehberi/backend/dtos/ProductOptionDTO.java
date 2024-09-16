@@ -9,8 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class NeighborhoodDTO {
-    private int id;
+public class ProductOptionDTO {
+
+    private Long id;
     private String name;
-    private int districtId; // Reference to the district ID
+    private int plantingDuration;
+    private String imageUrl;
 }

@@ -1,6 +1,6 @@
-package com.toprakrehberi.backend.repositories;
+package com.toprakrehberi.backend.repositories.location;
 
-import com.toprakrehberi.backend.models.Neighborhood;
+import com.toprakrehberi.backend.models.location.Neighborhood;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

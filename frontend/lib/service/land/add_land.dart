@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
 import '../../dtos/LandDTO.dart';
+import '../../dtos/UserDTO.dart';
 import '../fetching/pages/fetch_user.dart';
 
 Future<void> addLand(LandDTO landDTO) async {
@@ -18,7 +19,8 @@ Future<void> addLand(LandDTO landDTO) async {
     throw Exception('No auth token found. Please log in.');
   }
 
-  final userId = await getUserId(token);
+  UserDTO user = await fetchUser();
+  int userId = user.id!;
 
   print("User id from getUserIdByEmail2: $userId");
   if (userId == null) {

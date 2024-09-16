@@ -1,4 +1,4 @@
-package com.toprakrehberi.backend.dtos;
+package com.toprakrehberi.backend.dtos.location;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CityDTO {
-    private byte id;
+public class NeighborhoodDTO {
+
+    private int id;
     private String name;
+    private int districtId;
 }

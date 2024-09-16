@@ -1,77 +1,72 @@
-import '../models/land.dart';
-import '../utils/constants/enums.dart';
+import 'package:toprak_rehberi/dtos/LandTypeDTO.dart';
+import 'package:toprak_rehberi/dtos/location/NeighborhoodDTO.dart';
+
+import '../service/fetching/constants/fetch_cities.dart';
+import '../service/fetching/constants/fetch_districts.dart';
+import 'location/CityDTO.dart';
+import 'location/DistrictDTO.dart';
 
 class LandDTO {
   final int? id;
   int? userId;
   final String name;
-  final int? neighborhoodId;
+  final NeighborhoodDTO neighborhoodDTO;
   final String parcelNo;
   final String adaNo;
-  final double size;
-  final int? landTypeId;
+  final double area;
+  final LandTypeDTO landTypeDTO;
+  CityDTO? cityDTO;
+  DistrictDTO? districtDTO;
 
   LandDTO({
     this.id,
     this.userId,
     required this.name,
-    this.neighborhoodId,
+    required this.neighborhoodDTO,
     required this.parcelNo,
     required this.adaNo,
-    required this.size,
-    required this.landTypeId,
-  });
+    required this.area,
+    required this.landTypeDTO,
+  }) {
+    _initializeCityAndDistrict();
+  }
 
   factory LandDTO.fromJson(Map<String, dynamic> json) {
-    return LandDTO(
-      id: json['id'] != null ? json['id'] as int : null,
-      userId: json['userId'] != null ? json['userId'] as int : null,
+    final landDTO = LandDTO(
+      id: json['id'],
+      userId: json['userId'],
       name: json['name'],
-      neighborhoodId:
-          json['neighborhoodId'],
+      neighborhoodDTO: NeighborhoodDTO.fromJson(json['neighborhood']),
       parcelNo: json['parcelNo'],
       adaNo: json['adaNo'],
-      size: json['size'].toDouble(),
-      landTypeId: json['landTypeId'],
+      area: json['area'],
+      landTypeDTO: LandTypeDTO.fromJson(json['landType']),
     );
+
+    return landDTO;
   }
 
   Map<String, dynamic> toJson() => {
         'id': id,
         'userId': userId,
         'name': name,
-        'neighborhoodId': neighborhoodId,
+        'neighborhood': neighborhoodDTO.toJson(),
         'parcelNo': parcelNo,
         'adaNo': adaNo,
-        'size': size,
-        'landTypeId': landTypeId,
+        'area': area,
+        'landType': landTypeDTO.toJson(),
       };
-}
 
-LandType _landTypeFromId(int? landTypeId) {
-  switch (landTypeId) {
-    case 4:
-      return LandType.tarla;
-    case 5:
-      return LandType.bag;
-    case 6:
-      return LandType.bahce;
-    default:
-      return LandType.tarla;
+  Future<void> _initializeCityAndDistrict() async {
+    try {
+      DistrictDTO district =
+          await fetchDistrictById(neighborhoodDTO.districtId!);
+      CityDTO city = await fetchCityById(district.cityId);
+
+      districtDTO = district;
+      cityDTO = city;
+    } catch (e) {
+      print('Failed to fetch city or district: $e');
+    }
   }
-}
-
-Land convertLandDTOToLand(LandDTO landDTO, Address address) {
-  LandType landType = _landTypeFromId(landDTO.landTypeId);
-
-  return Land(
-    landName: landDTO.name,
-    landType: landType,
-    area: landDTO.size,
-    plantedArea: 0.0, // Default or computed value
-    isPlanted: false, // Default or computed value
-    address: address,
-    plantedProducts: [], // Default or fetched value
-    harvestedProducts: [], // Default or fetched value
-  );
 }

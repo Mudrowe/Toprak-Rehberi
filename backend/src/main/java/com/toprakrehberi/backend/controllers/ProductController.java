@@ -1,11 +1,16 @@
 package com.toprakrehberi.backend.controllers;
 
+import com.toprakrehberi.backend.dtos.LandDTO;
+import com.toprakrehberi.backend.dtos.LandTypeDTO;
 import com.toprakrehberi.backend.dtos.ProductDTO;
+import com.toprakrehberi.backend.dtos.ProductOptionDTO;
+import com.toprakrehberi.backend.dtos.location.NeighborhoodDTO;
 import com.toprakrehberi.backend.models.Land;
 import com.toprakrehberi.backend.models.Product;
+import com.toprakrehberi.backend.models.ProductOption;
 import com.toprakrehberi.backend.services.LandService;
+import com.toprakrehberi.backend.services.ProductOptionService;
 import com.toprakrehberi.backend.services.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,34 +22,68 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/product")
 public class ProductController {
 
-    @Autowired
-    private ProductService productService;
+    private final ProductService productService;
+    private final LandService landService;
+    private final ProductOptionService productOptionService;
 
-    @Autowired
-    private LandService landService;
+    public ProductController(ProductService productService, LandService landService, ProductOptionService productOptionService) {
+        this.productService = productService;
+        this.landService = landService;
+        this.productOptionService = productOptionService;
+    }
 
+    private LandDTO convertLandToDTO(Land land) {
+        return new LandDTO(
+                land.getId(),
+                land.getUser().getId(),
+                land.getName(),
+                new NeighborhoodDTO(
+                        land.getNeighborhood().getId(),
+                        land.getNeighborhood().getName(),
+                        land.getNeighborhood().getDistrict().getId()),
+                land.getParcelNo(),
+                land.getAdaNo(),
+                land.getArea(),
+                new LandTypeDTO(land.getLandType().getId(), land.getLandType().getName(), land.getLandType().getImageUrl())
+        );
+    }
+
+    private ProductOptionDTO convertProductOptionToDTO(ProductOption productOption) {
+        return new ProductOptionDTO(
+                productOption.getId(),
+                productOption.getName(),
+                productOption.getPlantingDuration(),
+                productOption.getImageUrl()
+        );
+    }
 
     private ProductDTO convertToDTO(Product product) {
         return new ProductDTO(
                 product.getId(),
                 product.getPlantingDate(),
                 product.getHarvestDate(),
-                product.getLandId(),
+                convertLandToDTO(product.getLand()),
                 product.getScore(),
-                product.getProductOptionId(),
-                product.getSize()
+                convertProductOptionToDTO(product.getProductOption()),
+                product.getArea(),
+                product.isHarvested()
         );
     }
 
     private Product convertToEntity(ProductDTO productDTO) {
+        Land land = landService.getLandById(productDTO.getLand().getId());
+        ProductOption productOption = productOptionService.getProductOptionById(productDTO.getProductOption().getId())
+                .orElseThrow(() -> new IllegalArgumentException("ProductOption not found for ID: " + productDTO.getProductOption().getId()));
+
         return new Product(
                 productDTO.getId(),
                 productDTO.getPlantingDate(),
                 productDTO.getHarvestDate(),
-                productDTO.getLandId(),
+                land,
                 productDTO.getScore(),
-                productDTO.getProductOptionId(),
-                productDTO.getSize()
+                productOption,
+                productDTO.getArea(),
+                productDTO.isHarvested()
         );
     }
 
@@ -54,37 +93,49 @@ public class ProductController {
         List<ProductDTO> productDTOs = products.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
-        return new ResponseEntity<>(productDTOs, HttpStatus.OK);
+        return ResponseEntity.ok(productDTOs);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> getProductById(@PathVariable("id") long id) {
         Product product = productService.getProductById(id);
         if (product != null) {
-            return new ResponseEntity<>(convertToDTO(product), HttpStatus.OK);
+            return ResponseEntity.ok(convertToDTO(product));
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 
     @GetMapping("/byLand/{landId}")
     public ResponseEntity<List<ProductDTO>> getProductsByLandId(@PathVariable("landId") long landId) {
-        List<ProductDTO> productsDTO = productService.getProductsByLandId(landId);
-        if (productsDTO.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        List<Product> products = productService.getProductsByLandId(landId);
+        List<ProductDTO> productDTOs = products.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+
+        if (productDTOs.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        return new ResponseEntity<>(productsDTO, HttpStatus.OK);
+        return ResponseEntity.ok(productDTOs);
     }
+
+    @GetMapping("/byUserId/{userId}")
+    public ResponseEntity<List<ProductDTO>> getProductsByUserId(@PathVariable("userId") long userId) {
+        List<Product> products = productService.getProductsByUserId(userId);
+        List<ProductDTO> productDTOs = products.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+
+        if (productDTOs.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(productDTOs);
+    }
+
 
     @PostMapping()
     public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO) {
         System.out.println("Received ProductDTO JSON: " + productDTO.toString());
-        
-        // Fetch the Land entity to validate landId
-        Land land = landService.getLandById(productDTO.getLandId());
-        if (land == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
 
         Product product = convertToEntity(productDTO);
         Product savedProduct = productService.saveProduct(product);
@@ -93,18 +144,6 @@ public class ProductController {
 
         System.out.println("Saved ProductDTO: " + savedProductDTO);
 
-        return new ResponseEntity<>(savedProductDTO, HttpStatus.CREATED);
-    }
-
-
-
-    @GetMapping("/planted")
-    public List<ProductDTO> getPlantedProducts() {
-        return productService.getPlantedProducts();
-    }
-
-    @GetMapping("/harvested")
-    public List<ProductDTO> getHarvestedProducts() {
-        return productService.getHarvestedProducts();
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedProductDTO);
     }
 }
