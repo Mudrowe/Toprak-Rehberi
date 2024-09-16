@@ -1,7 +1,5 @@
 package com.toprakrehberi.backend.dtos;
 
-// ! PASSWORD WILL BE REMOVED
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +16,4 @@ public class UserDTO {
     private String lastName;
     private String email;
     private String phoneNumber;
-    //private Set<Long> landIds; // Reference to land IDs
-    private String password;
 }

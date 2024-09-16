@@ -1,4 +1,4 @@
-package com.toprakrehberi.backend.dtos;
+package com.toprakrehberi.backend.dtos.location;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class LandTypeDTO {
+public class CityDTO {
 
-    private int id;
+    private byte id;
     private String name;
-    private String imageUrl;
 }

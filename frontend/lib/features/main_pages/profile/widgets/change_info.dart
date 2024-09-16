@@ -56,8 +56,11 @@ Widget _buildContent(String info, bool isPassword, Color textColor) {
         : TSizes.changeInfoHeightDefault,
     child: Column(
       children: [
+        if (isPassword)
+          _buildTextField('Eski $info', textColor),
         _buildTextField('Yeni $info', textColor),
-        if (isPassword) _buildTextField('Yeni $info Tekrar', textColor),
+        if (isPassword)
+          _buildTextField('Yeni $info Tekrar', textColor),
       ],
     ),
   );

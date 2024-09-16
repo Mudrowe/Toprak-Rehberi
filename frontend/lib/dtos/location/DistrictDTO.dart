@@ -1,16 +1,12 @@
-import 'dart:convert';
-
 class DistrictDTO {
-  final int id; // Dart does not have a `short` type, so `int` is used
+  final int id;
   final String name;
-  final int cityId; // Reference to the city ID
-  final List<int> neighborhoodIds; // List of neighborhood IDs
+  final int cityId;
 
   DistrictDTO({
     required this.id,
     required this.name,
     required this.cityId,
-    required this.neighborhoodIds,
   });
 
   factory DistrictDTO.fromJson(Map<String, dynamic> json) {
@@ -18,7 +14,6 @@ class DistrictDTO {
       id: json['id'],
       name: json['name'],
       cityId: json['cityId'],
-      neighborhoodIds: List<int>.from(json['neighborhoodIds']),
     );
   }
 
@@ -26,6 +21,5 @@ class DistrictDTO {
     'id': id,
     'name': name,
     'cityId': cityId,
-    'neighborhoodIds': neighborhoodIds,
   };
 }

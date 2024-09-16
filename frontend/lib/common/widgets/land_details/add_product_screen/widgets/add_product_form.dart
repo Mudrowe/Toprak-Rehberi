@@ -8,14 +8,14 @@ import 'package:toprak_rehberi/service/fetching/product/fetch_product_options.da
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
-import '../../../../../models/land.dart';
-import '../../../../../models/product_option.dart';
+import '../../../../../dtos/LandDTO.dart';
+import '../../../../../dtos/ProductOptionDTO.dart';
 import '../../../../../service/product/add_product.dart';
 
 class TAddProductForm extends StatefulWidget {
-  final Land land;
+  final LandDTO landDTO;
 
-  const TAddProductForm({super.key, required this.land});
+  const TAddProductForm({super.key, required this.landDTO});
 
   @override
   State<TAddProductForm> createState() => _TAddProductFormState();
@@ -24,10 +24,9 @@ class TAddProductForm extends StatefulWidget {
 class _TAddProductFormState extends State<TAddProductForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   double? _area;
-  int? _productOptionId;
   DateTime? _plantingDate;
   double? _score;
-  ProductOption? _productOption;
+  ProductOptionDTO? _productOptionDTO;
 
   @override
   void initState() {
@@ -39,21 +38,17 @@ class _TAddProductFormState extends State<TAddProductForm> {
     try {
       final fetchedProductOption = await fetchProductOptionById(id);
       setState(() {
-        _productOption = fetchedProductOption;
+        _productOptionDTO = fetchedProductOption;
       });
     } catch (error) {
       print('Error fetching product option: $error');
     }
   }
 
-
   void _handleProductChange(int? id) {
     if (id != null) {
       _fetchProductOption(id);
     }
-    setState(() {
-      _productOptionId = id;
-    });
   }
 
   DateTime addMonths(DateTime date, int months) {
@@ -72,34 +67,42 @@ class _TAddProductFormState extends State<TAddProductForm> {
     return date.add(Duration(minutes: minutes));
   }
 
-
   Future<void> _saveForm(BuildContext context) async {
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
 
       if (_area == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Lütfen eklemek istediğiniz alanı girin.')),
+          const SnackBar(
+              content: Text('Lütfen eklemek istediğiniz alanı girin.')),
         );
         return;
-      } else if (_productOptionId == null) {
+      } else if (_productOptionDTO == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Lütfen eklemek istediğiniz ürünü seçin.')),
+          const SnackBar(
+              content: Text('Lütfen eklemek istediğiniz ürünü seçin.')),
         );
         return;
       }
 
       ProductDTO productDTO = ProductDTO(
-        landId: (await fetchLandByName(widget.land.landName)).id,
+        //land: LandDTO(id: (await fetchLandByName(widget.land.landName)).id,
+        land: LandDTO(
+          id: (await fetchLandByName(widget.landDTO.name)).id,
+          name: widget.landDTO.name,
+          area: widget.landDTO.area,
+          adaNo: widget.landDTO.adaNo,
+          parcelNo: widget.landDTO.parcelNo,
+          landTypeDTO: widget.landDTO.landTypeDTO,
+          neighborhoodDTO: widget.landDTO.neighborhoodDTO,
+        ),
         area: _area!,
-        productOptionId: _productOptionId!,
-        landName: widget.land.landName,
+        productOptionDTO: _productOptionDTO!,
         plantingDate: _plantingDate,
-        harvestDate: addMonths(_plantingDate!, _productOption?.plantingDuration ?? 0),
-        //harvestDate: addMinutes(_plantingDate!, _productOption?.plantingDuration ?? 0),
-        imageUrl: _productOption?.imageUrl,
-        productName: _productOption?.name,
+        harvestDate:
+            addMonths(_plantingDate!, _productOptionDTO?.plantingDuration ?? 0),
         score: _score,
+        isHarvested: false,
       );
 
       print('Sending ProductDTO JSON 1: ${jsonEncode(productDTO.toJson())}');

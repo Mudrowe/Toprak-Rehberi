@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toprak_rehberi/dtos/ProductDTO.dart';
 
+import '../../../dtos/UserDTO.dart';
 import 'fetch_user.dart';
 
 Future<List<ProductDTO>> fetchProducts() async {
@@ -11,9 +12,10 @@ Future<List<ProductDTO>> fetchProducts() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString('authToken');
 
-  final userId = await getUserId(token!);
+  UserDTO user = await fetchUser();
+  int userId = user.id!;
 
-  print('userId: $userId');
+  //print('userId: $userId');
 
   var ipAddress = dotenv.env['IP_ADDRESS'];
   var baseUrl = 'http://$ipAddress:8080/api/product/byUserId/$userId';

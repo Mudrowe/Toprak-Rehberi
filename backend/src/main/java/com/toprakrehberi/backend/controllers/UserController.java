@@ -1,12 +1,13 @@
 package com.toprakrehberi.backend.controllers;
 
 import com.toprakrehberi.backend.auth.RegisterRequest;
+import com.toprakrehberi.backend.dtos.LandDTO;
 import com.toprakrehberi.backend.dtos.UserDTO;
-import com.toprakrehberi.backend.models.User;
 import com.toprakrehberi.backend.models.Land;
-import com.toprakrehberi.backend.repositories.UserRepository;
+import com.toprakrehberi.backend.models.User;
+import com.toprakrehberi.backend.services.LandService;
 import com.toprakrehberi.backend.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.toprakrehberi.backend.utils.ConverterUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -14,96 +15,54 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/user")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+    private final LandService landService;
 
-    @GetMapping
-    public ResponseEntity<List<UserDTO>> getAllUsers() {
-        List<User> users = userService.getAllUsers();
-        List<UserDTO> userDTOs = users.stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
-        return new ResponseEntity<>(userDTOs, HttpStatus.OK);
+    public UserController(UserService userService, LandService landService) {
+        this.userService = userService;
+        this.landService = landService;
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable("id") long id) {
         User user = userService.getUserById(id);
         if (user != null) {
-            return new ResponseEntity<>(convertToDTO(user), HttpStatus.OK);
+            return ResponseEntity.ok(ConverterUtil.convertToUserDTO(user));
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-    }
-
-    private UserDTO convertToDTO(User user) {
-        /* Convert lands to their IDs
-        Set<Long> landIds = user.getLands().stream()
-                .map(Land::getId)
-                .collect(Collectors.toSet());
-         */
-
-        return new UserDTO(
-                user.getId(),
-                user.getFirstName(),
-                user.getLastName(),
-                user.getEmail(),
-                user.getPhoneNumber(),
-                //landIds,
-                user.getPassword()
-        );
-    }
-
-    private User convertToEntity(RegisterRequest registerRequest) {
-        User user = new User();
-        user.setFirstName(registerRequest.getFirstName());
-        user.setLastName(registerRequest.getLastName());
-        user.setEmail(registerRequest.getEmail());
-        user.setPhoneNumber(registerRequest.getPhoneNumber());
-        user.setPassword(registerRequest.getPassword());
-        return user;
-    }
-
-    @PostMapping("/register")
-    public ResponseEntity<UserDTO> registerUser(@RequestBody RegisterRequest registerRequest) {
-        System.out.println("Received UserDTO: " + registerRequest.toString());
-
-        User user = convertToEntity(registerRequest);
-        User savedUser = userService.saveUser(user);
-        UserDTO savedUserDTO = convertToDTO(savedUser);
-        System.out.println("Saved UserDTO: " + savedUserDTO);
-
-        return new ResponseEntity<>(savedUserDTO, HttpStatus.CREATED);
     }
 
     @GetMapping("/byEmail/{email}")
     public ResponseEntity<UserDTO> getUserByEmail(@PathVariable String email) {
         User user = userService.getUserByEmail(email);
-        System.out.println(user.toString());
-        if (user != null) {
-            return new ResponseEntity<>(convertToDTO(user), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        System.out.println("Get User By Email: " + user.toString());
+
+        return ResponseEntity.ok(ConverterUtil.convertToUserDTO(user));
     }
 
     @GetMapping("/me")
-    public UserDTO getCurrentUser() {
+    public ResponseEntity<UserDTO> getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = (String) authentication.getPrincipal();
+        User user = (User) authentication.getPrincipal();
 
-        // Fetch the user details using the username or user ID
-        User user = userService.getUserByEmail(username);
+        return ResponseEntity.ok(ConverterUtil.convertToUserDTO(user));
+    }
 
-        return convertToDTO(user);
+    @GetMapping("/user/{userId}/lands")
+    public ResponseEntity<List<LandDTO>> getLandsByUserId(@PathVariable long userId) {
+        List<Land> lands = landService.getLandsByUserId(userId);
+        List<LandDTO> landDTOs = lands.stream()
+                .map(ConverterUtil::convertToLandDTO)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(landDTOs);
     }
 
 }

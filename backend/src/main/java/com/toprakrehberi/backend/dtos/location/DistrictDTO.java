@@ -1,11 +1,10 @@
-package com.toprakrehberi.backend.dtos;
+package com.toprakrehberi.backend.dtos.location;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 
 @Data
 @Builder
@@ -15,6 +14,5 @@ public class DistrictDTO {
 
     private short id;
     private String name;
-    private int cityId; // Reference to the city ID
-    private List<Integer> neighborhoodIds; // List of neighborhood IDs
+    private int cityId;
 }

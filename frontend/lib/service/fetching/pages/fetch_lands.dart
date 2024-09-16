@@ -10,11 +10,9 @@ Future<List<LandDTO>> fetchLands() async {
   var baseUrl = 'http://$ipAddress:8080/api/land';
   final url = Uri.parse(baseUrl);
 
-
   // Get token from SharedPreferences
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString('authToken');
-
 
   final response = await http.get(
     url,
@@ -27,23 +25,19 @@ Future<List<LandDTO>> fetchLands() async {
   if (response.statusCode == 200) {
     final List<dynamic> landsJson = json.decode(response.body);
     return landsJson.map((json) => LandDTO.fromJson(json)).toList();
-
   } else {
     throw Exception('Failed to load lands (fetchLands function)');
   }
 }
-
 
 Future<List<LandDTO>> fetchLandsByUserId(int userId) async {
   var ipAddress = dotenv.env['IP_ADDRESS'];
   var baseUrl = 'http://$ipAddress:8080/api/land/byUserId/$userId';
   final url = Uri.parse(baseUrl);
 
-
   // Get token from SharedPreferences
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString('authToken');
-
 
   final response = await http.get(
     url,
@@ -55,8 +49,13 @@ Future<List<LandDTO>> fetchLandsByUserId(int userId) async {
 
   if (response.statusCode == 200) {
     final List<dynamic> landsJson = json.decode(response.body);
-    return landsJson.map((json) => LandDTO.fromJson(json)).toList();
 
+    // Print the received JSON
+    for (var landJson in landsJson) {
+      print('Land JSON: $landJson');
+    }
+
+    return landsJson.map((json) => LandDTO.fromJson(json)).toList();
   } else {
     throw Exception('Failed to load land by userId');
   }
@@ -68,11 +67,9 @@ Future<LandDTO> fetchLandByName(String name) async {
   var baseUrl = 'http://$ipAddress:8080/api/land/byName/$utf8Name';
   final url = Uri.parse(baseUrl);
 
-
   // Get token from SharedPreferences
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString('authToken');
-
 
   final response = await http.get(
     url,
@@ -95,11 +92,9 @@ Future<LandDTO> fetchLandById(int id) async {
   var baseUrl = 'http://$ipAddress:8080/api/land/byId/$id';
   final url = Uri.parse(baseUrl);
 
-
   // Get token from SharedPreferences
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString('authToken');
-
 
   final response = await http.get(
     url,
@@ -122,11 +117,9 @@ Future<String> fetchLandNameById(int id) async {
   var baseUrl = 'http://$ipAddress:8080/api/land/byId/$id';
   final url = Uri.parse(baseUrl);
 
-
   // Get token from SharedPreferences
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString('authToken');
-
 
   final response = await http.get(
     url,

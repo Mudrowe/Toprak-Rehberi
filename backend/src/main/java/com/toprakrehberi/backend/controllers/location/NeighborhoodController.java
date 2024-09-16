@@ -1,9 +1,8 @@
-package com.toprakrehberi.backend.controllers;
+package com.toprakrehberi.backend.controllers.location;
 
-import com.toprakrehberi.backend.dtos.NeighborhoodDTO;
-import com.toprakrehberi.backend.models.Neighborhood;
-import com.toprakrehberi.backend.services.NeighborhoodService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.toprakrehberi.backend.dtos.location.NeighborhoodDTO;
+import com.toprakrehberi.backend.models.location.Neighborhood;
+import com.toprakrehberi.backend.services.location.NeighborhoodService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +14,11 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/neighborhoods")
 public class NeighborhoodController {
 
-    @Autowired
-    private NeighborhoodService neighborhoodService;
+    private final NeighborhoodService neighborhoodService;
+
+    public NeighborhoodController(NeighborhoodService neighborhoodService) {
+        this.neighborhoodService = neighborhoodService;
+    }
 
     @GetMapping
     public ResponseEntity<List<NeighborhoodDTO>> getAllNeighborhoods() {
@@ -24,7 +26,7 @@ public class NeighborhoodController {
         List<NeighborhoodDTO> neighborhoodDTOs = neighborhoods.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
-        return new ResponseEntity<>(neighborhoodDTOs, HttpStatus.OK);
+        return ResponseEntity.ok(neighborhoodDTOs);
     }
 
     @GetMapping("/{id}")
@@ -33,7 +35,7 @@ public class NeighborhoodController {
         if (neighborhood != null) {
             return new ResponseEntity<>(convertToDTO(neighborhood), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 
@@ -43,7 +45,7 @@ public class NeighborhoodController {
         List<NeighborhoodDTO> neighborhoodDTOs = neighborhoods.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
-        return new ResponseEntity<>(neighborhoodDTOs, HttpStatus.OK);
+        return ResponseEntity.ok(neighborhoodDTOs);
     }
 
     private NeighborhoodDTO convertToDTO(Neighborhood neighborhood) {

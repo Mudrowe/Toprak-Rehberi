@@ -34,7 +34,6 @@ class _TSignupFormState extends State<TSignupForm> {
         lastName: _lastName!,
         email: _email!,
         phoneNumber: _phoneNo!,
-        password: _password!,
       );
 
       createUser(user).then((_) {
