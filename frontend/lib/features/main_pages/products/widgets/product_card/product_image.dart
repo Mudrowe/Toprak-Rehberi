@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/styles/card_style.dart';
 import 'package:toprak_rehberi/dtos/ProductOptionDTO.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
+import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
 import '../../../../../dtos/ProductDTO.dart';
 
@@ -30,7 +31,7 @@ class TProductCardImage extends StatelessWidget {
           ),
           decoration: getCardDecoration(context),
           child: Text(
-            productOptionDTO.name,
+            THelperFunctions.decodeUtf8(productOptionDTO.name),
             style: textTheme.bodyLarge,
             overflow: TextOverflow.ellipsis,
           ),
@@ -38,7 +39,7 @@ class TProductCardImage extends StatelessWidget {
 
         // Product image
         Image.asset(
-          productOptionDTO.imageUrl,
+          THelperFunctions.decodeUtf8(productOptionDTO.imageUrl),
           height: TSizes.productImageHeight,
           width: TSizes.productImageWidth,
         ),
@@ -46,7 +47,7 @@ class TProductCardImage extends StatelessWidget {
         // Land name
 
         Text(
-          productDTO.land.name,
+          THelperFunctions.decodeUtf8(productDTO.land.name),
           style: textTheme.bodyLarge,
         ),
       ],

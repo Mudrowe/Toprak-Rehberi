@@ -3,12 +3,40 @@ import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:toprak_rehberi/models/product_option.dart';
-import 'package:toprak_rehberi/service/fetching/product/fetch_product_options.dart';
-import '../../../dtos/LandDTO.dart';
 import '../../../dtos/ProductDTO.dart';
-import '../../../dtos/ProductOptionDTO.dart';
-import '../pages/fetch_lands.dart';
+import '../../../dtos/UserDTO.dart';
+import '../pages/fetch_user.dart';
+
+Future<List<ProductDTO>> fetchProducts() async {
+  // Get token from SharedPreferences
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? token = prefs.getString('authToken');
+
+  UserDTO user = await fetchUser();
+  int userId = user.id!;
+
+  //print('userId: $userId');
+
+  var ipAddress = dotenv.env['IP_ADDRESS'];
+  var baseUrl = 'http://$ipAddress:8080/api/product/byUserId/$userId';
+  final url = Uri.parse(baseUrl);
+
+  final response = await http.get(
+    url,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token',
+    },
+  );
+
+  if (response.statusCode == 200) {
+    List<dynamic> productList = json.decode(response.body);
+    return productList.map((json) => ProductDTO.fromJson(json)).toList();
+  } else {
+    throw Exception('Failed to load products');
+  }
+}
+
 
 Future<List<ProductDTO>> fetchProductsByLandId(int landId) async {
   var ipAddress = dotenv.env['IP_ADDRESS'];
@@ -37,26 +65,15 @@ Future<List<ProductDTO>> fetchProductsByLandId(int landId) async {
       List<ProductDTO> products = [];
 
       for (var productJson in productsJson) {
-        // Existing logic to parse and build ProductDTO
-        int? landId = productJson['landId'];
-        int? productOptionId = productJson['productOptionId'];
-
-        // Fetch the land details to get the landName
-        LandDTO land = await fetchLandById(landId!);
-        ProductOptionDTO productOptionDTO =
-        await fetchProductOptionById(productOptionId);
-
         ProductDTO productDTO = ProductDTO.fromJson({
           'id': productJson['id'],
           'plantingDate': productJson['plantingDate'],
           'harvestDate': productJson['harvestDate'],
-          'landId': productJson['landId'],
+          'land': productJson['land'],
           'score': productJson['score'],
-          'productOptionId': productJson['productOptionId'],
-          'productName': productOptionDTO.name,
-          'imageUrl': productOptionDTO.imageUrl,
-          'landName': land.name,
+          'productOption': productJson['productOption'],
           'area': productJson['size'],
+          'harvested': productJson['harvested'],
         });
 
         products.add(productDTO);

@@ -14,9 +14,9 @@ class TAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       automaticallyImplyLeading: false,
       leading: showBackButton
-          ? CircularIconButton(
+          ? IconButton(
               onPressed: () => Get.back(),
-              assetImagePath: TImages.backArrow,
+              icon: const Icon(Icons.arrow_back),
             )
           : null,
       title: title != null ? Text(title!) : null,

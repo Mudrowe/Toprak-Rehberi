@@ -6,9 +6,9 @@ import 'ProductOptionDTO.dart';
 class ProductDTO {
   final int? id;
   final DateTime? plantingDate;
-  final DateTime? harvestDate;
+  DateTime? harvestDate;
   final LandDTO land;
-  final double? score;
+  double? score;
   final ProductOptionDTO productOptionDTO;
   double? area;
   bool isHarvested;
@@ -44,22 +44,22 @@ class ProductDTO {
       id: json['id'],
       plantingDate: DateTime.parse(json['plantingDate']),
       harvestDate: DateTime.parse(json['harvestDate']),
-      land: json['land'],
+      land: LandDTO.fromJson(json['land']),
       score: json['score'].toDouble(),
-      productOptionDTO: json['productOption'],
+      productOptionDTO: ProductOptionDTO.fromJson(json['productOption']),
       area: json['area'],
-      isHarvested: json['isHarvested'],
+      isHarvested: json['harvested'],
     );
   }
 
   Map<String, dynamic> toJson() => {
         'id': id,
-        'plantingDate': THelperFunctions.getFormattedDate(plantingDate!),
-        'harvestDate': THelperFunctions.getFormattedDate(harvestDate!),
-        'land': land,
+        'plantingDate': THelperFunctions.getIso8601Date(plantingDate!),
+        'harvestDate': THelperFunctions.getIso8601Date(harvestDate!),
+        'land': land.toJson(),
         'score': score,
-        'productOption': productOptionDTO,
+        'productOption': productOptionDTO.toJson(),
         'area': area,
-        'isHarvested': isHarvested,
+        'harvested': isHarvested,
       };
 }

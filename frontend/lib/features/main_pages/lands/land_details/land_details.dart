@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/widgets/appbar/appbar.dart';
-import 'package:toprak_rehberi/common/widgets/land_details/widgets/helpers/suggestions_button.dart';
-import 'package:toprak_rehberi/common/widgets/land_details/widgets/sections/land_details_info.dart';
-import 'package:toprak_rehberi/common/widgets/land_details/widgets/sections/land_planted_products.dart';
-import 'package:toprak_rehberi/common/widgets/land_details/widgets/sections/land_type_image.dart';
 import 'package:toprak_rehberi/dtos/LandDTO.dart';
+import 'package:toprak_rehberi/features/main_pages/lands/land_details/widgets/helpers/suggestions_button.dart';
+import 'package:toprak_rehberi/features/main_pages/lands/land_details/widgets/sections/land_details_info.dart';
+import 'package:toprak_rehberi/features/main_pages/lands/land_details/widgets/sections/land_planted_products.dart';
+import 'package:toprak_rehberi/features/main_pages/lands/land_details/widgets/sections/land_type_image.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
 class TLandDetails extends StatelessWidget {
@@ -35,7 +35,7 @@ class TLandDetails extends StatelessWidget {
 
               const SizedBox(height: TSizes.spaceBtwSections),
 
-              TLandPlantedProducts(land: landDTO)
+              TLandProducts(landDTO: landDTO)
             ],
           ),
         ),

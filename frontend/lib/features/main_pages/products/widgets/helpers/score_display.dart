@@ -4,7 +4,6 @@ import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
 // ? Resolution of images is not very good.
-// ? Mid color is not very visible for reading
 
 class TScoreDisplay extends StatelessWidget {
   const TScoreDisplay({

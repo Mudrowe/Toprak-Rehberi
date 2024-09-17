@@ -5,15 +5,21 @@ import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
 import '../../../../dtos/ProductDTO.dart';
-import '../../../../service/fetching/pages/fetch_products.dart';
+import '../../../../utils/constants/image_strings.dart';
+import '../../../../utils/helpers/helper_functions.dart';
 
 class THarvestedProducts extends StatelessWidget {
+  final List<ProductDTO> products;
+
   const THarvestedProducts({
     super.key,
+    required this.products,
   });
 
   @override
   Widget build(BuildContext context) {
+    final dark = THelperFunctions.isDarkMode(context);
+
     return Column(
       children: [
         const SizedBox(height: TSizes.spaceBtwItems),
@@ -23,47 +29,47 @@ class THarvestedProducts extends StatelessWidget {
 
         const SizedBox(height: TSizes.spaceBtwSections),
 
-        FutureBuilder<List<ProductDTO>>(
-          future: fetchHarvestedProducts(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const CircularProgressIndicator();
-            } else if (snapshot.hasError) {
-              return Text('Error: ${snapshot.error}');
-            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return const Text('No harvested products available');
-            } else {
-              // Display the total number of harvested products
-              return Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        if (products.isEmpty)
+          Column(
+            children: [
+              Image.asset(dark ? TImages.darkAppLogo : TImages.lightAppLogo),
+              const SizedBox(height: TSizes.spaceBtwItems),
+              const Text(
+                'Hasat edilmiş ürün yok',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ],
+          )
+        else
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    const Text(TTexts.totalHarvestedProducts),
+                    Text('${products.length}'),
+                  ],
+                ),
+
+                const Divider(
+                  indent: TSizes.dividerIndent,
+                  endIndent: TSizes.dividerIndent,
+                ),
+
+                const SizedBox(height: TSizes.spaceBtwItems),
+
+                // Products list
+                for (var productDTO in products)
+                  Column(
                     children: [
-                      const Text(TTexts.totalHarvestedProducts),
-                      Text('${snapshot.data!.length}')
+                      TProductCard(productDTO: productDTO),
+                      const SizedBox(height: TSizes.spaceBtwItems),
                     ],
                   ),
-
-                  const Divider(
-                    indent: TSizes.dividerIndent,
-                    endIndent: TSizes.dividerIndent,
-                  ),
-
-                  const SizedBox(height: TSizes.spaceBtwItems),
-
-                  // Products list
-                  for (var productDTO in snapshot.data!)
-                    Column(
-                      children: [
-                        TProductCard(productDTO: productDTO),
-                        const SizedBox(height: TSizes.spaceBtwItems),
-                      ],
-                    ),
-                ],
-              );
-            }
-          },
-        ),
+              ],
+            ),
+          ),
       ],
     );
   }

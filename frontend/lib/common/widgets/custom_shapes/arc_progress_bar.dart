@@ -13,14 +13,14 @@ class TArcProgressBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    Color progressColor = getProgressColor(progress);
+    Color progressColor = getProgressColor(progress / 100);
 
     return CircularPercentIndicator(
       radius: TSizes.pieChartRadius,
       lineWidth: TSizes.md,
-      percent: progress,
+      percent: progress / 100,
       center: Text(
-        "${(progress * 100).toStringAsFixed(2)}%",
+        "${(progress).toStringAsFixed(2)}%",
         style: textTheme.bodyMedium
       ),
       progressColor: progressColor,
