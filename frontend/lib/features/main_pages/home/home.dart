@@ -1,17 +1,10 @@
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/features/main_pages/home/sections/land_stats.dart';
 import 'package:toprak_rehberi/features/main_pages/home/sections/product_stats.dart';
 import 'package:toprak_rehberi/features/main_pages/home/widgets/card_slider.dart';
-import 'package:toprak_rehberi/features/main_pages/home/widgets/legend_item.dart';
-import 'package:toprak_rehberi/features/main_pages/home/widgets/pie_chart.dart';
 import 'package:toprak_rehberi/features/main_pages/home/widgets/product_card_home.dart';
 import 'package:toprak_rehberi/service/fetching/pages/fetch_user.dart';
-import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
-import 'package:toprak_rehberi/utils/constants/text_strings.dart';
-import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
-
 import '../../../dtos/LandDTO.dart';
 import '../../../dtos/ProductDTO.dart';
 import '../../../dtos/UserDTO.dart';
@@ -53,51 +46,8 @@ class _HomeScreenState extends State<HomeScreen> {
     return _plantedProducts;
   }
 
-  List<PieChartSectionData> _getProductPieChartSections() {
-    if (_plantedProducts.isEmpty) {
-      return [];
-    }
-
-    Map<String, double> productDistribution = {};
-    for (var product in _plantedProducts) {
-      String productName = product.productOptionDTO.name;
-      productDistribution[productName] = (productDistribution[productName] ?? 0) + 1;
-    }
-
-    return productDistribution.entries.map((entry) {
-      final percentage = (entry.value / _plantedProducts.length) * 100;
-      return PieChartSectionData(
-        value: percentage,
-        showTitle: false,
-        color: TColors.primaryColor,
-        title: '${percentage.toStringAsFixed(1)}%',
-      );
-    }).toList();
-  }
-
-  List<LegendItem> _getProductLegendItems() {
-    Map<String, double> productDistribution = {};
-    for (var product in _plantedProducts) {
-      String productName = product.productOptionDTO.name;
-      productDistribution[productName] = (productDistribution[productName] ?? 0) + 1;
-    }
-
-    return productDistribution.entries.map((entry) {
-      final percentage = (entry.value / _plantedProducts.length) * 100;
-      return LegendItem(
-        color: TColors.primaryColor,
-        productName: entry.key,
-        percentage: '${percentage.toStringAsFixed(1)}%',
-      );
-    }).toList();
-  }
-
-
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
-    final Color textColor = dark ? TColors.white : TColors.black;
-
     return Scaffold(
       body: FutureBuilder<UserDTO>(
         future: _user,
@@ -116,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   const SizedBox(height: TSizes.spaceBtwSections),
 
-                  // Carousel Slider for Products
+                  // Carousel Slider and Stats for Products
                   FutureBuilder<List<ProductDTO>>(
                     future: _productsFuture,
                     builder: (context, snapshot) {
@@ -130,7 +80,17 @@ class _HomeScreenState extends State<HomeScreen> {
                           return TProductCardHome(productDTO: product);
                         }).toList();
 
-                        return TCardSlider(cards: cards);
+                        return Column(
+                          children: [
+                            // Slider
+                            TCardSlider(cards: cards),
+
+                            const SizedBox(height: TSizes.spaceBtwItems),
+
+                            // Stats
+                            ProductStats(plantedProducts: _plantedProducts),
+                          ],
+                        );
                       } else {
                         return const Text('No products available');
                       }
@@ -138,8 +98,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
 
                   const SizedBox(height: TSizes.spaceBtwItems),
-
-                  ProductStats(plantedProducts: _plantedProducts),
 
                   // Lands Stats
                   FutureBuilder<List<LandDTO>>(

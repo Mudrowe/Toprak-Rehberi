@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/dtos/ProductDTO.dart';
 import '../../../../utils/constants/colors.dart';
+import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/constants/text_strings.dart';
 import '../../../../utils/helpers/helper_functions.dart';
 import '../widgets/legend_item.dart';
@@ -38,6 +39,10 @@ class ProductStats extends StatelessWidget {
             ),
           ],
         ),
+        const Divider(
+          indent: TSizes.dividerIndent,
+          endIndent: TSizes.dividerIndent,
+        ),
         TPieChart(
           chartName: TTexts.productDistribution,
           sections: sections,
@@ -55,7 +60,8 @@ class ProductStats extends StatelessWidget {
     Map<String, double> productDistribution = {};
     for (var product in plantedProducts) {
       String productName = product.productOptionDTO.name;
-      productDistribution[productName] = (productDistribution[productName] ?? 0) + 1;
+      productDistribution[productName] =
+          (productDistribution[productName] ?? 0) + 1;
     }
 
     const colorList = TColors.dynamicPieChartColors;
@@ -76,8 +82,10 @@ class ProductStats extends StatelessWidget {
   List<LegendItem> _getProductLegendItems() {
     Map<String, double> productDistribution = {};
     for (var product in plantedProducts) {
-      String productName = THelperFunctions.decodeUtf8(product.productOptionDTO.name);
-      productDistribution[productName] = (productDistribution[productName] ?? 0) + 1;
+      String productName =
+          THelperFunctions.decodeUtf8(product.productOptionDTO.name);
+      productDistribution[productName] =
+          (productDistribution[productName] ?? 0) + 1;
     }
 
     const colorList = TColors.dynamicPieChartColors;
