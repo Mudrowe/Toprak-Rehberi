@@ -104,4 +104,24 @@ public class ProductController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(savedProductDTO);
     }
+
+    @PutMapping("/score/{id}")
+    public ResponseEntity<ProductDTO> updateProduct(@RequestBody ProductDTO productDTO) {
+        try {
+            Product product = productService.getProductById(productDTO.getId());
+            if (product == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+
+            System.out.println("Received ProductDTO JSON: " + productDTO.toString());
+            product.setScore(productDTO.getScore());
+            product.setHarvested(productDTO.isHarvested());
+
+            Product updatedProduct = productService.saveProduct(product);
+            ProductDTO updatedProductDTO = ConverterUtil.convertToProductDTO(updatedProduct);
+            return ResponseEntity.ok(updatedProductDTO);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 }

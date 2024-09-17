@@ -3,10 +3,10 @@ import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/dtos/ProductDTO.dart';
 import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
-import '../../../../../common/styles/card_style.dart';
-import '../../../lands/land_details/widgets/sections/land_details_column.dart';
-import '../widgets/sections/product_details_image.dart';
-import '../widgets/sections/product_details_planting_date.dart';
+import '../../../../common/styles/card_style.dart';
+import '../../lands/land_details/widgets/sections/land_details_column.dart';
+import 'widgets/sections/product_details_image.dart';
+import 'widgets/sections/product_details_planting_date.dart';
 
 
 

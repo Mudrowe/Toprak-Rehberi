@@ -7,7 +7,7 @@ import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
 import '../../../../dtos/ProductDTO.dart';
-import '../../products/product_details/info/product_details.dart';
+import '../../products/product_details/product_details.dart';
 
 
 class TProductCardHome extends StatelessWidget {

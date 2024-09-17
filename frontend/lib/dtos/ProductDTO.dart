@@ -8,7 +8,7 @@ class ProductDTO {
   final DateTime? plantingDate;
   final DateTime? harvestDate;
   final LandDTO land;
-  final double? score;
+  double? score;
   final ProductOptionDTO productOptionDTO;
   double? area;
   bool isHarvested;

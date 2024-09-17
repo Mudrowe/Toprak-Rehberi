@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/widgets/appbar/appbar.dart';
-import 'package:toprak_rehberi/features/main_pages/products/product_details/info/product_details_common.dart';
+import 'package:toprak_rehberi/features/main_pages/products/product_details/product_details_common.dart';
 import 'package:toprak_rehberi/features/main_pages/products/widgets/product_card/product_progress.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/dtos/ProductDTO.dart';
 
-import '../widgets/sections/harvest_button.dart';
+import 'widgets/sections/harvest_button.dart';
 
 
 class TProductDetails extends StatefulWidget {

@@ -6,7 +6,7 @@ import 'package:toprak_rehberi/features/main_pages/products/widgets/product_card
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
 import '../../../../../dtos/ProductDTO.dart';
-import '../../product_details/info/product_details.dart';
+import '../../product_details/product_details.dart';
 
 class TProductCard extends StatelessWidget {
   const TProductCard({

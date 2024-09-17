@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/widgets/appbar/appbar.dart';
+import 'package:toprak_rehberi/features/main_pages/products/product_scoring_screen/update_score.dart';
 import 'package:toprak_rehberi/features/main_pages/products/widgets/helpers/score_display.dart';
 import 'package:toprak_rehberi/features/main_pages/products/product_scoring_screen/widgets/scoring_bar.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';
@@ -8,7 +9,7 @@ import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 import 'package:toprak_rehberi/dtos/ProductDTO.dart';
 
 import '../../../../utils/constants/image_strings.dart';
-import '../product_details/info/product_details_common.dart';
+import '../product_details/product_details_common.dart';
 
 class ProductScoringScreen extends StatefulWidget {
   final ProductDTO productDTO;
@@ -26,6 +27,23 @@ class _ProductScoringScreenState extends State<ProductScoringScreen> {
     setState(() {
       _selectedScore = newScore;
     });
+  }
+
+  void _submitScore() {
+    widget.productDTO.score = _selectedScore;
+    widget.productDTO.isHarvested = true;
+
+    try {
+      updateProductScore(widget.productDTO);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Harvest completed and score saved')),
+      );
+
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Failed to save harvest data')),
+      );
+    }
   }
 
   @override
@@ -82,7 +100,7 @@ class _ProductScoringScreenState extends State<ProductScoringScreen> {
                 SizedBox(
                   width: TSizes.buttonWidth,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: _submitScore,
                     child: const Text(TTexts.submit),
                   ),
                 ),

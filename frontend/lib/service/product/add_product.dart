@@ -40,10 +40,8 @@ Future<void> addProduct(ProductDTO productDTO) async {
   print('Planting Date: ${productDTO.plantingDate}');
 
   if (response.statusCode == 201) {
-    // Product added successfully
     print('Product added: ${response.body}');
   } else {
-    // Error handling
     print('Failed to add product: ${response.statusCode}');
   }
 }
