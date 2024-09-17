@@ -33,7 +33,8 @@ public class ConverterUtil {
                 land.getParcelNo(),
                 land.getAdaNo(),
                 land.getArea(),
-                new LandTypeDTO(land.getLandType().getId(), land.getLandType().getName(), land.getLandType().getImageUrl())
+                new LandTypeDTO(land.getLandType().getId(), land.getLandType().getName(), land.getLandType().getImageUrl()),
+                land.getRemainingArea()
         );
     }
 

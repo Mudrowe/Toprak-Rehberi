@@ -45,14 +45,11 @@ class TLandDetailsColumn extends StatelessWidget {
           label: TTexts.area,
           value: '${landDTO.area.toInt().toString()} ${TTexts.squareSymbol}',
         ),
-        /*
         TBuildLandInfoRow(
-          label: TTexts.plantedArea,
+          label: TTexts.freeArea,
           value:
-              '${land.plantedArea.toInt().toString()} ${TTexts.squareSymbol}',
+              '${landDTO.remainingArea!.toInt().toString()} ${TTexts.squareSymbol}',
         ),
-
-         */
       ],
     );
   }
