@@ -6,7 +6,7 @@ import 'ProductOptionDTO.dart';
 class ProductDTO {
   final int? id;
   final DateTime? plantingDate;
-  final DateTime? harvestDate;
+  DateTime? harvestDate;
   final LandDTO land;
   double? score;
   final ProductOptionDTO productOptionDTO;

@@ -4,7 +4,7 @@ import 'package:toprak_rehberi/utils/constants/colors.dart';
 class TBottomSheetTheme {
   TBottomSheetTheme._();
 
-  static BottomSheetThemeData lightButtomSheetTheme = BottomSheetThemeData(
+  static BottomSheetThemeData lightBottomSheetTheme = BottomSheetThemeData(
     showDragHandle: true,
     backgroundColor: TColors.white,
     modalBackgroundColor: TColors.white,

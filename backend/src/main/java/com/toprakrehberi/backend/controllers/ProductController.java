@@ -113,7 +113,7 @@ public class ProductController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
 
-            System.out.println("Received ProductDTO JSON: " + productDTO.toString());
+            //System.out.println("Received ProductDTO JSON: " + productDTO);
             product.setScore(productDTO.getScore());
             product.setHarvested(productDTO.isHarvested());
 
