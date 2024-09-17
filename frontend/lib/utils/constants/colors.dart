@@ -70,6 +70,18 @@ class TColors {
   static const Color pieChartColor8 = Color(0xFFBFA9FE);
   static const Color pieChartColor9 = Color(0xFF24BB4B);
 
+  static const List<Color> dynamicPieChartColors = [
+    Color(0xFF0D2535),
+    Color(0xFF5388D8),
+    Color(0xFFBE3700),
+    Color(0xFFF4BE37),
+    Color(0XFF7340BB),
+    Color(0xFFF57C00),
+    Color(0xFFB5EA79),
+    Color(0xFFBFA9FE),
+    Color(0xFF24BB4B),
+  ];
+
   // Neutral Shades
   static const Color black = Color(0XFF232323);
   static const Color darkerGrey = Color(0XFF4F4F4F);
