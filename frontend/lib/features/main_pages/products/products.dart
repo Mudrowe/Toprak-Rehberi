@@ -29,8 +29,10 @@ class _ProductsScreenState extends State<ProductsScreen> {
     List<ProductDTO> products = await fetchProducts();
 
     // Categorize the products
-    _plantedProducts = products.where((product) => !product.isHarvested).toList();
-    _harvestedProducts = products.where((product) => product.isHarvested).toList();
+    _plantedProducts =
+        products.where((product) => !product.isHarvested).toList();
+    _harvestedProducts =
+        products.where((product) => product.isHarvested).toList();
 
     return products;
   }
@@ -60,14 +62,23 @@ class _ProductsScreenState extends State<ProductsScreen> {
             future: _productsFuture,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
+                return Center(
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      Theme.of(context).primaryColor,
+                    ),
+                  ),
+                );
               } else if (snapshot.hasError) {
                 return Center(child: Text('Error: ${snapshot.error}'));
               } else {
                 return TabBarView(
                   children: [
-                    SingleChildScrollView(child: TPlantedProducts(products: _plantedProducts)),
-                    SingleChildScrollView(child: THarvestedProducts(products: _harvestedProducts)),
+                    SingleChildScrollView(
+                        child: TPlantedProducts(products: _plantedProducts)),
+                    SingleChildScrollView(
+                        child:
+                            THarvestedProducts(products: _harvestedProducts)),
                   ],
                 );
               }

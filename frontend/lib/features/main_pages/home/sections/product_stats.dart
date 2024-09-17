@@ -23,6 +23,10 @@ class ProductStats extends StatelessWidget {
 
     return Column(
       children: [
+        const Divider(
+          indent: TSizes.dividerIndent,
+          endIndent: TSizes.dividerIndent,
+        ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

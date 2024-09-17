@@ -9,15 +9,15 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const TAppBar(),
+    return const Scaffold(
+      appBar: TAppBar(),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(TSizes.defaultSpace),
+          padding: EdgeInsets.all(TSizes.defaultSpace),
           child: Column(
             children: [
               // Titles
-              const SizedBox(height: TSizes.spaceBtwSections),
+              SizedBox(height: TSizes.spaceBtwSections),
 
               // Form
               TSignupForm(),

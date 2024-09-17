@@ -53,7 +53,13 @@ class _HomeScreenState extends State<HomeScreen> {
         future: _user,
         builder: (context, userSnapshot) {
           if (userSnapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
+            return Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  Theme.of(context).primaryColor,
+                ),
+              ),
+            );
           } else if (userSnapshot.hasError) {
             return Text('Error: ${userSnapshot.error}');
           } else if (userSnapshot.hasData) {
@@ -104,7 +110,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     future: _lands,
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const CircularProgressIndicator();
+                        return Center(
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              Theme.of(context).primaryColor,
+                            ),
+                          ),
+                        );
                       } else if (snapshot.hasError) {
                         return Text('ErrorS: ${snapshot.error}');
                       } else if (snapshot.hasData) {
