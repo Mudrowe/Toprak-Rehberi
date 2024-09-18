@@ -1,23 +1,20 @@
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:toprak_rehberi/features/main_pages/home/sections/land_stats.dart';
+import 'package:toprak_rehberi/features/main_pages/home/sections/product_stats.dart';
 import 'package:toprak_rehberi/features/main_pages/home/widgets/card_slider.dart';
 import 'package:toprak_rehberi/features/main_pages/home/widgets/product_card_home.dart';
 import 'package:toprak_rehberi/service/fetching/pages/fetch_user.dart';
-import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
-import 'package:toprak_rehberi/utils/constants/text_strings.dart';
-import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
-
 import '../../../dtos/LandDTO.dart';
 import '../../../dtos/ProductDTO.dart';
 import '../../../dtos/UserDTO.dart';
 import '../../../service/fetching/pages/fetch_lands.dart';
 import '../../../service/fetching/product/fetch_products.dart';
-
-// TODO: So, Stats are not compatible with products in the productsScreen
-
-// ! FIX: There isn't any length check for legendItems.
-// ! FIX: If there would be too many items, the screen will break
+import '../../../utils/constants/colors.dart';
+import '../../../utils/constants/image_strings.dart';
+import '../../../utils/constants/text_strings.dart';
+import '../../../utils/helpers/helper_functions.dart';
+import '../lands/land_details/add_product_screen/widgets/no_data_column.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -28,121 +25,61 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late Future<UserDTO> _user;
-  late Future<List<ProductDTO>> _products;
+  late Future<List<ProductDTO>> _productsFuture;
   late Future<List<LandDTO>> _lands;
+  List<ProductDTO> _plantedProducts = [];
 
   @override
   void initState() {
     super.initState();
     _user = fetchUser();
+    _productsFuture = _fetchAndCategorizeProducts();
+  }
+
+  Future<List<ProductDTO>> _fetchAndCategorizeProducts() async {
+    List<ProductDTO> products = await fetchProducts();
+
+    // Not harvested products
+    _plantedProducts =
+        products.where((product) => !product.isHarvested).toList();
+
+    return _plantedProducts;
   }
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
-    final Color textColor = dark ? TColors.white : TColors.black;
-
     return Scaffold(
       body: FutureBuilder<UserDTO>(
         future: _user,
         builder: (context, userSnapshot) {
           if (userSnapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
+            return Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  Theme.of(context).primaryColor,
+                ),
+              ),
+            );
           } else if (userSnapshot.hasError) {
             return Text('Error: ${userSnapshot.error}');
           } else if (userSnapshot.hasData) {
             UserDTO user = userSnapshot.data!;
-            _products = fetchProducts();
+
             _lands = fetchLandsByUserId(user.id!);
 
             return SingleChildScrollView(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const SizedBox(height: TSizes.spaceBtwSections),
+                  const SizedBox(height: TSizes.spaceBtwSections * 1.5 ),
 
-                  // Carousel Slider for Products
-                  FutureBuilder<List<ProductDTO>>(
-                    future: _products,
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const CircularProgressIndicator();
-                      } else if (snapshot.hasError) {
-                        return Text('Error: ${snapshot.error}');
-                      } else if (snapshot.hasData) {
-                        List<TProductCardHome> cards =
-                        snapshot.data!.map((product) {
-                          return TProductCardHome(productDTO: product);
-                        }).toList();
-
-                        return TCardSlider(cards: cards);
-                      } else {
-                        return const Text('No products available');
-                      }
-                    },
-                  ),
+                  // Carousel Slider and Stats for Products
+                  _buildProductSection(),
 
                   const SizedBox(height: TSizes.spaceBtwItems),
 
                   // Lands Stats
-                  FutureBuilder<List<LandDTO>>(
-                    future: _lands,
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const CircularProgressIndicator();
-                      } else if (snapshot.hasError) {
-                        return Text('ErrorS: ${snapshot.error}');
-                      } else if (snapshot.hasData) {
-                        final lands = snapshot.data!;
-                        return Column(
-                          children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Text(
-                                  TTexts.totalLands,
-                                  style: TextStyle(
-                                      color: textColor,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16),
-                                ),
-                                Text(
-                                  '${lands.length}',
-                                  style: TextStyle(
-                                      color: textColor,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16),
-                                ),
-                              ],
-                            ),
-
-                            /*
-                      TPieChart(
-                        chartName: TTexts.landDistribution,
-                        sections: lands.map((land) {
-                          return PieChartSectionData(
-                            value: land.areaPercentage,
-                            showTitle: false,
-                            color: TColors.pieChartColor4,
-                          );
-                        }).toList(),
-                        legendItems: lands.map((land) {
-                          return LegendItem(
-                            color: TColors.pieChartColor4,
-                            productName: land.name,
-                            percentage: '${land.areaPercentage}%',
-                          );
-                        }).toList(),
-                      ),
-
-                       */
-                          ],
-                        );
-                      } else {
-                        return const Text('No lands available');
-                      }
-                    },
-                  ),
+                  _buildLandSection(),
                 ],
               ),
             );
@@ -153,4 +90,80 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
+  Widget _buildProductSection() {
+    final dark = THelperFunctions.isDarkMode(context);
+    final Color textColor = dark ? TColors.white : TColors.black;
+    return FutureBuilder<List<ProductDTO>>(
+      future: _productsFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+          List<TProductCardHome> cards = _plantedProducts.map((product) {
+            return TProductCardHome(productDTO: product);
+          }).toList();
+
+          return Column(
+            children: [
+              // Slider
+              TCardSlider(cards: cards),
+
+              const SizedBox(height: TSizes.spaceBtwItems),
+
+              // Stats
+              ProductStats(plantedProducts: _plantedProducts),
+            ],
+          );
+        } else {
+          return Center(
+            child: Column(
+              children: [
+                buildNoDataColumn(TTexts.totalProducts, 0, textColor),
+                Image.asset(dark ? TImages.darkAppLogo : TImages.lightAppLogo),
+                SizedBox(height: THelperFunctions.screenWidth() / 2.3),
+              ],
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  Widget _buildLandSection() {
+    final dark = THelperFunctions.isDarkMode(context);
+    final Color textColor = dark ? TColors.white : TColors.black;
+    return FutureBuilder<List<LandDTO>>(
+      future: _lands,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(
+                Theme.of(context).primaryColor,
+              ),
+            ),
+          );
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+          return LandStats(lands: snapshot.data!);
+        } else {
+          return Center(
+            child: Column(
+              children: [
+                buildNoDataColumn(TTexts.totalLands, 0, textColor),
+                Image.asset(dark ? TImages.darkAppLogo : TImages.lightAppLogo),
+              ],
+            ),
+          );
+        }
+      },
+    );
+  }
+
+
+
 }

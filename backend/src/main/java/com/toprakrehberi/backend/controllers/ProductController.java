@@ -95,6 +95,18 @@ public class ProductController {
     public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO) {
         System.out.println("Received ProductDTO JSON: " + productDTO.toString());
 
+        Land land = landService.getLandById(productDTO.getLand().getId());
+        if (land == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(null);
+        }
+
+        double remainingArea = land.getRemainingArea();
+        if (productDTO.getArea() > remainingArea) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(null);
+        }
+
         Product product = convertToEntity(productDTO);
         Product savedProduct = productService.saveProduct(product);
 
@@ -104,6 +116,7 @@ public class ProductController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(savedProductDTO);
     }
+
 
     @PutMapping("/score/{id}")
     public ResponseEntity<ProductDTO> updateProduct(@RequestBody ProductDTO productDTO) {

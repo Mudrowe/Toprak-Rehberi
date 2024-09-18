@@ -60,15 +60,27 @@ class TColors {
   static const Color progressBackground = Color(0xFF36434E);
 
   // Chart Colors
-  static const Color pieChartColor1 = Color(0xFF0D2535);
+  static const Color pieChartColor1 = Color(0xFF0F2135);
   static const Color pieChartColor2 = Color(0xFF5388D8);
   static const Color pieChartColor3 = Color(0xFFBE3700);
   static const Color pieChartColor4 = Color(0xFFF4BE37);
-  static const Color pieChartColor5 = Color(0XFF7340BB);
+  static const Color pieChartColor5 = Color(0XFF0340BB);
   static const Color pieChartColor6 = Color(0xFFF57C00);
   static const Color pieChartColor7 = Color(0xFFB5EA79);
   static const Color pieChartColor8 = Color(0xFFBFA9FE);
   static const Color pieChartColor9 = Color(0xFF24BB4B);
+
+  static const List<Color> dynamicPieChartColors = [
+    Color(0xFFAC4135),
+    Color(0xFF5388D8),
+    Color(0xFFB5EA79),
+    Color(0XFF73406B),
+    Color(0xFFF4BE37),
+    Color(0xFFF57C00),
+    Color(0xFFBFA9FE),
+    Color(0xFF24BB4B),
+    Color(0xFF5A3C09),
+  ];
 
   // Neutral Shades
   static const Color black = Color(0XFF232323);

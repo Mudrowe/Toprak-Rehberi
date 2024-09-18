@@ -47,4 +47,14 @@ public class Land {
 
     @OneToMany(mappedBy = "land", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Product> products;
+
+    public double getRemainingArea() {
+        double totalOccupiedArea = products.stream()
+                .filter(product -> !product.isHarvested())
+                .mapToDouble(Product::getArea)
+                .sum();
+        return area - totalOccupiedArea;
+    }
+
+
 }

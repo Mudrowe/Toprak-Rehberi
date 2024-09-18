@@ -20,4 +20,5 @@ public class LandDTO {
     private String adaNo;
     private double area;
     private LandTypeDTO landType;
+    private double remainingArea;
 }

@@ -8,12 +8,15 @@ class TPieChart extends StatelessWidget {
   final String chartName;
   final List<PieChartSectionData> sections;
   final List<LegendItem> legendItems;
+  final List<Color>? dynamicColors;
 
-  const TPieChart(
-      {super.key,
-      required this.chartName,
-      required this.sections,
-      required this.legendItems});
+  const TPieChart({
+    super.key,
+    required this.chartName,
+    required this.sections,
+    required this.legendItems,
+    this.dynamicColors,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +24,13 @@ class TPieChart extends StatelessWidget {
     final Color textColor = dark ? TColors.white : TColors.black;
 
     return AspectRatio(
-        aspectRatio: 1.5,
-        child: Row(
-          children: [
-            Expanded(
-              child: Stack(alignment: Alignment.center, children: [
+      aspectRatio: 1.5,
+      child: Row(
+        children: [
+          Expanded(
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
                 Text(
                   chartName,
                   style: TextStyle(
@@ -35,15 +40,16 @@ class TPieChart extends StatelessWidget {
                 ),
                 PieChart(
                   PieChartData(
-                      sections: sections.map((section) {
-                        return section;
-                      }).toList(),
-                      centerSpaceRadius: 90),
+                    sections: sections,
+                    centerSpaceRadius: 90,
+                  ),
                 ),
-              ]),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 20.0),
+          ),
+          SizedBox(
+            width: 100,
+            child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,9 +57,10 @@ class TPieChart extends StatelessWidget {
                   return legendItem;
                 }).toList(),
               ),
-            )
-          ],
-        ));
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
-

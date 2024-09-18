@@ -42,7 +42,13 @@ class _LandsScreenState extends State<LandsScreen> {
         future: _userFuture,
         builder: (context, userSnapshot) {
           if (userSnapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  Theme.of(context).primaryColor,
+                ),
+              ),
+            );
           } else if (userSnapshot.hasError) {
             return Center(child: Text('Error: ${userSnapshot.error}'));
           } else if (!userSnapshot.hasData) {
@@ -53,7 +59,13 @@ class _LandsScreenState extends State<LandsScreen> {
             future: _landsFuture,
             builder: (context, landsSnapshot) {
               if (landsSnapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
+                return Center(
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      Theme.of(context).primaryColor,
+                    ),
+                  ),
+                );
               } else if (landsSnapshot.hasError) {
                 print(Text('Error 2: ${landsSnapshot.error}'));
               }

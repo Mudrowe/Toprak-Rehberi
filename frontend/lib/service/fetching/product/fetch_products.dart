@@ -32,11 +32,12 @@ Future<List<ProductDTO>> fetchProducts() async {
   if (response.statusCode == 200) {
     List<dynamic> productList = json.decode(response.body);
     return productList.map((json) => ProductDTO.fromJson(json)).toList();
+  } else if (response.statusCode == 404) {
+    return [];
   } else {
     throw Exception('Failed to load products');
   }
 }
-
 
 Future<List<ProductDTO>> fetchProductsByLandId(int landId) async {
   var ipAddress = dotenv.env['IP_ADDRESS'];

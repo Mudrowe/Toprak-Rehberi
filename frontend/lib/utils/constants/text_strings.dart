@@ -73,8 +73,9 @@ class TTexts {
   static const String neighborhood = 'Mahalle/Köy';
   static const String adaNo = 'Ada No';
   static const String parcelNo = 'Parsel No';
-  static const String area = 'Alan';
+  static const String area = 'Toplam Alan';
   static const String plantedArea = 'Ürün Ekili Alan';
+  static const String freeArea = 'Boş Alan';
   static const String landType = 'Arazi Tipi';
 
   // Add Product

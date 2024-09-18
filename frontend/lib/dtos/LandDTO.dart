@@ -17,6 +17,7 @@ class LandDTO {
   final LandTypeDTO landTypeDTO;
   CityDTO? cityDTO;
   DistrictDTO? districtDTO;
+  double? remainingArea;
 
   LandDTO({
     this.id,
@@ -27,6 +28,7 @@ class LandDTO {
     required this.adaNo,
     required this.area,
     required this.landTypeDTO,
+    this.remainingArea,
   }) {
     _initializeCityAndDistrict();
   }
@@ -41,6 +43,7 @@ class LandDTO {
       adaNo: json['adaNo'],
       area: json['area'],
       landTypeDTO: LandTypeDTO.fromJson(json['landType']),
+      remainingArea: json['remainingArea'],
     );
 
     return landDTO;
@@ -55,6 +58,7 @@ class LandDTO {
         'adaNo': adaNo,
         'area': area,
         'landType': landTypeDTO.toJson(),
+        'remainingArea': remainingArea,
       };
 
   Future<void> _initializeCityAndDistrict() async {
