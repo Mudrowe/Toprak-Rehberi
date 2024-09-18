@@ -70,7 +70,7 @@ class _TLandProductsState extends State<TLandProducts>
                     ],
                   ),
                   SizedBox(
-                    height: THelperFunctions.screenHeight(),
+                    height: _plantedProducts.length.toDouble() * 140 ,
                     child: TabBarView(
                       children: [
                         _buildProductList(_plantedProducts),
