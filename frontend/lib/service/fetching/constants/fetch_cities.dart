@@ -51,7 +51,7 @@ Future<CityDTO> fetchCityById(int cityId) async {
     throw Exception('Token is null, please log in again.');
   }
 
-  print('Token (Fetch City by Id Function): $token');
+  //print('Token (Fetch City by Id Function): $token');
 
   try {
     final response = await http.get(

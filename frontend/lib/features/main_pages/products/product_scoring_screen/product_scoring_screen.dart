@@ -36,12 +36,12 @@ class _ProductScoringScreenState extends State<ProductScoringScreen> {
     try {
       updateProductScore(widget.productDTO);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Harvest completed and score saved')),
+        const SnackBar(content: Text('Ürün başarıyla hasat edildi')),
       );
 
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Failed to save harvest data')),
+        const SnackBar(content: Text('Hasat edilemedi')),
       );
     }
   }

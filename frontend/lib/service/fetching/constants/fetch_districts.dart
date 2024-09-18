@@ -18,7 +18,7 @@ Future<List<DistrictDTO>> fetchDistricts(int cityId) async {
     throw Exception('Token is null, please log in again.');
   }
 
-  print('Token (Fetch Districts Function): $token');
+  //print('Token (Fetch Districts Function): $token');
 
   try {
     final response = await http.get(
@@ -54,7 +54,7 @@ Future<DistrictDTO> fetchDistrictById(int districtId) async {
     throw Exception('Token is null, please log in again.');
   }
 
-  print('Token (Fetch District by Id Function): $token');
+  //print('Token (Fetch District by Id Function): $token');
 
   try {
     final response = await http.get(

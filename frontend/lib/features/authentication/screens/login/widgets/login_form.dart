@@ -61,11 +61,11 @@ class _TLoginFormState extends State<TLoginForm> {
         final token = responseData['token'];
         setAuthToken(token);
 
-
         Get.to(() => const NavigationMenu());
       } else {
         setState(() {
-          _errorMessage = 'Failed to authenticate. Please check your credentials.';
+          _errorMessage =
+              'Failed to authenticate. Please check your credentials.';
         });
       }
     } catch (e) {
@@ -146,7 +146,7 @@ class _TLoginFormState extends State<TLoginForm> {
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: Text(
                   _errorMessage!,
-                  style: TextStyle(color: TColors.error),
+                  style: const TextStyle(color: TColors.error),
                 ),
               ),
 
@@ -158,7 +158,11 @@ class _TLoginFormState extends State<TLoginForm> {
               child: ElevatedButton(
                 onPressed: _isLoading ? null : _login,
                 child: _isLoading
-                    ? const CircularProgressIndicator()
+                    ? CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          Theme.of(context).primaryColor,
+                        ),
+                      )
                     : const Text(TTexts.signIn),
               ),
             ),

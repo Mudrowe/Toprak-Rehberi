@@ -10,11 +10,11 @@ import '../../../dtos/ProductDTO.dart';
 import '../../../dtos/UserDTO.dart';
 import '../../../service/fetching/pages/fetch_lands.dart';
 import '../../../service/fetching/product/fetch_products.dart';
-
-// TODO: So, Stats are not compatible with products in the productsScreen
-
-// ! FIX: There isn't any length check for legendItems.
-// ! FIX: If there would be too many items, the screen will break
+import '../../../utils/constants/colors.dart';
+import '../../../utils/constants/image_strings.dart';
+import '../../../utils/constants/text_strings.dart';
+import '../../../utils/helpers/helper_functions.dart';
+import '../lands/land_details/add_product_screen/widgets/no_data_column.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -69,63 +69,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
             return SingleChildScrollView(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const SizedBox(height: TSizes.spaceBtwSections),
+                  const SizedBox(height: TSizes.spaceBtwSections * 1.5 ),
 
                   // Carousel Slider and Stats for Products
-                  FutureBuilder<List<ProductDTO>>(
-                    future: _productsFuture,
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const CircularProgressIndicator();
-                      } else if (snapshot.hasError) {
-                        return Text('Error: ${snapshot.error}');
-                      } else if (snapshot.hasData) {
-                        List<TProductCardHome> cards =
-                            _plantedProducts.map((product) {
-                          return TProductCardHome(productDTO: product);
-                        }).toList();
-
-                        return Column(
-                          children: [
-                            // Slider
-                            TCardSlider(cards: cards),
-
-                            const SizedBox(height: TSizes.spaceBtwItems),
-
-                            // Stats
-                            ProductStats(plantedProducts: _plantedProducts),
-                          ],
-                        );
-                      } else {
-                        return const Text('No products available');
-                      }
-                    },
-                  ),
+                  _buildProductSection(),
 
                   const SizedBox(height: TSizes.spaceBtwItems),
 
                   // Lands Stats
-                  FutureBuilder<List<LandDTO>>(
-                    future: _lands,
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              Theme.of(context).primaryColor,
-                            ),
-                          ),
-                        );
-                      } else if (snapshot.hasError) {
-                        return Text('ErrorS: ${snapshot.error}');
-                      } else if (snapshot.hasData) {
-                        return LandStats(lands: snapshot.data!);
-                      } else {
-                        return const Text('No lands available');
-                      }
-                    },
-                  ),
+                  _buildLandSection(),
                 ],
               ),
             );
@@ -136,4 +90,80 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
+  Widget _buildProductSection() {
+    final dark = THelperFunctions.isDarkMode(context);
+    final Color textColor = dark ? TColors.white : TColors.black;
+    return FutureBuilder<List<ProductDTO>>(
+      future: _productsFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+          List<TProductCardHome> cards = _plantedProducts.map((product) {
+            return TProductCardHome(productDTO: product);
+          }).toList();
+
+          return Column(
+            children: [
+              // Slider
+              TCardSlider(cards: cards),
+
+              const SizedBox(height: TSizes.spaceBtwItems),
+
+              // Stats
+              ProductStats(plantedProducts: _plantedProducts),
+            ],
+          );
+        } else {
+          return Center(
+            child: Column(
+              children: [
+                buildNoDataColumn(TTexts.totalProducts, 0, textColor),
+                Image.asset(dark ? TImages.darkAppLogo : TImages.lightAppLogo),
+                SizedBox(height: THelperFunctions.screenWidth() / 2.3),
+              ],
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  Widget _buildLandSection() {
+    final dark = THelperFunctions.isDarkMode(context);
+    final Color textColor = dark ? TColors.white : TColors.black;
+    return FutureBuilder<List<LandDTO>>(
+      future: _lands,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(
+                Theme.of(context).primaryColor,
+              ),
+            ),
+          );
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+          return LandStats(lands: snapshot.data!);
+        } else {
+          return Center(
+            child: Column(
+              children: [
+                buildNoDataColumn(TTexts.totalLands, 0, textColor),
+                Image.asset(dark ? TImages.darkAppLogo : TImages.lightAppLogo),
+              ],
+            ),
+          );
+        }
+      },
+    );
+  }
+
+
+
 }
