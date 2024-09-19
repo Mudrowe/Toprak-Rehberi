@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/features/main_pages/home/sections/land_stats.dart';
 import 'package:toprak_rehberi/features/main_pages/home/sections/product_stats.dart';
 import 'package:toprak_rehberi/features/main_pages/home/widgets/card_slider.dart';
-import 'package:toprak_rehberi/features/main_pages/home/widgets/product_card_home.dart';
+import 'package:toprak_rehberi/features/main_pages/home/widgets/product_card_slider.dart';
 import 'package:toprak_rehberi/service/fetching/pages/fetch_user.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import '../../../dtos/LandDTO.dart';

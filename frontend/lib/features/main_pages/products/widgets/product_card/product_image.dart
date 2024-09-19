@@ -45,8 +45,7 @@ class TProductCardImage extends StatelessWidget {
           width: TSizes.productImageWidth,
         ),
 
-        // Land name
-
+        // Land name and Product area
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -56,7 +55,7 @@ class TProductCardImage extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
             Text(
-              '${THelperFunctions.decodeUtf8(productDTO.area.toString())} ${TTexts.squareSymbol}',
+              '${THelperFunctions.decodeUtf8(productDTO.area!.toInt().toString())} ${TTexts.squareSymbol}',
               style: textTheme.bodyLarge,
               overflow: TextOverflow.ellipsis,
             ),

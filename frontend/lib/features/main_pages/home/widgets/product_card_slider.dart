@@ -49,7 +49,7 @@ class TProductCardHome extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
 
-                  // Land Name
+                  // Land Name and Product Area
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [

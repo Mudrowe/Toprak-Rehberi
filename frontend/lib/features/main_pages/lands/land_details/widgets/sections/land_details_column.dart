@@ -23,15 +23,15 @@ class TLandDetailsColumn extends StatelessWidget {
         ),
         TBuildLandInfoRow(
           label: TTexts.city,
-          value: THelperFunctions.decodeUtf8(landDTO.cityDTO?.name ?? 'Unknown City'),
+          value: THelperFunctions.toTitleCase(THelperFunctions.decodeUtf8(landDTO.cityDTO?.name ?? 'Unknown City')),
         ),
         TBuildLandInfoRow(
           label: TTexts.district,
-          value: THelperFunctions.decodeUtf8(landDTO.districtDTO?.name ?? 'Unknown District'),
+          value: THelperFunctions.toTitleCase(THelperFunctions.decodeUtf8(landDTO.districtDTO?.name ?? 'Unknown District')),
         ),
         TBuildLandInfoRow(
           label: TTexts.neighborhood,
-          value: THelperFunctions.decodeUtf8(landDTO.neighborhoodDTO.name),
+          value: THelperFunctions.toTitleCase(THelperFunctions.decodeUtf8(landDTO.neighborhoodDTO.name)),
         ),
         TBuildLandInfoRow(
           label: TTexts.adaNo,

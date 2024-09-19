@@ -23,17 +23,17 @@ class TLandCardInfo extends StatelessWidget {
           Column(
             children: [
               Text(
-                utf8.decode(landDTO.name.codeUnits),
+                THelperFunctions.decodeUtf8(landDTO.name),
                 style: textTheme.bodyMedium,
                 overflow: TextOverflow.ellipsis,
               ),
               Text(
-                THelperFunctions.decodeUtf8(landDTO.cityDTO?.name ?? 'Unknown City'),
+                THelperFunctions.toTitleCase(THelperFunctions.decodeUtf8(landDTO.cityDTO?.name ?? 'Unknown City')),
                 style: textTheme.bodyMedium,
                 overflow: TextOverflow.ellipsis,
               ),
               Text(
-                THelperFunctions.decodeUtf8(landDTO.districtDTO?.name ?? 'Unknown District'),
+                THelperFunctions.toTitleCase(THelperFunctions.decodeUtf8(landDTO.districtDTO?.name ?? 'Unknown District')),
                 style: textTheme.bodyMedium,
                 overflow: TextOverflow.ellipsis,
               ),

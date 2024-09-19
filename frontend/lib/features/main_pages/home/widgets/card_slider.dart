@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:toprak_rehberi/features/main_pages/home/widgets/product_card_home.dart';
+import 'package:toprak_rehberi/features/main_pages/home/widgets/product_card_slider.dart';
 
 class TCardSlider extends StatelessWidget {
   const TCardSlider({
