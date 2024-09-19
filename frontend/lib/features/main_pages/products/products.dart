@@ -39,10 +39,8 @@ class _ProductsScreenState extends State<ProductsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        return Future.value(false);
-      },
+    return PopScope(
+      canPop: false,
       child: DefaultTabController(
         length: 2,
         child: Scaffold(

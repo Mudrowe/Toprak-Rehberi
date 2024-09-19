@@ -33,10 +33,8 @@ class _LandsScreenState extends State<LandsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        return Future.value(false);
-      },
+    return PopScope(
+      canPop: false,
       child: Scaffold(
         body: FutureBuilder<UserDTO>(
           future: _userFuture,
