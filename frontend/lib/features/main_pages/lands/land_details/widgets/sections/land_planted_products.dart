@@ -38,10 +38,6 @@ class _TLandProductsState extends State<TLandProducts> {
     _harvestedProducts =
         products.where((product) => product.isHarvested).toList();
 
-    for (var product in _plantedProducts) {
-      print(product.toJson());
-    }
-
     return products;
   }
 

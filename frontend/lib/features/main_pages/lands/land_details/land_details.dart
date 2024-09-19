@@ -27,7 +27,7 @@ class _TLandDetailsState extends State<TLandDetails> {
           child: Column(
             children: [
               // Suggestions Button
-              const TSuggestionsButton(),
+              TSuggestionsButton(landId: widget.landDTO.id!),
 
               const SizedBox(height: TSizes.spaceBtwItems),
 

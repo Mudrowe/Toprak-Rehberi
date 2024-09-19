@@ -34,7 +34,7 @@ class AddProductScreen extends StatelessWidget {
               const SizedBox(height: TSizes.appBarHeight),
 
               // Suggestions Button
-              const TSuggestionsButton(),
+              TSuggestionsButton(landId: landDTO.id!),
 
               const SizedBox(height: TSizes.spaceBtwSections * 2),
 
