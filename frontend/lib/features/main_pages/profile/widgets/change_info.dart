@@ -11,7 +11,7 @@ Future<void> changeInfo({
   final bool dark = THelperFunctions.isDarkMode(context);
   final String title = _getTitle(info);
   final bool isPassword = info == TTexts.password;
-  final Color textColor = dark ? TColors.light : TColors.primaryColor;
+  final Color textColor = dark ? TColors.light : TColors.dark;
 
   return showDialog<void>(
     context: context,
@@ -83,6 +83,7 @@ List<Widget> _buildActions(BuildContext context) {
     TextButton(
       onPressed: () => Navigator.of(context).pop(),
       child: const Text(TTexts.cancel),
+
     ),
     TextButton(
       onPressed: () => Navigator.of(context).pop(),
