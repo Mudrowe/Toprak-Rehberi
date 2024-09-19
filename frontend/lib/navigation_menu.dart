@@ -24,8 +24,7 @@ class NavigationMenu extends StatelessWidget {
           destinations: const [
             NavigationDestination(icon: Icon(Icons.home), label: 'Anasayfa'),
             NavigationDestination(icon: Icon(Icons.grass), label: 'Arazilerim'),
-            NavigationDestination(
-                icon: Icon(Icons.agriculture), label: 'Ürünlerim'),
+            NavigationDestination(icon: Icon(Icons.agriculture), label: 'Ürünlerim'),
             NavigationDestination(icon: Icon(Icons.person), label: 'Profil'),
           ],
         ),

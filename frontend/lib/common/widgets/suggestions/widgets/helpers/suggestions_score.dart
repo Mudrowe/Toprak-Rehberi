@@ -1,9 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/widgets/custom_shapes/arc_progress_bar.dart';
-import 'package:toprak_rehberi/common/widgets/suggestions/seed/suggestions_list.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
+
+import '../../../../../models/suggestion_product.dart';
 
 class TSuggestionsScore extends StatelessWidget {
   const TSuggestionsScore({

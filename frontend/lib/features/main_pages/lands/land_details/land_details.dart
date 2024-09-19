@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:toprak_rehberi/common/widgets/appbar/appbar.dart';
 import 'package:toprak_rehberi/dtos/LandDTO.dart';
 import 'package:toprak_rehberi/features/main_pages/lands/land_details/widgets/helpers/suggestions_button.dart';
@@ -7,11 +8,16 @@ import 'package:toprak_rehberi/features/main_pages/lands/land_details/widgets/se
 import 'package:toprak_rehberi/features/main_pages/lands/land_details/widgets/sections/land_type_image.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
-class TLandDetails extends StatelessWidget {
+class TLandDetails extends StatefulWidget {
   final LandDTO landDTO;
 
   const TLandDetails({super.key, required this.landDTO});
 
+  @override
+  State<TLandDetails> createState() => _TLandDetailsState();
+}
+
+class _TLandDetailsState extends State<TLandDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,21 +27,21 @@ class TLandDetails extends StatelessWidget {
           child: Column(
             children: [
               // Suggestions Button
-              const TSuggestionsButton(),
+              TSuggestionsButton(landId: widget.landDTO.id!),
 
               const SizedBox(height: TSizes.spaceBtwItems),
 
               // Land Type Image
-              TLandTypeImage(landDTO: landDTO),
+              TLandTypeImage(landDTO: widget.landDTO),
 
               const SizedBox(height: TSizes.spaceBtwItems),
 
               // Land Info
-              TLandDetailsInfo(landDTO: landDTO),
+              TLandDetailsInfo(landDTO: widget.landDTO),
 
               const SizedBox(height: TSizes.spaceBtwSections),
 
-              TLandProducts(landDTO: landDTO)
+              TLandProducts(landDTO: widget.landDTO)
             ],
           ),
         ),

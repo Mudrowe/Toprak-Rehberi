@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/styles/card_style.dart';
-import 'package:toprak_rehberi/common/widgets/suggestions/seed/suggestions_list.dart';
 import 'package:toprak_rehberi/common/widgets/suggestions/widgets/helpers/suggestions_score.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
+import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
+
+import '../../../../models/suggestion_product.dart';
 
 class TSuggestionCard extends StatelessWidget {
   final SuggestionProduct suggestionProduct;
@@ -25,7 +27,7 @@ class TSuggestionCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: TSizes.xxl),
             child: Text(
-              suggestionProduct.name,
+              THelperFunctions.decodeUtf8(suggestionProduct.name),
               style: textTheme.titleLarge,
             ),
           ),

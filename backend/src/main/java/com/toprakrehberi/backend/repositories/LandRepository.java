@@ -11,4 +11,5 @@ public interface LandRepository extends JpaRepository<Land, Long> {
 
     List<Land> findByUserId(Long userId);
     Land findByName(String name);
+    List<Land> findByNeighborhoodId(int neighborhood_id);
 }

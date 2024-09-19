@@ -3,14 +3,15 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/dtos/ProductDTO.dart';
 import 'package:toprak_rehberi/features/main_pages/lands/land_details/add_product_screen/widgets/select_product_dropdown_menu.dart';
-import 'package:toprak_rehberi/service/fetching/product/fetch_product_options.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
 import '../../../../../../dtos/LandDTO.dart';
 import '../../../../../../dtos/ProductOptionDTO.dart';
+import '../../../../../../service/fetching/product/fetch_product_options.dart';
 import '../../../../../../service/product/add_product.dart';
-
+import '../../../../../../models/suggestion_product.dart';
+import '../../../../../../service/suggestion/suggestion.dart';
 
 class TAddProductForm extends StatefulWidget {
   final LandDTO landDTO;
@@ -27,16 +28,29 @@ class _TAddProductFormState extends State<TAddProductForm> {
   DateTime? _plantingDate;
   double? _score;
   ProductOptionDTO? _productOptionDTO;
+  List<SuggestionProduct> _suggestions = [];
 
   @override
   void initState() {
-    _plantingDate = DateTime.now();
     super.initState();
+    _plantingDate = DateTime.now();
+    _fetchSuggestions(widget.landDTO.id!);
   }
 
-  Future<void> _fetchProductOption(int id) async {
+  Future<void> _fetchSuggestions(int landId) async {
     try {
-      final fetchedProductOption = await fetchProductOptionById(id);
+      final fetchedSuggestions = await fetchSuggestions(landId);
+      setState(() {
+        _suggestions = fetchedSuggestions;
+      });
+    } catch (error) {
+      print('Error fetching suggestions: $error');
+    }
+  }
+
+  Future<void> _fetchProductOption(int productOptionId) async {
+    try {
+      final fetchedProductOption = await fetchProductOptionById(productOptionId);
       setState(() {
         _productOptionDTO = fetchedProductOption;
       });
@@ -73,14 +87,12 @@ class _TAddProductFormState extends State<TAddProductForm> {
 
       if (_area == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-              content: Text('Lütfen eklemek istediğiniz alanı girin.')),
+          const SnackBar(content: Text('Lütfen eklemek istediğiniz alanı girin.')),
         );
         return;
       } else if (_productOptionDTO == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-              content: Text('Lütfen eklemek istediğiniz ürünü seçin.')),
+          const SnackBar(content: Text('Lütfen eklemek istediğiniz ürünü seçin.')),
         );
         return;
       }
@@ -98,8 +110,7 @@ class _TAddProductFormState extends State<TAddProductForm> {
         area: _area!,
         productOptionDTO: _productOptionDTO!,
         plantingDate: _plantingDate,
-        harvestDate:
-            addMonths(_plantingDate!, _productOptionDTO?.plantingDuration ?? 0),
+        harvestDate: addMonths(_plantingDate!, _productOptionDTO?.plantingDuration ?? 0),
         score: _score,
         isHarvested: false,
       );
@@ -126,6 +137,7 @@ class _TAddProductFormState extends State<TAddProductForm> {
           const SizedBox(height: TSizes.appBarHeight),
 
           TSelectProductDropdownMenu(
+            suggestions: _suggestions,
             onChanged: _handleProductChange,
           ),
 

@@ -22,16 +22,34 @@ class TProductDetailsPlantingDate extends StatelessWidget {
       height: TSizes.cardHeight / 3,
       width: TSizes.cardWidth / 1.2,
       decoration: getCardDecoration(context),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text(
-            TTexts.plantingDate,
-            style: textTheme.headlineSmall,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                TTexts.plantingDate,
+                style: textTheme.headlineSmall,
+              ),
+              Text(
+                THelperFunctions.getFormattedDate(productDTO.plantingDate!),
+                style: textTheme.headlineSmall,
+              ),
+            ],
           ),
-          Text(
-            THelperFunctions.getFormattedDate(productDTO.plantingDate!),
-            style: textTheme.headlineSmall,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Ekili Alan',
+                style: textTheme.headlineSmall,
+              ),
+              Text(
+                '${THelperFunctions.decodeUtf8(productDTO.area.toString())} ${TTexts.squareSymbol}',
+                style: textTheme.headlineSmall,
+              ),
+            ],
           ),
         ],
       ),

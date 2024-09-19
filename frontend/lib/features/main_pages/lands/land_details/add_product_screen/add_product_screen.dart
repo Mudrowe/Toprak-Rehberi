@@ -4,6 +4,7 @@ import 'package:toprak_rehberi/common/widgets/appbar/appbar.dart';
 import 'package:toprak_rehberi/dtos/LandDTO.dart';
 import 'package:toprak_rehberi/features/main_pages/lands/land_details/add_product_screen/widgets/add_product_form.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
+import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
 import '../widgets/helpers/suggestions_button.dart';
 
@@ -33,19 +34,20 @@ class AddProductScreen extends StatelessWidget {
               const SizedBox(height: TSizes.appBarHeight),
 
               // Suggestions Button
-              const TSuggestionsButton(),
+              TSuggestionsButton(landId: landDTO.id!),
 
               const SizedBox(height: TSizes.spaceBtwSections * 2),
 
-              // ! Sizes aren't flexible for long names
               Container(
-                width: TSizes.buttonWidth / 2,
-                height: TSizes.buttonHeight * 2,
+                width: TSizes.buttonWidth / 1.3,
+                height: TSizes.buttonHeight * 2.3,
                 decoration: getCardDecoration(context),
                 child: Center(
                   child: Text(
-                    landDTO.name,
-                    style: textTheme.titleLarge
+                    THelperFunctions.decodeUtf8(landDTO.name),
+                    style: textTheme.titleLarge,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ),

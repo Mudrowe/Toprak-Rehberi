@@ -73,7 +73,7 @@ Future<List<ProductDTO>> fetchProductsByLandId(int landId) async {
           'land': productJson['land'],
           'score': productJson['score'],
           'productOption': productJson['productOption'],
-          'area': productJson['size'],
+          'area': productJson['area'],
           'harvested': productJson['harvested'],
         });
 
