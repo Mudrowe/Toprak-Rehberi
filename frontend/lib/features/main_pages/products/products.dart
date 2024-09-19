@@ -39,50 +39,54 @@ class _ProductsScreenState extends State<ProductsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        body: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return const [
-              SliverAppBar(
-                automaticallyImplyLeading: false,
-                flexibleSpace: FlexibleSpaceBar(
-                  title: TTabBar(
-                    tabs: [
-                      Tab(child: Text(TTexts.plantedProducts)),
-                      Tab(child: Text(TTexts.harvestedProducts)),
-                    ],
-                  ),
-                ),
-              ),
-            ];
-          },
-          body: FutureBuilder<List<ProductDTO>>(
-            future: _productsFuture,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                      Theme.of(context).primaryColor,
+    return PopScope(
+      canPop: false,
+      child: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          body: NestedScrollView(
+            headerSliverBuilder:
+                (BuildContext context, bool innerBoxIsScrolled) {
+              return const [
+                SliverAppBar(
+                  automaticallyImplyLeading: false,
+                  flexibleSpace: FlexibleSpaceBar(
+                    title: TTabBar(
+                      tabs: [
+                        Tab(child: Text(TTexts.plantedProducts)),
+                        Tab(child: Text(TTexts.harvestedProducts)),
+                      ],
                     ),
                   ),
-                );
-              } else if (snapshot.hasError) {
-                return Center(child: Text('Error: ${snapshot.error}'));
-              } else {
-                return TabBarView(
-                  children: [
-                    SingleChildScrollView(
-                        child: TPlantedProducts(products: _plantedProducts)),
-                    SingleChildScrollView(
-                        child:
-                            THarvestedProducts(products: _harvestedProducts)),
-                  ],
-                );
-              }
+                ),
+              ];
             },
+            body: FutureBuilder<List<ProductDTO>>(
+              future: _productsFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        Theme.of(context).primaryColor,
+                      ),
+                    ),
+                  );
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else {
+                  return TabBarView(
+                    children: [
+                      SingleChildScrollView(
+                          child: TPlantedProducts(products: _plantedProducts)),
+                      SingleChildScrollView(
+                          child:
+                              THarvestedProducts(products: _harvestedProducts)),
+                    ],
+                  );
+                }
+              },
+            ),
           ),
         ),
       ),

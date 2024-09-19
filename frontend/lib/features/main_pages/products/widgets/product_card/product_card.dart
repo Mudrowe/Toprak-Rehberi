@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:toprak_rehberi/common/styles/card_style.dart';
 import 'package:toprak_rehberi/features/main_pages/products/widgets/product_card/product_image.dart';
 import 'package:toprak_rehberi/features/main_pages/products/widgets/product_card/product_progress.dart';
@@ -22,7 +21,12 @@ class TProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.to(() => TProductDetails(productDTO: productDTO)),
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => TProductDetails(productDTO: productDTO),
+        ),
+      ),
       child: Container(
         width: TSizes.cardWidth,
         height: TSizes.cardHeight,

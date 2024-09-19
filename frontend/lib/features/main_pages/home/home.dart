@@ -48,45 +48,48 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: FutureBuilder<UserDTO>(
-        future: _user,
-        builder: (context, userSnapshot) {
-          if (userSnapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(
-                  Theme.of(context).primaryColor,
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        body: FutureBuilder<UserDTO>(
+          future: _user,
+          builder: (context, userSnapshot) {
+            if (userSnapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    Theme.of(context).primaryColor,
+                  ),
                 ),
-              ),
-            );
-          } else if (userSnapshot.hasError) {
-            return Text('Error: ${userSnapshot.error}');
-          } else if (userSnapshot.hasData) {
-            UserDTO user = userSnapshot.data!;
+              );
+            } else if (userSnapshot.hasError) {
+              return Text('Error: ${userSnapshot.error}');
+            } else if (userSnapshot.hasData) {
+              UserDTO user = userSnapshot.data!;
 
-            _lands = fetchLandsByUserId(user.id!);
+              _lands = fetchLandsByUserId(user.id!);
 
-            return SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  const SizedBox(height: TSizes.spaceBtwSections * 1.5 ),
+              return SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    const SizedBox(height: TSizes.spaceBtwSections * 1.5),
 
-                  // Carousel Slider and Stats for Products
-                  _buildProductSection(),
+                    // Carousel Slider and Stats for Products
+                    _buildProductSection(),
 
-                  const SizedBox(height: TSizes.spaceBtwItems),
+                    const SizedBox(height: TSizes.spaceBtwItems),
 
-                  // Lands Stats
-                  _buildLandSection(),
-                ],
-              ),
-            );
-          } else {
-            return const Text('User data is not available');
-          }
-        },
+                    // Lands Stats
+                    _buildLandSection(),
+                  ],
+                ),
+              );
+            } else {
+              return const Text('User data is not available');
+            }
+          },
+        ),
       ),
     );
   }
@@ -98,7 +101,13 @@ class _HomeScreenState extends State<HomeScreen> {
       future: _productsFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
+          return Center(
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(
+                Theme.of(context).primaryColor,
+              ),
+            ),
+          );
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
@@ -163,7 +172,4 @@ class _HomeScreenState extends State<HomeScreen> {
       },
     );
   }
-
-
-
 }

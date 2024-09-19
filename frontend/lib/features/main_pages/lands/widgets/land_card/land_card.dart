@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:toprak_rehberi/common/styles/card_style.dart';
 import 'package:toprak_rehberi/dtos/LandDTO.dart';
 import 'package:toprak_rehberi/features/main_pages/lands/widgets/land_card/land_banner.dart';
@@ -23,7 +22,12 @@ class TLandCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.to(() => TLandDetails(landDTO: landDTO)),
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => TLandDetails(landDTO: landDTO),
+        ),
+      ),
       child: Container(
         height: TSizes.cardHeight,
         width: TSizes.cardWidth,

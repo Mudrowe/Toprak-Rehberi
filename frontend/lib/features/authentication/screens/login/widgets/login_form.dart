@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:toprak_rehberi/features/authentication/screens/signup/signup.dart';
 import 'package:toprak_rehberi/navigation_menu.dart';
 import 'package:toprak_rehberi/service/auth/token_service.dart';
@@ -60,12 +59,15 @@ class _TLoginFormState extends State<TLoginForm> {
         final token = responseData['token'];
         setAuthToken(token);
 
-        Get.to(() => const NavigationMenu());
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const NavigationMenu()),
+        );
 
       } else {
         setState(() {
           _errorMessage =
-              'Failed to authenticate. Please check your credentials.';
+          'Failed to authenticate. Please check your credentials.';
         });
       }
     } catch (e) {
@@ -159,10 +161,10 @@ class _TLoginFormState extends State<TLoginForm> {
                 onPressed: _isLoading ? null : _login,
                 child: _isLoading
                     ? CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          Theme.of(context).primaryColor,
-                        ),
-                      )
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    Theme.of(context).primaryColor,
+                  ),
+                )
                     : const Text(TTexts.signIn),
               ),
             ),
@@ -173,7 +175,10 @@ class _TLoginFormState extends State<TLoginForm> {
             SizedBox(
               width: double.infinity,
               child: OutlinedButton(
-                onPressed: () => Get.to(() => const SignupScreen()),
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SignupScreen()),
+                ),
                 child: const Text(TTexts.createAccount),
               ),
             ),
