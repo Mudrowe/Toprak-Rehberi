@@ -9,7 +9,6 @@ import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 import '../../../../dtos/ProductDTO.dart';
 import '../../products/product_details/product_details.dart';
 
-
 class TProductCardHome extends StatelessWidget {
   const TProductCardHome({
     super.key,
@@ -17,7 +16,6 @@ class TProductCardHome extends StatelessWidget {
   });
 
   final ProductDTO productDTO;
-
 
   @override
   Widget build(BuildContext context) {
@@ -31,40 +29,60 @@ class TProductCardHome extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Column(
-              children: [
-                Text(TTexts.progress, style: textTheme.bodyLarge),
-                TArcProgressBar(progress: productDTO.progressPercentage)
-              ],
+            Expanded(
+              child: Column(
+                children: [
+                  Text(TTexts.progress, style: textTheme.bodyLarge),
+                  TArcProgressBar(progress: productDTO.progressPercentage)
+                ],
+              ),
             ),
             const SizedBox(width: TSizes.spaceBtwItems),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                // Product Name
-                Text(
-                  THelperFunctions.decodeUtf8(productDTO.productOptionDTO.name),
-                  style: textTheme.bodyMedium,
-                ),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  // Product Name
+                  Text(
+                    THelperFunctions.decodeUtf8(productDTO.productOptionDTO.name),
+                    style: textTheme.bodyMedium,
+                    overflow: TextOverflow.ellipsis,
+                  ),
 
-                // Land Name
-                Text(
-                  THelperFunctions.decodeUtf8(productDTO.land.name),
-                  style: textTheme.bodyMedium,
-                ),
+                  // Land Name
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          THelperFunctions.decodeUtf8(productDTO.land.name),
+                          style: textTheme.bodyMedium,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      Text(
+                        '${THelperFunctions.decodeUtf8(productDTO.area.toString())} ${TTexts.squareSymbol}',
+                        style: textTheme.bodyMedium,
+                        overflow: TextOverflow.ellipsis,
+                      )
+                    ],
+                  ),
 
-                // Harvest Date Title
-                Text(
-                  TTexts.harvestDate,
-                  style: textTheme.bodyMedium,
-                ),
+                  // Harvest Date Title
+                  Text(
+                    TTexts.harvestDate,
+                    style: textTheme.bodyMedium,
+                    overflow: TextOverflow.ellipsis,
+                  ),
 
-                // Harvest Date
-                Text(
-                  THelperFunctions.getFormattedDate(productDTO.harvestDate!),
-                  style: textTheme.bodyMedium,
-                ),
-              ],
+                  // Harvest Date
+                  Text(
+                    THelperFunctions.getFormattedDate(productDTO.harvestDate!),
+                    style: textTheme.bodyMedium,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
             ),
           ],
         ),
