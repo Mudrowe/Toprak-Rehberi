@@ -34,6 +34,10 @@ class _ProductsScreenState extends State<ProductsScreen> {
     _harvestedProducts =
         products.where((product) => product.isHarvested).toList();
 
+    for (var product in _plantedProducts) {
+      print(product.toJson());
+    }
+
     return products;
   }
 

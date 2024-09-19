@@ -19,8 +19,7 @@ class TLandProducts extends StatefulWidget {
   _TLandProductsState createState() => _TLandProductsState();
 }
 
-class _TLandProductsState extends State<TLandProducts>
-    with SingleTickerProviderStateMixin {
+class _TLandProductsState extends State<TLandProducts> {
   late Future<List<ProductDTO>> _productsFuture;
   List<ProductDTO> _plantedProducts = [];
   List<ProductDTO> _harvestedProducts = [];
@@ -38,6 +37,10 @@ class _TLandProductsState extends State<TLandProducts>
         products.where((product) => !product.isHarvested).toList();
     _harvestedProducts =
         products.where((product) => product.isHarvested).toList();
+
+    for (var product in _plantedProducts) {
+      print(product.toJson());
+    }
 
     return products;
   }
@@ -70,7 +73,9 @@ class _TLandProductsState extends State<TLandProducts>
                     ],
                   ),
                   SizedBox(
-                    height: _plantedProducts.length.toDouble() * 140 ,
+                    // FIXME: It could be better
+                    height: _plantedProducts.length.toDouble() * 100 +
+                        THelperFunctions.screenHeight(),
                     child: TabBarView(
                       children: [
                         _buildProductList(_plantedProducts),
