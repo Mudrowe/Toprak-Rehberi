@@ -64,7 +64,7 @@ class LandDTO {
   Future<void> _initializeCityAndDistrict() async {
     try {
       DistrictDTO district =
-          await fetchDistrictById(neighborhoodDTO.districtId!);
+          await fetchDistrictById(neighborhoodDTO.districtId);
       CityDTO city = await fetchCityById(district.cityId);
 
       districtDTO = district;

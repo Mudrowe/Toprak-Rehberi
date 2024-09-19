@@ -46,7 +46,7 @@ class TProductDetailsPlantingDate extends StatelessWidget {
                 style: textTheme.headlineSmall,
               ),
               Text(
-                '${THelperFunctions.decodeUtf8(productDTO.area.toString())} ${TTexts.squareSymbol}',
+                '${THelperFunctions.decodeUtf8(productDTO.area!.toInt().toString())} ${TTexts.squareSymbol}',
                 style: textTheme.headlineSmall,
               ),
             ],

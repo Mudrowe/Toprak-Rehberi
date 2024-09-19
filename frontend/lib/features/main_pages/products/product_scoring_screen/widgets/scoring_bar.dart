@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
 class TScoringBar extends StatelessWidget {
@@ -21,7 +22,7 @@ class TScoringBar extends StatelessWidget {
       onTap: onTap,
       child: Column(
         children: [
-          Image.asset(scorePath),
+          SvgPicture.asset(scorePath),
           const SizedBox(height: TSizes.xs),
           Container(
             height: TSizes.scoreRectangleHeight,

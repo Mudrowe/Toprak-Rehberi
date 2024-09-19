@@ -5,7 +5,7 @@ class CircularCheckbox extends StatefulWidget {
   final bool value;
   final ValueChanged<bool?> onChanged;
 
-  CircularCheckbox({required this.value, required this.onChanged});
+  const CircularCheckbox({super.key, required this.value, required this.onChanged});
 
   @override
   _CircularCheckboxState createState() => _CircularCheckboxState();

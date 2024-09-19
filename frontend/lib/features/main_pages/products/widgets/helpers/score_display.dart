@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:toprak_rehberi/utils/constants/image_strings.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
@@ -47,7 +48,7 @@ class TScoreDisplay extends StatelessWidget {
 
     return Column(
       children: [
-        Image.asset(imagePath, width: 55, height: 55, fit: BoxFit.contain),
+        SvgPicture.asset(imagePath, width: 55, height: 55, fit: BoxFit.contain),
         const SizedBox(height: TSizes.spaceBtwItems),
         Text(scoreText, style: textTheme.bodyLarge),
       ],

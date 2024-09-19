@@ -21,11 +21,11 @@ class TImages {
   static const String wheat = "assets/products/wheat.png";
 
   // Scores
-  static const String bad = "assets/scores/1.png";
-  static const String meh = "assets/scores/2.png";
-  static const String mid = "assets/scores/3.png";
-  static const String good = "assets/scores/4.png";
-  static const String veryGood = "assets/scores/5.png";
+  static const String bad = "assets/scores/1.svg";
+  static const String meh = "assets/scores/2.svg";
+  static const String mid = "assets/scores/3.svg";
+  static const String good = "assets/scores/4.svg";
+  static const String veryGood = "assets/scores/5.svg";
 
   // Land Types
   static const String tarla = "assets/land_types/tarla.png";

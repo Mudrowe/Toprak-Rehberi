@@ -23,9 +23,6 @@ Future<void> addLand(LandDTO landDTO) async {
   int userId = user.id!;
 
   print("User id from getUserIdByEmail2: $userId");
-  if (userId == null) {
-    throw Exception('Failed to retrieve user ID');
-  }
 
   // Update LandDTO with the userId
   landDTO.userId = userId;

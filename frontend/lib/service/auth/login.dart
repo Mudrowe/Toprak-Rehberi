@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toprak_rehberi/service/auth/token_service.dart';
 
 Future<void> login(String email, String password) async {

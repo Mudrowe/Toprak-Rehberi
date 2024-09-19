@@ -61,7 +61,7 @@ class TProductCardHome extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '${THelperFunctions.decodeUtf8(productDTO.area.toString())} ${TTexts.squareSymbol}',
+                        '${THelperFunctions.decodeUtf8(productDTO.area!.toInt().toString())} ${TTexts.squareSymbol}',
                         style: textTheme.bodyMedium,
                         overflow: TextOverflow.ellipsis,
                       )

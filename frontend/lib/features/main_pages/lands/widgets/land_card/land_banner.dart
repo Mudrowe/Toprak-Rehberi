@@ -5,7 +5,6 @@ import 'package:toprak_rehberi/utils/constants/enums.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
-import '../../../../../utils/constants/colors.dart';
 
 class TLandBanner extends StatelessWidget {
   const TLandBanner({

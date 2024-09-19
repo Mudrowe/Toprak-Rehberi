@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:toprak_rehberi/common/widgets/appbar/appbar.dart';
 import 'package:toprak_rehberi/dtos/LandDTO.dart';
 import 'package:toprak_rehberi/features/main_pages/lands/land_details/widgets/helpers/suggestions_button.dart';

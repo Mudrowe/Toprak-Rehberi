@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:toprak_rehberi/common/widgets/appbar/appbar.dart';
 import 'package:toprak_rehberi/features/main_pages/products/product_scoring_screen/update_score.dart';
-import 'package:toprak_rehberi/features/main_pages/products/products.dart';
 import 'package:toprak_rehberi/features/main_pages/products/widgets/helpers/score_display.dart';
 import 'package:toprak_rehberi/features/main_pages/products/product_scoring_screen/widgets/scoring_bar.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';

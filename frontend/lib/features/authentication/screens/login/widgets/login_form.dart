@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:toprak_rehberi/features/authentication/screens/login/login.dart';
 import 'package:toprak_rehberi/features/authentication/screens/signup/signup.dart';
 import 'package:toprak_rehberi/navigation_menu.dart';
 import 'package:toprak_rehberi/service/auth/token_service.dart';
