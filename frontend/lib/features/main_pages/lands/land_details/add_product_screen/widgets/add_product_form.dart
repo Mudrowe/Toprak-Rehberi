@@ -8,6 +8,7 @@ import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
 import '../../../../../../dtos/LandDTO.dart';
 import '../../../../../../dtos/ProductOptionDTO.dart';
+import '../../../../../../navigation_menu.dart';
 import '../../../../../../service/fetching/product/fetch_product_options.dart';
 import '../../../../../../service/product/add_product.dart';
 import '../../../../../../models/suggestion_product.dart';
@@ -116,15 +117,26 @@ class _TAddProductFormState extends State<TAddProductForm> {
       );
 
       print('Sending ProductDTO JSON 1: ${jsonEncode(productDTO.toJson())}');
-      addProduct(productDTO).then((_) {
+      try {
+        await addProduct(productDTO);
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Ürün başarıyla eklendi!')),
         );
-      }).catchError((error) {
+
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const NavigationMenu(
+              initialIndex: 2,
+            ),
+          ),
+              (Route<dynamic> route) => false,
+        );
+      } catch (error) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Ürün eklenemedi.')),
         );
-      });
+      }
     }
   }
 

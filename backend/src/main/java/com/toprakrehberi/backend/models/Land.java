@@ -49,6 +49,9 @@ public class Land {
     private List<Product> products;
 
     public double getRemainingArea() {
+        if (this.products == null || this.products.isEmpty()) {
+            return area;
+        }
         double totalOccupiedArea = products.stream()
                 .filter(product -> !product.isHarvested())
                 .mapToDouble(Product::getArea)

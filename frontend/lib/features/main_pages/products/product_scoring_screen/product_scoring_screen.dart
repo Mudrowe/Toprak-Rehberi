@@ -8,6 +8,7 @@ import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 import 'package:toprak_rehberi/dtos/ProductDTO.dart';
 
+import '../../../../navigation_menu.dart';
 import '../../../../utils/constants/image_strings.dart';
 import '../product_details/product_details_common.dart';
 
@@ -38,7 +39,17 @@ class _ProductScoringScreenState extends State<ProductScoringScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Ürün başarıyla hasat edildi')),
       );
-      
+
+
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const NavigationMenu(
+            initialIndex: 2,
+          ),
+        ),
+            (Route<dynamic> route) => false,
+      );
 
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -46,6 +57,8 @@ class _ProductScoringScreenState extends State<ProductScoringScreen> {
       );
     }
   }
+
+
 
   @override
   Widget build(BuildContext context) {

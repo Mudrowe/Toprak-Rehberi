@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:toprak_rehberi/common/widgets/custom_shapes/custom_elevated_button.dart';
 import 'package:toprak_rehberi/common/widgets/suggestions/suggestions_screen.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';
@@ -16,7 +15,12 @@ class TSuggestionsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomElevatedButton(
-      onPressed: () => Get.to(() => SuggestionsScreen(landId: landId)),
+      onPressed: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SuggestionsScreen(landId: landId),
+        ),
+      ),
       text: TTexts.showSuggestions,
       backgroundGradient: TColors.recommendationGradient,
       textColor: TColors.black,

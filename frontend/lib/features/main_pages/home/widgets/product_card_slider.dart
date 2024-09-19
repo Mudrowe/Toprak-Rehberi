@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:toprak_rehberi/common/styles/card_style.dart';
 import 'package:toprak_rehberi/common/widgets/custom_shapes/arc_progress_bar.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
@@ -21,7 +20,12 @@ class TProductCardHome extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return GestureDetector(
-      onTap: () => Get.to(() => TProductDetails(productDTO: productDTO)),
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => TProductDetails(productDTO: productDTO),
+        ),
+      ),
       child: Container(
         width: TSizes.cardWidth,
         height: TSizes.cardHeight,

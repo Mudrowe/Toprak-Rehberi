@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:toprak_rehberi/features/authentication/screens/login/login.dart';
 import 'package:toprak_rehberi/features/authentication/screens/signup/signup.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';
@@ -21,14 +20,20 @@ class TButtons extends StatelessWidget {
         children: [
           Expanded(
             child: OutlinedButton(
-              onPressed: () => Get.to(() => const LoginScreen()),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const LoginScreen()),
+              ),
               child: const Text(TTexts.signIn),
             ),
           ),
           const SizedBox(width: TSizes.spaceBtwItems),
           Expanded(
             child: ElevatedButton(
-              onPressed: () => Get.to(() => const SignupScreen()),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SignupScreen()),
+              ),
               child: const Text(TTexts.createAccount),
             ),
           ),

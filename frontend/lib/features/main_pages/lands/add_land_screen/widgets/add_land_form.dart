@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/dtos/LandDTO.dart';
+import 'package:toprak_rehberi/features/main_pages/lands/lands.dart';
 import 'package:toprak_rehberi/service/fetching/constants/fetch_cities.dart';
 import 'package:toprak_rehberi/service/fetching/constants/fetch_districts.dart';
 import 'package:toprak_rehberi/service/fetching/constants/fetch_neighborhoods.dart';
@@ -14,6 +15,7 @@ import '../../../../../dtos/location/CityDTO.dart';
 import '../../../../../dtos/LandTypeDTO.dart';
 import '../../../../../dtos/location/DistrictDTO.dart';
 import '../../../../../dtos/location/NeighborhoodDTO.dart';
+import '../../../../../navigation_menu.dart';
 import '../../../../../service/fetching/constants/fetch_land_types.dart';
 
 class TAddLandForm extends StatefulWidget {
@@ -127,11 +129,21 @@ class _TAddLandFormState extends State<TAddLandForm> {
 
       try {
         await addLand(land);
+
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Arazi başarıyla kaydedildi!')),
           );
         }
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const NavigationMenu(
+              initialIndex: 1,
+            ),
+          ),
+          (Route<dynamic> route) => false,
+        );
       } catch (error) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
