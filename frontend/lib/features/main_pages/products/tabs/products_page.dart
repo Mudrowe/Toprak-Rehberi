@@ -34,7 +34,7 @@ class _TProductsListState extends State<TProductsList> {
   void _onSearchChanged(String query) {
     setState(() {
       filteredProducts = widget.products
-          .where((product) => product.productOptionDTO.name
+          .where((product) => THelperFunctions.decodeUtf8(product.productOptionDTO.name)
           .toLowerCase()
           .contains(query.toLowerCase()))
           .toList();

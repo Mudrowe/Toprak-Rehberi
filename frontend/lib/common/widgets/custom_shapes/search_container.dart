@@ -28,7 +28,6 @@ class TSearchContainer extends StatelessWidget {
       ),
       child: Container(
         width: TDeviceUtils.getScreenWidth(context),
-        //padding: const EdgeInsets.all(TSizes.md),
         decoration: getCardDecoration(context),
         child: Row(
           children: [
@@ -40,16 +39,13 @@ class TSearchContainer extends StatelessWidget {
                   prefixIcon: Icon(Icons.search, color: color),
                   hintText: 'Ürün ara',
                   border: InputBorder.none,
-                  enabledBorder: const OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                  ),
-                  focusedBorder: const OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                  ),
+                  enabledBorder:
+                      const OutlineInputBorder(borderSide: BorderSide.none),
+                  focusedBorder:
+                      const OutlineInputBorder(borderSide: BorderSide.none),
                 ),
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.only(right: TSizes.md),
               child: GestureDetector(
