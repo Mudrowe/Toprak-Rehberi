@@ -9,7 +9,7 @@ import '../../../service/fetching/product/fetch_products.dart';
 
 class ProductsScreen extends StatefulWidget {
   final int initialTabIndex;
-  const ProductsScreen({super.key, this.initialTabIndex = 1});
+  const ProductsScreen({super.key, this.initialTabIndex = 0});
 
   @override
   _ProductsScreenState createState() => _ProductsScreenState();
@@ -29,6 +29,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
   Future<List<ProductDTO>> _fetchAndCategorizeProducts() async {
     List<ProductDTO> products = await fetchProducts();
 
+    // Categorize the products
     _plantedProducts =
         products.where((product) => !product.isHarvested).toList();
     _harvestedProducts =
@@ -39,52 +40,56 @@ class _ProductsScreenState extends State<ProductsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      initialIndex: widget.initialTabIndex,
-      child: Scaffold(
-        body: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return const [
-              SliverAppBar(
-                automaticallyImplyLeading: false,
-                flexibleSpace: FlexibleSpaceBar(
-                  title: TTabBar(
-                    tabs: [
-                      Tab(child: Text(TTexts.plantedProducts)),
-                      Tab(child: Text(TTexts.harvestedProducts)),
-                    ],
+    return PopScope(
+      canPop: false,
+      child: DefaultTabController(
+        length: 2,
+        initialIndex: widget.initialTabIndex,
+        child: Scaffold(
+          body: NestedScrollView(
+            headerSliverBuilder:
+                (BuildContext context, bool innerBoxIsScrolled) {
+              return const [
+                SliverAppBar(
+                  automaticallyImplyLeading: false,
+                  flexibleSpace: FlexibleSpaceBar(
+                    title: TTabBar(
+                      tabs: [
+                        Tab(child: Text(TTexts.plantedProducts)),
+                        Tab(child: Text(TTexts.harvestedProducts)),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ];
-          },
-          body: FutureBuilder<List<ProductDTO>>(
-            future: _productsFuture,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                      Theme.of(context).primaryColor,
-                    ),
-                  ),
-                );
-              } else if (snapshot.hasError) {
-                return Center(child: Text('Error: ${snapshot.error}'));
-              } else {
-                return TabBarView(
-                  children: [
-                    SingleChildScrollView(
-                      child: TPlantedProducts(products: _plantedProducts),
-                    ),
-                    SingleChildScrollView(
-                      child: THarvestedProducts(products: _harvestedProducts),
-                    ),
-                  ],
-                );
-              }
+              ];
             },
+            body: FutureBuilder<List<ProductDTO>>(
+              future: _productsFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        Theme.of(context).primaryColor,
+                      ),
+                    ),
+                  );
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else {
+                  return TabBarView(
+                    children: [
+                      SingleChildScrollView(
+                        child: TPlantedProducts(products: _plantedProducts),
+                      ),
+                      SingleChildScrollView(
+                        child: THarvestedProducts(products: _harvestedProducts),
+                      ),
+                    ],
+                  );
+                }
+              },
+            ),
           ),
         ),
       ),
