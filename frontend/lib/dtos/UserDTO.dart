@@ -1,9 +1,9 @@
 class UserDTO {
   final int? id;
-  final String firstName;
-  final String lastName;
-  final String email;
-  final String phoneNumber;
+  String firstName;
+  String lastName;
+  String email;
+  String phoneNumber;
 
   UserDTO({
     this.id,

@@ -51,7 +51,7 @@ class ProfileScreen extends StatelessWidget {
                     // First Name
                     TProfileSection(
                       title: TTexts.firstName,
-                      value: user.firstName ?? 'N/A',
+                      value: THelperFunctions.decodeUtf8(user.firstName ?? 'N/A'),
                       onTap: () =>
                           changeInfo(context: context, info: TTexts.firstName),
                     ),
@@ -59,7 +59,7 @@ class ProfileScreen extends StatelessWidget {
                     // Last Name
                     TProfileSection(
                       title: TTexts.lastName,
-                      value: user.lastName ?? 'N/A',
+                      value: THelperFunctions.decodeUtf8(user.lastName ?? 'N/A'),
                       onTap: () =>
                           changeInfo(context: context, info: TTexts.lastName),
                     ),
@@ -67,7 +67,7 @@ class ProfileScreen extends StatelessWidget {
                     // Email
                     TProfileSection(
                       title: TTexts.email,
-                      value: user.email ?? 'N/A',
+                      value: THelperFunctions.decodeUtf8(user.email ?? 'N/A'),
                       onTap: () =>
                           changeInfo(context: context, info: TTexts.email),
                     ),
@@ -75,7 +75,7 @@ class ProfileScreen extends StatelessWidget {
                     // Phone Number
                     TProfileSection(
                       title: TTexts.phoneNoShort,
-                      value: user.phoneNumber ?? 'N/A',
+                      value: THelperFunctions.decodeUtf8(user.phoneNumber ?? 'N/A'),
                       onTap: () =>
                           changeInfo(context: context, info: TTexts.phoneNo),
                     ),
