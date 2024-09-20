@@ -30,7 +30,7 @@ class LandDTO {
     required this.landTypeDTO,
     this.remainingArea,
   }) {
-    _initializeCityAndDistrict();
+    initializeCityAndDistrict();
   }
 
   factory LandDTO.fromJson(Map<String, dynamic> json) {
@@ -61,16 +61,17 @@ class LandDTO {
         'remainingArea': remainingArea,
       };
 
-  Future<void> _initializeCityAndDistrict() async {
-    try {
-      DistrictDTO district =
-          await fetchDistrictById(neighborhoodDTO.districtId);
-      CityDTO city = await fetchCityById(district.cityId);
-
-      districtDTO = district;
-      cityDTO = city;
-    } catch (e) {
-      print('Failed to fetch city or district: $e');
+  Future<void> initializeCityAndDistrict() async {
+    if (cityDTO == null || districtDTO == null) {
+      try {
+        DistrictDTO district = await fetchDistrictById(neighborhoodDTO.districtId);
+        CityDTO city = await fetchCityById(district.cityId);
+        districtDTO = district;
+        cityDTO = city;
+      } catch (e) {
+        print('Failed to fetch city or district: $e');
+      }
     }
   }
+
 }
