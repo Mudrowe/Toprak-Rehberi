@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/dtos/register_request.dart';
+import 'package:toprak_rehberi/features/authentication/screens/first_screen/first_screen.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 import 'package:toprak_rehberi/features/authentication/screens/signup/widgets/terms_and_conditions_checkbox.dart';
 
-import '../../../../../dtos/UserDTO.dart';
-import '../../../../../service/user/http_add_user_service.dart';
+import '../../../../../service/user/add_user.dart';
 
 class TSignupForm extends StatefulWidget {
   const TSignupForm({super.key});
@@ -40,12 +40,20 @@ class _TSignupFormState extends State<TSignupForm> {
 
       createUser(user).then((_) {
         // Handle success
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text('Kullanıcı oluşturuldu!')));
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Kullanıcı oluşturuldu!')));
+
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const FirstScreen(),
+            ),
+            (Route<dynamic> route) => false);
+
       }).catchError((error) {
         // Handle error
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text('Kullanıcı oluşturulamadı.')));
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Kullanıcı oluşturulamadı.')));
       });
     }
   }

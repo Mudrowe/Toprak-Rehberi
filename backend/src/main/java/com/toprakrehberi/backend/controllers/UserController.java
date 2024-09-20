@@ -5,6 +5,7 @@ import com.toprakrehberi.backend.dtos.LandDTO;
 import com.toprakrehberi.backend.dtos.UserDTO;
 import com.toprakrehberi.backend.models.Land;
 import com.toprakrehberi.backend.models.User;
+import com.toprakrehberi.backend.models.UserFieldUpdateRequest;
 import com.toprakrehberi.backend.services.LandService;
 import com.toprakrehberi.backend.services.UserService;
 import com.toprakrehberi.backend.utils.ConverterUtil;
@@ -64,5 +65,12 @@ public class UserController {
                 .collect(Collectors.toList());
         return ResponseEntity.ok(landDTOs);
     }
+
+    @PutMapping("/updateField")
+    public ResponseEntity<UserDTO> updateUserField(@RequestBody UserFieldUpdateRequest request) {
+        User updatedUser = userService.updateUserField(request.getFieldName(), request.getNewValue());
+        return ResponseEntity.ok(ConverterUtil.convertToUserDTO(updatedUser));
+    }
+
 
 }
