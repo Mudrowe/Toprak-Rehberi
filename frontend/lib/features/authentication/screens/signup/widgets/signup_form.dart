@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:toprak_rehberi/dtos/register_request.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 import 'package:toprak_rehberi/features/authentication/screens/signup/widgets/terms_and_conditions_checkbox.dart';
@@ -29,11 +30,12 @@ class _TSignupFormState extends State<TSignupForm> {
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
 
-      UserDTO user = UserDTO(
+      RegisterRequest user = RegisterRequest(
         firstName: _firstName!,
         lastName: _lastName!,
         email: _email!,
         phoneNumber: _phoneNo!,
+        password: _password!,
       );
 
       createUser(user).then((_) {
@@ -155,11 +157,14 @@ class _TSignupFormState extends State<TSignupForm> {
             onSaved: (String? value) {
               _password = value;
             },
+            /*
             validator: (String? value) {
               return (value != null && value.length < 6)
                   ? 'Şifre en az 6 karakter uzunluğunda olmalıdır..'
                   : null;
             },
+
+             */
           ),
 
           const SizedBox(height: TSizes.spaceBtwInputFields),
