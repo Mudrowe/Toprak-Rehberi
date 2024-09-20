@@ -6,6 +6,7 @@ import com.toprakrehberi.backend.services.location.CityService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +28,7 @@ public class CityController {
     public ResponseEntity<List<CityDTO>> getAllCities() {
         List<City> cities = cityService.getAllCities();
         List<CityDTO> cityDTOs = cities.stream()
+                .sorted(Comparator.comparing(City::getName))
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(cityDTOs);

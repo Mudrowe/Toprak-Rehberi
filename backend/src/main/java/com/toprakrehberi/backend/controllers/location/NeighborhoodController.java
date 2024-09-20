@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,6 +44,7 @@ public class NeighborhoodController {
     public ResponseEntity<List<NeighborhoodDTO>> getNeighborhoodsByDistrictId(@PathVariable("districtId") int districtId) {
         List<Neighborhood> neighborhoods = neighborhoodService.getNeighborhoodsByDistrictId(districtId);
         List<NeighborhoodDTO> neighborhoodDTOs = neighborhoods.stream()
+                .sorted(Comparator.comparing(Neighborhood::getName))
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(neighborhoodDTOs);

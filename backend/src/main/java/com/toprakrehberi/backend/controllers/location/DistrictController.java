@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,6 +64,7 @@ public class DistrictController {
                 List<District> districts = districtService.getDistrictsByCityId(cityId);
 
         List<DistrictDTO> districtDTOs = districts.stream()
+                .sorted(Comparator.comparing(District::getName))
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(districtDTOs);
