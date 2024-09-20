@@ -46,6 +46,7 @@ class _ProductScoringScreenState extends State<ProductScoringScreen> {
         MaterialPageRoute(
           builder: (context) => const NavigationMenu(
             initialIndex: 2,
+            initialTabIndex: 1,
           ),
         ),
             (Route<dynamic> route) => false,

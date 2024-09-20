@@ -7,8 +7,9 @@ import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
 class NavigationMenu extends StatefulWidget {
   final int initialIndex;
+  final int initialTabIndex;
 
-  const NavigationMenu({super.key, this.initialIndex = 0});
+  const NavigationMenu({super.key, this.initialIndex = 0, this.initialTabIndex = 0});
 
   @override
   _NavigationMenuState createState() => _NavigationMenuState();
@@ -17,12 +18,6 @@ class NavigationMenu extends StatefulWidget {
 class _NavigationMenuState extends State<NavigationMenu> {
   late int _selectedIndex;
 
-  final List<Widget> _screens = const [
-    HomeScreen(),
-    LandsScreen(),
-    ProductsScreen(),
-    ProfileScreen(),
-  ];
 
   @override
   void initState() {
@@ -38,6 +33,13 @@ class _NavigationMenuState extends State<NavigationMenu> {
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> screens = [
+      const HomeScreen(),
+      const LandsScreen(),
+      ProductsScreen(initialTabIndex: widget.initialTabIndex),
+      const ProfileScreen(),
+    ];
+
     return Scaffold(
       bottomNavigationBar: NavigationBar(
         height: TSizes.navigationBarHeight,
@@ -51,7 +53,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
           NavigationDestination(icon: Icon(Icons.person), label: 'Profil'),
         ],
       ),
-      body: _screens[_selectedIndex],
+      body: screens[_selectedIndex],
     );
   }
 }

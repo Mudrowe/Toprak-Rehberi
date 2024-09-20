@@ -8,7 +8,8 @@ import 'package:toprak_rehberi/dtos/ProductDTO.dart';
 import '../../../service/fetching/product/fetch_products.dart';
 
 class ProductsScreen extends StatefulWidget {
-  const ProductsScreen({super.key});
+  final int initialTabIndex;
+  const ProductsScreen({super.key, this.initialTabIndex = 1});
 
   @override
   _ProductsScreenState createState() => _ProductsScreenState();
@@ -43,6 +44,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
       canPop: false,
       child: DefaultTabController(
         length: 2,
+        initialIndex: widget.initialTabIndex,
         child: Scaffold(
           body: NestedScrollView(
             headerSliverBuilder:

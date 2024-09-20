@@ -19,6 +19,7 @@ class TFirstScreenBackground extends StatelessWidget {
             gradient: TColors.linearGradient,
           ),
         ),
+
         // Logo and app name
         Center(
           child: Column(
