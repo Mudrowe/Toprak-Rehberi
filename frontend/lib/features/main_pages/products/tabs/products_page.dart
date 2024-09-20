@@ -50,6 +50,7 @@ class _TProductsListState extends State<TProductsList> {
         const SizedBox(height: TSizes.spaceBtwItems),
         TSearchContainer(
           onSearchChanged: _onSearchChanged,
+          hintText: 'Ürün Ara',
         ),
         const SizedBox(height: TSizes.spaceBtwSections),
         if (filteredProducts.isEmpty)

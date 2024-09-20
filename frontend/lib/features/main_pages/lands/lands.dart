@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/widgets/custom_shapes/search_container.dart';
 import 'package:toprak_rehberi/features/main_pages/lands/add_land_screen/add_land_screen.dart';
 import 'package:toprak_rehberi/features/main_pages/lands/widgets/land_card/land_card.dart';
-import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
@@ -23,6 +22,8 @@ class LandsScreen extends StatefulWidget {
 class _LandsScreenState extends State<LandsScreen> {
   late Future<List<LandDTO>> _landsFuture;
   late Future<UserDTO> _userFuture;
+  List<LandDTO> filteredLands = [];
+  String searchQuery = '';
 
   void _fetchLands() {
     _userFuture = fetchUser();
@@ -35,9 +36,16 @@ class _LandsScreenState extends State<LandsScreen> {
     _fetchLands();
   }
 
+  void _onSearchChanged(String query) {
+    setState(() {
+      searchQuery = query;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
+
     return PopScope(
       canPop: false,
       child: Scaffold(
@@ -57,8 +65,6 @@ class _LandsScreenState extends State<LandsScreen> {
             } else if (!userSnapshot.hasData) {
               return const Center(child: Text('No user data available.'));
             }
-            final userJson = userSnapshot.data!.toJson();
-            print('User JSON: $userJson');
 
             return FutureBuilder<List<LandDTO>>(
               future: _landsFuture,
@@ -78,16 +84,22 @@ class _LandsScreenState extends State<LandsScreen> {
                 }
 
                 final landsDTOList = landsSnapshot.data!;
-                for (var landDTO in landsDTOList) {
-                  print(landDTO.toJson());
-
-                }
+                filteredLands = landsDTOList.where((land) {
+                  return land.name
+                      .toLowerCase()
+                      .contains(searchQuery.toLowerCase());
+                }).toList();
 
                 return SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.only(top: TSizes.appBarHeight),
                     child: Column(
                       children: [
+                        TSearchContainer(
+                          onSearchChanged: _onSearchChanged,
+                          hintText: 'Arazi Ara',
+                        ),
+                        const SizedBox(height: TSizes.spaceBtwSections),
                         // Total Land Info
                         Column(
                           children: [
@@ -96,7 +108,7 @@ class _LandsScreenState extends State<LandsScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 const Text(TTexts.totalLands),
-                                Text(landsDTOList.length.toString()),
+                                Text(filteredLands.length.toString()),
                               ],
                             ),
                             const Divider(
@@ -105,7 +117,7 @@ class _LandsScreenState extends State<LandsScreen> {
                             ),
 
                             // Lands
-                            for (var land in landsDTOList)
+                            for (var land in filteredLands)
                               Column(
                                 children: [
                                   TLandCard(landDTO: land),

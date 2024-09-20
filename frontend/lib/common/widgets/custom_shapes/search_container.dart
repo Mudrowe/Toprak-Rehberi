@@ -12,10 +12,12 @@ class TSearchContainer extends StatelessWidget {
     required this.onSearchChanged,
     this.showBackground = true,
     this.showBorder = true,
+    required this.hintText,
   });
 
   final ValueChanged<String> onSearchChanged;
   final bool showBackground, showBorder;
+  final String hintText;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,7 @@ class TSearchContainer extends StatelessWidget {
                 onChanged: onSearchChanged,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.search, color: color),
-                  hintText: 'Ürün ara',
+                  hintText: hintText,
                   border: InputBorder.none,
                   enabledBorder:
                       const OutlineInputBorder(borderSide: BorderSide.none),

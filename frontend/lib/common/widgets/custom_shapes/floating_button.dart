@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../features/main_pages/lands/add_land_screen/add_land_screen.dart';
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
 
