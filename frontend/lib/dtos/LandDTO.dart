@@ -29,6 +29,7 @@ class LandDTO {
     required this.area,
     required this.landTypeDTO,
     this.remainingArea,
+
   }) {
     initializeCityAndDistrict();
   }
@@ -44,6 +45,7 @@ class LandDTO {
       area: json['area'],
       landTypeDTO: LandTypeDTO.fromJson(json['landType']),
       remainingArea: json['remainingArea'],
+
     );
 
     return landDTO;

@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:toprak_rehberi/common/widgets/custom_shapes/search_container.dart';
 import 'package:toprak_rehberi/features/main_pages/lands/add_land_screen/add_land_screen.dart';
 import 'package:toprak_rehberi/features/main_pages/lands/widgets/land_card/land_card.dart';
+import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
+import '../../../common/widgets/custom_shapes/floating_button.dart';
 import '../../../dtos/LandDTO.dart';
 import '../../../dtos/UserDTO.dart';
 import '../../../service/fetching/pages/fetch_lands.dart';
 import '../../../service/fetching/pages/fetch_user.dart';
+import '../../../utils/helpers/helper_functions.dart';
 
 class LandsScreen extends StatefulWidget {
   const LandsScreen({super.key});
@@ -33,6 +37,7 @@ class _LandsScreenState extends State<LandsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final dark = THelperFunctions.isDarkMode(context);
     return PopScope(
       canPop: false,
       child: Scaffold(
@@ -52,6 +57,8 @@ class _LandsScreenState extends State<LandsScreen> {
             } else if (!userSnapshot.hasData) {
               return const Center(child: Text('No user data available.'));
             }
+            final userJson = userSnapshot.data!.toJson();
+            print('User JSON: $userJson');
 
             return FutureBuilder<List<LandDTO>>(
               future: _landsFuture,
@@ -71,32 +78,16 @@ class _LandsScreenState extends State<LandsScreen> {
                 }
 
                 final landsDTOList = landsSnapshot.data!;
+                for (var landDTO in landsDTOList) {
+                  print(landDTO.toJson());
+
+                }
 
                 return SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.only(top: TSizes.appBarHeight),
                     child: Column(
                       children: [
-                        // Add Land Button
-                        const Text(
-                          TTexts.addLand,
-                          style: TextStyle(
-                            fontSize: TSizes.fontSizeLg,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        IconButton(
-                          iconSize: TSizes.iconLg,
-                          onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const TAddLandScreen()),
-                          ),
-                          icon: const Icon(Icons.add),
-                        ),
-
-                        const SizedBox(height: TSizes.spaceBtwSections),
-
                         // Total Land Info
                         Column(
                           children: [
@@ -130,6 +121,11 @@ class _LandsScreenState extends State<LandsScreen> {
               },
             );
           },
+        ),
+        floatingActionButton: FloatingButton(
+          dark: dark,
+          label: 'Arazi Ekle',
+          route: const TAddLandScreen(),
         ),
       ),
     );

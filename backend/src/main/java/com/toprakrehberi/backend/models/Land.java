@@ -21,14 +21,14 @@ public class Land {
     private Long id;
 
     // Many lands belong to one user
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "neighborhood_id", nullable = false)
     private Neighborhood neighborhood;
 
@@ -41,11 +41,11 @@ public class Land {
     @Column(name = "area", nullable = false)
     private double area;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "land_type_id", nullable = false)
     private LandType landType;
 
-    @OneToMany(mappedBy = "land", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "land", cascade = CascadeType.ALL)
     private List<Product> products;
 
     public double getRemainingArea() {
