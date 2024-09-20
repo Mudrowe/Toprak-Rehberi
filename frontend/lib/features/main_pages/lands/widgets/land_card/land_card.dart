@@ -37,7 +37,7 @@ class _TLandCardState extends State<TLandCard> {
       future: _cityDistrictFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator()); // Show loading spinner
+          return Center(child: CircularProgressIndicator());
         }
 
         if (snapshot.hasError) {

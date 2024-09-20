@@ -8,7 +8,7 @@ import '../../../../dtos/ProductDTO.dart';
 import '../../../../utils/constants/image_strings.dart';
 import '../../../../utils/helpers/helper_functions.dart';
 
-class THarvestedProducts extends StatelessWidget {
+class THarvestedProducts extends StatefulWidget {
   final List<ProductDTO> products;
 
   const THarvestedProducts({
@@ -17,19 +17,40 @@ class THarvestedProducts extends StatelessWidget {
   });
 
   @override
+  _THarvestedProductsState createState() => _THarvestedProductsState();
+}
+
+class _THarvestedProductsState extends State<THarvestedProducts> {
+  late List<ProductDTO> filteredProducts;
+
+  @override
+  void initState() {
+    super.initState();
+    filteredProducts = widget.products;
+  }
+
+  void _onSearchChanged(String query) {
+    setState(() {
+      filteredProducts = widget.products
+          .where((product) => product.productOptionDTO.name
+              .toLowerCase()
+              .contains(query.toLowerCase()))
+          .toList();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
 
     return Column(
       children: [
         const SizedBox(height: TSizes.spaceBtwItems),
-
-        // Search bar
-        const TSearchContainer(text: TTexts.searchProduct),
-
+        TSearchContainer(
+          onSearchChanged: _onSearchChanged,
+        ),
         const SizedBox(height: TSizes.spaceBtwSections),
-
-        if (products.isEmpty)
+        if (filteredProducts.isEmpty)
           Column(
             children: [
               Image.asset(dark ? TImages.darkAppLogo : TImages.lightAppLogo),
@@ -48,7 +69,7 @@ class THarvestedProducts extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     const Text(TTexts.totalHarvestedProducts),
-                    Text('${products.length}'),
+                    Text('${filteredProducts.length}'),
                   ],
                 ),
 
@@ -60,7 +81,7 @@ class THarvestedProducts extends StatelessWidget {
                 const SizedBox(height: TSizes.spaceBtwItems),
 
                 // Products list
-                for (var productDTO in products)
+                for (var productDTO in filteredProducts)
                   Column(
                     children: [
                       TProductCard(productDTO: productDTO),

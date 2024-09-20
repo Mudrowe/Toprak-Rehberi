@@ -84,7 +84,6 @@ class _TRadioListTileState extends State<TRadioListTile> {
             ),
 
             // Confirm Button
-            // ! It shouldn't pop of course
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
               child: const Text(TTexts.submit),

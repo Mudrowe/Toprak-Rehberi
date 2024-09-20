@@ -7,7 +7,7 @@ import '../widgets/product_card/product_card.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/constants/text_strings.dart';
 
-class TPlantedProducts extends StatelessWidget {
+class TPlantedProducts extends StatefulWidget {
   final List<ProductDTO> products;
 
   const TPlantedProducts({
@@ -16,19 +16,40 @@ class TPlantedProducts extends StatelessWidget {
   });
 
   @override
+  _TPlantedProductsState createState() => _TPlantedProductsState();
+}
+
+class _TPlantedProductsState extends State<TPlantedProducts> {
+  List<ProductDTO> filteredProducts = [];
+
+  @override
+  void initState() {
+    super.initState();
+    filteredProducts = widget.products;
+  }
+
+  void _onSearchChanged(String query) {
+    setState(() {
+      filteredProducts = widget.products
+          .where((product) => product.productOptionDTO.name
+              .toLowerCase()
+              .contains(query.toLowerCase()))
+          .toList();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
 
     return Column(
       children: [
         const SizedBox(height: TSizes.spaceBtwItems),
-
-        // Search bar
-        const TSearchContainer(text: TTexts.searchProduct),
-
+        TSearchContainer(
+          onSearchChanged: _onSearchChanged,
+        ),
         const SizedBox(height: TSizes.spaceBtwSections),
-
-        if (products.isEmpty)
+        if (filteredProducts.isEmpty)
           Column(
             children: [
               Image.asset(dark ? TImages.darkAppLogo : TImages.lightAppLogo),
@@ -47,7 +68,7 @@ class TPlantedProducts extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     const Text(TTexts.totalPlantedProducts),
-                    Text('${products.length}'),
+                    Text('${filteredProducts.length}'),
                   ],
                 ),
                 const Divider(
@@ -55,7 +76,7 @@ class TPlantedProducts extends StatelessWidget {
                   endIndent: TSizes.dividerIndent,
                 ),
                 const SizedBox(height: TSizes.spaceBtwItems),
-                for (var productDTO in products)
+                for (var productDTO in filteredProducts)
                   Column(
                     children: [
                       TProductCard(productDTO: productDTO),

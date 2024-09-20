@@ -1,10 +1,13 @@
 package com.toprakrehberi.backend.services;
 
+import com.toprakrehberi.backend.dtos.ProductDTO;
 import com.toprakrehberi.backend.models.Product;
 import com.toprakrehberi.backend.repositories.ProductRepository;
+import com.toprakrehberi.backend.utils.ConverterUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -35,4 +38,12 @@ public class ProductService {
         return productRepository.save(product);
     }
 
+    public List<ProductDTO> searchProducts(String query) {
+        List<Product> products = productRepository.findAll();
+
+        return products.stream()
+                .filter(product -> product.getProductOption().getName().toLowerCase().contains(query.toLowerCase()))
+                .map(ConverterUtil::convertToProductDTO)
+                .collect(Collectors.toList());
+    }
 }
