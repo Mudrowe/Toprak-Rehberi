@@ -28,7 +28,7 @@ class TSearchContainer extends StatelessWidget {
       ),
       child: Container(
         width: TDeviceUtils.getScreenWidth(context),
-        padding: const EdgeInsets.all(TSizes.xs),
+        //padding: const EdgeInsets.all(TSizes.md),
         decoration: getCardDecoration(context),
         child: Row(
           children: [
@@ -49,13 +49,14 @@ class TSearchContainer extends StatelessWidget {
                 ),
               ),
             ),
-            IconButton(
-              onPressed: () => filter(context: context),
-              icon: Icon(
-                Icons.tune,
-                color: color,
+
+            Padding(
+              padding: const EdgeInsets.only(right: TSizes.md),
+              child: GestureDetector(
+                child: Icon(Icons.tune, color: color),
+                onTap: () => filter(context: context),
               ),
-            ),
+            )
           ],
         ),
       ),
