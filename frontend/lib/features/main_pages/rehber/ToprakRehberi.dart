@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:toprak_rehberi/service/fetching/constants/fetch_cities.dart';
 import 'package:toprak_rehberi/service/fetching/constants/fetch_districts.dart';
 import 'package:toprak_rehberi/service/fetching/constants/fetch_neighborhoods.dart';
@@ -132,7 +133,9 @@ class _ToprakRehberiState extends State<ToprakRehberi> {
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   child: Text(
                     'Lütfen il, ilçe ve mahalleyi seçtikten sonra "Önerileri Gör" butonuna tıklayın.\n Toprak Rehberi, seçtiğiniz mahalleye veya köye uygun ürün önerileri sunacaktır.',
-                    style: TextStyle(fontSize: 16, color: dark ? TColors.light : TColors.dark),
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: dark ? TColors.light : TColors.dark),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -196,6 +199,7 @@ class _ToprakRehberiState extends State<ToprakRehberi> {
                     text: 'Önerileri Gör',
                     textColor: TColors.dark,
                     backgroundGradient: TColors.recommendationGradient,
+                    isShimmer: true,
                   ),
                 ),
               ],
