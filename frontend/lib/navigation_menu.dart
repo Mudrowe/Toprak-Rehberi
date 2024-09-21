@@ -5,6 +5,8 @@ import 'package:toprak_rehberi/features/main_pages/products/products.dart';
 import 'package:toprak_rehberi/features/main_pages/profile/profile.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
+import 'features/main_pages/rehber/ToprakRehberi.dart';
+
 class NavigationMenu extends StatefulWidget {
   final int initialIndex;
   final int initialTabIndex;
@@ -35,6 +37,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
   Widget build(BuildContext context) {
     final List<Widget> screens = [
       const HomeScreen(),
+      const ToprakRehberi(),
       const LandsScreen(),
       ProductsScreen(initialTabIndex: widget.initialTabIndex),
       const ProfileScreen(),
@@ -48,6 +51,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
         onDestinationSelected: _onItemTapped,
         destinations: const [
           NavigationDestination(icon: Icon(Icons.home), label: 'Anasayfa'),
+          NavigationDestination(icon: Icon(Icons.manage_search), label: 'Rehber'),
           NavigationDestination(icon: Icon(Icons.grass), label: 'Arazilerim'),
           NavigationDestination(icon: Icon(Icons.agriculture), label: 'Ürünlerim'),
           NavigationDestination(icon: Icon(Icons.person), label: 'Profil'),

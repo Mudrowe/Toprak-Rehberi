@@ -24,6 +24,7 @@ class TSuggestionsButton extends StatelessWidget {
       text: TTexts.showSuggestions,
       backgroundGradient: TColors.recommendationGradient,
       textColor: TColors.black,
+      isShimmer: true,
     );
   }
 }
