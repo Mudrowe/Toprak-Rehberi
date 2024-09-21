@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/styles/shadows.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
-import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 import 'package:toprak_rehberi/utils/device/device_utility.dart';
 
 class TSuggestionScreenHeader extends StatelessWidget {
+  final String suggestionsText;
+
   const TSuggestionScreenHeader({
     super.key,
+    required this.suggestionsText,
   });
 
   @override
@@ -19,10 +21,10 @@ class TSuggestionScreenHeader extends StatelessWidget {
         gradient: TColors.recommendationGradient,
         boxShadow: [TShadowStyle.productShadow],
       ),
-      child: const Center(
+      child: Center(
         child: Text(
-          TTexts.ourSuggestions,
-          style: TextStyle(
+          suggestionsText,
+          style: const TextStyle(
               color: TColors.black,
               fontSize: TSizes.fontSizeLg,
               fontWeight: FontWeight.bold),
