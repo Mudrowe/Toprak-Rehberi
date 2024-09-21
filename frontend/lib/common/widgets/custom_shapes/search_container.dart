@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:toprak_rehberi/common/styles/card_style.dart';
 import 'package:toprak_rehberi/features/main_pages/products/filter_screen/filter_screen.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
@@ -8,54 +9,51 @@ import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 class TSearchContainer extends StatelessWidget {
   const TSearchContainer({
     super.key,
-    required this.text,
-    this.icon1 = Icons.search,
-    this.icon2 = Icons.tune,
+    required this.onSearchChanged,
     this.showBackground = true,
     this.showBorder = true,
+    required this.hintText,
   });
 
-  final String text;
-  final IconData? icon1;
-  final IconData? icon2;
+  final ValueChanged<String> onSearchChanged;
   final bool showBackground, showBorder;
+  final String hintText;
 
   @override
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
-
+    final Color color = dark ? TColors.light : TColors.primaryColor;
     return Padding(
       padding: const EdgeInsets.only(
-          left: TSizes.spaceBtwItems, right: TSizes.spaceBtwItems),
+        left: TSizes.spaceBtwItems,
+        right: TSizes.spaceBtwItems,
+      ),
       child: Container(
         width: TDeviceUtils.getScreenWidth(context),
-        padding: const EdgeInsets.all(TSizes.md),
-        decoration: BoxDecoration(
-            color: showBackground
-                ? dark
-                    ? TColors.dark
-                    : TColors.light
-                : Colors.transparent,
-            borderRadius: BorderRadius.circular(TSizes.cardRadiusLg),
-            border: showBorder ? Border.all(color: TColors.grey) : null),
+        decoration: getCardDecoration(context),
         child: Row(
           children: [
-            // Search icon
-            Icon(
-              icon1,
-              color: TColors.primaryColor,
+            Expanded(
+              child: TextField(
+                cursorColor: color,
+                onChanged: onSearchChanged,
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.search, color: color),
+                  hintText: hintText,
+                  border: InputBorder.none,
+                  enabledBorder:
+                      const OutlineInputBorder(borderSide: BorderSide.none),
+                  focusedBorder:
+                      const OutlineInputBorder(borderSide: BorderSide.none),
+                ),
+              ),
             ),
-
-            const SizedBox(width: TSizes.spaceBtwItems),
-
-            // Search Text
-            Text(text, style: Theme.of(context).textTheme.bodySmall),
-            const Spacer(),
-
-            // Filter icon
-            GestureDetector(
-              child: Icon(icon2, color: TColors.primaryColor),
-              onTap: () => filter(context: context),
+            Padding(
+              padding: const EdgeInsets.only(right: TSizes.md),
+              child: GestureDetector(
+                child: Icon(Icons.tune, color: color),
+                onTap: () => filter(context: context),
+              ),
             )
           ],
         ),

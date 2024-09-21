@@ -37,7 +37,7 @@ class TAppTheme {
     navigationBarTheme: TNavigationBarTheme.lightNavigationBarTheme,
     iconButtonTheme: TIconButtonTheme.lightIconButtonTheme,
     dialogTheme: TAlertDialogTheme.lightAlertDialogTheme,
-    radioTheme: TRadioTheme.radioTheme,
+    radioTheme: TRadioTheme.lightRadioTheme,
     dropdownMenuTheme: TDropdownMenuTheme.lightDropdownButtonTheme,
   );
 
@@ -61,7 +61,7 @@ class TAppTheme {
     navigationBarTheme: TNavigationBarTheme.darkNavigationBarTheme,
     iconButtonTheme: TIconButtonTheme.darkIconButtonTheme,
     dialogTheme: TAlertDialogTheme.darkAlertDialogTheme,
-    radioTheme: TRadioTheme.radioTheme,
+    radioTheme: TRadioTheme.darkRadioTheme,
     dropdownMenuTheme: TDropdownMenuTheme.darkDropdownButtonTheme,
   );
 }

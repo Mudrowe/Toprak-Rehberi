@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/dtos/LandDTO.dart';
-import 'package:toprak_rehberi/features/main_pages/lands/lands.dart';
 import 'package:toprak_rehberi/service/fetching/constants/fetch_cities.dart';
 import 'package:toprak_rehberi/service/fetching/constants/fetch_districts.dart';
 import 'package:toprak_rehberi/service/fetching/constants/fetch_neighborhoods.dart';

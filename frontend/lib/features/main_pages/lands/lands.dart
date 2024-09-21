@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:toprak_rehberi/common/widgets/custom_shapes/search_container.dart';
 import 'package:toprak_rehberi/features/main_pages/lands/add_land_screen/add_land_screen.dart';
 import 'package:toprak_rehberi/features/main_pages/lands/widgets/land_card/land_card.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
+import '../../../common/widgets/custom_shapes/floating_button.dart';
 import '../../../dtos/LandDTO.dart';
 import '../../../dtos/UserDTO.dart';
 import '../../../service/fetching/pages/fetch_lands.dart';
 import '../../../service/fetching/pages/fetch_user.dart';
+import '../../../utils/helpers/helper_functions.dart';
 
 class LandsScreen extends StatefulWidget {
   const LandsScreen({super.key});
@@ -19,6 +22,8 @@ class LandsScreen extends StatefulWidget {
 class _LandsScreenState extends State<LandsScreen> {
   late Future<List<LandDTO>> _landsFuture;
   late Future<UserDTO> _userFuture;
+  List<LandDTO> filteredLands = [];
+  String searchQuery = '';
 
   void _fetchLands() {
     _userFuture = fetchUser();
@@ -31,8 +36,16 @@ class _LandsScreenState extends State<LandsScreen> {
     _fetchLands();
   }
 
+  void _onSearchChanged(String query) {
+    setState(() {
+      searchQuery = query;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final dark = THelperFunctions.isDarkMode(context);
+
     return PopScope(
       canPop: false,
       child: Scaffold(
@@ -71,32 +84,22 @@ class _LandsScreenState extends State<LandsScreen> {
                 }
 
                 final landsDTOList = landsSnapshot.data!;
+                filteredLands = landsDTOList.where((land) {
+                  return land.name
+                      .toLowerCase()
+                      .contains(searchQuery.toLowerCase());
+                }).toList();
 
                 return SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.only(top: TSizes.appBarHeight),
                     child: Column(
                       children: [
-                        // Add Land Button
-                        const Text(
-                          TTexts.addLand,
-                          style: TextStyle(
-                            fontSize: TSizes.fontSizeLg,
-                            fontWeight: FontWeight.w500,
-                          ),
+                        TSearchContainer(
+                          onSearchChanged: _onSearchChanged,
+                          hintText: 'Arazi Ara',
                         ),
-                        IconButton(
-                          iconSize: TSizes.iconLg,
-                          onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const TAddLandScreen()),
-                          ),
-                          icon: const Icon(Icons.add),
-                        ),
-
                         const SizedBox(height: TSizes.spaceBtwSections),
-
                         // Total Land Info
                         Column(
                           children: [
@@ -105,7 +108,7 @@ class _LandsScreenState extends State<LandsScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 const Text(TTexts.totalLands),
-                                Text(landsDTOList.length.toString()),
+                                Text(filteredLands.length.toString()),
                               ],
                             ),
                             const Divider(
@@ -114,7 +117,7 @@ class _LandsScreenState extends State<LandsScreen> {
                             ),
 
                             // Lands
-                            for (var land in landsDTOList)
+                            for (var land in filteredLands)
                               Column(
                                 children: [
                                   TLandCard(landDTO: land),
@@ -130,6 +133,11 @@ class _LandsScreenState extends State<LandsScreen> {
               },
             );
           },
+        ),
+        floatingActionButton: FloatingButton(
+          dark: dark,
+          label: 'Arazi Ekle',
+          route: const TAddLandScreen(),
         ),
       ),
     );

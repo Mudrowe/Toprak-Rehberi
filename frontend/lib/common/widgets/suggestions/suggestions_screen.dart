@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:toprak_rehberi/common/widgets/appbar/appbar.dart';
 import 'package:toprak_rehberi/common/widgets/suggestions/widgets/suggestion_card.dart';
 import 'package:toprak_rehberi/common/widgets/suggestions/widgets/suggestion_column_titles.dart';
-import 'package:toprak_rehberi/common/widgets/suggestions/widgets/suggestion_sceen_header.dart';
+import 'package:toprak_rehberi/common/widgets/suggestions/widgets/suggestion_screen_header.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 
 import '../../../models/suggestion_product.dart';
 import '../../../service/suggestion/suggestion.dart';
+import '../../../utils/constants/text_strings.dart';
 
 class SuggestionsScreen extends StatelessWidget {
   final int landId;
@@ -40,7 +41,7 @@ class SuggestionsScreen extends StatelessWidget {
                   const SizedBox(height: TSizes.appBarHeight),
 
                   // Headline
-                  const TSuggestionScreenHeader(),
+                  const TSuggestionScreenHeader(suggestionsText: TTexts.ourSuggestions,),
 
                   const SizedBox(height: TSizes.spaceBtwSections),
 

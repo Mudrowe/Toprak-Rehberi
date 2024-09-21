@@ -6,8 +6,11 @@ import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 import 'package:toprak_rehberi/utils/device/device_utility.dart';
 
 class TSuggestionScreenHeader extends StatelessWidget {
+  final String suggestionsText;
+
   const TSuggestionScreenHeader({
     super.key,
+    required this.suggestionsText,
   });
 
   @override

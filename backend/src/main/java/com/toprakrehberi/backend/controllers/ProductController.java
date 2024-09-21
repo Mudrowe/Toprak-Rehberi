@@ -137,4 +137,9 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+    @GetMapping("/api/product/search")
+    public List<ProductDTO> searchProducts(@RequestParam String query) {
+        return productService.searchProducts(query);
+    }
 }

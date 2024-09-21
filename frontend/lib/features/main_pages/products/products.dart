@@ -9,7 +9,7 @@ import '../../../service/fetching/product/fetch_products.dart';
 
 class ProductsScreen extends StatefulWidget {
   final int initialTabIndex;
-  const ProductsScreen({super.key, this.initialTabIndex = 1});
+  const ProductsScreen({super.key, this.initialTabIndex = 0});
 
   @override
   _ProductsScreenState createState() => _ProductsScreenState();
@@ -80,10 +80,11 @@ class _ProductsScreenState extends State<ProductsScreen> {
                   return TabBarView(
                     children: [
                       SingleChildScrollView(
-                          child: TPlantedProducts(products: _plantedProducts)),
+                        child: TPlantedProducts(products: _plantedProducts),
+                      ),
                       SingleChildScrollView(
-                          child:
-                              THarvestedProducts(products: _harvestedProducts)),
+                        child: THarvestedProducts(products: _harvestedProducts),
+                      ),
                     ],
                   );
                 }

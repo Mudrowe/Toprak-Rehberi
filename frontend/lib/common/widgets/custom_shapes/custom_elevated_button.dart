@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
+
+import '../../../utils/constants/colors.dart';
 
 class CustomElevatedButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -9,6 +12,7 @@ class CustomElevatedButton extends StatelessWidget {
   final Color textColor;
   final double width;
   final double height;
+  final bool isShimmer;
 
   const CustomElevatedButton({
     super.key,
@@ -19,6 +23,7 @@ class CustomElevatedButton extends StatelessWidget {
     required this.textColor,
     this.width = TSizes.buttonWidth,
     this.height = TSizes.buttonHeight,
+    this.isShimmer = false, // Default is false
   });
 
   @override
@@ -27,7 +32,7 @@ class CustomElevatedButton extends StatelessWidget {
       decoration: BoxDecoration(
         color: backgroundGradient == null ? backgroundColor : null,
         gradient: backgroundGradient,
-        borderRadius: BorderRadius.circular(TSizes.borderRadiusLg),  
+        borderRadius: BorderRadius.circular(TSizes.borderRadiusLg),
       ),
       child: ElevatedButton(
         onPressed: onPressed,
@@ -38,10 +43,24 @@ class CustomElevatedButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(TSizes.borderRadiusLg),
           ),
         ),
-        child: Text(
-          text,
-          style: TextStyle(color: textColor),
-        ),
+        child: isShimmer
+            ? Shimmer.fromColors(
+                baseColor: TColors.dark,
+                highlightColor: Colors.red,
+                period: const Duration(seconds: 3),
+                child: Text(
+                  text,
+                  style: TextStyle(
+                    fontSize: TSizes.fontSizeLg,
+                    fontWeight: FontWeight.bold,
+                    color: textColor,
+                  ),
+                ),
+              )
+            : Text(
+                text,
+                style: TextStyle(color: textColor),
+              ),
       ),
     );
   }

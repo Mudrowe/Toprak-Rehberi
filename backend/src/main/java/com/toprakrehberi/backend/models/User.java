@@ -38,7 +38,7 @@ public class User implements UserDetails {
     @Column(name = "phone_number", unique = true, length = 15)
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Land> lands;
 
     @Override

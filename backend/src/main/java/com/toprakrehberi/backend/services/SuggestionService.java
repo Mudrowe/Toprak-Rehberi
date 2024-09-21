@@ -56,4 +56,25 @@ public class SuggestionService {
 
         return totalScore / count;
     }
+
+    /*
+    public List<SuggestionProductDTO> getSuggestions(List<Long> neighboringLandIds) {
+        List<ProductOption> productOptions = productOptionRepository.findAll();
+        List<SuggestionProductDTO> suggestions = new ArrayList<>();
+
+        for (ProductOption option : productOptions) {
+            // Calculate the average score for this product in neighboring lands using the new query
+            Double avgScore = productRepository.calculateAverageScore(neighboringLandIds, option.getId());
+
+            if (avgScore == null) {
+                avgScore = 80.0; // Default score if no products found
+            }
+
+            suggestions.add(new SuggestionProductDTO(option.getName(), avgScore, option.getId()));
+        }
+
+        return suggestions;
+    }
+
+     */
 }

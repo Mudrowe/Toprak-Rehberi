@@ -17,8 +17,6 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
-    final Color textColor = dark ? TColors.white : TColors.black;
     return PopScope(
       canPop: false,
       child: Scaffold(

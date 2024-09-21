@@ -25,14 +25,14 @@ public class Product {
     @Column(name = "harvest_date", nullable = false)
     private LocalDate harvestDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "land_id", nullable = false)
     private Land land;
 
     @Column(name = "score")
     private double score;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "product_option_id", nullable = false)
     private ProductOption productOption;
 
