@@ -7,6 +7,7 @@ import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 
 import '../../land_details/land_details.dart';
+
 class TLandCard extends StatefulWidget {
   const TLandCard({
     super.key,
@@ -37,17 +38,40 @@ class _TLandCardState extends State<TLandCard> {
       future: _cityDistrictFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(
-                Theme.of(context).primaryColor,
-              ),
-            ),
+          return const Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Skeleton(height: 120, width: 120),
+              SizedBox(width: TSizes.slg),
+              Expanded(
+                child: Column(
+                  children: [
+                    Skeleton(width: 80),
+                    SizedBox(height: TSizes.sm),
+                    Skeleton(),
+                    SizedBox(height: TSizes.sm),
+                    Skeleton(),
+                    SizedBox(height: TSizes.sm),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Skeleton(),
+                        ),
+                        SizedBox(width: 16),
+                        Expanded(
+                          child: Skeleton(),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              )
+            ],
           );
         }
 
         if (snapshot.hasError) {
-          return Center(child: Text('Error loading data'));
+          return const Center(child: Text('Error loading data'));
         }
 
         return GestureDetector(
@@ -70,7 +94,8 @@ class _TLandCardState extends State<TLandCard> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Image.asset(
-                        THelperFunctions.decodeUtf8(widget.landDTO.landTypeDTO.imageUrl),
+                        THelperFunctions.decodeUtf8(
+                            widget.landDTO.landTypeDTO.imageUrl),
                         height: TSizes.typeImageHeight,
                         width: TSizes.typeImageWidth,
                         fit: BoxFit.contain,
@@ -84,6 +109,29 @@ class _TLandCardState extends State<TLandCard> {
           ),
         );
       },
+    );
+  }
+}
+
+class Skeleton extends StatelessWidget {
+  const Skeleton({
+    super.key,
+    this.height,
+    this.width,
+  });
+
+  final double? height, width;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: height,
+      width: width,
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: Colors.black.withOpacity(0.04),
+        borderRadius: const BorderRadius.all(Radius.circular(16)),
+      ),
     );
   }
 }

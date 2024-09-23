@@ -15,7 +15,6 @@ Future<List<SuggestionProduct>> fetchSuggestions(int landId) async {
     throw Exception('No auth token found. Please log in.');
   }
 
-  // Construct the URL using environment variables for IP address
   var ipAddress = dotenv.env['IP_ADDRESS'];
   var baseUrl = 'http://$ipAddress:8080/api/suggestions/$landId';
   final url = Uri.parse(baseUrl);
@@ -56,7 +55,6 @@ Future<List<SuggestionProduct>> fetchSuggestionsByNeighborhood(int neighborhoodI
     throw Exception('No auth token found. Please log in.');
   }
 
-  // Construct the URL using environment variables for IP address
   var ipAddress = dotenv.env['IP_ADDRESS'];
   var baseUrl = 'http://$ipAddress:8080/api/suggestions/byNeighborhoodId/$neighborhoodId';
   final url = Uri.parse(baseUrl);

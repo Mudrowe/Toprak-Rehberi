@@ -42,6 +42,19 @@ public class SuggestionController {
         return ResponseEntity.ok(suggestions);
     }
 
+    @GetMapping("/byNeighborhoodId/{neighborhoodId}")
+    public ResponseEntity<List<SuggestionProductDTO>> getSuggestionsByNeighborhoodId(@PathVariable int neighborhoodId) {
+        // Fetch all lands in the neighborhood
+        List<Land> landsInNeighborhood = landRepository.findByNeighborhoodId(neighborhoodId);
+        List<Long> landIds = landsInNeighborhood.stream().map(Land::getId).collect(Collectors.toList());
+
+        // Fetch the suggestions from the service based on the lands in the neighborhood
+        List<SuggestionProductDTO> suggestions = suggestionService.getSuggestions(landIds);
+
+        return ResponseEntity.ok(suggestions);
+    }
+
+
     private List<Long> getNeighboringLandIds(Long landId) {
         // Fetch the land by landId to get the neighborhood it belongs to
         Land currentLand = landRepository.findById(landId).orElse(null);

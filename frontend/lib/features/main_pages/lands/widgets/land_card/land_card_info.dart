@@ -38,23 +38,16 @@ class TLandCardInfo extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
               Text(
-                '${landDTO.area.toInt()} ${TTexts.squareSymbol}',
+                'Toplam alan: ${landDTO.area.toInt()} ${TTexts.squareSymbol}',
                 style: textTheme.bodyMedium,
                 overflow: TextOverflow.ellipsis,
               ),
+              Text(
+                'Boş alan: ${landDTO.remainingArea!.toInt()} ${TTexts.squareSymbol}',
+                style: textTheme.bodyMedium,
+                overflow: TextOverflow.ellipsis,
+              )
 
-              // Is Planted Checkbox
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    TTexts.isPlanted,
-                    style: textTheme.bodyMedium,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  Checkbox(value: false, onChanged: (value) {}),
-                ],
-              ),
             ],
           ),
         ],
