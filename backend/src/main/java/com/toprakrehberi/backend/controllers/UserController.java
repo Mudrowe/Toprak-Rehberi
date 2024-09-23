@@ -2,6 +2,7 @@ package com.toprakrehberi.backend.controllers;
 
 import com.toprakrehberi.backend.auth.RegisterRequest;
 import com.toprakrehberi.backend.dtos.LandDTO;
+import com.toprakrehberi.backend.dtos.UpdatePasswordRequest;
 import com.toprakrehberi.backend.dtos.UserDTO;
 import com.toprakrehberi.backend.models.Land;
 import com.toprakrehberi.backend.models.User;
@@ -71,6 +72,8 @@ public class UserController {
         User updatedUser = userService.updateUserField(request.getFieldName(), request.getNewValue());
         return ResponseEntity.ok(ConverterUtil.convertToUserDTO(updatedUser));
     }
+
+
 
 
 }

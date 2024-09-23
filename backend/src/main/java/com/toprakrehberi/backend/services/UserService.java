@@ -40,6 +40,9 @@ public class UserService {
             case "phoneNumber":
                 user.setPhoneNumber(newValue);
                 break;
+            case "email":
+                user.setEmail(newValue);
+                break;
             default:
                 throw new IllegalArgumentException("Invalid field name");
         }

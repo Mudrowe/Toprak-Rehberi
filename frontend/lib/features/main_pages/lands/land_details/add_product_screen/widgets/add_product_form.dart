@@ -127,7 +127,7 @@ class _TAddProductFormState extends State<TAddProductForm> {
           context,
           MaterialPageRoute(
             builder: (context) => const NavigationMenu(
-              initialIndex: 2,
+              initialIndex: 3,
             ),
           ),
               (Route<dynamic> route) => false,

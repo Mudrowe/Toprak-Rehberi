@@ -30,6 +30,18 @@ class _TSignupFormState extends State<TSignupForm> {
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
 
+      if (_password != _confirmPassword) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Şifreler eşleşmiyor.')));
+        return;
+      }
+
+      if (!RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$').hasMatch(_password!)) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Şifre en az 6 karakter, bir harf ve bir rakam içermelidir.')));
+        return;
+      }
+
       RegisterRequest user = RegisterRequest(
         firstName: _firstName!,
         lastName: _lastName!,
@@ -70,6 +82,7 @@ class _TSignupFormState extends State<TSignupForm> {
               Expanded(
                 child: TextFormField(
                   expands: false,
+                  textCapitalization: TextCapitalization.words,
                   decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.person),
                     labelText: TTexts.firstName,
@@ -78,9 +91,10 @@ class _TSignupFormState extends State<TSignupForm> {
                     _firstName = value;
                   },
                   validator: (String? value) {
-                    return (value != null && value.contains('@'))
-                        ? 'Do not use the @ char.'
-                        : null;
+                    if (value == null || value.isEmpty) {
+                      return 'İsim boş olamaz';
+                    }
+                    return null;
                   },
                 ),
               ),
@@ -90,6 +104,7 @@ class _TSignupFormState extends State<TSignupForm> {
               // Last Name
               Expanded(
                 child: TextFormField(
+                  textCapitalization: TextCapitalization.words,
                   decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.person),
                     labelText: TTexts.lastName,
@@ -98,9 +113,10 @@ class _TSignupFormState extends State<TSignupForm> {
                     _lastName = value;
                   },
                   validator: (String? value) {
-                    return (value != null && value.contains('@'))
-                        ? 'Do not use the @ char.'
-                        : null;
+                    if (value == null || value.isEmpty) {
+                      return 'Soyad boş olamaz';
+                    }
+                    return null;
                   },
                 ),
               ),
@@ -111,6 +127,7 @@ class _TSignupFormState extends State<TSignupForm> {
 
           // Email
           TextFormField(
+            keyboardType: TextInputType.emailAddress,
             decoration: const InputDecoration(
               prefixIcon: Icon(Icons.email),
               labelText: TTexts.email,
@@ -118,11 +135,14 @@ class _TSignupFormState extends State<TSignupForm> {
             onSaved: (String? value) {
               _email = value;
             },
-            /*
-                validator: (String? value) {
-                  return (value != null && !value.contains('@')) ? 'Enter a valid email address.' : null;
-                },
-                 */
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Email boş olamaz';
+              } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                return 'Geçerli bir email adresi giriniz';
+              }
+              return null;
+            },
           ),
 
           const SizedBox(height: TSizes.spaceBtwInputFields),
@@ -136,11 +156,15 @@ class _TSignupFormState extends State<TSignupForm> {
             onSaved: (String? value) {
               _phoneNo = value;
             },
-            /*
-                validator: (String? value) {
-                  return (value != null && value.length != 10) ? 'Enter a valid phone number.' : null;
-                },
-                */
+            keyboardType: TextInputType.phone,
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Telefon numarası boş olamaz';
+              } else if (value.length != 10) {
+                return 'Geçerli bir telefon numarası giriniz (10 hane)';
+              }
+              return null;
+            },
           ),
 
           const SizedBox(height: TSizes.spaceBtwInputFields),
@@ -165,14 +189,14 @@ class _TSignupFormState extends State<TSignupForm> {
             onSaved: (String? value) {
               _password = value;
             },
-            /*
             validator: (String? value) {
-              return (value != null && value.length < 6)
-                  ? 'Şifre en az 6 karakter uzunluğunda olmalıdır..'
-                  : null;
+              if (value == null || value.isEmpty) {
+                return 'Şifre boş olamaz';
+              } else if (value.length < 6) {
+                return 'Şifre en az 6 karakter uzunluğunda olmalıdır';
+              }
+              return null;
             },
-
-             */
           ),
 
           const SizedBox(height: TSizes.spaceBtwInputFields),
@@ -199,6 +223,7 @@ class _TSignupFormState extends State<TSignupForm> {
             onSaved: (String? value) {
               _confirmPassword = value;
             },
+
           ),
 
           const SizedBox(height: TSizes.spaceBtwSections),

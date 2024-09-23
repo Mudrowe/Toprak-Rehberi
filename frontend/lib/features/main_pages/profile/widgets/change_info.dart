@@ -3,10 +3,10 @@ import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
-
 import '../../../../dtos/user_field_update_request.dart';
 import '../../../../navigation_menu.dart';
 import '../../../../service/user/update_user.dart';
+import 'logout.dart';
 
 Future<void> changeInfo({
   required BuildContext context,
@@ -77,26 +77,104 @@ Widget _buildContent(
     child: Column(
       children: [
         if (isPassword)
-          _buildTextField('Eski $info', textColor, oldValueController),
-        _buildTextField('Yeni $info', textColor, newValueController),
-        if (isPassword)
-          _buildTextField(
-              'Yeni $info Tekrar', textColor, confirmPasswordController!),
+          _buildPasswordField(textColor, oldValueController, newValueController,
+              confirmPasswordController!),
+        if (info == TTexts.firstName)
+          _buildFirstNameField(textColor, newValueController),
+        if (info == TTexts.lastName)
+          _buildLastNameField(textColor, newValueController),
+        if (info == TTexts.email)
+          _buildEmailField(textColor, newValueController),
+        if (info == TTexts.phoneNo)
+          _buildPhoneField(textColor, newValueController),
       ],
     ),
   );
 }
 
-Widget _buildTextField(
-    String label, Color textColor, TextEditingController controller) {
+Widget _buildFirstNameField(Color textColor, TextEditingController controller) {
   return Expanded(
     child: TextFormField(
       controller: controller,
+      textCapitalization: TextCapitalization.words,
       decoration: InputDecoration(
-        labelText: label,
+        labelText: 'Yeni Ad',
         labelStyle: TextStyle(fontSize: TSizes.fontSizeSm, color: textColor),
       ),
     ),
+  );
+}
+
+Widget _buildLastNameField(Color textColor, TextEditingController controller) {
+  return Expanded(
+    child: TextFormField(
+      controller: controller,
+      textCapitalization: TextCapitalization.words,
+      decoration: InputDecoration(
+        labelText: 'Yeni Soyad',
+        labelStyle: TextStyle(fontSize: TSizes.fontSizeSm, color: textColor),
+      ),
+    ),
+  );
+}
+
+Widget _buildEmailField(Color textColor, TextEditingController controller) {
+  return Expanded(
+    child: TextFormField(
+      controller: controller,
+      keyboardType: TextInputType.emailAddress,
+      decoration: InputDecoration(
+        labelText: 'Yeni Email',
+        labelStyle: TextStyle(fontSize: TSizes.fontSizeSm, color: textColor),
+      ),
+    ),
+  );
+}
+
+Widget _buildPhoneField(Color textColor, TextEditingController controller) {
+  return Expanded(
+    child: TextFormField(
+      controller: controller,
+      keyboardType: TextInputType.phone,
+      decoration: InputDecoration(
+        labelText: 'Yeni Telefon Numarası',
+        labelStyle: TextStyle(fontSize: TSizes.fontSizeSm, color: textColor),
+      ),
+    ),
+  );
+}
+
+Widget _buildPasswordField(
+    Color textColor,
+    TextEditingController oldValueController,
+    TextEditingController newValueController,
+    TextEditingController confirmPasswordController) {
+  return Column(
+    children: [
+      TextFormField(
+        controller: oldValueController,
+        decoration: InputDecoration(
+          labelText: 'Eski Şifre',
+          labelStyle: TextStyle(fontSize: TSizes.fontSizeSm, color: textColor),
+        ),
+      ),
+      const SizedBox(height: TSizes.spaceBtwItems),
+      TextFormField(
+        controller: newValueController,
+        decoration: InputDecoration(
+          labelText: 'Yeni Şifre',
+          labelStyle: TextStyle(fontSize: TSizes.fontSizeSm, color: textColor),
+        ),
+      ),
+      const SizedBox(height: TSizes.spaceBtwItems),
+      TextFormField(
+        controller: confirmPasswordController,
+        decoration: InputDecoration(
+          labelText: 'Yeni Şifre Tekrar',
+          labelStyle: TextStyle(fontSize: TSizes.fontSizeSm, color: textColor),
+        ),
+      ),
+    ],
   );
 }
 
@@ -121,8 +199,19 @@ List<Widget> _buildActions(
     ),
     TextButton(
       onPressed: () async {
-        String newValue = newValueController.text;
+        if (info == TTexts.password) {
+          String newValue = newValueController.text;
+          String confirmValue = confirmPasswordController!.text;
 
+          if (newValue != confirmValue) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Yeni şifreler eşleşmiyor!')),
+            );
+            return;
+          }
+        }
+
+        String newValue = newValueController.text;
         String? backendFieldName = fieldMapping[info];
 
         if (backendFieldName == null) {
@@ -139,16 +228,22 @@ List<Widget> _buildActions(
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Bilginiz Güncellendi!')),
           );
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const NavigationMenu(
-                initialIndex: 4,
-              ),
-            ),
-            (Route<dynamic> route) => false,
+          // Log out the user after updating their email or password
+          if (info == TTexts.email || info == TTexts.password) {
+            logout(context);
+          } else {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const NavigationMenu(initialIndex: 4)),
+                  (Route<dynamic> route) => false,
+            );
+          }
+        } catch (error) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Güncelleme başarısız!')),
           );
-        } catch (error) {}
+        }
       },
       child: const Text(TTexts.submit),
     ),

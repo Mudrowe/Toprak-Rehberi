@@ -138,7 +138,7 @@ class _TAddLandFormState extends State<TAddLandForm> {
           context,
           MaterialPageRoute(
             builder: (context) => const NavigationMenu(
-              initialIndex: 1,
+              initialIndex: 2,
             ),
           ),
           (Route<dynamic> route) => false,
