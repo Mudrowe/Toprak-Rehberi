@@ -38,36 +38,7 @@ class _TLandCardState extends State<TLandCard> {
       future: _cityDistrictFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Skeleton(height: 120, width: 120),
-              SizedBox(width: TSizes.slg),
-              Expanded(
-                child: Column(
-                  children: [
-                    Skeleton(width: 80),
-                    SizedBox(height: TSizes.sm),
-                    Skeleton(),
-                    SizedBox(height: TSizes.sm),
-                    Skeleton(),
-                    SizedBox(height: TSizes.sm),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Skeleton(),
-                        ),
-                        SizedBox(width: 16),
-                        Expanded(
-                          child: Skeleton(),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              )
-            ],
-          );
+          return const _waitingBuilder();
         }
 
         if (snapshot.hasError) {
@@ -109,6 +80,54 @@ class _TLandCardState extends State<TLandCard> {
           ),
         );
       },
+    );
+  }
+}
+
+class _waitingBuilder extends StatelessWidget {
+  const _waitingBuilder({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: TSizes.cardHeight,
+      width: TSizes.cardWidth,
+      decoration: getCardDecoration(context),
+      child: const Padding(
+        padding: EdgeInsets.only(top: 55, left: 14),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Skeleton(height: 120, width: 120),
+            SizedBox(width: TSizes.slg),
+            Expanded(
+              child: Column(
+                children: [
+                  Skeleton(width: 80),
+                  SizedBox(height: TSizes.sm),
+                  Skeleton(),
+                  SizedBox(height: TSizes.sm),
+                  Skeleton(),
+                  SizedBox(height: TSizes.sm),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Skeleton(),
+                      ),
+                      SizedBox(width: 16),
+                      Expanded(
+                        child: Skeleton(),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
