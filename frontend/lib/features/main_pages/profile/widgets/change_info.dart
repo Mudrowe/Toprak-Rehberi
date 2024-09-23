@@ -143,7 +143,7 @@ List<Widget> _buildActions(
             context,
             MaterialPageRoute(
               builder: (context) => const NavigationMenu(
-                initialIndex: 3,
+                initialIndex: 4,
               ),
             ),
             (Route<dynamic> route) => false,

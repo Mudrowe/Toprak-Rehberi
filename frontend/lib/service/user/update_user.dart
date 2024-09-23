@@ -4,7 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
 import '../../dtos/user_field_update_request.dart';
-import '../auth/token_service.dart';
 
 Future<void> updateUserField(UserFieldUpdateRequest request) async {
   var ipAddress = dotenv.env['IP_ADDRESS'];
