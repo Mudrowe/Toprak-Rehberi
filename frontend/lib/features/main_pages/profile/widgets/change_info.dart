@@ -3,7 +3,6 @@ import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
-
 import '../../../../dtos/user_field_update_request.dart';
 import '../../../../navigation_menu.dart';
 import '../../../../service/user/update_user.dart';
@@ -200,6 +199,18 @@ List<Widget> _buildActions(
     ),
     TextButton(
       onPressed: () async {
+        if (info == TTexts.password) {
+          String newValue = newValueController.text;
+          String confirmValue = confirmPasswordController!.text;
+
+          if (newValue != confirmValue) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Yeni şifreler eşleşmiyor!')),
+            );
+            return;
+          }
+        }
+
         String newValue = newValueController.text;
         String? backendFieldName = fieldMapping[info];
 
@@ -228,7 +239,11 @@ List<Widget> _buildActions(
                   (Route<dynamic> route) => false,
             );
           }
-        } catch (error) {}
+        } catch (error) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Güncelleme başarısız!')),
+          );
+        }
       },
       child: const Text(TTexts.submit),
     ),

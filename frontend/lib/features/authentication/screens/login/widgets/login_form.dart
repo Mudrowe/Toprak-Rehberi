@@ -31,7 +31,7 @@ class _TLoginFormState extends State<TLoginForm> {
 
     if (email.isEmpty || password.isEmpty) {
       setState(() {
-        _errorMessage = 'Lütfen hem e-mail hem de şifre girin.';
+        _errorMessage = 'Lütfen hem e-posta hem de şifre girin.';
       });
       return;
     }
@@ -63,16 +63,15 @@ class _TLoginFormState extends State<TLoginForm> {
           context,
           MaterialPageRoute(builder: (context) => const NavigationMenu()),
         );
-
       } else {
         setState(() {
           _errorMessage =
-          'Failed to authenticate. Please check your credentials.';
+              'Kimlik doğrulama başarısız oldu. Lütfen kimlik bilgilerinizi kontrol edin.';
         });
       }
     } catch (e) {
       setState(() {
-        _errorMessage = 'An error occurred. Please try again later.';
+        _errorMessage = 'Bir hata oluştu. Lütfen daha sonra tekrar deneyin.';
       });
     } finally {
       setState(() {
@@ -161,10 +160,10 @@ class _TLoginFormState extends State<TLoginForm> {
                 onPressed: _isLoading ? null : _login,
                 child: _isLoading
                     ? CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    Theme.of(context).primaryColor,
-                  ),
-                )
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          Theme.of(context).primaryColor,
+                        ),
+                      )
                     : const Text(TTexts.signIn),
               ),
             ),
