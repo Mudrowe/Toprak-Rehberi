@@ -17,7 +17,7 @@ void showLogoutConfirmationDialog(BuildContext context) {
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
-              _logout(context);
+              logout(context);
             },
             child: const Text('Evet'),
           ),
@@ -27,7 +27,7 @@ void showLogoutConfirmationDialog(BuildContext context) {
   );
 }
 
-void _logout(BuildContext context) async {
+void logout(BuildContext context) async {
   try {
     Navigator.pushAndRemoveUntil(
       context,

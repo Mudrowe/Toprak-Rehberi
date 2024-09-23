@@ -7,6 +7,7 @@ import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
 import '../../../../dtos/user_field_update_request.dart';
 import '../../../../navigation_menu.dart';
 import '../../../../service/user/update_user.dart';
+import 'logout.dart';
 
 Future<void> changeInfo({
   required BuildContext context,
@@ -216,15 +217,17 @@ List<Widget> _buildActions(
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Bilginiz Güncellendi!')),
           );
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const NavigationMenu(
-                initialIndex: 4,
-              ),
-            ),
-            (Route<dynamic> route) => false,
-          );
+          // Log out the user after updating their email or password
+          if (info == TTexts.email || info == TTexts.password) {
+            logout(context);
+          } else {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const NavigationMenu(initialIndex: 4)),
+                  (Route<dynamic> route) => false,
+            );
+          }
         } catch (error) {}
       },
       child: const Text(TTexts.submit),
