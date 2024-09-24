@@ -33,6 +33,7 @@ class _ProductScoringScreenState extends State<ProductScoringScreen> {
   void _submitScore() {
     widget.productDTO.score = _selectedScore;
     widget.productDTO.isHarvested = true;
+    widget.productDTO.harvestDate = DateTime.now();
 
     try {
       updateProductScore(widget.productDTO);
@@ -45,7 +46,7 @@ class _ProductScoringScreenState extends State<ProductScoringScreen> {
         context,
         MaterialPageRoute(
           builder: (context) => const NavigationMenu(
-            initialIndex: 2,
+            initialIndex: 3,
             initialTabIndex: 1,
           ),
         ),

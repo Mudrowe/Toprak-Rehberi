@@ -129,6 +129,7 @@ public class ProductController {
             //System.out.println("Received ProductDTO JSON: " + productDTO);
             product.setScore(productDTO.getScore());
             product.setHarvested(productDTO.isHarvested());
+            product.setHarvestDate(productDTO.getHarvestDate());
 
             Product updatedProduct = productService.saveProduct(product);
             ProductDTO updatedProductDTO = ConverterUtil.convertToProductDTO(updatedProduct);
