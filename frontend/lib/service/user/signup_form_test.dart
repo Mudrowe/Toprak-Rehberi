@@ -3,6 +3,8 @@ import 'package:toprak_rehberi/features/authentication/screens/signup/widgets/te
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 
+import '../../utils/constants/colors.dart';
+
 class TSignupFormTest extends StatelessWidget {
   const TSignupFormTest({
     super.key,

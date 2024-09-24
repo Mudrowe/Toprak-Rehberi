@@ -73,7 +73,9 @@ public class UserController {
         return ResponseEntity.ok(ConverterUtil.convertToUserDTO(updatedUser));
     }
 
-
-
-
+    @PutMapping("/updatePassword")
+    public ResponseEntity<UserDTO> updatePassword(@RequestBody UpdatePasswordRequest request) {
+        User updatedUser = userService.updatePassword(request.getUserId(), request.getOldPassword(), request.getNewPassword());
+        return ResponseEntity.ok(ConverterUtil.convertToUserDTO(updatedUser));
+    }
 }
