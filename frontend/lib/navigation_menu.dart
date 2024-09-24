@@ -53,7 +53,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
           NavigationDestination(icon: Icon(Icons.home), label: 'Anasayfa'),
           NavigationDestination(icon: Icon(Icons.manage_search), label: 'Rehber'),
           NavigationDestination(icon: Icon(Icons.grass), label: 'Arazilerim'),
-          NavigationDestination(icon: Icon(Icons.agriculture), label: 'Ürünlerim'),
+          NavigationDestination(icon: Icon(Icons.eco), label: 'Ürünlerim'),
           NavigationDestination(icon: Icon(Icons.person), label: 'Profil'),
         ],
       ),

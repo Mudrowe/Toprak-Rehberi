@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:toprak_rehberi/dtos/UserDTO.dart';
+import 'package:toprak_rehberi/service/fetching/pages/fetch_user.dart';
 import 'package:toprak_rehberi/utils/constants/colors.dart';
 import 'package:toprak_rehberi/utils/constants/sizes.dart';
 import 'package:toprak_rehberi/utils/constants/text_strings.dart';
 import 'package:toprak_rehberi/utils/helpers/helper_functions.dart';
+import '../../../../dtos/update_password_request.dart';
 import '../../../../dtos/user_field_update_request.dart';
 import '../../../../navigation_menu.dart';
 import '../../../../service/user/update_user.dart';
@@ -200,49 +203,68 @@ List<Widget> _buildActions(
     TextButton(
       onPressed: () async {
         if (info == TTexts.password) {
-          String newValue = newValueController.text;
-          String confirmValue = confirmPasswordController!.text;
-
-          if (newValue != confirmValue) {
+          // Handle password update
+          if (newValueController.text != confirmPasswordController?.text) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Yeni şifreler eşleşmiyor!')),
+              const SnackBar(content: Text('Şifreler uyuşmuyor!')),
             );
             return;
           }
-        }
 
-        String newValue = newValueController.text;
-        String? backendFieldName = fieldMapping[info];
-
-        if (backendFieldName == null) {
-          return;
-        }
-
-        UserFieldUpdateRequest updateRequest = UserFieldUpdateRequest(
-          fieldName: backendFieldName,
-          newValue: newValue,
-        );
-
-        try {
-          await updateUserField(updateRequest);
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Bilginiz Güncellendi!')),
+          UserDTO user = await fetchUser();
+          UpdatePasswordRequest updatePasswordRequest = UpdatePasswordRequest(
+            userId: user.id!,
+            oldPassword: oldValueController.text,
+            newPassword: newValueController.text,
           );
-          // Log out the user after updating their email or password
-          if (info == TTexts.email || info == TTexts.password) {
+
+          try {
+            await updatePassword(updatePasswordRequest);
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Şifreniz güncellendi!')),
+            );
+            // Log the user out after updating password
             logout(context);
-          } else {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const NavigationMenu(initialIndex: 4)),
-                  (Route<dynamic> route) => false,
+          } catch (error) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Şifre güncelleme başarısız!')),
             );
           }
-        } catch (error) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Güncelleme başarısız!')),
+        } else {
+          // Handle other field updates
+          String newValue = newValueController.text;
+          String? backendFieldName = fieldMapping[info];
+
+          if (backendFieldName == null) {
+            return;
+          }
+
+          UserFieldUpdateRequest updateRequest = UserFieldUpdateRequest(
+            fieldName: backendFieldName,
+            newValue: newValue,
           );
+
+          try {
+            await updateUserField(updateRequest);
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Bilginiz güncellendi!')),
+            );
+            // If the field is email, log the user out after updating
+            if (info == TTexts.email) {
+              logout(context);
+            } else {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const NavigationMenu(initialIndex: 4)),
+                    (Route<dynamic> route) => false,
+              );
+            }
+          } catch (error) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Güncelleme başarısız!')),
+            );
+          }
         }
       },
       child: const Text(TTexts.submit),

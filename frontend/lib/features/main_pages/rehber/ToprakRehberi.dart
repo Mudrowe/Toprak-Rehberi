@@ -120,89 +120,92 @@ class _ToprakRehberiState extends State<ToprakRehberi> {
   @override
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
-    return Scaffold(
-      appBar: const TAppBar(),
-      body: Form(
-        key: _formKey,
-        child: Padding(
-          padding: const EdgeInsets.all(TSizes.lg),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child: Text(
-                    'Lütfen il, ilçe ve mahalleyi seçtikten sonra "Önerileri Gör" butonuna tıklayın.\n Toprak Rehberi, seçtiğiniz mahalleye veya köye uygun ürün önerileri sunacaktır.',
-                    style: TextStyle(
-                        fontSize: 16,
-                        color: dark ? TColors.light : TColors.dark),
-                    textAlign: TextAlign.center,
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        appBar: const TAppBar(showBackButton: false,),
+        body: Form(
+          key: _formKey,
+          child: Padding(
+            padding: const EdgeInsets.all(TSizes.lg),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: Text(
+                      'Lütfen il, ilçe ve mahalleyi seçtikten sonra "Önerileri Gör" butonuna tıklayın.\n Toprak Rehberi, seçtiğiniz mahalleye veya köye uygun ürün önerileri sunacaktır.',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: dark ? TColors.light : TColors.dark),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
-                ),
-                // City Dropdown
-                DropdownButtonFormField<CityDTO>(
-                  hint: const Text(TTexts.city),
-                  items: _cities.map(
-                    (city) {
-                      return DropdownMenuItem<CityDTO>(
-                        value: city,
-                        child: Text(THelperFunctions.decodeUtf8(city.name)),
-                      );
-                    },
-                  ).toList(),
-                  onChanged: _onCityChanged,
-                ),
-                const SizedBox(height: TSizes.spaceBtwItems),
-
-                // District Dropdown
-                DropdownButtonFormField<DistrictDTO>(
-                  hint: const Text(TTexts.district),
-                  items: _districts.map(
-                    (district) {
-                      return DropdownMenuItem<DistrictDTO>(
-                        value: district,
-                        child: Text(THelperFunctions.decodeUtf8(district.name)),
-                      );
-                    },
-                  ).toList(),
-                  onChanged: _onDistrictChanged,
-                ),
-                const SizedBox(height: TSizes.spaceBtwItems),
-
-                // Neighborhood Dropdown
-                DropdownButtonFormField<NeighborhoodDTO>(
-                  hint: const Text(TTexts.neighborhood),
-                  items: _neighborhoods.map(
-                    (neighborhood) {
-                      return DropdownMenuItem<NeighborhoodDTO>(
-                        value: neighborhood,
-                        child: Text(
-                            THelperFunctions.decodeUtf8(neighborhood.name)),
-                      );
-                    },
-                  ).toList(),
-                  onChanged: (NeighborhoodDTO? newValue) {
-                    setState(
-                      () {
-                        _selectedNeighborhood = newValue;
+                  // City Dropdown
+                  DropdownButtonFormField<CityDTO>(
+                    hint: const Text(TTexts.city),
+                    items: _cities.map(
+                      (city) {
+                        return DropdownMenuItem<CityDTO>(
+                          value: city,
+                          child: Text(THelperFunctions.decodeUtf8(city.name)),
+                        );
                       },
-                    );
-                  },
-                ),
-                const SizedBox(height: TSizes.spaceBtwSections),
-
-                // Fetch Suggestions Button
-                SizedBox(
-                  width: double.infinity,
-                  child: CustomElevatedButton(
-                    onPressed: _fetchSuggestions,
-                    text: 'Önerileri Gör',
-                    textColor: TColors.dark,
-                    backgroundGradient: TColors.recommendationGradient,
-                    isShimmer: true,
+                    ).toList(),
+                    onChanged: _onCityChanged,
                   ),
-                ),
-              ],
+                  const SizedBox(height: TSizes.spaceBtwItems),
+
+                  // District Dropdown
+                  DropdownButtonFormField<DistrictDTO>(
+                    hint: const Text(TTexts.district),
+                    items: _districts.map(
+                      (district) {
+                        return DropdownMenuItem<DistrictDTO>(
+                          value: district,
+                          child: Text(THelperFunctions.decodeUtf8(district.name)),
+                        );
+                      },
+                    ).toList(),
+                    onChanged: _onDistrictChanged,
+                  ),
+                  const SizedBox(height: TSizes.spaceBtwItems),
+
+                  // Neighborhood Dropdown
+                  DropdownButtonFormField<NeighborhoodDTO>(
+                    hint: const Text(TTexts.neighborhood),
+                    items: _neighborhoods.map(
+                      (neighborhood) {
+                        return DropdownMenuItem<NeighborhoodDTO>(
+                          value: neighborhood,
+                          child: Text(
+                              THelperFunctions.decodeUtf8(neighborhood.name)),
+                        );
+                      },
+                    ).toList(),
+                    onChanged: (NeighborhoodDTO? newValue) {
+                      setState(
+                        () {
+                          _selectedNeighborhood = newValue;
+                        },
+                      );
+                    },
+                  ),
+                  const SizedBox(height: TSizes.spaceBtwSections),
+
+                  // Fetch Suggestions Button
+                  SizedBox(
+                    width: double.infinity,
+                    child: CustomElevatedButton(
+                      onPressed: _fetchSuggestions,
+                      text: 'Önerileri Gör',
+                      textColor: TColors.dark,
+                      backgroundGradient: TColors.recommendationGradient,
+                      isShimmer: true,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
