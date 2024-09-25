@@ -1,3 +1,6 @@
+![showcase](https://github.com/user-attachments/assets/e2576dcf-317e-42fd-822f-6f4d83f977b3)
+
+
 # Toprak Rehberi
 
 Toprak Rehberi is an agricultural advisory application designed to provide information about different regions before cultivation. The app helps farmers make accurate product selections to start farming, prevents waste and damage in agriculture. 
