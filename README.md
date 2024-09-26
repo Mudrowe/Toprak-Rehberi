@@ -1,6 +1,4 @@
-![frame](https://github.com/user-attachments/assets/304aa16a-9377-4fa4-8b6a-ed30444355b2)
-
-
+![showcase-en](https://github.com/user-attachments/assets/445f08f9-8aea-472d-a266-c1f8d46dc9bf)
 
 # Toprak Rehberi
 
